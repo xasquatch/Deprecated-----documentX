@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+#header-logo > span:first-child {
+    position: relative;
+    left: 55px;
+    font-family: cursive;
+    font-size: 80px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0);
+    background: url("/resources/img/Xasquatch.png");
+    background-position: center;
+    background-size: cover;
+    background-clip: text;
+    -webkit-background-clip: text;
+    z-index: 1;
+}
+
+
+#header-logo > span:last-child {
+    color: darkred;
+    font-size: 30px;
+    font-weight: bold;
+    position: relative;
+    left: -52px;
+    top: -18px;
+    z-index: 2;
+}
+
+.input-character {
+    background-color: rgba(37, 92, 194, 1);
+    filter: invert(100%);
+}
+
+footer {
+    background: rgba(0, 0, 0, 1);
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-weight: bold;
+}
