@@ -9,8 +9,5 @@ home ${home}
     Launch demo modal
 </button>
 
-<script>
-    text.insert('#header-logo>span:last-child', 'Document', 10);
-</script>
 
 <c:import url="include/footer.jsp"/>

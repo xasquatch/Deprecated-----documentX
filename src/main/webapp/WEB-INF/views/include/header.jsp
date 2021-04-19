@@ -20,3 +20,6 @@
         <span></span><%--text스크립트로 Document글자 삽입될 자리--%>
     </div>
 </header>
+<script>
+    text.insert('#header-logo>span:last-child', 'Document', 10);
+</script>
