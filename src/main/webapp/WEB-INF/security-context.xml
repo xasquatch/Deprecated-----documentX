@@ -10,10 +10,9 @@
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/member/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <intercept-url pattern="/management/**" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/**" access="permitAll"/>
-    </http>
-
-    <!--
+        <intercept-url pattern="/guest/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/**" access="permitAll()"/>
+<!--
     #SpEL문법
     hasRole("admin") - admin권한을 가지고 있어야 접근가능
     hasAnyRole("admin", "user") - admin, user권한중 한가지만 가지고 있으면 접근가능
@@ -23,8 +22,32 @@
     isRememberMe() - Remember-me 기능으로 로그인한 사용자일 경우(자동로그인 사용자)
     isAuthenticated() - 인증을 한 사용자일 경우(로그인한 사용자)
     isFullyAuthenticated() - 인증을 한 사용자이면서 Remember-me 기능으로 로그인하지 않은 사용자
-    
-    -->
+
+-->
+
+        <form-login
+                username-parameter="email"
+                password-parameter="pwd"
+                login-processing-url="/login"
+                login-page="/login"
+                default-target-url="/GUEST"/>
+<!--
+    #form-login 속성
+
+        username-parameter : input 태그의 name(계정) 속성 값(여기서 말하는 username-parameter의 username은 아이디를 의미한다)
+        password-parameter : input 태그의 비밀번호 name 속성 값 (default: password)
+        login-page : 로그인 화면 url
+        login-processing-url form : 태그의 action 속성 (default : /login)
+        default-target-url : 로그인 성공시 url
+        authentication-failure-url : 로그인 실패시 url (default: /login?error=1)
+        authentication-success-handler-ref : 로그인 성공시 default-target-url이 아닌 핸들러로 리다이렉트
+        authentication-failure-handler-ref : 로그인 실패시 authentication-failure-url이 아닌 핸들러로 리다이렉트
+        always-use-default-target : 무조건 핸들러가 지정한 페이지로 이동 (default: false)
+
+-->
+    </http>
+
+
 
     <authentication-manager>
         <authentication-provider>
