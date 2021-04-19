@@ -45,6 +45,17 @@
         always-use-default-target : 무조건 핸들러가 지정한 페이지로 이동 (default: false)
 
 -->
+        <logout
+                logout-url="/logout"
+                logout-success-url="/all"
+                delete-cookies=""/>
+<!--
+        logout-url : 로그아웃 URL
+        logout-success-url : 로그아웃 성공시, 이동할 URL. (default: /login?logout)
+        invalidate-session : 로그아웃 시, session을 무효화할 지 선택. (default: true)
+        delete-cookies : 로그아웃 성공시, 삭제할 쿠키 이름 지정
+        success-handler-ref : 로그아웃 성공시, logout-success-url 이 아닌 핸들러로 리다이렉트
+-->
     </http>
 
 
