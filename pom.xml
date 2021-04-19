@@ -12,7 +12,8 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <jdk-version>11</jdk-version>
-        <spring-version>5.3.6</spring-version>
+        <spring-version>5.2.13.RELEASE</spring-version>
+        <spring-security-version>5.3.9.RELEASE</spring-security-version>
     </properties>
 
     <dependencies>
@@ -42,6 +43,31 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>${spring-security-version}</version>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
         <dependency>
             <groupId>org.webjars</groupId>
@@ -54,7 +80,6 @@
             <artifactId>jquery</artifactId>
             <version>3.6.0</version>
         </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
         <dependency>
