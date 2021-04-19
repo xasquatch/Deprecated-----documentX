@@ -11,7 +11,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/root-context.xml
-<!--            /WEB-INF/security-context.xml-->
+            /WEB-INF/security-context.xml
         </param-value>
     </context-param>
 
@@ -43,7 +43,6 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-<!--
 
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
@@ -53,8 +52,6 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
--->
 
     <session-config>
         <session-timeout>180</session-timeout>
