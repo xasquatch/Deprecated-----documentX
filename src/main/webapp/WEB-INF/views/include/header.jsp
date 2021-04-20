@@ -27,18 +27,30 @@
         <span>X</span>
         <span></span><%--text스크립트로 Document글자 삽입될 자리--%>
     </a>
-    <div id="header-dashboard">
-    <sec:authorize access="isAuthenticated()">
-        <form id="logout" action="${path}/logout" method="POST">
-            <button type="submit" class="btn">
-                <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
-            </button>
-            <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-        </form>
-    </sec:authorize>
-
+    <div id="header-dashboard" class="list-inline">
+        <sec:authorize access="isAuthenticated()">
+            <form id="logout" action="${path}/logout" method="POST">
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+            </form>
+            <a class="list-inline-item d-none d-xl-inline d-xxl-none"
+               href="javascript:document.querySelector('#logout').submit();">
+                <i class="fa fa-sign-out " aria-hidden="true"></i>
+            </a>
+        </sec:authorize>
+        <a class="list-inline-item d-none d-xl-inline d-xxl-none" href="javascript:">
+            <i class="fa fa-user-circle " aria-hidden="true"></i>
+        </a>
+        <a class="list-inline-item d-none d-xl-inline d-xxl-none" href="javascript:">
+            <i class="fa fa-users " aria-hidden="true"></i>
+        </a>
+        <a class="list-inline-item d-none d-xl-inline d-xxl-none" href="javascript:">
+            <i class="fa fa-weixin " aria-hidden="true"></i>
+        </a>
+        <a id="header-collapse" class="list-inline-item d-xl-none" href="javascript:">
+            <i class="fa fa-chevron-right " aria-hidden="true"></i>
+        </a>
     </div>
-    <div id="header-list">
+    <div id="header-list" class="list">
 
     </div>
 </header>
