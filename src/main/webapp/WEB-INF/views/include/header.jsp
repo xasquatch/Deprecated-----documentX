@@ -23,7 +23,7 @@
 </head>
 <body>
 <header id="main-header">
-    <a id="header-logo" href="${path}">
+    <a id="header-logo" href="${path}/">
         <span>X</span>
         <span class="d-none d-xl-inline d-xxl-none"></span><%--text스크립트로 Document글자 삽입될 자리--%>
     </a>

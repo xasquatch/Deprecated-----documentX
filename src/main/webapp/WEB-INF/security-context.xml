@@ -30,7 +30,7 @@
                 password-parameter="pwd"
                 login-processing-url="/login"
                 login-page="/login"
-                default-target-url="/GUEST"/>
+                default-target-url="/"/>
 <!--
     #form-login 속성
 
@@ -47,7 +47,7 @@
 -->
         <logout
                 logout-url="/logout"
-                logout-success-url="/all"
+                logout-success-url="/"
                 delete-cookies=""/>
 <!--
         logout-url : 로그아웃 URL
