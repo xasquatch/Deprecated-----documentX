@@ -4,9 +4,9 @@
 
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
+<section class="wrap">
+    ${obj}
 
-${obj}
-
-
+</section>
 
 <c:import url="${path}/WEB-INF/views/include/footer.jsp"/>

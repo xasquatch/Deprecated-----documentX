@@ -1,13 +1,29 @@
 @charset "UTF-8";
 
+#main-header{
+    display: flex;
+    flex-direction: column;
+    width: 170px;
+    height: 100vh;
+    position: fixed;
+    border-right: 5px ridge indianred;
+}
+
+#header-logo {
+    cursor: pointer;
+    transition: 1s all;
+    height: 80px;
+    text-decoration: none;
+}
+
 #header-logo > span:first-child {
     position: relative;
-    left: 55px;
+    left: 55px;top: -20px;
     font-family: cursive;
     font-size: 80px;
     font-weight: bold;
     color: rgba(0, 0, 0, 0);
-    background: url("/resources/img/Xasquatch.png");
+    background: url("/resources/img/icon/Xasquatch.png");
     background-position: center;
     background-size: cover;
     background-clip: text;
@@ -15,14 +31,27 @@
     z-index: 1;
 }
 
+#header-logo:HOVER>span:first-child {
+    animation: visible-opacity 1s;
+    background-clip: inherit;
+    -webkit-background-clip: inherit;
+}
+@keyframes visible-opacity {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
 
 #header-logo > span:last-child {
     color: darkred;
     font-size: 30px;
     font-weight: bold;
-    position: relative;
-    left: -52px;
-    top: -18px;
+    position: absolute;
+    left: 8px;
+    top: 18px;
     z-index: 2;
 }
 
@@ -30,6 +59,13 @@
     background-color: rgba(37, 92, 194, 1);
     filter: invert(100%);
 }
+
+.wrap {
+    box-sizing: border-box;
+    margin-left: 170px;
+    padding: 10px;
+}
+
 
 footer {
     background: rgba(0, 0, 0, 1);

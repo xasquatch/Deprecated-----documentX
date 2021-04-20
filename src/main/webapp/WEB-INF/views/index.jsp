@@ -3,11 +3,77 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <c:import url="include/header.jsp"/>
-home ${home}
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    Launch demo modal
-</button>
 
+<section class="wrap">
+
+    <ul class="list-inline">
+        <li class="list-inline-item">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                ${home}
+            </button>
+        </li>
+        <li class="list-inline-item"><a class="btn" href="${path}/management">management</a></li>
+        <li class="list-inline-item"><a class="btn" href="${path}/member">member</a></li>
+        <li class="list-inline-item"><a class="btn" href="${path}/guest">guest</a></li>
+    </ul>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+    <BR>
+</section>
 
 <c:import url="include/footer.jsp"/>

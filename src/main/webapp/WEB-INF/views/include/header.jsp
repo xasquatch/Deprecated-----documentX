@@ -6,8 +6,15 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="xasquatch">
+    <meta name="author" content="xasquatch">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document X</title>
+    <link rel="shortcut icon" type="image/x-icon" href="${path}/resources/img/icon/documentX.ico"/>
     <link rel="stylesheet" href="${path}/webjars/bootstrap/4.6.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${path}/webjars/fontawesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="${path}/resources/css/style.css"/>
     <link rel="stylesheet" href="${path}/resources/css/reset.css"/>
     <script src="${path}/resources/js/default.js"></script>
@@ -15,21 +22,25 @@
     <script defer src="${path}/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<header>
-    <div id="header-logo">
+<header id="main-header">
+    <a id="header-logo" href="${path}">
         <span>X</span>
         <span></span><%--text스크립트로 Document글자 삽입될 자리--%>
-    </div>
+    </a>
+    <div id="header-dashboard">
     <sec:authorize access="isAuthenticated()">
-        <div>
-            <a class="btn btn-danger" href="javascript:document.getElementById('logout').submit();">
-                Log Out
-            </a>
-        </div>
         <form id="logout" action="${path}/logout" method="POST">
+            <button type="submit" class="btn">
+                <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
+            </button>
             <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         </form>
     </sec:authorize>
+
+    </div>
+    <div id="header-list">
+
+    </div>
 </header>
 <script>
     text.insert('#header-logo>span:last-child', 'Document', 10);
