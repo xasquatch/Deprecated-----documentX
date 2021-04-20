@@ -25,33 +25,74 @@
 <header id="main-header">
     <a id="header-logo" href="${path}">
         <span>X</span>
-        <span></span><%--text스크립트로 Document글자 삽입될 자리--%>
+        <span class="d-none d-xl-inline d-xxl-none"></span><%--text스크립트로 Document글자 삽입될 자리--%>
     </a>
     <div id="header-dashboard" class="list-inline">
+        <sec:authorize access="isAnonymous()">
+            <a class="list-inline-item d-none d-xl-inline d-xxl-none"
+                href="${path}/login">
+                <i class="fa fa-sign-in" aria-hidden="true"></i>
+                <span style="font-size: 1.5em;">Sign In</span>
+            </a>
+        </sec:authorize>
         <sec:authorize access="isAuthenticated()">
             <form id="logout" action="${path}/logout" method="POST">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
             </form>
+
             <a class="list-inline-item d-none d-xl-inline d-xxl-none"
+               data-bs-toggle="tooltip" data-bs-placement="bottom" title="Log Out"
                href="javascript:document.querySelector('#logout').submit();">
                 <i class="fa fa-sign-out " aria-hidden="true"></i>
             </a>
+            <a class="list-inline-item d-none d-xl-inline d-xxl-none"
+               data-bs-toggle="tooltip" data-bs-placement="bottom" title="My Information"
+               href="javascript:">
+                <i class="fa fa-user-circle " aria-hidden="true"></i>
+            </a>
+            <a class="list-inline-item d-none d-xl-inline d-xxl-none"
+               data-bs-toggle="tooltip" data-bs-placement="bottom" title="Organization"
+               href="javascript:">
+                <i class="fa fa-users " aria-hidden="true"></i>
+            </a>
+            <a class="list-inline-item d-none d-xl-inline d-xxl-none"
+               data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chatting Room"
+               href="javascript:">
+                <i class="fa fa-weixin " aria-hidden="true"></i>
+            </a>
         </sec:authorize>
-        <a class="list-inline-item d-none d-xl-inline d-xxl-none" href="javascript:">
-            <i class="fa fa-user-circle " aria-hidden="true"></i>
-        </a>
-        <a class="list-inline-item d-none d-xl-inline d-xxl-none" href="javascript:">
-            <i class="fa fa-users " aria-hidden="true"></i>
-        </a>
-        <a class="list-inline-item d-none d-xl-inline d-xxl-none" href="javascript:">
-            <i class="fa fa-weixin " aria-hidden="true"></i>
-        </a>
-        <a id="header-collapse" class="list-inline-item d-xl-none" href="javascript:">
+        <a id="header-collapse" class="list-inline-item d-xl-none"
+           data-bs-toggle="tooltip" data-bs-placement="left" title="Open"
+           href="javascript:">
             <i class="fa fa-chevron-right " aria-hidden="true"></i>
         </a>
     </div>
-    <div id="header-list" class="list">
 
+    <div id="header-list" class="list">
+        <a href="#" class="list-group-item list-group-item-action active">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <span class="d-none d-xl-inline d-xxl-none">
+            The current link item
+            </span>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <span class="d-none d-xl-inline d-xxl-none">
+            A second link item
+            </span>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <span class="d-none d-xl-inline d-xxl-none">
+                A third link item
+            </span>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <span class="d-none d-xl-inline d-xxl-none">
+            A fourth link item
+            </span>
+        </a>
     </div>
 </header>
 <script>

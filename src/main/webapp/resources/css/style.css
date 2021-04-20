@@ -6,10 +6,11 @@
     width: 200px;
     height: 100vh;
     position: fixed;
-    border-right: 5px ridge indianred;
+    border-right: 5px ridge;
     transition: 0.3s all;
 }
-#main-header *{
+
+#main-header * {
     transition: 0.3s all;
 
 }
@@ -85,9 +86,25 @@
     margin: 0 2px;
 }
 
+#header-list {
+    margin: 5px;
+    height: 60vh;
+}
+
+#header-list > * {
+    padding: 5px;
+}
+
 .input-character {
     background-color: rgba(37, 92, 194, 1);
     filter: invert(100%);
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: white !important;
+    background-color: darkred !important;
+    border-color: darkred !important;
 }
 
 .wrap {
@@ -110,7 +127,6 @@ footer {
 }
 
 
-
 @media (max-width: 1200px) {
     #main-header {
         width: 80px;
@@ -124,7 +140,7 @@ footer {
         left: 10px;
     }
 
-    #header-logo > span:last-child {
-        display: none;
+    #header-list a {
+        text-align: center;
     }
 }
