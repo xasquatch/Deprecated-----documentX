@@ -17,20 +17,27 @@
     <link rel="stylesheet" href="${path}/webjars/fontawesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="${path}/resources/css/style.css"/>
     <link rel="stylesheet" href="${path}/resources/css/reset.css"/>
-    <script src="${path}/resources/js/default.js"></script>
+    <script defer src="${path}/resources/js/default.js"></script>
     <script defer src="${path}/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
     <script defer src="${path}/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<header id="main-header">
-    <a id="header-logo" href="${path}/">
+<header id="main-header" class="reduced-main-header">
+    <a id="main-header-logo" class="reduced-header-logo" href="${path}/">
         <span>X</span>
         <span class="d-none d-xl-inline d-xxl-none"></span><%--text스크립트로 Document글자 삽입될 자리--%>
     </a>
-    <div id="header-dashboard" class="list-inline">
+
+    <a id="main-header-collapse" class="reduced-header-collapse"
+       data-bs-toggle="tooltip" data-bs-placement="left" title="Open"
+       href="javascript:collapseHeaderToggle()">
+        <i class="fa fa-arrows-h" aria-hidden="true"></i>
+    </a>
+
+    <div id="main-header-dashboard" class="list-inline">
         <sec:authorize access="isAnonymous()">
             <a class="list-inline-item d-none d-xl-inline d-xxl-none"
-                href="${path}/login">
+               href="${path}/login">
                 <i class="fa fa-sign-in" aria-hidden="true"></i>
                 <span style="font-size: 1.5em;">Sign In</span>
             </a>
@@ -61,14 +68,9 @@
                 <i class="fa fa-weixin " aria-hidden="true"></i>
             </a>
         </sec:authorize>
-        <a id="header-collapse" class="list-inline-item d-xl-none"
-           data-bs-toggle="tooltip" data-bs-placement="left" title="Open"
-           href="javascript:">
-            <i class="fa fa-chevron-right " aria-hidden="true"></i>
-        </a>
     </div>
 
-    <div id="header-list" class="list">
+    <div id="main-header-list" class="reduced-header-list">
         <a href="#" class="list-group-item list-group-item-action active">
             <i class="fa fa-angle-right" aria-hidden="true"></i>
             <span class="d-none d-xl-inline d-xxl-none">
@@ -96,5 +98,25 @@
     </div>
 </header>
 <script>
-    text.insert('#header-logo>span:last-child', 'Document', 10);
+    window.onload = function () {
+        text.insert('#main-header-logo>span:last-child', 'Document', 10);
+
+    }
+
+    function collapseHeaderToggle() {
+        var mainHeader = document.querySelector("#main-header");
+        mainHeader.classList.toggle('reduced-main-header');
+        document.querySelector('.wrap').classList.toggle('reduced-wrap');
+        mainHeader.querySelector('#main-header-collapse').classList.toggle('reduced-header-collapse');
+        mainHeader.querySelector('#main-header-logo').classList.toggle('reduced-header-logo');
+        mainHeader.querySelector('#main-header-list').classList.toggle('reduced-header-list');
+
+        var listOfNoneVisible = mainHeader.querySelectorAll(".d-xl-inline");
+
+        for (var element of listOfNoneVisible) {
+            element.classList.toggle('d-none');
+
+        }
+    }
+
 </script>
