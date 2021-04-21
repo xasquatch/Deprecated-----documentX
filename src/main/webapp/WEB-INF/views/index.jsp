@@ -4,7 +4,7 @@
 
 <c:import url="include/header.jsp"/>
 
-<section class="wrap">
+<section class="wrap reduced-wrap">
 
     <ul class="list-inline">
         <li class="list-inline-item">

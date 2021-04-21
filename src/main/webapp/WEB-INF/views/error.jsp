@@ -3,7 +3,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <c:import url="include/header.jsp"/>
-<section class="wrap">
+<section class="wrap reduced-wrap">
 
 
 </section>

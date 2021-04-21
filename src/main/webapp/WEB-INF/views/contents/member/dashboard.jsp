@@ -4,7 +4,7 @@
 
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
-<section class="wrap">
+<section class="wrap reduced-wrap">
     ${obj}
 
 </section>

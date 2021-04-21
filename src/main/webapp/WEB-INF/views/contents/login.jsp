@@ -3,7 +3,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
-<section class="wrap">
+<section class="wrap reduced-wrap">
     <form class="form-horizontal" method="POST" action="${path}/login">
         <div class="form-group">
             <label for="login-email" class="col-sm-2 control-label">Email</label>
