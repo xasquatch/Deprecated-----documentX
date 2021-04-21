@@ -6,7 +6,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <meta name="keywords" content="xasquatch">
     <meta name="author" content="xasquatch">
     <meta name="apple-mobile-web-app-capable" content="yes">
