@@ -73,7 +73,7 @@
 
 #main-header-dashboard {
     margin: 3px;
-    padding: 10px;
+    padding: 5px;
     background: darkred;
     color: white;
     border-radius: 10px;
@@ -98,7 +98,7 @@
 #main-header-collapse {
     position: absolute;
     top: 40vh;
-    left: 185px;
+    left: 190px;
     color: gray;
 }
 
@@ -140,7 +140,7 @@ footer {
 
 @media (max-width: 1200px) {
     .reduced-header-collapse {
-        left: 63px !important;
+        left: 68px !important;
     }
 
     .reduced-main-header {
