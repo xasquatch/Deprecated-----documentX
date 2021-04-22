@@ -34,9 +34,9 @@
         <i class="fa fa-arrows-h" aria-hidden="true"></i>
     </a>
 
-    <div id="main-header-dashboard" class="list-inline">
+    <div id="main-header-dashboard" class="list-inline d-none d-xl-inline d-xxl-none">
         <sec:authorize access="isAnonymous()">
-            <a class="list-inline-item d-none d-xl-inline d-xxl-none"
+            <a class="list-inline-item"
                href="${path}/login">
                 <i class="fa fa-sign-in" aria-hidden="true"></i>
                 <span style="font-size: 1.5em;">Sign In</span>
@@ -47,22 +47,22 @@
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
             </form>
 
-            <a class="list-inline-item d-none d-xl-inline d-xxl-none"
+            <a class="list-inline-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Log Out"
                href="javascript:document.querySelector('#logout').submit();">
                 <i class="fa fa-sign-out " aria-hidden="true"></i>
             </a>
-            <a class="list-inline-item d-none d-xl-inline d-xxl-none"
+            <a class="list-inline-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="My Information"
                href="javascript:">
                 <i class="fa fa-user-circle " aria-hidden="true"></i>
             </a>
-            <a class="list-inline-item d-none d-xl-inline d-xxl-none"
+            <a class="list-inline-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Organization"
                href="javascript:">
                 <i class="fa fa-users " aria-hidden="true"></i>
             </a>
-            <a class="list-inline-item d-none d-xl-inline d-xxl-none"
+            <a class="list-inline-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chatting Room"
                href="javascript:">
                 <i class="fa fa-weixin " aria-hidden="true"></i>
