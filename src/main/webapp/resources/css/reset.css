@@ -2,6 +2,7 @@
 
 * {
     font-family: 맑은 고딕, monospace;
+    overscroll-behavior-y: none;
     scroll-behavior: smooth;
 }
 html, body{
