@@ -103,7 +103,7 @@ var text = {
     }
 };
 
-var drag ={
+var drag = {
 
     addElement: function (element) {
         drag.mouseElement(element);
@@ -116,7 +116,10 @@ var drag ={
     },
 
     mouseElementX: function (element) {
-        var pos1 = 0, pos3 = 0;
+        var currentPos = 0;
+        var originContainerWidth = element.parentNode.style.width;
+        var originElementLeft = element.style.left;
+
         try {
             element.onmousedown = dragMouseDown;
         } catch (e) {
@@ -126,17 +129,26 @@ var drag ={
         function dragMouseDown(event) {
             event = event || window.event;
             event.preventDefault();
-            pos3 = event.clientX;
-            document.onmouseup = closeDragElement;
+            currentPos = event.clientX;
+            document.onmouseup = function () {
+                element.parentNode.style.width = originContainerWidth;
+                element.style.left = originElementLeft;
+                closeDragElement();
+            }
             document.onmousemove = elementDrag;
         }
 
         function elementDrag(event) {
+            if (event.clientX < originElementLeft) return;
+
             event = event || window.event;
             event.preventDefault();
-            pos1 = pos3 - event.clientX;
-            pos3 = event.clientX;
-            element.parentNode.style.left = (element.parentNode.offsetLeft - pos1) + "px";
+            var elementLeft = originElementLeft + currentPos - (element.clientWidth / 2);
+            currentPos = event.clientX;
+            element.setAttribute('style',
+                'left : ' + elementLeft + 'px !important');
+            element.parentNode.setAttribute('style',
+                'width : ' + currentPos + 'px !important');
         }
 
         function closeDragElement() {
@@ -147,7 +159,10 @@ var drag ={
     },
 
     touchElementX: function (element) {
-        var pos1 = 0, pos3 = 0;
+        var currentPos = 0;
+        var originContainerWidth = element.parentNode.style.width;
+        var originElementLeft = element.style.left;
+
         try {
             element.ontouchstart = dragTouchStart;
         } catch (e) {
@@ -157,15 +172,25 @@ var drag ={
         function dragTouchStart(event) {
             event = event || window.event;
             pos3 = event.clientX;
-            document.ontouchend = closeDragElement;
+            document.ontouchend = function () {
+                element.parentNode.style.width = originContainerWidth;
+                element.style.left = originElementLeft;
+                closeDragElement();
+            }
             document.ontouchmove = elementDrag;
         }
 
         function elementDrag(event) {
+            if (event.changedTouches[0].clientX < originElementLeft) return;
+
             event = event || window.event;
-            pos1 = pos3 - event.changedTouches[0].clientX;
-            pos3 = event.changedTouches[0].clientX;
-            element.parentNode.style.left = (element.parentNode.offsetLeft - pos1) + "px";
+            event.preventDefault();
+            var elementLeft = originElementLeft + currentPos - (element.clientWidth / 2);
+            currentPos = event.changedTouches[0].clientX;
+            element.setAttribute('style',
+                'left : ' + elementLeft + 'px !important');
+            element.parentNode.setAttribute('style',
+                'width : ' + currentPos + 'px !important');
         }
 
         function closeDragElement() {
