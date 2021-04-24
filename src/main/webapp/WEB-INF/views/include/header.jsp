@@ -30,12 +30,20 @@
         <span class="d-none d-xl-inline d-xxl-none"></span><%--text스크립트로 Document글자 삽입될 자리--%>
     </a>
 
-    <div id="main-header-dashboard" class="list-inline d-none d-xl-inline d-xxl-none">
+    <div id="main-header-dashboard" class="list-group list-group-flush">
+        <a id="main-header-expansion-btn" class="list-group-item d-xl-none"
+           data-bs-toggle="tooltip" data-bs-placement="bottom" title="Open"
+           href="javascript:headerExpansion.toggle()">
+            <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
+        </a>
         <sec:authorize access="isAnonymous()">
-            <a class="list-inline-item"
+            <a class="list-group-item"
                href="${path}/login">
                 <i class="fa fa-sign-in" aria-hidden="true"></i>
-                <span style="font-size: 1.5em;">Sign In</span>
+                <span style="font-size: 1.5em;"
+                      class="d-none d-xl-inline d-xxl-none">
+                    로그인
+                </span>
             </a>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
@@ -43,25 +51,37 @@
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
             </form>
 
-            <a class="list-inline-item"
+            <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Log Out"
                href="javascript:document.querySelector('#logout').submit();">
                 <i class="fa fa-sign-out " aria-hidden="true"></i>
+                <span class="d-none d-xl-inline d-xxl-none">
+                로그 아웃
+                </span>
             </a>
-            <a class="list-inline-item"
+            <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="My Information"
                href="javascript:">
                 <i class="fa fa-user-circle " aria-hidden="true"></i>
+                <span class="d-none d-xl-inline d-xxl-none">
+                내 정보관리
+                </span>
             </a>
-            <a class="list-inline-item"
+            <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Organization"
                href="javascript:">
                 <i class="fa fa-users " aria-hidden="true"></i>
+                <span class="d-none d-xl-inline d-xxl-none">
+                내 단체관리
+                </span>
             </a>
-            <a class="list-inline-item"
+            <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chatting Room"
                href="javascript:">
                 <i class="fa fa-weixin " aria-hidden="true"></i>
+                <span class="d-none d-xl-inline d-xxl-none">
+                채팅룸 보기
+                </span>
             </a>
         </sec:authorize>
     </div>
@@ -93,10 +113,14 @@
         </a>
     </div>
 </header>
+<nav id="main-nav" class="reduced-main-nav deactivate-nav">
+hi
+</nav>
 <script>
     window.onload = function () {
         text.insert('#main-header-logo>span:last-child', 'Document', 10);
-        drag.addCollapseElement(document.querySelector('#main-header'));
+        drag.addExpansionElement(document.querySelector('#main-header'));
     }
+
 
 </script>

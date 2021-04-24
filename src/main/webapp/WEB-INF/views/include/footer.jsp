@@ -17,8 +17,6 @@
         </div>
     </div>
 </div>
-
-<BR><BR>
 <footer>
     Develop By Xasquatch (https://xasquatch.net)
 </footer>

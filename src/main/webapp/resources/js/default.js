@@ -110,7 +110,7 @@ var drag = {
         drag.touchElement(element);
     },
 
-    addCollapseElement: function (element) {
+    addExpansionElement: function (element) {
         drag.mouseElementX(element);
         drag.touchElementX(element);
     },
@@ -125,27 +125,12 @@ var drag = {
             console.log(e);
         }
 
-        function collapseHeaderToggle() {
-            var mainHeader = document.querySelector("#main-header");
-            mainHeader.classList.toggle('reduced-main-header');
-            document.querySelector('.wrap').classList.toggle('reduced-wrap');
-            mainHeader.querySelector('#main-header-logo').classList.toggle('reduced-header-logo');
-            mainHeader.querySelector('#main-header-list').classList.toggle('reduced-header-list');
-
-            var listOfNoneVisible = mainHeader.querySelectorAll(".d-xl-inline");
-
-            for (var element of listOfNoneVisible) {
-                element.classList.toggle('d-none');
-
-            }
-        }
-
         function dragMouseDown(event) {
             event = event || window.event;
             event.preventDefault();
             currentPos = event.clientX;
             document.onmouseup = function () {
-                if (currentPos > 200) collapseHeaderToggle();
+                if (currentPos > 200) headerExpansion.toggle();
                 element.style.width = originContainerWidth;
                 closeDragElement();
             }
@@ -179,26 +164,11 @@ var drag = {
             console.log(e);
         }
 
-        function collapseHeaderToggle() {
-            var mainHeader = document.querySelector("#main-header");
-            mainHeader.classList.toggle('reduced-main-header');
-            document.querySelector('.wrap').classList.toggle('reduced-wrap');
-            mainHeader.querySelector('#main-header-logo').classList.toggle('reduced-header-logo');
-            mainHeader.querySelector('#main-header-list').classList.toggle('reduced-header-list');
-
-            var listOfNoneVisible = mainHeader.querySelectorAll(".d-xl-inline");
-
-            for (var element of listOfNoneVisible) {
-                element.classList.toggle('d-none');
-
-            }
-        }
-
         function dragTouchStart(event) {
             event = event || window.event;
             currentPos = event.clientX;
             document.ontouchend = function () {
-                if (currentPos > 200) collapseHeaderToggle();
+                if (currentPos > 200) headerExpansion.toggle();
                 element.style.width = originContainerWidth;
                 closeDragElement();
             }
@@ -289,3 +259,68 @@ var drag = {
     }
 
 }
+
+var headerExpansion = {
+
+    mainHeader: document.querySelector('#main-header'),
+    btn: document.querySelector('#main-header-expansion-btn'),
+    isDeactivated: false,
+
+    toggle: function () {
+        headerExpansion.isDeactivated
+            = headerExpansion.mainHeader.classList.toggle('reduced-main-header');
+        document.querySelector('.wrap').classList.toggle('reduced-wrap');
+        headerExpansion.mainHeader.querySelector('#main-header-logo').classList.toggle('reduced-header-logo');
+        headerExpansion.mainHeader.querySelector('#main-header-list').classList.toggle('reduced-header-list');
+
+        var listOfNoneVisible = headerExpansion.mainHeader.querySelectorAll(".d-xl-inline");
+
+        for (var element of listOfNoneVisible) {
+            element.classList.toggle('d-none');
+
+        }
+/*
+        if (headerExpansion.isDeactivated) {
+            headerExpansion.btn.classList.remove('hidden');
+
+        } else {
+            headerExpansion.btn.classList.add('hidden');
+
+        }
+*/
+
+    },
+    deactivate: function () {
+        headerExpansion.btn.classList.remove('hidden');
+        headerExpansion.isDeactivated
+            = headerExpansion.mainHeader.classList.add('reduced-main-header');
+        document.querySelector('.wrap').classList.add('reduced-wrap');
+        headerExpansion.mainHeader.querySelector('#main-header-logo').classList.add('reduced-header-logo');
+        headerExpansion.mainHeader.querySelector('#main-header-list').classList.add('reduced-header-list');
+
+        var listOfNoneVisible = headerExpansion.mainHeader.querySelectorAll(".d-xl-inline");
+
+        for (var element of listOfNoneVisible) {
+            element.classList.add('d-none');
+
+        }
+    },
+    activate: function () {
+        headerExpansion.btn.classList.add('hidden');
+        headerExpansion.isDeactivated
+            = headerExpansion.mainHeader.classList.remove('reduced-main-header');
+        document.querySelector('.wrap').classList.remove('reduced-wrap');
+        headerExpansion.mainHeader.querySelector('#main-header-logo').classList.remove('reduced-header-logo');
+        headerExpansion.mainHeader.querySelector('#main-header-list').classList.remove('reduced-header-list');
+
+        var listOfNoneVisible = headerExpansion.mainHeader.querySelectorAll(".d-xl-inline");
+
+        for (var element of listOfNoneVisible) {
+            element.classList.remove('d-none');
+
+        }
+    }
+
+
+}
+

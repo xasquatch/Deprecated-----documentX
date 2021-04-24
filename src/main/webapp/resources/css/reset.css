@@ -9,3 +9,15 @@ html, body{
     margin: 0;
     padding: 0;
 }
+*::-webkit-scrollbar {
+    width: 5px;
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: rgba(150, 0, 0, 0.5);
+}
+
+*::-webkit-scrollbar-thumb:HOVER {
+    background: rgba(150, 0, 0, 1);
+}
