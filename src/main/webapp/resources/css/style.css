@@ -122,7 +122,7 @@
     background: black;
     color: white;
     margin-left: 200px;
-    transition: 0.3s all;
+    padding: 5px 5px 5px 10px;
 }
 
 .deactivate-nav {
@@ -152,7 +152,7 @@
 .wrap {
     box-sizing: border-box;
     margin-left: 200px;
-    padding: 3em 10px;
+    padding: 2em 10px;
     transition: 0.3s all;
 }
 
@@ -185,7 +185,7 @@ footer {
     }
 
     .reduced-header-logo > span:first-child {
-        left: 10px !important;
+        left: 5px !important;
     }
 
     .reduced-header-list a {
