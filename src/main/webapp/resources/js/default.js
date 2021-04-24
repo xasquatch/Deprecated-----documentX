@@ -117,8 +117,7 @@ var drag = {
 
     mouseElementX: function (element) {
         var currentPos = 0;
-        var originContainerWidth = element.parentNode.style.width;
-        var originElementLeft = element.style.left;
+        var originContainerWidth = element.style.width;
 
         try {
             element.onmousedown = dragMouseDown;
@@ -126,28 +125,40 @@ var drag = {
             console.log(e);
         }
 
+        function collapseHeaderToggle() {
+            var mainHeader = document.querySelector("#main-header");
+            mainHeader.classList.toggle('reduced-main-header');
+            document.querySelector('.wrap').classList.toggle('reduced-wrap');
+            mainHeader.querySelector('#main-header-logo').classList.toggle('reduced-header-logo');
+            mainHeader.querySelector('#main-header-list').classList.toggle('reduced-header-list');
+
+            var listOfNoneVisible = mainHeader.querySelectorAll(".d-xl-inline");
+
+            for (var element of listOfNoneVisible) {
+                element.classList.toggle('d-none');
+
+            }
+        }
+
         function dragMouseDown(event) {
             event = event || window.event;
             event.preventDefault();
             currentPos = event.clientX;
             document.onmouseup = function () {
-                element.parentNode.style.width = originContainerWidth;
-                element.style.left = originElementLeft;
+                if (currentPos > 200) collapseHeaderToggle();
+                element.style.width = originContainerWidth;
                 closeDragElement();
             }
             document.onmousemove = elementDrag;
         }
 
         function elementDrag(event) {
-            if (event.clientX < originElementLeft) return;
+            if (event.clientX < 200) return;
 
             event = event || window.event;
             event.preventDefault();
-            var elementLeft = originElementLeft + currentPos - (element.clientWidth / 2);
             currentPos = event.clientX;
             element.setAttribute('style',
-                'left : ' + elementLeft + 'px !important');
-            element.parentNode.setAttribute('style',
                 'width : ' + currentPos + 'px !important');
         }
 
@@ -160,8 +171,7 @@ var drag = {
 
     touchElementX: function (element) {
         var currentPos = 0;
-        var originContainerWidth = element.parentNode.style.width;
-        var originElementLeft = element.style.left;
+        var originContainerWidth = element.style.width;
 
         try {
             element.ontouchstart = dragTouchStart;
@@ -169,27 +179,39 @@ var drag = {
             console.log(e);
         }
 
+        function collapseHeaderToggle() {
+            var mainHeader = document.querySelector("#main-header");
+            mainHeader.classList.toggle('reduced-main-header');
+            document.querySelector('.wrap').classList.toggle('reduced-wrap');
+            mainHeader.querySelector('#main-header-logo').classList.toggle('reduced-header-logo');
+            mainHeader.querySelector('#main-header-list').classList.toggle('reduced-header-list');
+
+            var listOfNoneVisible = mainHeader.querySelectorAll(".d-xl-inline");
+
+            for (var element of listOfNoneVisible) {
+                element.classList.toggle('d-none');
+
+            }
+        }
+
         function dragTouchStart(event) {
             event = event || window.event;
-            pos3 = event.clientX;
+            currentPos = event.clientX;
             document.ontouchend = function () {
-                element.parentNode.style.width = originContainerWidth;
-                element.style.left = originElementLeft;
+                if (currentPos > 200) collapseHeaderToggle();
+                element.style.width = originContainerWidth;
                 closeDragElement();
             }
             document.ontouchmove = elementDrag;
         }
 
         function elementDrag(event) {
-            if (event.changedTouches[0].clientX < originElementLeft) return;
+            if (event.changedTouches[0].clientX < 200) return;
 
             event = event || window.event;
             event.preventDefault();
-            var elementLeft = originElementLeft + currentPos - (element.clientWidth / 2);
             currentPos = event.changedTouches[0].clientX;
             element.setAttribute('style',
-                'left : ' + elementLeft + 'px !important');
-            element.parentNode.setAttribute('style',
                 'width : ' + currentPos + 'px !important');
         }
 

@@ -26,9 +26,10 @@
 
 #main-header-logo > span:first-child {
     position: relative;
-    left: 70px;
+    padding: 5px;
+    left: 65px;
     top: -20px;
-    font-family: cursive;
+    font-family: cursive, 'Goudy Bookletter 1911';
     font-size: 80px;
     font-weight: bold;
     color: rgba(0, 0, 0, 0);
@@ -81,27 +82,12 @@
 }
 
 #main-header-list {
-    margin: 5px 20px 5px 5px;
+    margin: 5px;
     height: 60vh;
 }
 
 #main-header-list > * {
     padding: 5px;
-}
-
-#main-header-collapse {
-    position: absolute;
-    top: 40vh;
-    left: 180px;
-    color: gray;
-    background: white;
-    border: 1px solid gray;
-    border-radius: 50%;
-    padding: 5px;
-}
-
-#main-header-collapse:HOVER {
-    filter: invert(100%);
 }
 
 .input-character {
@@ -137,10 +123,6 @@ footer {
 
 
 @media (max-width: 1200px) {
-    .reduced-header-collapse {
-        left: 58px !important;
-    }
-
     .reduced-main-header {
         width: 80px !important;
     }

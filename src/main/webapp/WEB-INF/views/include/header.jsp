@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="${path}/webjars/fontawesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="${path}/resources/css/style.css"/>
     <link rel="stylesheet" href="${path}/resources/css/reset.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap" rel="stylesheet">
     <script defer src="${path}/resources/js/default.js"></script>
     <script defer src="${path}/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
     <script defer src="${path}/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
@@ -26,12 +28,6 @@
     <a id="main-header-logo" class="reduced-header-logo" href="${path}/">
         <span>X</span>
         <span class="d-none d-xl-inline d-xxl-none"></span><%--text스크립트로 Document글자 삽입될 자리--%>
-    </a>
-
-    <a id="main-header-collapse" class="reduced-header-collapse"
-       data-bs-toggle="tooltip" data-bs-placement="left" title="Open"
-       href="javascript:collapseHeaderToggle()">
-        <i class="fa fa-arrows-h" aria-hidden="true"></i>
     </a>
 
     <div id="main-header-dashboard" class="list-inline d-none d-xl-inline d-xxl-none">
@@ -100,23 +96,7 @@
 <script>
     window.onload = function () {
         text.insert('#main-header-logo>span:last-child', 'Document', 10);
-        drag.addCollapseElement(document.querySelector('#main-header-collapse'));
-    }
-
-    function collapseHeaderToggle() {
-        var mainHeader = document.querySelector("#main-header");
-        mainHeader.classList.toggle('reduced-main-header');
-        document.querySelector('.wrap').classList.toggle('reduced-wrap');
-        mainHeader.querySelector('#main-header-collapse').classList.toggle('reduced-header-collapse');
-        mainHeader.querySelector('#main-header-logo').classList.toggle('reduced-header-logo');
-        mainHeader.querySelector('#main-header-list').classList.toggle('reduced-header-list');
-
-        var listOfNoneVisible = mainHeader.querySelectorAll(".d-xl-inline");
-
-        for (var element of listOfNoneVisible) {
-            element.classList.toggle('d-none');
-
-        }
+        drag.addCollapseElement(document.querySelector('#main-header'));
     }
 
 </script>
