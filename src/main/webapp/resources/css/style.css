@@ -87,7 +87,7 @@
 }
 
 #main-header-list {
-    margin: 5px;
+    margin: 5px 20px 5px 5px;
     height: 60vh;
 }
 
@@ -98,8 +98,12 @@
 #main-header-collapse {
     position: absolute;
     top: 40vh;
-    left: 190px;
+    left: 180px;
     color: gray;
+    background: white;
+    border: 1px solid gray;
+    border-radius: 50%;
+    padding: 5px;
 }
 
 #main-header-collapse:HOVER {
@@ -140,7 +144,7 @@ footer {
 
 @media (max-width: 1200px) {
     .reduced-header-collapse {
-        left: 68px !important;
+        left: 58px !important;
     }
 
     .reduced-main-header {

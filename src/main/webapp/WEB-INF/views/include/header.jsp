@@ -100,7 +100,7 @@
 <script>
     window.onload = function () {
         text.insert('#main-header-logo>span:last-child', 'Document', 10);
-
+        drag.addCollapseElement(document.querySelector('#main-header-collapse'));
     }
 
     function collapseHeaderToggle() {

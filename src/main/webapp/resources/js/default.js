@@ -103,4 +103,142 @@ var text = {
     }
 };
 
+var drag ={
 
+    addElement: function (element) {
+        drag.mouseElement(element);
+        drag.touchElement(element);
+    },
+
+    addCollapseElement: function (element) {
+        drag.mouseElementX(element);
+        drag.touchElementX(element);
+    },
+
+    mouseElementX: function (element) {
+        var pos1 = 0, pos3 = 0;
+        try {
+            element.onmousedown = dragMouseDown;
+        } catch (e) {
+            console.log(e);
+        }
+
+        function dragMouseDown(event) {
+            event = event || window.event;
+            event.preventDefault();
+            pos3 = event.clientX;
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(event) {
+            event = event || window.event;
+            event.preventDefault();
+            pos1 = pos3 - event.clientX;
+            pos3 = event.clientX;
+            element.parentNode.style.left = (element.parentNode.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+
+    },
+
+    touchElementX: function (element) {
+        var pos1 = 0, pos3 = 0;
+        try {
+            element.ontouchstart = dragTouchStart;
+        } catch (e) {
+            console.log(e);
+        }
+
+        function dragTouchStart(event) {
+            event = event || window.event;
+            pos3 = event.clientX;
+            document.ontouchend = closeDragElement;
+            document.ontouchmove = elementDrag;
+        }
+
+        function elementDrag(event) {
+            event = event || window.event;
+            pos1 = pos3 - event.changedTouches[0].clientX;
+            pos3 = event.changedTouches[0].clientX;
+            element.parentNode.style.left = (element.parentNode.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            document.ontouchend = null;
+            document.ontouchmove = null;
+        }
+    },
+
+    mouseElement: function (element) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        try {
+            element.onmousedown = dragMouseDown;
+        } catch (e) {
+            console.log(e);
+        }
+
+        function dragMouseDown(event) {
+            event = event || window.event;
+            event.preventDefault();
+            pos3 = event.clientX;
+            pos4 = event.clientY;
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(event) {
+            event = event || window.event;
+            event.preventDefault();
+            pos1 = pos3 - event.clientX;
+            pos2 = pos4 - event.clientY;
+            pos3 = event.clientX;
+            pos4 = event.clientY;
+            element.parentNode.style.top = (element.parentNode.offsetTop - pos2) + "px";
+            element.parentNode.style.left = (element.parentNode.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+
+    },
+
+    touchElement: function (element) {
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        try {
+            element.ontouchstart = dragTouchStart;
+        } catch (e) {
+            console.log(e);
+        }
+
+        function dragTouchStart(event) {
+            event = event || window.event;
+            pos3 = event.clientX;
+            pos4 = event.clientY;
+            document.ontouchend = closeDragElement;
+            document.ontouchmove = elementDrag;
+        }
+
+        function elementDrag(event) {
+            event = event || window.event;
+            pos1 = pos3 - event.changedTouches[0].clientX;
+            pos2 = pos4 - event.changedTouches[0].clientY;
+            pos3 = event.changedTouches[0].clientX;
+            pos4 = event.changedTouches[0].clientY;
+            element.parentNode.style.top = (element.parentNode.offsetTop - pos2) + "px";
+            element.parentNode.style.left = (element.parentNode.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            document.ontouchend = null;
+            document.ontouchmove = null;
+        }
+    }
+
+}
