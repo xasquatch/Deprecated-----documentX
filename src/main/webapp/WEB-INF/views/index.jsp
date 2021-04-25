@@ -23,13 +23,13 @@
     <div class="container">
         <canvas id="myChart2"></canvas>
     </div>
-    <div class="container">
-        <canvas id="myChart4"></canvas>
-    </div>
-    <div class="container">
-        <canvas id="myChart5"></canvas>
-    </div>
 
+    <div class="container">
+        <div class="row">
+            <canvas id="myChart4" class="col-6"></canvas>
+            <canvas id="myChart5" class="col-6"></canvas>
+        </div>
+    </div>
     <div class="container">
         <div class="row my-3">
             <div class="col"><h4>Bootstrap 4 Chart.js - pie to donut</h4></div>
@@ -69,9 +69,9 @@
             data: {
                 labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                 datasets: [{
-                    label: '# of Votes',
+                    label: ' of Votes',
                     data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+                    backgroundColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
                     borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
                     borderWidth: 1
                 }]
@@ -122,31 +122,75 @@
     }
 
     function chart4() {
-        var colors = ['red', 'skyblue', 'yellowgreen', '#c3e6cb', '#dc3545', '#6c757d'];
+        var colors = ['darkred', 'gray', 'aqua', '#c3e6cb', '#dc3545', '#6c757d'];
         var donutOptions = {
-            cutoutPercentage: 30, //도넛두께 : 값이 클수록 얇아짐
-            legend: {position: 'bottom', padding: 5, labels: {pointStyle: 'circle', usePointStyle: true}}
+            cutoutPercentage: 10, //도넛두께 : 값이 클수록 얇아짐
+            legend: {
+                position: 'bottom', padding: 5,
+                labels: {
+                    pointStyle: 'circle', usePointStyle: true
+                }
+            }
         };
         var chDonutData1 = {
             labels: ['Bootstrap', 'Popper', 'Other'],
-            datasets: [{backgroundColor: colors.slice(0, 3), borderWidth: 0, data: [74, 11, 40]}]
+            datasets: [
+                {
+                    backgroundColor: colors.slice(0, 3), borderWidth: 0, data: [74, 11, 40]
+                }
+            ]
         };
 
         var chDonut1 = document.getElementById("chDonut1");
         if (chDonut1) {
-            new Chart(chDonut1, {type: 'pie', data: chDonutData1, options: donutOptions});
+            new Chart(chDonut1,
+                {
+                    type: 'pie',
+                    data: chDonutData1,
+                    options: donutOptions
+                }
+            );
         }
 
-        var chDonutData2 = {labels: ['Wips', 'Pops', 'Dags'], datasets: [{backgroundColor: colors.slice(0, 3), borderWidth: 0, data: [40, 45, 30]}]};
+        var chDonutData2 = {
+            labels: ['Wips', 'Pops', 'Dags'],
+            datasets: [
+                {
+                    backgroundColor: colors.slice(0, 3),
+                    borderWidth: 0,
+                    data: [40, 45, 30]
+                }
+            ]
+        };
         var chDonut2 = document.getElementById("chDonut2");
         if (chDonut2) {
-            new Chart(chDonut2, {type: 'pie', data: chDonutData2, options: donutOptions});
+            new Chart(chDonut2,
+                {
+                    type: 'pie',
+                    data: chDonutData2,
+                    options: donutOptions
+                }
+            );
         }
 
-        var chDonutData3 = {labels: ['Angular', 'React', 'Other'], datasets: [{backgroundColor: colors.slice(0, 3), borderWidth: 0, data: [21, 45, 55, 33]}]};
+        var chDonutData3 = {
+            labels: ['Angular', 'React', 'Other', 'Otdher'],
+            datasets: [
+                {
+                    backgroundColor: colors.slice(0, 4),
+                    borderWidth: 0,
+                    data: [21, 45, 55, 33]
+                }
+            ]
+        };
         var chDonut3 = document.getElementById("chDonut3");
         if (chDonut3) {
-            new Chart(chDonut3, {type: 'pie', data: chDonutData3, options: donutOptions});
+            new Chart(chDonut3,
+                {
+                    type: 'doughnut',
+                    data: chDonutData3,
+                    options: donutOptions
+                });
         }
 
 
