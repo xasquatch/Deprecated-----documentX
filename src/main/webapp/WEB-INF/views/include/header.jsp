@@ -22,6 +22,7 @@
     <script defer src="${path}/resources/js/default.js"></script>
     <script defer src="${path}/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
     <script defer src="${path}/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="${path}/webjars/chart.js/3.1.1/dist/chart.min.js"></script>
 </head>
 <body>
 <header id="main-header" class="reduced-main-header">
