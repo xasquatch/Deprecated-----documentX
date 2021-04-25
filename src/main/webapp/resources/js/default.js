@@ -279,15 +279,15 @@ var headerExpansion = {
             element.classList.toggle('d-none');
 
         }
-/*
-        if (headerExpansion.isDeactivated) {
-            headerExpansion.btn.classList.remove('hidden');
+        /*
+                if (headerExpansion.isDeactivated) {
+                    headerExpansion.btn.classList.remove('hidden');
 
-        } else {
-            headerExpansion.btn.classList.add('hidden');
+                } else {
+                    headerExpansion.btn.classList.add('hidden');
 
-        }
-*/
+                }
+        */
 
     },
     deactivate: function () {
@@ -324,3 +324,42 @@ var headerExpansion = {
 
 }
 
+var nav = {
+    container: document.querySelector('#main-nav'),
+    count: document.querySelector('#main-nav-count'),
+    msg: document.querySelector('#main-nav-msg'),
+    decreaseCount: function () {
+        nav.count.innerHTML--;
+    },
+    toggle: function () {
+        nav.container.classList.toggle('deactivate-nav');
+    },
+    activate: function (msgCount, msg) {
+        nav.container.classList.remove('deactivate-nav');
+        nav.count.innerHTML = msgCount;
+        nav.msg.innerHTML = msg;
+    },
+    deactivate: function () {
+        nav.container.classList.add('deactivate-nav');
+        nav.count.innerHTML = '';
+        nav.msg.innerHTML = '';
+    },
+    revertToFirst: function (interval) {
+        clearInterval(interval);
+        nav.deactivate();
+    },
+    acceptMsg: function (msgCount, msg) {
+        nav.activate(msgCount, msg);
+
+        var interval = setInterval(function () {
+            if (nav.count.innerHTML > 1) {
+                nav.decreaseCount();
+            } else {
+                nav.revertToFirst(interval);
+            }
+
+        }, 1000);
+    },
+
+
+}

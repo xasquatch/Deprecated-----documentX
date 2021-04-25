@@ -123,15 +123,23 @@
     color: white;
     margin-left: 200px;
     padding: 5px 5px 5px 10px;
+    transition: height 0.3s, opacity 0.3s;
 }
 
 .deactivate-nav {
     height: 0 !important;
+    opacity: 0 !important;
 }
 
 .deactivate-nav * {
     display: none;
 }
+#main-nav-count{
+    color: darkred;
+    font-weight: bold;
+
+}
+
 
 .input-character {
     background-color: rgba(37, 92, 194, 1);

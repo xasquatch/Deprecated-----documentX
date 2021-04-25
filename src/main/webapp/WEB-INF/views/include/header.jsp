@@ -87,34 +87,37 @@
     </div>
 
     <div id="main-header-list" class="reduced-header-list">
-        <a href="#" class="list-group-item list-group-item-action active">
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
+        <a id="searchDropdown" href="#" class="list-group-item list-group-item-action">
+            <i class="fa fa-search" aria-hidden="true"></i>
             <span class="d-none d-xl-inline d-xxl-none">
-            The current link item
+                검색
             </span>
         </a>
         <a href="#" class="list-group-item list-group-item-action">
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <i class="fa fa-files-o" aria-hidden="true"></i>
             <span class="d-none d-xl-inline d-xxl-none">
-            A second link item
+                파일 관리
             </span>
         </a>
         <a href="#" class="list-group-item list-group-item-action">
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <i class="fa fa-pie-chart" aria-hidden="true"></i>
             <span class="d-none d-xl-inline d-xxl-none">
-                A third link item
+                핫 키워드
             </span>
         </a>
         <a href="#" class="list-group-item list-group-item-action">
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
+            <i class="fa fa-line-chart" aria-hidden="true"></i>
             <span class="d-none d-xl-inline d-xxl-none">
-            A fourth link item
+                단체 통계
             </span>
         </a>
     </div>
 </header>
 <nav id="main-nav" class="reduced-main-nav deactivate-nav">
-hi
+    <span id="main-nav-count"></span>
+    <span id="main-nav-msg">
+
+    </span>
 </nav>
 <script>
     window.onload = function () {
