@@ -6,6 +6,7 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.*;
@@ -35,7 +36,7 @@ public class SpringConfig implements WebApplicationInitializer {
 
         // Bean을 정의하는 클래스를 지정한다
         AnnotationConfigWebApplicationContext rootAppContext = new AnnotationConfigWebApplicationContext();
-        rootAppContext.register(RootAppContext.class);
+        rootAppContext.register(net.xasquatch.document.context.RootAppContext.class);
 
         ContextLoaderListener listener = new ContextLoaderListener(rootAppContext);
         servletContext.addListener(listener);
@@ -45,12 +46,15 @@ public class SpringConfig implements WebApplicationInitializer {
         filter.setInitParameter("encoding", "UTF-8");
         filter.addMappingForServletNames(null, false, "dispatcher");
 
-        // 멀티파일 설정
+/*
+        // 시큐리티 설정
+		FilterRegistration.Dynamic securityFilter = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
+		securityFilter.addMappingForUrlPatterns(null,false,"/*");
+*/
+
+		// 멀티파일 설정
         servlet.setMultipartConfig(new MultipartConfigElement(filesSavePath, 1024 * 1024 * 1024, 1024 * 1024 * 1024, 0));
 
-        // 시큐리티 설정
-//		FilterRegistration.Dynamic securityFilter = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
-//		securityFilter.addMappingForUrlPatterns(null,false,"/user/*");
 
 //세션 리스너 설정
         servletContext.setSessionTimeout(60 * 60);

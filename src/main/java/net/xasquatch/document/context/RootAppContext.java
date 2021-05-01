@@ -26,15 +26,15 @@ public class RootAppContext {
     @Value("${db.password}")
     private String dbPassword;
 
-    /*--------TODO:Mail 접속관리--------------*/
-    @Value("${email.host}")
-    private String emailHost;
-    @Value("${email.port}")
-    private int emailPort;
-    @Value("${email.username}")
-    private String emailUserName;
-    @Value("${email.password}")
-    private String emailPwd;
+//    /*--------TODO:Mail 접속관리--------------*/
+//    @Value("${email.host}")
+//    private String emailHost;
+//    @Value("${email.port}")
+//    private int emailPort;
+//    @Value("${email.username}")
+//    private String emailUserName;
+//    @Value("${email.password}")
+//    private String emailPwd;
 
 
     @Bean
