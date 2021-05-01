@@ -46,11 +46,9 @@ public class SpringConfig implements WebApplicationInitializer {
         filter.setInitParameter("encoding", "UTF-8");
         filter.addMappingForServletNames(null, false, "dispatcher");
 
-/*
         // 시큐리티 설정
 		FilterRegistration.Dynamic securityFilter = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
-		securityFilter.addMappingForUrlPatterns(null,false,"/*");
-*/
+        securityFilter.addMappingForServletNames(null, false, "dispatcher");
 
 		// 멀티파일 설정
         servlet.setMultipartConfig(new MultipartConfigElement(filesSavePath, 1024 * 1024 * 1024, 1024 * 1024 * 1024, 0));
