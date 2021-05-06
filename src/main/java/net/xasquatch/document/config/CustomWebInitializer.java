@@ -1,11 +1,13 @@
 package net.xasquatch.document.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.*;
@@ -29,6 +31,7 @@ public class CustomWebInitializer implements WebApplicationInitializer {
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
         ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", dispatcherServlet);
 
+
         // 부가 설정
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
@@ -43,7 +46,13 @@ public class CustomWebInitializer implements WebApplicationInitializer {
         // 파라미터 인코딩 설정
         FilterRegistration.Dynamic filter = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
         filter.setInitParameter("encoding", "UTF-8");
+        filter.setInitParameter("forceEncoding", "true");
         filter.addMappingForServletNames(null, false, "dispatcher");
+/*
+
+        FilterRegistration.Dynamic securityFilter = servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
+        securityFilter.addMappingForUrlPatterns(null, false, "/*");
+*/
 
 		// 멀티파일 설정
         servlet.setMultipartConfig(new MultipartConfigElement(filesSavePath, 1024 * 1024 * 1024, 1024 * 1024 * 1024, 0));
