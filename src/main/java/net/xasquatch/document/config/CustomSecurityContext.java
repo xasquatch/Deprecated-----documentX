@@ -1,6 +1,7 @@
-package net.xasquatch.document.context;
+package net.xasquatch.document.config;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -12,7 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityWebApplicationInitializer extends WebSecurityConfigurerAdapter {
+@Slf4j
+public class CustomSecurityContext extends WebSecurityConfigurerAdapter {
 /*
 
     @Autowired
@@ -24,29 +26,28 @@ public class SecurityWebApplicationInitializer extends WebSecurityConfigurerAdap
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        log.debug("hi");
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index.jsp", "/home", "/favicon.ico", "/resources/**", "/publish/**")
-                .permitAll()
-                .antMatchers("/secure/**", "/manage/**", "/admin/**", "/comment/admin/**")
-                .hasRole("ADMIN")
-                .anyRequest()
-                .authenticated()
-                .and()
+                    .antMatchers("/", "/index.jsp", "/home", "/favicon.ico", "/resources/**", "/publish/**")
+                    .permitAll()
+                    .antMatchers("/secure/**", "/manage/**", "/admin/**", "/comment/admin/**")
+                    .hasRole("ADMIN")
+                    .anyRequest()
+                    .authenticated()
+                    .and()
                 .formLogin()
-                .loginPage("/user/loginForm")
-                .loginProcessingUrl("/j_spring_security_check")
-                .usernameParameter("j_username")
-                .passwordParameter("j_password")
-//                .successHandler(loginSuccessHandler)
-//                .permitAll()
-                .and()
+                    .loginPage("/user/loginForm")
+                    .loginProcessingUrl("/j_spring_security_check")
+                    .usernameParameter("j_username")
+                    .passwordParameter("j_password")
+    //                .successHandler(loginSuccessHandler)
+    //                .permitAll()
+                    .and()
                 .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/home")
-                .and()
-                .csrf()
-                .and()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/home")
+                    .and()
                 .httpBasic();
     }
 

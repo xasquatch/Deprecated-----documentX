@@ -1,4 +1,4 @@
-package net.xasquatch.document.context;
+package net.xasquatch.document.config;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,7 +13,7 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 //@Import({SecurityConfig.class})
 @Configuration
 @PropertySource("/WEB-INF/setting.properties")
-public class RootAppContext {
+public class CustomRootAppContext {
 
     /*--------TODO:DB 접속관리--------------*/
     @Value("${db.classname}")

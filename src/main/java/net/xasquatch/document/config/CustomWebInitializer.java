@@ -1,4 +1,4 @@
-package net.xasquatch.document.context;
+package net.xasquatch.document.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -6,7 +6,6 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.*;
@@ -23,7 +22,7 @@ public class CustomWebInitializer implements WebApplicationInitializer {
 
         // Spring MVC 프로젝트 설정을 위해 작성하는 클래스의 객체를 생성한다.
         AnnotationConfigWebApplicationContext servletAppContext = new AnnotationConfigWebApplicationContext();
-        servletAppContext.register(ServletAppContext.class);
+        servletAppContext.register(CustomServletAppContext.class);
 
         // 요청 발생 시 요청을 처리하는 서블릿을 DispatcherServlet으로 설정해준다.
         DispatcherServlet dispatcherServlet = new DispatcherServlet(servletAppContext);
@@ -36,7 +35,7 @@ public class CustomWebInitializer implements WebApplicationInitializer {
 
         // Bean을 정의하는 클래스를 지정한다
         AnnotationConfigWebApplicationContext rootAppContext = new AnnotationConfigWebApplicationContext();
-        rootAppContext.register(net.xasquatch.document.context.RootAppContext.class);
+        rootAppContext.register(net.xasquatch.document.config.CustomRootAppContext.class);
 
         ContextLoaderListener listener = new ContextLoaderListener(rootAppContext);
         servletContext.addListener(listener);

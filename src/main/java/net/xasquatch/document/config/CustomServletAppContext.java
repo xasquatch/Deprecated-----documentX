@@ -1,4 +1,4 @@
-package net.xasquatch.document.context;
+package net.xasquatch.document.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +26,7 @@ import java.util.Properties;
 @ComponentScan("net.xasquatch.document.repository")
 @ComponentScan("net.xasquatch.document.interceptor")
 @PropertySource("/WEB-INF/setting.properties")
-public class ServletAppContext implements WebMvcConfigurer {
+public class CustomServletAppContext implements WebMvcConfigurer {
 
     @Value("${files.context.path}")
     private String filesContextPath;
