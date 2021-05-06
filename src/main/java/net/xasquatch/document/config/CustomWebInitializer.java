@@ -1,7 +1,6 @@
 package net.xasquatch.document.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -38,21 +37,20 @@ public class CustomWebInitializer implements WebApplicationInitializer {
 
         // Bean을 정의하는 클래스를 지정한다
         AnnotationConfigWebApplicationContext rootAppContext = new AnnotationConfigWebApplicationContext();
-        rootAppContext.register(net.xasquatch.document.config.CustomRootAppContext.class);
+        rootAppContext.register(CustomRootAppContext.class);
+        rootAppContext.register(CustomSecurityConfig.class);
 
         ContextLoaderListener listener = new ContextLoaderListener(rootAppContext);
         servletContext.addListener(listener);
+
+
+
 
         // 파라미터 인코딩 설정
         FilterRegistration.Dynamic filter = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
         filter.setInitParameter("encoding", "UTF-8");
         filter.setInitParameter("forceEncoding", "true");
         filter.addMappingForServletNames(null, false, "dispatcher");
-/*
-
-        FilterRegistration.Dynamic securityFilter = servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
-        securityFilter.addMappingForUrlPatterns(null, false, "/*");
-*/
 
 		// 멀티파일 설정
         servlet.setMultipartConfig(new MultipartConfigElement(filesSavePath, 1024 * 1024 * 1024, 1024 * 1024 * 1024, 0));
