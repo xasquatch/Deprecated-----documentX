@@ -25,7 +25,7 @@ import java.util.Properties;
 @ComponentScan("net.xasquatch.document.service")
 @ComponentScan("net.xasquatch.document.repository")
 @ComponentScan("net.xasquatch.document.interceptor")
-@PropertySource("/WEB-INF/properties/file-manager.properties")
+@PropertySource("/WEB-INF/setting.properties")
 public class ServletAppContext implements WebMvcConfigurer {
 
     @Value("${files.context.path}")

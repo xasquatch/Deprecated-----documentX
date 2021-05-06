@@ -2,3 +2,4 @@
 documentX.iml
 target/
 src/main/webapp/WEB-INF/properties/
+src/main/webapp/WEB-INF/setting.properties

@@ -12,8 +12,8 @@ import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.*;
 import java.util.Collections;
 
-@PropertySource("/WEB-INF/properties/file-manager.properties")
-public class SpringConfig implements WebApplicationInitializer {
+@PropertySource("/WEB-INF/setting.properties")
+public class CustomWebInitializer implements WebApplicationInitializer {
 
     @Value("${files.save.path}")
     private String filesSavePath;
@@ -45,10 +45,6 @@ public class SpringConfig implements WebApplicationInitializer {
         FilterRegistration.Dynamic filter = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
         filter.setInitParameter("encoding", "UTF-8");
         filter.addMappingForServletNames(null, false, "dispatcher");
-
-        // 시큐리티 설정
-		FilterRegistration.Dynamic securityFilter = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
-        securityFilter.addMappingForServletNames(null, false, "dispatcher");
 
 		// 멀티파일 설정
         servlet.setMultipartConfig(new MultipartConfigElement(filesSavePath, 1024 * 1024 * 1024, 1024 * 1024 * 1024, 0));

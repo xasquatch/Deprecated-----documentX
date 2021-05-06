@@ -12,8 +12,7 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 
 //@Import({SecurityConfig.class})
 @Configuration
-@PropertySource("/WEB-INF/properties/db.properties")
-@PropertySource("/WEB-INF/properties/email.properties")
+@PropertySource("/WEB-INF/setting.properties")
 public class RootAppContext {
 
     /*--------TODO:DB 접속관리--------------*/
