@@ -363,3 +363,26 @@ var nav = {
 
 
 }
+
+
+var modal = {
+    title: document.querySelector('.modal-title'),
+    contents: document.querySelector('.modal-body'),
+    confirm: document.querySelector('.modal-footer>button:first-child'),
+    cancel: document.querySelector('.modal-footer>button:last-child'),
+
+    open: function (titleInput, contentsInput, confirmInput) {
+        modal.title.innerHTML = titleInput;
+        modal.contents.innerHTML = contentsInput;
+        modal.confirm.setAttribute('onclick', confirmInput);
+
+        $('#myModal').modal();
+    },
+    close: function () {
+        modal.title.innerHTML = '';
+        modal.contents.innerHTML = '';
+        modal.confirm.removeAttribute('onclick');
+        modal.cancel.click();
+    }
+
+}
