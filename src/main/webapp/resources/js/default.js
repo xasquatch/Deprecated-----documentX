@@ -464,8 +464,17 @@ var sign = {
         var formData = new FormData(signForm);
         request.submit('POST', '/sign-up', function (data) {
 
-            // data값 boolean여부따라 결정
+            if (data === 'false') {
+                nav.acceptMsg(3, '계정 생성에 실패하였습니다. 잠시 후 다시 이용바랍니다.');
+                return;
+            }
 
+            // data값 boolean여부따라 결정
+            nav.acceptMsg(3, '???님 환영합니다.')
+            setTimeout(function () {
+                window.location.href = '/login';
+
+            }, 3000)
 
         }, 'FORMFILE', formData);
     },

@@ -62,7 +62,7 @@
             </a>
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="My Information"
-               href="javascript:">
+               href="/members/${member.nickname}">
                 <i class="fa fa-user-circle " aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 내 정보관리
@@ -83,7 +83,7 @@
             --%>
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chatting Room"
-               href="javascript:">
+               href="/members/${member.nickname}/chatting-room">
                 <i class="fa fa-weixin " aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 채팅 관리
@@ -91,7 +91,7 @@
             </a>
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chatting Room"
-               href="javascript:">
+               href="/members/${member.nickname}/files">
                 <i class="fa fa-file-archive-o " aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 파일 관리
@@ -104,19 +104,19 @@
             <div class="d-none d-xl-inline d-xxl-none" style="text-align: center; font-weight: bold;">
                 Management
             </div>
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="/management/members" class="list-group-item list-group-item-action">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 회원 관리
             </span>
             </a>
-            <a id="searchDropdown" href="#" class="list-group-item list-group-item-action">
+            <a href="/management/chatting-rooms" class="list-group-item list-group-item-action">
                 <i class="fa fa-weixin " aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 채팅 관리
             </span>
             </a>
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="/management/files" class="list-group-item list-group-item-action">
                 <i class="fa fa-files-o" aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 파일 관리
