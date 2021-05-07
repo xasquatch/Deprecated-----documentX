@@ -54,7 +54,7 @@
 
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Log Out"
-               href="javascript:document.querySelector('#logout').submit();">
+               href="javascript:if(window.confirm('로그아웃 하시겠습니까?')) document.querySelector('#logout').submit();">
                 <i class="fa fa-sign-out " aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 로그 아웃

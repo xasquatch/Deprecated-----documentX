@@ -10,7 +10,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
-//@Import({SecurityConfig.class})
 @Configuration
 @PropertySource("/WEB-INF/setting.properties")
 public class CustomRootAppContext {
