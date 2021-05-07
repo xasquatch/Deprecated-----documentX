@@ -13,7 +13,7 @@
             </button>
         </li>
         <li class="list-inline-item"><a class="btn" href="${path}/management">management</a></li>
-        <li class="list-inline-item"><a class="btn" href="${path}/member">member</a></li>
+        <li class="list-inline-item"><a class="btn" href="${path}/members">member</a></li>
         <li class="list-inline-item"><a class="btn" href="${path}/guest">guest</a></li>
     </ul>
 
