@@ -68,6 +68,10 @@
                 내 정보관리
                 </span>
             </a>
+        </sec:authorize>
+        <sec:authorize access="hasAnyRole('USER')">
+
+            <%--
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Organization"
                href="javascript:">
@@ -76,42 +80,76 @@
                 내 단체관리
                 </span>
             </a>
+            --%>
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chatting Room"
                href="javascript:">
                 <i class="fa fa-weixin " aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
-                채팅룸 보기
+                채팅 관리
+                </span>
+            </a>
+            <a class="list-group-item"
+               data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chatting Room"
+               href="javascript:">
+                <i class="fa fa-file-archive-o " aria-hidden="true"></i>
+                <span class="d-none d-xl-inline d-xxl-none">
+                파일 관리
                 </span>
             </a>
         </sec:authorize>
     </div>
-
     <div id="main-header-list" class="reduced-header-list">
-        <a id="searchDropdown" href="#" class="list-group-item list-group-item-action">
-            <i class="fa fa-search" aria-hidden="true"></i>
-            <span class="d-none d-xl-inline d-xxl-none">
-                검색
+        <sec:authorize access="hasAnyRole('MANAGEMENT')">
+            <div class="d-none d-xl-inline d-xxl-none" style="text-align: center; font-weight: bold;">
+                Management
+            </div>
+            <a href="#" class="list-group-item list-group-item-action">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <span class="d-none d-xl-inline d-xxl-none">
+                회원 관리
             </span>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-            <i class="fa fa-files-o" aria-hidden="true"></i>
-            <span class="d-none d-xl-inline d-xxl-none">
+            </a>
+            <a id="searchDropdown" href="#" class="list-group-item list-group-item-action">
+                <i class="fa fa-weixin " aria-hidden="true"></i>
+                <span class="d-none d-xl-inline d-xxl-none">
+                채팅 관리
+            </span>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                <i class="fa fa-files-o" aria-hidden="true"></i>
+                <span class="d-none d-xl-inline d-xxl-none">
                 파일 관리
             </span>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-            <i class="fa fa-pie-chart" aria-hidden="true"></i>
-            <span class="d-none d-xl-inline d-xxl-none">
-                핫 키워드
-            </span>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-            <i class="fa fa-line-chart" aria-hidden="true"></i>
-            <span class="d-none d-xl-inline d-xxl-none">
-                단체 통계
-            </span>
-        </a>
+            </a>
+        </sec:authorize>
+
+        <%--
+                <a id="searchDropdown" href="#" class="list-group-item list-group-item-action">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <span class="d-none d-xl-inline d-xxl-none">
+                        검색
+                    </span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fa fa-files-o" aria-hidden="true"></i>
+                    <span class="d-none d-xl-inline d-xxl-none">
+                        파일 관리
+                    </span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fa fa-pie-chart" aria-hidden="true"></i>
+                    <span class="d-none d-xl-inline d-xxl-none">
+                        핫 키워드
+                    </span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <i class="fa fa-line-chart" aria-hidden="true"></i>
+                    <span class="d-none d-xl-inline d-xxl-none">
+                        단체 통계
+                    </span>
+                </a>
+            --%>
     </div>
 </header>
 <nav id="main-nav" class="reduced-main-nav deactivate-nav">
