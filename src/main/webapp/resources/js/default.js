@@ -1,3 +1,53 @@
+var request = {
+    json: 'application/json',
+    form: 'application/x-www-form-urlencoded',
+    formFile: 'multipart/form-data',
+
+    setContentsType: function (inputContentsType) {
+        var contentsType = 'text/plain';
+
+        if (inputContentsType.toUpperCase() === 'FORM') {
+            contentsType = request.form;
+
+        } else if (inputContentsType.toUpperCase() === 'FORMFILE') {
+            contentsType = request.formFile;
+
+        } else if (inputContentsType.toUpperCase() === 'JSON') {
+            contentsType = request.json;
+
+        }
+        return contentsType;
+    },
+
+    submit: function (method, url, callback, inputContentsType, sendData) {
+        var xhr = new XMLHttpRequest();
+
+        var result = null;
+        var contentsType = null;
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    result = xhr.response;
+                    callback(result);
+                }
+            }
+        };
+        if (method.toUpperCase() === 'GET') {
+            xhr.open(method, url);
+            xhr.send();
+        } else if (method.toUpperCase() === 'POST' || method.toUpperCase() === 'PUT' || method.toUpperCase() === 'DELETE' || method.toUpperCase() === 'PATCH') {
+            method = method.toUpperCase();
+            contentsType = request.setContentsType(inputContentsType);
+            xhr.open(method, url, true);
+            if (contentsType !== request.formFile)
+                xhr.setRequestHeader('Content-Type', contentsType);
+            xhr.send(sendData);
+        }
+
+    }
+}
+
 //-text객체 문자열을 character로 변환하여 한 자씩 interval로 반복해가며 삽입
 var text = {
 
@@ -384,5 +434,16 @@ var modal = {
         modal.confirm.removeAttribute('onclick');
         modal.cancel.click();
     }
+
+}
+
+var sign = {
+    up: function () {
+        request.submit('GET', '/resources/html/sign-up.html', function (data) {
+            modal.open('회원가입', data, 'alert("hi")');
+
+        })
+    },
+
 
 }

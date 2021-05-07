@@ -11,8 +11,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">confirm</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="modal.close()">Close</button>
+                <button type="button" class="btn btn-dark">confirm</button>
+                <button type="button" class="btn btn-light" data-dismiss="modal" onclick="modal.close()">Close</button>
             </div>
         </div>
     </div>

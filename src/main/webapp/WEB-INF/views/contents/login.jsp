@@ -27,9 +27,13 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-2 col-sm-10" style="text-align: center;">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-                <button type="submit" class="btn btn-default">Sign in</button>
+                <button type="submit" class="btn btn-dark">로그인</button>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <button type="button" class="btn btn-light" onclick="sign.up()">회원가입</button>
             </div>
         </div>
     </form>
