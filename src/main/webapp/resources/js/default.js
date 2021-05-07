@@ -470,15 +470,86 @@ var sign = {
         }, 'FORMFILE', formData);
     },
     isAvailableEmail: function (data) {
-        var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
         return regExp.test(data);
     },
     isAvailablePwd: function (data) {
-        var regExp = /^[0-9a-z]{8,20}$/
+        var regExp = /^[a-z0-9]{8,20}$/
         return regExp.test(data);
     },
     isAvailableNickName: function (data) {
         var regExp = /^[0-9a-z]{8,20}$/
         return regExp.test(data);
-    }
+    },
+    tokenCountDown: function (element) {
+        element.setAttribute('onclick', "window.alert('이미 인증요청을 시도하였습니다.')");
+        var originValue = element.innerHTML;
+        var count = 60 * 5;
+        var intervalNumber = setInterval(function () {
+
+            try {
+                if (count < 0) throw new Error('Count zero');
+                count--;
+                element.innerHTML = originValue + '(' + count + ')';
+            } catch (e) {
+                clearInterval(intervalNumber);
+            }
+
+        }, 1000);
+
+    },
+    confirmAvailableEmail: function () {
+//서버 통신 후 성공여부
+        // 성공시
+        if (true) {
+            sign.successEmailAuthorization();
+            //실패
+        } else {
+            window.alert('일치하지않는 토큰번호입니다.\n다시 확인해주세요.');
+        }
+    },
+    successEmailAuthorization: function () {
+        var msgBox = document.querySelector('#emailHelp');
+        msgBox.innerHTML = '이메일 인증에 성공하였습니다.'
+        document.querySelector('#sign-up-email').setAttribute('readonly', 'readonly');
+        document.querySelector('#sign-up-email-token').setAttribute('readonly', 'readonly');
+        document.querySelector('#sign-up-email-token').setAttribute('onclick', '');
+        document.querySelector('#sign-up-email-token-submit').setAttribute('onclick', '');
+
+    },
+    confirmAvailablePwd: function (element) {
+        var msgBox = document.querySelector('#pwdHelp');
+        if (sign.isAvailablePwd(element.value)) {
+            msgBox.innerHTML = '올바른 비밀번호입니다.'
+            msgBox.style.color = 'green';
+
+        } else {
+            msgBox.innerHTML = '잘 못된 형식의 비밀번호입니다. 다시 확인해주세요'
+            msgBox.style.color = 'red';
+
+        }
+    },
+    confirmSamePwd: function (element) {
+        var msgBox = document.querySelector('#pwdConfirmHelp');
+        if (document.querySelector('#sign-up-pwd').value === element.value) {
+            msgBox.innerHTML = '비밀번호가 일치합니다.'
+            msgBox.style.color = 'green';
+        } else {
+            msgBox.innerHTML = '비밀번호가 일치하지않습니다. 다시 확인해주세요'
+            msgBox.style.color = 'red';
+
+        }
+    },
+    confirmAvailableNickName: function (element) {
+        var msgBox = document.querySelector('#nickNameHelp');
+        if (sign.isAvailableNickName(element.value)) {
+            msgBox.innerHTML = '올바른 비밀번호입니다.'
+            msgBox.style.color = 'green';
+
+        } else {
+            msgBox.innerHTML = '잘 못된 형식의 비밀번호입니다. 다시 확인해주세요'
+            msgBox.style.color = 'red';
+
+        }
+    },
 }

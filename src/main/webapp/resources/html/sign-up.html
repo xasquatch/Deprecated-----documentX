@@ -1,26 +1,42 @@
 <form id="sign-up-form" action="/sign-up" method="POST">
     <div class="mb-3">
         <label for="sign-up-email" class="form-label">이메일</label>
-        <input type="email" class="form-control" id="sign-up-email" aria-describedby="emailHelp"
-               placeholder="xxxxxxx@gmail.com">
+        <div class="input-group mb-3">
+            <input type="email" class="form-control" id="sign-up-email" aria-describedby="emailHelp"
+                   placeholder="xxxxxxx@gmail.com">
+            <button type="button" class="input-group-text"
+                    onclick="sign.tokenCountDown(this);">
+                인증
+            </button>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="인증버튼을 누른 후 토큰번호를 입력해주세요." id="sign-up-email-token">
+            <button type="button" id="sign-up-email-token-submit" class="input-group-text"
+                    onclick="sign.confirmAvailableEmail();">
+                확인
+            </button>
+        </div>
         <div id="emailHelp" class="form-text"></div>
     </div>
     <div class="mb-3">
         <label for="sign-up-pwd" class="form-label">비밀번호</label>
         <input type="password" class="form-control" id="sign-up-pwd" aria-describedby="pwdHelp"
-               placeholder="영소문자와 숫자를 조합하여 8~20자 이내로 입력해주세요">
+               placeholder="영소문자와 숫자를 조합하여 8~20자 이내로 입력해주세요"
+               onchange="sign.confirmAvailablePwd(this);">
         <div id="pwdHelp" class="form-text"></div>
     </div>
     <div class="mb-3">
         <label for="sign-up-pwd" class="form-label">비밀번호 확인</label>
         <input type="password" class="form-control" id="sign-up-pwd-confirm" aria-describedby="pwdConfirmHelp"
-               placeholder="비밀번호 확인">
+               placeholder="비밀번호 확인"
+               onchange="sign.confirmSamePwd(this);">
         <div id="pwdConfirmHelp" class="form-text"></div>
     </div>
     <div class="mb-3">
         <label for="sign-up-nickName" class="form-label">닉네임</label>
         <input type="text" class="form-control" id="sign-up-nickName" aria-describedby="nickNameHelp"
-               placeholder="영소문자와 숫자를 조합하여 8~20자 이내로 입력해주세요">
+               placeholder="영소문자와 숫자를 조합하여 8~20자 이내로 입력해주세요"
+               onchange="sign.confirmAvailableNickName(this);">
         <div id="nickNameHelp" class="form-text"></div>
     </div>
 </form>
