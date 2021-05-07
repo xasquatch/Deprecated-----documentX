@@ -2,8 +2,11 @@ package net.xasquatch.document.config;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,22 +19,37 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        System.out.println("hi security");
-        http.authorizeRequests().antMatchers("/admin/**")
-                .access("hasRole('ADMIN')").and().formLogin()
-                .loginPage("/login").failureUrl("/login?error")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .and().logout().logoutSuccessUrl("/login?logout")
-                .and().csrf()
-                .and().exceptionHandling().accessDeniedPage("/403");
+        http
+                .authorizeRequests()
+                    .antMatchers("/resources/**", "/webjars/**").permitAll()
+                    .antMatchers("/management/**").hasAnyRole("MANAGEMENT")
+                    .antMatchers("/members/**").hasAnyRole("MANAGEMENT", "USER")
+                    .antMatchers("/guest/**").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
+                .formLogin()
+                    .successHandler(
+                            (request, response, authentication) -> {
+                                log.debug(authentication.getName());
+                                response.sendRedirect("/");
+                            })
+                    .failureHandler(
+                            (request, response, exception) -> {
+                                response.sendRedirect("/login");
+                            })
+                    .loginPage("/login")
+                    .loginProcessingUrl("/login")
+                    .usernameParameter("email")
+                    .passwordParameter("pwd")
+                    .permitAll();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser("user").password("{noop}1234").roles("USER").and()
+                .withUser("admin").password("{noop}1234").roles("USER", "MANAGEMENT");
     }
 
 }
-

@@ -30,7 +30,6 @@ public class CustomWebInitializer implements WebApplicationInitializer {
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
         ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", dispatcherServlet);
 
-
         // 부가 설정
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
@@ -42,9 +41,6 @@ public class CustomWebInitializer implements WebApplicationInitializer {
 
         ContextLoaderListener listener = new ContextLoaderListener(rootAppContext);
         servletContext.addListener(listener);
-
-
-
 
         // 파라미터 인코딩 설정
         FilterRegistration.Dynamic filter = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
