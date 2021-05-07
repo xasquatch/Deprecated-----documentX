@@ -4,15 +4,17 @@
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
 <section class="wrap reduced-wrap">
+    <h2>Sign In</h2>
+    <BR>
     <form class="form-horizontal" method="POST" action="${path}/login">
         <div class="form-group">
-            <label for="login-email" class="col-sm-2 control-label">Email</label>
+            <label for="login-email" class="col-sm-2 control-label">이메일</label>
             <div class="col-sm-10">
-                <input type="text" name="email" class="form-control" id="login-email" placeholder="Email">
+                <input type="text" name="email" class="form-control" id="login-email" placeholder="xxxxx@gmail.com">
             </div>
         </div>
         <div class="form-group">
-            <label for="login-pwd" class="col-sm-2 control-label">Password</label>
+            <label for="login-pwd" class="col-sm-2 control-label">비밀번호</label>
             <div class="col-sm-10">
                 <input type="password" name="pwd" class="form-control" id="login-pwd" placeholder="Password">
             </div>
@@ -33,7 +35,7 @@
                 &nbsp;
                 &nbsp;
                 &nbsp;
-                <button type="button" class="btn btn-light" onclick="sign.up()">회원가입</button>
+                <button type="button" class="btn btn-light" onclick="sign.upPage()">회원가입</button>
             </div>
         </div>
     </form>

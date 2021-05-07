@@ -1,4 +1,4 @@
-<form>
+<form id="sign-up-form" action="/sign-up" method="POST">
     <div class="mb-3">
         <label for="sign-up-email" class="form-label">이메일</label>
         <input type="email" class="form-control" id="sign-up-email" aria-describedby="emailHelp"
@@ -20,7 +20,7 @@
     <div class="mb-3">
         <label for="sign-up-nickName" class="form-label">닉네임</label>
         <input type="text" class="form-control" id="sign-up-nickName" aria-describedby="nickNameHelp"
-               placeholder="비밀번호 확인">
+               placeholder="영소문자와 숫자를 조합하여 8~20자 이내로 입력해주세요">
         <div id="nickNameHelp" class="form-text"></div>
     </div>
 </form>

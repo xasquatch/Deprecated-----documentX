@@ -438,12 +438,47 @@ var modal = {
 }
 
 var sign = {
-    up: function () {
+    upPage: function () {
         request.submit('GET', '/resources/html/sign-up.html', function (data) {
-            modal.open('회원가입', data, 'alert("hi")');
+            modal.open('회원가입', data, 'sign.up()');
 
         })
     },
+    up: function () {
+        var emailInput = document.querySelector('#sign-up-email');
+        var pwdInput = document.querySelector('#sign-up-pwd');
+        var pwdConfirmInput = document.querySelector('#sign-up-pwd-confirm');
+        var nickNameInput = document.querySelector('#sign-up-nickName');
+        var msgBox = '[회원가입 실패: 다음을 확인해주세요]\n';
+        if (!sign.isAvailableEmail(emailInput.value)) msgBox += '- 이메일 형식이 맞지 않습니다.\n';
+        if (!sign.isAvailablePwd(pwdInput.value)) msgBox += '- 비밀번호 형식이 맞지 않습니다.\n';
+        if (pwdInput.value !== pwdConfirmInput.value) msgBox += '- 비밀번호가 일치하지 않습니다.\n';
+        if (!sign.isAvailableNickName(nickNameInput.value)) msgBox += '- 이름 형식이 맞지 않습니다.\n';
+
+        if (msgBox !== '[회원가입 실패: 다음을 확인해주세요]\n') {
+            alert(msgBox);
+            return;
+        }
+
+        var signForm = document.querySelector('#sign-up-form');
+        var formData = new FormData(signForm);
+        request.submit('POST', '/sign-up', function (data) {
+
+            // data값 boolean여부따라 결정
 
 
+        }, 'FORMFILE', formData);
+    },
+    isAvailableEmail: function (data) {
+        var regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        return regExp.test(data);
+    },
+    isAvailablePwd: function (data) {
+        var regExp = /^[0-9a-z]{8,20}$/
+        return regExp.test(data);
+    },
+    isAvailableNickName: function (data) {
+        var regExp = /^[0-9a-z]{8,20}$/
+        return regExp.test(data);
+    }
 }
