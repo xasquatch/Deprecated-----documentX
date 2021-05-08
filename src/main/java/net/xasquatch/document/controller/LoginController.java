@@ -21,6 +21,7 @@ public class LoginController {
         log.debug("login");
         return "redirect:/";
     }
+/*
 
     @GetMapping("/management")
     public String admin(Model model) {
@@ -40,4 +41,5 @@ public class LoginController {
 //        model.addAttribute("obj", "GUEST");
         return "GUEST";
     }
+*/
 }

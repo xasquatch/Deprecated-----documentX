@@ -30,7 +30,7 @@
 
         <!-- 파일을 덮어쓰는 정책 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <FileNamePattern>D:\logback\log.%i.log.zip</FileNamePattern>
+            <FileNamePattern>D:\logback\log.%i.zip</FileNamePattern>
             <!--
                 MinIndex가 1이고, MaxIndex가 10이므로, 위의 파일 이름 패턴에 따라 아래의 로그 파일이 생길 것이다.
                 logexample2.1.log.zip   logexample2.2.log.zip  .... logexample2.10.log.zip

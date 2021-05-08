@@ -6,15 +6,14 @@
 
 <section class="wrap reduced-wrap">
 
-    <ul class="list-inline">
-        <li class="list-inline-item">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                ${home}
-            </button>
-        </li>
-        <li class="list-inline-item"><a class="btn" href="${path}/management">management</a></li>
-        <li class="list-inline-item"><a class="btn" href="${path}/members">member</a></li>
-        <li class="list-inline-item"><a class="btn" href="${path}/guest">guest</a></li>
+    <ul class="list-group">
+        <li class="list-group-item"><a class="btn" href="${path}/management/members">management member</a></li>
+        <li class="list-group-item"><a class="btn" href="${path}/management/files">management file</a></li>
+        <li class="list-group-item"><a class="btn" href="${path}/management/chatting-rooms">management chtting room</a></li>
+        <li class="list-group-item"><a class="btn" href="${path}/members/test-guest">memberInfo</a></li>
+        <li class="list-group-item"><a class="btn" href="${path}/members/test-guest/files">file</a></li>
+        <li class="list-group-item"><a class="btn" href="${path}/members/test-guest/chatting-rooms">chatting-rooms</a></li>
+        <li class="list-group-item"><a class="btn" href="${path}/members/test-guest/chatting-rooms/1">1번 chatting room</a></li>
     </ul>
 
     <div class="container">

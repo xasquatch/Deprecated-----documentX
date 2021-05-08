@@ -83,7 +83,7 @@
             --%>
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chatting Room"
-               href="/members/${member.nickname}/chatting-room">
+               href="/members/${member.nickname}/chatting-rooms">
                 <i class="fa fa-weixin " aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 채팅 관리
