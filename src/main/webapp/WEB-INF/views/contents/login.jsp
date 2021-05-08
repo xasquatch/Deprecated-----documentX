@@ -20,8 +20,7 @@
             <label for="login-pwd" class="col-sm-2 control-label">비밀번호</label>
             <div class="col-sm-10">
                 <input type="password" name="pwd" class="form-control" id="login-pwd" placeholder="Password"
-                       onchange="login.confirmAvailablePwd(this);"
-                       value="${pwd}">
+                       onchange="login.confirmAvailablePwd(this);">
                 <div id="loginPwdHelp" class="form-text"></div>
             </div>
         </div>
