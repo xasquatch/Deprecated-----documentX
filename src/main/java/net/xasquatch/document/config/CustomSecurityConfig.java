@@ -21,36 +21,35 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/resources/**", "/webjars/**").permitAll()
-                    .antMatchers("/management/**").hasAnyRole("MANAGEMENT")
-                    .antMatchers("/members/**").hasAnyRole("MANAGEMENT", "USER")
-                    .antMatchers("/guest/**").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
+                .antMatchers("/resources/**", "/webjars/**").permitAll()
+                .antMatchers("/management/**").hasAnyRole("MANAGEMENT")
+                .antMatchers("/members/**").hasAnyRole("MANAGEMENT", "USER")
+                .antMatchers("/guest/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
-                    .successHandler(
-                            (request, response, authentication) -> {
-                                log.debug(authentication.getName());
-                                response.sendRedirect("/");
-                            })
-                    .failureHandler(
-                            (request, response, exception) -> {
-                                response.sendRedirect("/login");
-                            })
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login")
-                    .usernameParameter("email")
-                    .passwordParameter("pwd")
-                    .permitAll();
+                .successHandler(
+                        (request, response, authentication) -> {
+                            response.sendRedirect("/");
+                        })
+                .failureHandler(
+                        (request, response, exception) -> {
+                            response.sendRedirect("/login");
+                        })
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .usernameParameter("email")
+                .passwordParameter("pwd")
+                .permitAll();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("user").password("{noop}1234").roles("USER").and()
-                .withUser("admin").password("{noop}1234").roles("MANAGEMENT").and()
-                .withUser("master").password("{noop}1234").roles("USER", "MANAGEMENT");
+                .withUser("user@test.com").password("{noop}a12345678").roles("USER").and()
+                .withUser("admin@test.com").password("{noop}a12345678").roles("MANAGEMENT").and()
+                .withUser("master@test.com").password("{noop}a12345678").roles("USER", "MANAGEMENT");
     }
 
 }

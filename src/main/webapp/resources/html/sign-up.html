@@ -3,7 +3,8 @@
         <label for="sign-up-email" class="form-label">이메일</label>
         <div class="input-group mb-3">
             <input type="email" class="form-control" id="sign-up-email" aria-describedby="emailHelp"
-                   placeholder="xxxxxxx@gmail.com">
+                   placeholder="xxxxxxx@gmail.com"
+                   onchange="sign.confirmAvailableEmail(this)">
             <button type="button" class="input-group-text"
                     onclick="sign.tokenCountDown(this);">
                 인증
@@ -12,7 +13,7 @@
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="인증버튼을 누른 후 토큰번호를 입력해주세요." id="sign-up-email-token">
             <button type="button" id="sign-up-email-token-submit" class="input-group-text"
-                    onclick="sign.confirmAvailableEmail();">
+                    onclick="sign.confirmEmailToken();">
                 확인
             </button>
         </div>

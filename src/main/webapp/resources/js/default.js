@@ -490,6 +490,18 @@ var sign = {
         var regExp = /^[0-9a-z]{8,20}$/
         return regExp.test(data);
     },
+    confirmAvailableEmail:function (element) {
+        var msgBox = document.querySelector('#emailHelp');
+        if (sign.isAvailableEmail(element.value)) {
+            msgBox.innerHTML = '올바른 이메일형식입니다.'
+            msgBox.style.color = 'green';
+
+        } else {
+            msgBox.innerHTML = '잘 못된 형식의 이메일입니다. 다시 확인해주세요'
+            msgBox.style.color = 'red';
+
+        }
+    },
     tokenCountDown: function (element) {
         element.setAttribute('onclick', "window.alert('이미 인증요청을 시도하였습니다.')");
         var originValue = element.innerHTML;
@@ -507,7 +519,8 @@ var sign = {
         }, 1000);
 
     },
-    confirmAvailableEmail: function () {
+    confirmEmailToken: function () {
+
 //서버 통신 후 성공여부
         // 성공시
         if (true) {
@@ -561,4 +574,45 @@ var sign = {
 
         }
     },
+}
+var login = {
+    submit : function () {
+        var emailInput = document.querySelector('#login-email');
+        var pwdInput = document.querySelector('#login-pwd');
+        var msgBox = '[로그인 실패: 다음을 확인해주세요]\n';
+        if (!sign.isAvailableEmail(emailInput.value)) msgBox += '- 이메일 형식이 맞지 않습니다.\n';
+        if (!sign.isAvailablePwd(pwdInput.value)) msgBox += '- 비밀번호 형식이 맞지 않습니다.\n';
+
+        if (msgBox !== '[로그인 실패: 다음을 확인해주세요]\n') {
+            alert(msgBox);
+            return;
+        }
+        document.querySelector('#login-form').submit();
+    },
+    confirmAvailableEmail: function (element) {
+        var msgBox = document.querySelector('#loginEmailHelp');
+        if (sign.isAvailableEmail(element.value)) {
+            msgBox.innerHTML = '올바른 이메일형식입니다.'
+            msgBox.style.color = 'green';
+
+        } else {
+            msgBox.innerHTML = '잘 못된 형식의 이메일입니다. 다시 확인해주세요'
+            msgBox.style.color = 'red';
+
+        }
+
+    },
+    confirmAvailablePwd:function (element) {
+        var msgBox = document.querySelector('#loginPwdHelp');
+        if (sign.isAvailablePwd(element.value)) {
+            msgBox.innerHTML = '올바른 비밀번호입니다.'
+            msgBox.style.color = 'green';
+
+        } else {
+            msgBox.innerHTML = '잘 못된 형식의 비밀번호입니다. 다시 확인해주세요'
+            msgBox.style.color = 'red';
+
+        }
+
+    }
 }

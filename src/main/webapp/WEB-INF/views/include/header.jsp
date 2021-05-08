@@ -162,6 +162,9 @@
     window.onload = function () {
         text.insert('#main-header-logo>span:last-child', 'Document', 10);
         drag.addExpansionElement(document.querySelector('#main-header'));
+        if ('${navMassage}'!==''){
+            nav.acceptMsg(3000,'${navMassage}');
+        }
     }
 
 
