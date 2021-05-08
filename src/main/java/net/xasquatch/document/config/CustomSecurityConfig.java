@@ -19,15 +19,15 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/**", "/webjars/**").permitAll()
                 .antMatchers("/management/**").hasAnyRole("MANAGEMENT")
                 .antMatchers("/members/**").hasAnyRole("MANAGEMENT", "USER")
-                .antMatchers("/guest/**","/login/**").permitAll()
+                .antMatchers("/guest/**", "/login/**").permitAll()
                 .anyRequest().authenticated();
 
         http
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/sign-in")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/")
-                .failureUrl("/login")
+                .failureUrl("/sign-in")
                 .successHandler(
                         (request, response, authentication) -> {
                             response.sendRedirect("/");
@@ -35,7 +35,8 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(
                         (request, response, exception) -> {
                             request.setAttribute("navMassage", "로그인에 실패하였습니다.");
-                            request.getRequestDispatcher("/login").forward(request, response);
+                            request.setAttribute("email", request.getParameter("email"));
+                            request.getRequestDispatcher("/sign-in").forward(request, response);
 
                         })
                 .usernameParameter("email")
