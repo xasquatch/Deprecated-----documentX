@@ -11,7 +11,8 @@
             <label for="login-email" class="col-sm-2 control-label">이메일</label>
             <div class="col-sm-10">
                 <input type="text" name="email" class="form-control" id="login-email" placeholder="xxxxx@gmail.com"
-                       onchange="login.confirmAvailableEmail(this)">
+                       onchange="login.confirmAvailableEmail(this)"
+                       value="${email}">
                 <div id="loginEmailHelp" class="form-text"></div>
             </div>
         </div>
@@ -19,7 +20,8 @@
             <label for="login-pwd" class="col-sm-2 control-label">비밀번호</label>
             <div class="col-sm-10">
                 <input type="password" name="pwd" class="form-control" id="login-pwd" placeholder="Password"
-                       onchange="login.confirmAvailablePwd(this);">
+                       onchange="login.confirmAvailablePwd(this);"
+                       value="${pwd}">
                 <div id="loginPwdHelp" class="form-text"></div>
             </div>
         </div>

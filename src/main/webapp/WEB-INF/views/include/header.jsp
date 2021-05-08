@@ -163,7 +163,7 @@
         text.insert('#main-header-logo>span:last-child', 'Document', 10);
         drag.addExpansionElement(document.querySelector('#main-header'));
         if ('${navMassage}'!==''){
-            nav.acceptMsg(3000,'${navMassage}');
+            nav.acceptMsg(3,'${navMassage}');
         }
     }
 
