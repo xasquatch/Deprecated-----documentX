@@ -8,18 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/management")
 public class ManagementController {
 
-    @GetMapping("/memebers")
+    @GetMapping("/members")
     public String manageMembers(){
-        return "management/member-list";
+        return "contents/management/member-list";
     }
+
     @GetMapping("/chatting-rooms")
     public String manageChattingList(){
-        return "management/chatting-room-list";
+        return "contents/management/chatting-room-list";
     }
 
     @GetMapping("/files")
     public String manageFiles(){
-        return "management/file-list";
+        return "contents/management/file-list";
     }
 
 }
