@@ -26,6 +26,8 @@ import java.util.Properties;
 @ComponentScan("net.xasquatch.document.service")
 @ComponentScan("net.xasquatch.document.repository")
 @ComponentScan("net.xasquatch.document.interceptor")
+@ComponentScan("net.xasquatch.document.mapper")
+@ComponentScan("net.xasquatch.document.model")
 @PropertySource("/WEB-INF/setting.properties")
 public class CustomServletAppContext implements WebMvcConfigurer {
 
