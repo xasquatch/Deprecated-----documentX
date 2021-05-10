@@ -49,7 +49,7 @@ public class CustomServletAppContext implements WebMvcConfigurer {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/favicon.ico").addResourceLocations("/resources/favicon.ico");
     }
-
+/*
     @Bean
     HandlerExceptionResolver customExceptionResolver() {
         CustomSimpleMappingExceptionResolver resolver = new CustomSimpleMappingExceptionResolver();
@@ -70,5 +70,6 @@ public class CustomServletAppContext implements WebMvcConfigurer {
         resolver.setExceptionAttribute("exception");
         return resolver;
     }
+*/
 
 }
