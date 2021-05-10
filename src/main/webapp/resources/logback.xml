@@ -44,7 +44,7 @@
     <!-- root는 최상위 패키지 -->
     <!-- additivity="false 설정시 me.logback.level 이하 패키지에는 logger 이벤트가 전달되지 않음 -->
     <logger name="net.xasquatch.document" level="debug" additivity="true"/>
-    <logger name="org.springframework" level="warn" additivity="false">
+    <logger name="org.springframework" level="info" additivity="false">
         <appender-ref ref="consoleAppender"/>
     </logger>
 

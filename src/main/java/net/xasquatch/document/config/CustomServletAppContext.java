@@ -21,7 +21,12 @@ import java.util.Properties;
 // Controller 어노테이션이 셋팅되어 있는 클래스를 Controller로 등록한다.
 @EnableWebMvc
 // 스캔할 패키지를 지정한다.
-@ComponentScan("net.xasquatch.document.*")
+@ComponentScan("net.xasquatch.document.config")
+@ComponentScan("net.xasquatch.document.controller")
+@ComponentScan("net.xasquatch.document.service")
+@ComponentScan("net.xasquatch.document.repository")
+@ComponentScan("net.xasquatch.document.interceptor")
+@ComponentScan("net.xasquatch.document.model")
 @PropertySource("/WEB-INF/setting.properties")
 public class CustomServletAppContext implements WebMvcConfigurer {
 
@@ -46,7 +51,7 @@ public class CustomServletAppContext implements WebMvcConfigurer {
     }
 
     @Bean
-    HandlerExceptionResolver customExceptionResolver () {
+    HandlerExceptionResolver customExceptionResolver() {
         CustomSimpleMappingExceptionResolver resolver = new CustomSimpleMappingExceptionResolver();
         Properties mappings = new Properties();
         // Mapping Spring internal error NoHandlerFoundException to a view name
