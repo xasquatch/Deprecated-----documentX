@@ -1,0 +1,23 @@
+package net.xasquatch.document.repository;
+
+import net.xasquatch.document.mapper.AuthorizationMapper;
+import net.xasquatch.document.model.Authorization;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class AuthorizationDao {
+
+    @Autowired
+    private AuthorizationMapper authorizationMapper;
+
+
+    public List<Authorization> selectByMbrNickName(String email) {
+
+        return authorizationMapper.selectByMbrNickName(email);
+    }
+
+
+}

@@ -1,5 +1,6 @@
 package net.xasquatch.document.config;
 
+import net.xasquatch.document.mapper.AuthorizationMapper;
 import net.xasquatch.document.mapper.MemberMapper;
 import net.xasquatch.document.model.Member;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -72,6 +73,14 @@ public class CustomRootAppContext {
     @Bean
     public MapperFactoryBean<MemberMapper> getMemberMapper(SqlSessionFactory factory) {
         MapperFactoryBean<MemberMapper> factoryBean = new MapperFactoryBean<MemberMapper>(MemberMapper.class);
+        factoryBean.setSqlSessionFactory(factory);
+        return factoryBean;
+
+    }
+
+    @Bean
+    public MapperFactoryBean<AuthorizationMapper> getAuthorizationMapper(SqlSessionFactory factory) {
+        MapperFactoryBean<AuthorizationMapper> factoryBean = new MapperFactoryBean<AuthorizationMapper>(AuthorizationMapper.class);
         factoryBean.setSqlSessionFactory(factory);
         return factoryBean;
 

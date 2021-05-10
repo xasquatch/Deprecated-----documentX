@@ -1,10 +1,10 @@
 package net.xasquatch.document.mapper;
 
-import org.springframework.context.annotation.Configuration;
+import net.xasquatch.document.model.Member;
+import org.apache.ibatis.annotations.Select;
 
-@Configuration
 public interface MemberMapper {
 
-
-
+    @Select("SELECT * FROM mbr WHERE nick_name = #{arg0}")
+    Member selectByMbrNickName(String name);
 }
