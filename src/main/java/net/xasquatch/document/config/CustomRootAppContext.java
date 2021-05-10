@@ -3,6 +3,9 @@ package net.xasquatch.document.config;
 import net.xasquatch.document.mapper.AuthorizationMapper;
 import net.xasquatch.document.mapper.MemberMapper;
 import net.xasquatch.document.model.Member;
+import net.xasquatch.document.repository.AuthorizationDao;
+import net.xasquatch.document.repository.MemberDao;
+import net.xasquatch.document.service.MemberService;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -120,4 +123,18 @@ public class CustomRootAppContext {
         return mailSender;
     }
 
+    @Bean
+    public MemberService memberService(){
+        return new MemberService();
+    }
+    @Bean
+    public MemberDao memberDao(){
+        return new MemberDao();
+    }
+    @Bean
+    public AuthorizationDao authorizationDao(){
+        return new AuthorizationDao();
+    }
+
 }
+

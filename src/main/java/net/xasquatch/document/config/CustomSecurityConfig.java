@@ -3,15 +3,16 @@ package net.xasquatch.document.config;
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Slf4j
 @EnableWebSecurity
-@WebAppConfiguration
 public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -54,17 +55,15 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .withUser("admin@test.com").password("{noop}11111111").roles("MANAGEMENT").and()
 //                .withUser("master@test.com").password("{noop}11111111").roles("USER", "MANAGEMENT");
         auth
-                .userDetailsService(memberService);
+                .userDetailsService(memberService)
+                .passwordEncoder(encoder())
+        ;
 
     }
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder);
-//    }
 
-//    @Bean
-//    public PasswordEncoder encoder(){
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public PasswordEncoder encoder(){
+        return new BCryptPasswordEncoder();
+    }
+
 }
