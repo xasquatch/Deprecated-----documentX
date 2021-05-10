@@ -15,7 +15,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +22,6 @@ import java.util.List;
 
 
 @Slf4j
-@Service
 @PropertySource("/WEB-INF/setting.properties")
 public class MemberService implements UserDetailsService, MemberServiceInterface {
 
@@ -36,6 +34,7 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     @Autowired
     private AuthorizationDao authorizationDao;
 
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Member member = memberDao.selectByEmail(s);
@@ -44,16 +43,11 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
             throw new UsernameNotFoundException(s + "is not found.");
         }
 
-        CustomUserDetails userDetails = new CustomUserDetails();
-        userDetails.setUsername(member.getEmail());
-        userDetails.setPassword(member.getPwd());
-        userDetails.setAuthorities(getAuthorities(s));
-        userDetails.setEnabled(true);
-        userDetails.setAccountNonExpired(true);
-        userDetails.setAccountNonLocked(true);
-        userDetails.setCredentialsNonExpired(true);
+        member.setEmail(member.getUsername());
+        member.setPwd(member.getPassword());
+        member.setAuthorities(getAuthorities(s));
 
-        return userDetails;
+        return member;
     }
 
     public Collection<GrantedAuthority> getAuthorities(String username) {
