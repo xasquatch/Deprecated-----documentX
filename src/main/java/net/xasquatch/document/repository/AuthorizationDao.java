@@ -13,10 +13,9 @@ public class AuthorizationDao {
     @Autowired
     private AuthorizationMapper authorizationMapper;
 
+    public List<Authorization> selectByEmail(String email) {
 
-    public List<Authorization> selectByMbrNickName(String email) {
-
-        return authorizationMapper.selectByMbrNickName(email);
+        return authorizationMapper.selectByEmail(email);
     }
 
 

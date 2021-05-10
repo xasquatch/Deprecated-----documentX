@@ -16,9 +16,6 @@ import java.util.Collection;
 @Slf4j
 public class HomeController {
 
-    @Autowired
-    private MemberService memberService;
-
     @GetMapping("/")
     public String Home(Model model) {
         model.addAttribute("home", "success");

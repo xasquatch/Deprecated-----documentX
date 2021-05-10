@@ -11,8 +11,8 @@ public class MemberDao {
     @Autowired
     private MemberMapper memberMapper;
 
-    public Member selectByMbrNickName(String name) {
-        return memberMapper.selectByMbrNickName(name);
+    public Member selectByEmail(String email) {
+        return memberMapper.selectByEmail(email);
     }
 
 

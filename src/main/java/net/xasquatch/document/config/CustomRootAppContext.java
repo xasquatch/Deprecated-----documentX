@@ -49,7 +49,6 @@ public class CustomRootAppContext {
         return new Member();
     }
 
-
     @Bean
     public BasicDataSource dataSource() {
         BasicDataSource basicDataSource = new BasicDataSource();
@@ -86,7 +85,6 @@ public class CustomRootAppContext {
 
     }
 
-
     //------------------------------------------------------
     @Bean
     public MultipartResolver multipartResolver() {
@@ -121,6 +119,5 @@ public class CustomRootAppContext {
 
         return mailSender;
     }
-
 
 }

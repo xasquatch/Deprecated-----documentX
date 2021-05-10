@@ -38,9 +38,9 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Member member = memberDao.selectByMbrNickName(s);
+        Member member = memberDao.selectByEmail(s);
 
-        if (member == null) {
+        if (member.getEmail() == null) {
             throw new UsernameNotFoundException(s + "is not found.");
         }
 
@@ -57,7 +57,7 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     }
 
     public Collection<GrantedAuthority> getAuthorities(String username) {
-        List<Authorization> authList = authorizationDao.selectByMbrNickName(username);
+        List<Authorization> authList = authorizationDao.selectByEmail(username);
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Authorization Authorization : authList) {
             authorities.add(new SimpleGrantedAuthority(Authorization.getName()));

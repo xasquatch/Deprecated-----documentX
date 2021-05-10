@@ -48,7 +48,7 @@
         <appender-ref ref="consoleAppender"/>
     </logger>
 
-    <root level="WARN">
+    <root level="warn">
         <!-- ref="appender name 지정" -->
         <appender-ref ref="consoleAppender"/>
         <appender-ref ref="ROLLING-FILE"/>

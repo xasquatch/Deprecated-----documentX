@@ -5,6 +5,6 @@ import org.apache.ibatis.annotations.Select;
 
 public interface MemberMapper {
 
-    @Select("SELECT * FROM mbr WHERE nick_name = #{arg0}")
-    Member selectByMbrNickName(String name);
+    @Select("SELECT * FROM mbr WHERE email = #{arg0}")
+    Member selectByEmail(String email);
 }
