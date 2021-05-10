@@ -19,7 +19,6 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/**", "/webjars/**").permitAll()
                 .antMatchers("/management/**").hasAnyRole("MANAGEMENT")
                 .antMatchers("/members/**").hasAnyRole("MANAGEMENT", "USER")
-                .antMatchers("/guest/**", "/login/**").permitAll()
                 .anyRequest().authenticated();
 
         http
@@ -44,13 +43,12 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
                 .withUser("user@test.com").password("{noop}a12345678").roles("USER").and()
                 .withUser("admin@test.com").password("{noop}a12345678").roles("MANAGEMENT").and()
                 .withUser("master@test.com").password("{noop}a12345678").roles("USER", "MANAGEMENT");
     }
-
 }
