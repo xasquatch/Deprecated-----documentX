@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AuthorizationMapper {
 
-    @Select("SELECT * FROM authorization WHERE email = #{arg0}")
+    @Select("SELECT * FROM authorization WHERE mbr_email = #{arg0}")
     List<Authorization> selectByEmail(String email);
 
 }
