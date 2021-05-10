@@ -542,7 +542,7 @@ var sign = {
     confirmAvailablePwd: function (element) {
         var msgBox = document.querySelector('#pwdHelp');
         if (sign.isAvailablePwd(element.value)) {
-            msgBox.innerHTML = '올바른 비밀번호입니다.'
+            msgBox.innerHTML = '올바른 형식의 비밀번호입니다.'
             msgBox.style.color = 'green';
 
         } else {
@@ -565,7 +565,7 @@ var sign = {
     confirmAvailableNickName: function (element) {
         var msgBox = document.querySelector('#nickNameHelp');
         if (sign.isAvailableNickName(element.value)) {
-            msgBox.innerHTML = '올바른 비밀번호입니다.'
+            msgBox.innerHTML = '올바른 형식의 비밀번호입니다.'
             msgBox.style.color = 'green';
 
         } else {
@@ -605,7 +605,7 @@ var login = {
     confirmAvailablePwd:function (element) {
         var msgBox = document.querySelector('#loginPwdHelp');
         if (sign.isAvailablePwd(element.value)) {
-            msgBox.innerHTML = '올바른 비밀번호입니다.'
+            msgBox.innerHTML = '올바른 형식의 비밀번호입니다.'
             msgBox.style.color = 'green';
 
         } else {
