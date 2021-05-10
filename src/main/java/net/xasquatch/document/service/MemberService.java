@@ -2,13 +2,11 @@ package net.xasquatch.document.service;
 
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.Authorization;
-import net.xasquatch.document.model.CustomUserDetails;
 import net.xasquatch.document.model.Member;
 import net.xasquatch.document.repository.AuthorizationDao;
 import net.xasquatch.document.repository.MemberDao;
 import net.xasquatch.document.service.command.MemberServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,15 +23,11 @@ import java.util.List;
 @PropertySource("/WEB-INF/setting.properties")
 public class MemberService implements UserDetailsService, MemberServiceInterface {
 
-    @Value("${password.encryption.salt}")
-    private String salt;
-
     @Autowired
     private MemberDao memberDao;
 
     @Autowired
     private AuthorizationDao authorizationDao;
-
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -54,9 +48,39 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
         List<Authorization> authList = authorizationDao.selectByEmail(username);
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Authorization Authorization : authList) {
-            authorities.add(new SimpleGrantedAuthority(Authorization.getName()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + Authorization.getName()));
         }
         return authorities;
     }
 
+//-----------------------MemberServiceInterface------------------------------------------
+    @Override
+    public boolean isAvailableEmail(String email) {
+        return false;
+    }
+
+    @Override
+    public boolean isAvailableNickName(String nickName) {
+        return false;
+    }
+
+    @Override
+    public List<Member> searchMemberList(String emailOrNickName) {
+        return null;
+    }
+
+    @Override
+    public boolean addMember(Member member) {
+        return false;
+    }
+
+    @Override
+    public boolean modifyMember(Member member) {
+        return false;
+    }
+
+    @Override
+    public boolean removeMember(Member member) {
+        return false;
+    }
 }
