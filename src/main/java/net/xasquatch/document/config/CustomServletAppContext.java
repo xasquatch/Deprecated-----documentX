@@ -49,10 +49,10 @@ public class CustomServletAppContext implements WebMvcConfigurer {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/favicon.ico").addResourceLocations("/resources/favicon.ico");
     }
-/*
+
     @Bean
     HandlerExceptionResolver customExceptionResolver() {
-        CustomSimpleMappingExceptionResolver resolver = new CustomSimpleMappingExceptionResolver();
+        CustomMappingExceptionResolver resolver = new CustomMappingExceptionResolver();
         Properties mappings = new Properties();
         // Mapping Spring internal error NoHandlerFoundException to a view name
         mappings.setProperty(NoHandlerFoundException.class.getName(), "/error/404");
@@ -70,6 +70,6 @@ public class CustomServletAppContext implements WebMvcConfigurer {
         resolver.setExceptionAttribute("exception");
         return resolver;
     }
-*/
+
 
 }

@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
-public class CustomSimpleMappingExceptionResolver extends SimpleMappingExceptionResolver {
+public class CustomMappingExceptionResolver extends SimpleMappingExceptionResolver {
 
-    public CustomSimpleMappingExceptionResolver() {
+    public CustomMappingExceptionResolver() {
         // Turn logging on by default
         setWarnLogCategory(getClass().getName());
     }
