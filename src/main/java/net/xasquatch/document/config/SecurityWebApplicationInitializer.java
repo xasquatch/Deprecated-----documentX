@@ -11,7 +11,7 @@ import javax.servlet.*;
 import java.util.Collections;
 
 //webApplicationInitializer상속 관계
-@PropertySource("/WEB-INF/setting.properties")
+@PropertySource("/webapp/WEB-INF/setting.properties")
 public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
 
     @Value("${files.save.path}")

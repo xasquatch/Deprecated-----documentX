@@ -54,13 +54,13 @@ public class CustomSimpleMappingExceptionResolver extends SimpleMappingException
             errorHuman = "We cannot find the page you are looking for";
             errorTech = "Page not found";
             userExceptionDetail = String.format("The page %s cannot be found", request.getRequestURL());
-            mav.setViewName("/error/404");
+            mav.setViewName("error/404");
             mav.addObject("status", HttpStatus.NOT_FOUND.value());
         } else if (exceptions500.contains(exceptionType)) {
             errorHuman = "We cannot currently serve the page you request";
             errorTech = "Internal error";
             userExceptionDetail = "The current page refuses to load due to an internal error";
-            mav.setViewName("/error/500");
+            mav.setViewName("error/500");
             mav.addObject("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
         } else {
             errorHuman = "We cannot serve the current page";
