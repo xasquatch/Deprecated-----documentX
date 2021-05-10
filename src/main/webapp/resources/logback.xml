@@ -30,7 +30,7 @@
 
         <!-- 파일을 덮어쓰는 정책 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <FileNamePattern>D:\logback\log.%i.zip</FileNamePattern>
+            <FileNamePattern>D:\logback\log-%i.zip</FileNamePattern>
             <!--
                 MinIndex가 1이고, MaxIndex가 10이므로, 위의 파일 이름 패턴에 따라 아래의 로그 파일이 생길 것이다.
                 logexample2.1.log.zip   logexample2.2.log.zip  .... logexample2.10.log.zip
@@ -41,17 +41,16 @@
         </rollingPolicy>
     </appender>
 
-    <!--
-             com.victolee.logExample 아래 패키지 로그들만  consoleAppender, fileAppender 방법으로 로그를 남긴다.
-             물론 <appender-ref ref="consoleAppender" />를 추가하여 콘솔로도 로그를 남길 수 있다.
-    -->
-    <logger name="net.xasquatch" level="info" additivity="false">
-        <appender-ref ref="fileAppender"/>
+    <!-- root는 최상위 패키지 -->
+    <!-- additivity="false 설정시 me.logback.level 이하 패키지에는 logger 이벤트가 전달되지 않음 -->
+    <logger name="net.xasquatch.document" level="debug" additivity="true"/>
+    <logger name="org.springframework" level="warn" additivity="false">
+        <appender-ref ref="consoleAppender"/>
     </logger>
 
-    <!-- root는 글로벌 로거를 의미하며, 위의 logger에 해당하지 않으면 root 로거가 실행된다. -->
-    <root level="warn">
+    <root level="WARN">
+        <!-- ref="appender name 지정" -->
         <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="ROLLING-FILE"/>
     </root>
-
 </configuration>
