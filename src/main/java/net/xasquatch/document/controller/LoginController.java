@@ -1,15 +1,20 @@
 package net.xasquatch.document.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import net.xasquatch.document.model.Member;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.annotation.Resource;
 
 @Slf4j
 @Controller
 public class LoginController {
 
-    @RequestMapping(path = "/sign-in", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(path = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public String loginPage() {
         return "contents/login";
     }

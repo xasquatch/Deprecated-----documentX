@@ -4,7 +4,7 @@
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
 <section class="wrap reduced-wrap">
-    <h2>Sign In</h2>
+    <h2>LogIn</h2>
     <BR>
     <form id="login-form" class="form-horizontal" method="POST" action="${path}/login">
         <div class="form-group">

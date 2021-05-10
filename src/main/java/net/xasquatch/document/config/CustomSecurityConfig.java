@@ -22,15 +22,15 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/sign-in", "/resources/**", "/webjars/**").permitAll()
+                .antMatchers("/login", "/resources/**", "/webjars/**").permitAll()
                 .antMatchers("/management/**").hasAnyRole("MANAGEMENT")
                 .antMatchers("/members/**").hasAnyRole("MANAGEMENT", "USER")
                 .anyRequest().authenticated();
 
         http
                 .formLogin()
-                .loginPage("/sign-in")
-                .loginProcessingUrl("/login")
+                .loginPage("/login")
+                .loginProcessingUrl("/loginProcess")
                 .successHandler(
                         (request, response, authentication) -> {
                             response.sendRedirect("/");
@@ -39,7 +39,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                         (request, response, exception) -> {
                             request.setAttribute("navMassage", "로그인에 실패하였습니다.");
                             request.setAttribute("email", request.getParameter("email"));
-                            request.getRequestDispatcher("/sign-in").forward(request, response);
+                            request.getRequestDispatcher("/login").forward(request, response);
 
                         })
                 .usernameParameter("email")
