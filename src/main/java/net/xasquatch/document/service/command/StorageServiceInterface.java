@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
 
-public interface FileServiceInterface {
+public interface StorageServiceInterface {
 
     //생성된 경로 리턴
     String writeFile(byte[] byteArray, String path, String saveFileName);

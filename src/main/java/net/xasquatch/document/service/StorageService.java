@@ -1,6 +1,8 @@
 package net.xasquatch.document.service;
 
-import net.xasquatch.document.service.command.FileServiceInterface;
+import net.xasquatch.document.repository.StorageDao;
+import net.xasquatch.document.service.command.StorageServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
@@ -16,12 +18,15 @@ import java.util.List;
 
 @Service
 @PropertySource("WEB-INF/setting.properties")
-public class FileService implements FileServiceInterface {
+public class StorageService implements StorageServiceInterface {
 
     @Value("${files.save.path}")
     private String filesSavePath;
     @Value("${files.context.path}")
     private String filesContextPath;
+
+    @Autowired
+    private StorageDao storageDao;
 
     //생성된 경로 리턴
     @Override
