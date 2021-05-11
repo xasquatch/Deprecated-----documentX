@@ -33,6 +33,9 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     @Autowired
     private AuthorizationDao authorizationDao;
 
+    @Autowired
+    private TokenMap tokenMap;
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Member member = memberDao.selectByEmail(s);
@@ -64,8 +67,12 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     }
 
     @Override
-    public boolean isConfirmEmail(String email) {
-        return true;
+    public boolean isConfirmEmail(String email, String token) {
+
+        boolean result;
+        result = tokenMap.confirmToken(email + token);
+
+        return result;
     }
 
     @Override
@@ -80,6 +87,8 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
 
     @Override
     public boolean addMember(Member member) {
+        boolean confirmedTokenAuthorization = tokenMap.isConfirmedTokenAuthorization(member.getEmail());
+        
         return true;
     }
 

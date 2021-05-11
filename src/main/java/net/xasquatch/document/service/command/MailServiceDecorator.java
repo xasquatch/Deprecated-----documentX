@@ -17,10 +17,10 @@ public abstract class MailServiceDecorator {
     protected abstract void send();
 
     public void sendAuthMail(int tokenSize, String email, String title, String contents) {
-        createToken(tokenSize);
         setEmail(email);
         setTitle(title);
         setContents(contents);
+        createToken(tokenSize);
         send();
 
     }

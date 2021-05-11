@@ -38,9 +38,10 @@ public class MemberController {
 
     @GetMapping("/confirm-token/{email}")
     @ResponseBody
-    public String isConfirmedEmail(@PathVariable String email) {
+    public String isConfirmedEmail(@PathVariable String email,
+                                   @RequestParam(required = true, name = "token") String token) {
         String result = "false";
-        result = String.valueOf(memberService.isConfirmEmail(email));
+        result = String.valueOf(memberService.isConfirmEmail(email, token));
 
         return result;
     }
@@ -110,7 +111,7 @@ public class MemberController {
         } catch (UnsupportedEncodingException e) {
             log.warn("acquired ImgUpload Exception");
         }
-        result = storageService.uploadFile(request, String.valueOf(member.getNo()));
+        result = String.valueOf(storageService.uploadFile(request, String.valueOf(member.getNo())));
         return result;
     }
 

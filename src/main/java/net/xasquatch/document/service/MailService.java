@@ -26,6 +26,9 @@ public class MailService extends MailServiceDecorator {
     @Autowired
     private JavaMailSenderImpl mailSender;
 
+    @Autowired
+    private TokenMap tokenMap;
+
     @Override
     protected void createToken(int size) {
 
@@ -36,7 +39,7 @@ public class MailService extends MailServiceDecorator {
         }
         String token = result.toString();
         this.tokenSize = token;
-
+        tokenMap.addToken(this.email + token);
     }
 
     @Override

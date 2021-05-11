@@ -529,16 +529,19 @@ var sign = {
     },
     confirmEmailToken: function () {
         var emailInput = document.querySelector('#sign-up-email');
+        var tokenValue = document.querySelector('#sign-up-email-token');
         //서버 통신 후 성공여부
-        request.submit('GET', '/members/confirm-token/' + emailInput.value, function (isConfirmed) {
-            // 성공시
-            if (isConfirmed === 'true') {
-                sign.successEmailAuthorization();
-                //실패
-            } else {
-                window.alert('일치하지않는 토큰번호입니다.\n다시 확인해주세요.');
-            }
-        })
+        request.submit('GET',
+            '/members/confirm-token/' + emailInput.value + '?token=' + tokenValue.value,
+            function (isConfirmed) {
+                // 성공시
+                if (isConfirmed === 'true') {
+                    sign.successEmailAuthorization();
+                    //실패
+                } else {
+                    window.alert('일치하지않는 토큰번호입니다.\n다시 확인해주세요.');
+                }
+            })
 
     },
     successEmailAuthorization: function () {

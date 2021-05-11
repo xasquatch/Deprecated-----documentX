@@ -6,6 +6,7 @@ import net.xasquatch.document.mapper.StorageMapper;
 import net.xasquatch.document.repository.AuthorizationDao;
 import net.xasquatch.document.repository.MemberDao;
 import net.xasquatch.document.service.MemberService;
+import net.xasquatch.document.service.TokenMap;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -116,17 +117,23 @@ public class CustomRootAppContext {
     }
 
     @Bean
-    public MemberService memberService(){
+    public MemberService memberService() {
         return new MemberService();
     }
+
     @Bean
-    public MemberDao memberDao(){
+    public MemberDao memberDao() {
         return new MemberDao();
     }
+
     @Bean
-    public AuthorizationDao authorizationDao(){
+    public AuthorizationDao authorizationDao() {
         return new AuthorizationDao();
     }
 
+    @Bean
+    public TokenMap tokenMap() {
+        return new TokenMap();
+    }
 }
 
