@@ -1,5 +1,7 @@
 package net.xasquatch.document.service;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.xasquatch.document.service.command.MailServiceDecorator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +31,10 @@ public class MailService extends MailServiceDecorator {
     @Autowired
     private TokenMap tokenMap;
 
+    @Getter
+    @Setter
+    private String sentToken;
+
     @Override
     protected void createToken(int size) {
 
@@ -38,7 +44,8 @@ public class MailService extends MailServiceDecorator {
             if (!(j >= 10)) result.append(j);
         }
         String token = result.toString();
-        tokenMap.addToken(this.email + token);
+        setSentToken(this.email + token);
+        tokenMap.addToken(getSentToken());
     }
 
     @Override
@@ -70,30 +77,10 @@ public class MailService extends MailServiceDecorator {
 
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
+
         }
-
-
         mailSender.send(mail);
 
     }
 
-
-/*
-            if (this.mainContents.contains("Token Number")) {
-                mainContents = createMainContents(sessionMember.getNick_name() + "님<BR>My Blog By Xasquatch에<BR>오신것을 환영합니다.",
-                        "            Token Number: " + token,
-                        "<a href=\"https://myblog.xasquatch.net/members/" + sessionMember.getNo() + "/check-email\" style=\"text-decoration: none; color: darkred; font-weight: bold;\">이메일 다시 인증하러가기</a>");
-
-            } else {
-                mainContents = this.mainContents;
-
-            }
-        } catch (NullPointerException e) {
-            mainContents = createMainContents(sessionMember.getNick_name() + "님<BR>My Blog By Xasquatch에<BR>오신것을 환영합니다.",
-                    "            Token Number: " + token,
-                    "<a href=\"https://myblog.xasquatch.net/members/" + sessionMember.getNo() + "/check-email\" style=\"text-decoration: none; color: darkred; font-weight: bold;\">이메일 다시 인증하러가기</a>");
-
-        }
-
-*/
 }

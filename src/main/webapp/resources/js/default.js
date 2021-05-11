@@ -511,11 +511,11 @@ var sign = {
         }
     },
     tokenCountDown: function (element) {
+        var emailInput = document.querySelector('#sign-up-email');
         element.setAttribute('onclick', "window.alert('이미 인증요청을 시도하였습니다.')");
         var originValue = element.innerHTML;
         var count = 60 * 5;
         var intervalNumber = setInterval(function () {
-
             try {
                 if (count < 0) throw new Error('Count zero');
                 count--;
@@ -525,7 +525,16 @@ var sign = {
             }
 
         }, 1000);
+        request.submit('GET', '/members/confirm-token/count-down?email=' + emailInput.value,
+            function (data) {
+                if (data === "true") {
+                    window.alert('[인증요청 완료]\n' + emailInput.value + '\n해당 이메일을 확인해주시기바랍니다.')
 
+                } else {
+                    window.alert("[인증요청 실패]\n페이지 새로고침 후 다시 시도해주시기바랍니다.")
+
+                }
+            });
     },
     confirmEmailToken: function () {
         var emailInput = document.querySelector('#sign-up-email');

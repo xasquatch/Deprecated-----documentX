@@ -2,23 +2,33 @@ package net.xasquatch.document.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.Member;
+import net.xasquatch.document.service.MailService;
+import net.xasquatch.document.service.TokenMap;
 import net.xasquatch.document.service.command.StorageServiceInterface;
 import net.xasquatch.document.service.command.MemberServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 
 @Slf4j
 @Controller
 @RequestMapping("/members")
+@PropertySource("/WEB-INF/setting.properties")
 public class MemberController {
+
+    @Value("${project.domain}")
+    private String domain;
 
     @Autowired
     private MemberServiceInterface memberService;
@@ -26,6 +36,11 @@ public class MemberController {
     @Autowired
     private StorageServiceInterface storageService;
 
+    @Autowired
+    private MailService mailService;
+
+    @Autowired
+    private TokenMap tokenMap;
 
     @GetMapping("/available-email/{email}")
     @ResponseBody
@@ -36,10 +51,45 @@ public class MemberController {
         return result;
     }
 
+    @GetMapping("/confirm-token/count-down")
+    @ResponseBody
+    public String startTokenCountDown(@RequestParam(required = true, name = "email") String email) {
+        String result = "true";
+        try {
+            mailService.sendAuthMail(6,
+                    email,
+                    "Document X: 이메일 인증",
+                    "<div>" +
+                            "<h1>[Document X] " + email + "님 환영합니다</h1>" +
+                            "<BR><BR><BR>" +
+                            "<a href=\"" + domain + "/confirm-token/" + email + "?" +
+                            "token=" + mailService.getSentToken() + "\">" +
+                            "해당 링크를 클릭하면 인증이 완료됩니다." +
+                            "</a>" +
+                            "</div>");
+
+        } catch (Exception e) {
+            return result;
+        }
+
+        return result;
+    }
+
     @GetMapping("/confirm-token/{email}")
     @ResponseBody
-    public String isConfirmedEmail(@PathVariable String email,
-                                   @RequestParam(required = true, name = "token") String token) {
+    public String confirmEmail(@PathVariable String email,
+                               @RequestParam(required = true, name = "token") String token) {
+        String result = email.concat(": 해당 이메일 인증에 실패하였습니다");
+        if (memberService.isConfirmEmail(email, token))
+            result = email.concat(": 이메일 인증에 성공하였습니다");
+
+
+        return result;
+    }
+
+    @GetMapping("/confirm-token/{email}")
+    @ResponseBody
+    public String isConfirmedEmail(@PathVariable String email) {
         String result = "false";
         result = String.valueOf(memberService.isConfirmEmail(email, token));
 
@@ -95,7 +145,6 @@ public class MemberController {
 
     @GetMapping("/{nickName}/files")
     public String goMemberFileList(Model model, @PathVariable String nickName) {
-
 
 
         return "contents/file/list";
