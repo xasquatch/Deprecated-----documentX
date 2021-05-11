@@ -5,7 +5,15 @@
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
 <section class="wrap reduced-wrap">
-    ${obj}
+    <div>파일리스트들</div>
+    <div>파일리스트들</div>
+    <div>파일리스트들</div>
+    <div>파일리스트들</div>
+    <div>파일리스트들</div>
+    <div>파일리스트들</div>
+    <div>파일리스트들</div>
+    <div>파일리스트들</div>
+    <div>파일리스트들</div>
 
 </section>
 

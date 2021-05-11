@@ -5,7 +5,18 @@
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
 <section class="wrap reduced-wrap">
-    ${obj}
+    <section>
+        <article>
+            참여자
+        </article>
+        <article>
+            채팅
+        </article>
+
+    </section>
+    <div>
+        파일 업로드
+    </div>
 
 </section>
 
