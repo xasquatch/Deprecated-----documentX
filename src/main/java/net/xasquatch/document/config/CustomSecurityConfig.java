@@ -24,7 +24,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login",
                         "/members/available-email/**", "/members/available-nick-name/**",
-                        "/members/confirm-token/**",
+                        "/members/new/**", "/members/confirm-token/**",
                         "/resources/**", "/webjars/**").permitAll()
                 .antMatchers("/management/**").hasAnyRole("MANAGEMENT")
                 .antMatchers("/members/**").hasAnyRole("MANAGEMENT", "USER")
