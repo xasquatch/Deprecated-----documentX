@@ -5,7 +5,7 @@
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 <section class="wrap reduced-wrap">
 
-403
+generic
 </section>
 
 <c:import url="${path}/WEB-INF/views/include/footer.jsp"/>
