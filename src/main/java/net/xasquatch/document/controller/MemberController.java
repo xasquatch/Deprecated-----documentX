@@ -104,12 +104,14 @@ public class MemberController {
     @ResponseBody
     public String uploadFileList(@AuthenticationPrincipal Member member,
                                  MultipartHttpServletRequest request) {
+        String result = "false";
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {
             log.warn("acquired ImgUpload Exception");
         }
-        return storageService.uploadFile(request, String.valueOf(member.getNo())).toString();
+        result = storageService.uploadFile(request, String.valueOf(member.getNo()));
+        return result;
     }
 
     @DeleteMapping("/{nickName}/files/{fileNo}")
