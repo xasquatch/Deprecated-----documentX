@@ -60,17 +60,17 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     //-----------------------MemberServiceInterface------------------------------------------
     @Override
     public boolean isAvailableEmail(String email) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isConfirmEmail(String email) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAvailableNickName(String nickName) {
-        return false;
+        return true;
     }
 
     @Override
