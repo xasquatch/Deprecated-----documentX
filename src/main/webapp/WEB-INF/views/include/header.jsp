@@ -37,6 +37,9 @@
            href="javascript:headerExpansion.toggle()">
             <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
         </a>
+        <form id="logout" action="${path}/logout" method="POST">
+            <input id="csrf-input" name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+        </form>
         <sec:authorize access="isAnonymous()">
             <a class="list-group-item"
                href="${path}/login">
@@ -48,9 +51,6 @@
             </a>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
-            <form id="logout" action="${path}/logout" method="POST">
-                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-            </form>
 
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Log Out"
