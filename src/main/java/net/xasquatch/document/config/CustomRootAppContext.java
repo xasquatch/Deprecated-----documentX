@@ -87,15 +87,6 @@ public class CustomRootAppContext {
     }
 
     @Bean
-    public ReloadableResourceBundleMessageSource msgSource() {
-        ReloadableResourceBundleMessageSource msg = new ReloadableResourceBundleMessageSource();
-        msg.setBasenames("/WEB-INF/properties/home/login", "/WEB-INF/properties/home/signUp");
-
-        return msg;
-    }
-
-
-    @Bean
     public JavaMailSenderImpl mailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         Properties mailProperties = new Properties();
