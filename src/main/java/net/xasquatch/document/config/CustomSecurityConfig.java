@@ -22,7 +22,10 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login", "/resources/**", "/webjars/**").permitAll()
+                .antMatchers("/login",
+                        "/members/available-email/**", "/members/available-nick-name/**",
+                        "/members/confirm-token/**",
+                        "/resources/**", "/webjars/**").permitAll()
                 .antMatchers("/management/**").hasAnyRole("MANAGEMENT")
                 .antMatchers("/members/**").hasAnyRole("MANAGEMENT", "USER")
                 .anyRequest().authenticated();
@@ -34,6 +37,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(
                         (request, response, authentication) -> {
                             response.sendRedirect("/");
+
                         })
                 .failureHandler(
                         (request, response, exception) -> {
@@ -45,6 +49,13 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("pwd")
                 .permitAll();
+
+        http
+                .sessionManagement()
+                .sessionConcurrency(concurrencyControlConfigurer -> {
+                    concurrencyControlConfigurer.maximumSessions(1);
+                    concurrencyControlConfigurer.maxSessionsPreventsLogin(false);
+                });
     }
 
     @Override
@@ -56,13 +67,12 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .withUser("master@test.com").password("{noop}11111111").roles("USER", "MANAGEMENT");
         auth
                 .userDetailsService(memberService)
-                .passwordEncoder(encoder())
-        ;
+                .passwordEncoder(passwordEncoder());
 
     }
 
     @Bean
-    public PasswordEncoder encoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

@@ -7,6 +7,7 @@ import java.util.List;
 public interface MemberServiceInterface {
 
     boolean isAvailableEmail(String email);
+    boolean isConfirmEmail(String email);
     boolean isAvailableNickName(String nickName);
     List<Member> searchMemberList(String emailOrNickName);
     boolean addMember(Member member);

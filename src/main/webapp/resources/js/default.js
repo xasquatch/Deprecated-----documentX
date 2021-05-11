@@ -462,17 +462,17 @@ var sign = {
 
         var signForm = document.querySelector('#sign-up-form');
         var formData = new FormData(signForm);
-        request.submit('POST', '/sign-up', function (data) {
+        request.submit('POST', '/members/' + nickNameInput.value, function (data) {
 
+            // data값 boolean여부따라 결정
             if (data === 'false') {
                 nav.acceptMsg(3, '계정 생성에 실패하였습니다. 잠시 후 다시 이용바랍니다.');
                 return;
             }
 
-            // data값 boolean여부따라 결정
             nav.acceptMsg(3, '???님 환영합니다.')
             setTimeout(function () {
-                window.location.href = '/login';
+                window.location.href = '/';
 
             }, 3000)
 
@@ -490,11 +490,18 @@ var sign = {
         var regExp = /^[0-9a-z]{8,20}$/
         return regExp.test(data);
     },
-    confirmAvailableEmail:function (element) {
+    confirmAvailableEmail: function (element) {
         var msgBox = document.querySelector('#emailHelp');
         if (sign.isAvailableEmail(element.value)) {
-            msgBox.innerHTML = '올바른 이메일형식입니다.'
-            msgBox.style.color = 'green';
+            request.submit('GET', '/members/available-email/' + element.value, function (available) {
+                if (available === 'ture') {
+                    msgBox.innerHTML = '사용가능한 이메일입니다.'
+                    msgBox.style.color = 'green';
+                } else {
+                    msgBox.innerHTML = '이미 사용중인 이메일입니다.'
+                    msgBox.style.color = 'red';
+                }
+            });
 
         } else {
             msgBox.innerHTML = '잘 못된 형식의 이메일입니다. 다시 확인해주세요'
@@ -520,15 +527,18 @@ var sign = {
 
     },
     confirmEmailToken: function () {
-
-//서버 통신 후 성공여부
-        // 성공시
-        if (true) {
-            sign.successEmailAuthorization();
+        var emailInput = document.querySelector('#sign-up-email');
+        //서버 통신 후 성공여부
+        request.submit('GET', '/members/confirm-token/' + emailInput.value, function (isConfirmed) {
+            // 성공시
+            if (isConfirmed) {
+                sign.successEmailAuthorization();
             //실패
-        } else {
-            window.alert('일치하지않는 토큰번호입니다.\n다시 확인해주세요.');
-        }
+            } else {
+                window.alert('일치하지않는 토큰번호입니다.\n다시 확인해주세요.');
+            }
+        })
+
     },
     successEmailAuthorization: function () {
         var msgBox = document.querySelector('#emailHelp');
@@ -565,18 +575,24 @@ var sign = {
     confirmAvailableNickName: function (element) {
         var msgBox = document.querySelector('#nickNameHelp');
         if (sign.isAvailableNickName(element.value)) {
-            msgBox.innerHTML = '올바른 형식의 비밀번호입니다.'
-            msgBox.style.color = 'green';
-
+            request.submit('GET', '/members/available-nick-name/' + element.value, function (available) {
+                if (available === 'ture') {
+                    msgBox.innerHTML = '사용가능한 닉네임입니다.'
+                    msgBox.style.color = 'green';
+                } else {
+                    msgBox.innerHTML = '이미 사용중인 닉네임입니다.'
+                    msgBox.style.color = 'red';
+                }
+            });
         } else {
-            msgBox.innerHTML = '잘 못된 형식의 비밀번호입니다. 다시 확인해주세요'
+            msgBox.innerHTML = '잘 못된 형식의 닉네임입니다. 다시 확인해주세요'
             msgBox.style.color = 'red';
 
         }
     },
 }
 var login = {
-    submit : function () {
+    submit: function () {
         var emailInput = document.querySelector('#login-email');
         var pwdInput = document.querySelector('#login-pwd');
         var msgBox = '[로그인 실패: 다음을 확인해주세요]\n';
@@ -602,7 +618,7 @@ var login = {
         }
 
     },
-    confirmAvailablePwd:function (element) {
+    confirmAvailablePwd: function (element) {
         var msgBox = document.querySelector('#loginPwdHelp');
         if (sign.isAvailablePwd(element.value)) {
             msgBox.innerHTML = '올바른 형식의 비밀번호입니다.'

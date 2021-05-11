@@ -62,7 +62,7 @@
             </a>
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="My Information"
-               href="/members/${member.nickname}">
+               href="/members/${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nick_name}">
                 <i class="fa fa-user-circle " aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 내 정보관리
@@ -83,7 +83,7 @@
             --%>
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chatting Room"
-               href="/members/${member.nickname}/chatting-rooms">
+               href="/members/${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nick_name}/chatting-rooms">
                 <i class="fa fa-weixin " aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 채팅 관리
@@ -91,7 +91,7 @@
             </a>
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chatting Room"
-               href="/members/${member.nickname}/files">
+               href="/members/${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nick_name}/files">
                 <i class="fa fa-file-archive-o " aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 파일 관리

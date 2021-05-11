@@ -13,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,6 +23,9 @@ import java.util.List;
 @Slf4j
 @PropertySource("/WEB-INF/setting.properties")
 public class MemberService implements UserDetailsService, MemberServiceInterface {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private MemberDao memberDao;
@@ -53,9 +57,14 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
         return authorities;
     }
 
-//-----------------------MemberServiceInterface------------------------------------------
+    //-----------------------MemberServiceInterface------------------------------------------
     @Override
     public boolean isAvailableEmail(String email) {
+        return false;
+    }
+
+    @Override
+    public boolean isConfirmEmail(String email) {
         return false;
     }
 
@@ -71,7 +80,7 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
 
     @Override
     public boolean addMember(Member member) {
-        return false;
+        return true;
     }
 
     @Override
