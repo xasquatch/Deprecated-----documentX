@@ -1,22 +1,29 @@
 package net.xasquatch.document.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.Member;
+import net.xasquatch.document.service.command.StorageServiceInterface;
 import net.xasquatch.document.service.command.MemberServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 
+@Slf4j
 @Controller
 @RequestMapping("/members")
 public class MemberController {
 
     @Autowired
     private MemberServiceInterface memberService;
+
+    @Autowired
+    private StorageServiceInterface storageService;
+
 
     @GetMapping("/available-email/{email}")
     @ResponseBody
@@ -49,7 +56,7 @@ public class MemberController {
     @ResponseBody
     public String signUpMember(
 //            @Valid
-                    Member member
+            Member member
 //            , BindingResult bindingResult
     ) {
         String result = "false";
@@ -86,10 +93,39 @@ public class MemberController {
     }
 
     @GetMapping("/{nickName}/files")
-    public String goMemberFileList(@PathVariable String nickName) {
+    public String goMemberFileList(Model model, @PathVariable String nickName) {
+
+
 
         return "contents/file/list";
     }
+
+    @PostMapping("/{nickName}/files/new")
+    @ResponseBody
+    public String uploadFileList(@AuthenticationPrincipal Member member,
+                                 MultipartHttpServletRequest request) {
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            log.warn("acquired ImgUpload Exception");
+        }
+        return storageService.uploadFile(request, String.valueOf(member.getNo())).toString();
+    }
+
+    @DeleteMapping("/{nickName}/files/{fileNo}")
+    @ResponseBody
+    public String deleteFile(@AuthenticationPrincipal Member member,
+                             @PathVariable String fileNo,
+                             MultipartHttpServletRequest request) {
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            log.warn("acquired ImgUpload Exception");
+        }
+
+        return null;
+    }
+
 
     @GetMapping("/{nickName}/chatting-rooms")
     public String goMemberChattingList(@PathVariable String nickName) {
