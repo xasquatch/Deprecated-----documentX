@@ -67,7 +67,8 @@ public class StorageService implements StorageServiceInterface {
 
     //이미지 업로드하고 업로드 된 경로를 리스트에 담아 리턴
     @Override
-    public List<String> uploadFile(MultipartHttpServletRequest request, String memberNo) {
+    public boolean uploadFile(MultipartHttpServletRequest request, String memberNo) {
+        boolean result = false;
         List<String> resultFileList = new ArrayList<String>();
         List<MultipartFile> multipartFiles = request.getFiles("filePackage");
 
@@ -80,12 +81,14 @@ public class StorageService implements StorageServiceInterface {
                     resultFileList.add(contextPath);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    return result;
                 }
 
             }
         }
 
+        result = storageDao.insertFileList(resultFileList);
 
-        return resultFileList;
+        return result;
     }
 }
