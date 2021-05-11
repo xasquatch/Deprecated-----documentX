@@ -2,7 +2,6 @@ package net.xasquatch.document.config;
 
 import net.xasquatch.document.mapper.AuthorizationMapper;
 import net.xasquatch.document.mapper.MemberMapper;
-import net.xasquatch.document.model.Member;
 import net.xasquatch.document.repository.AuthorizationDao;
 import net.xasquatch.document.repository.MemberDao;
 import net.xasquatch.document.service.MemberService;
@@ -16,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
@@ -45,12 +43,6 @@ public class CustomRootAppContext {
     private String emailUserName;
     @Value("${email.password}")
     private String emailPwd;
-
-    @Bean("sessionMember")
-    @SessionScope
-    public Member loginMember() {
-        return new Member();
-    }
 
     @Bean
     public BasicDataSource dataSource() {
