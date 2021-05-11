@@ -20,10 +20,11 @@ public class Member implements UserDetails {
     private String email;
 
     @NotNull
-    @Pattern(regexp = "/^[a-z0-9]{8,20}$/")
     @Size(min = 8, max = 20)
+    @Pattern(regexp = "/^[a-z0-9]{8,20}$/")
     private String pwd;
 
+    @NotNull
     @Size(min = 8, max = 20)
     @Pattern(regexp = "/^[0-9a-z]{8,20}$/")
     private String nick_name;

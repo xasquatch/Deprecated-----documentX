@@ -6,7 +6,7 @@
 <section class="wrap reduced-wrap">
     <h2>LogIn</h2>
     <BR>
-    <form id="login-form" class="form-horizontal" method="POST" action="${path}/login">
+    <form id="login-form" class="form-horizontal" method="POST" action="${path}/loginProcess">
         <div class="form-group">
             <label for="login-email" class="col-sm-2 control-label">이메일</label>
             <div class="col-sm-10">

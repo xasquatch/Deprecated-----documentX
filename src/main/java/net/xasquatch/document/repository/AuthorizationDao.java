@@ -14,8 +14,8 @@ public class AuthorizationDao {
     private AuthorizationMapper authorizationMapper;
 
     public List<Authorization> selectByEmail(String email) {
-
         return authorizationMapper.selectByEmail(email);
+
     }
 
 

@@ -7,6 +7,7 @@
 <section class="wrap reduced-wrap">
 
     <ul class="list-group">
+        <li class="list-group-item">${sessionMember.nick_name}</li>
         <li class="list-group-item"><a class="btn" href="${path}/management/members">management member</a></li>
         <li class="list-group-item"><a class="btn" href="${path}/management/files">management file</a></li>
         <li class="list-group-item"><a class="btn" href="${path}/management/chatting-rooms">management chtting room</a></li>
