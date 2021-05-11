@@ -15,11 +15,18 @@ public class TokenMap {
 
     /**
      * @param token: 해당 토큰 파라미터를 키값으로 map에 삽입
-     *             value는 5분후의 Calender인스턴스
-     *             5분이 경과하면 해당 키의 밸류 값이 삭제되도록 구현
-     *             (5분이 경과하면 재인증해야된다는 말)
+     *               value는 5분후의 Calender인스턴스
+     *               5분이 경과하면 해당 키의 밸류 값이 삭제되도록 구현
+     *               (5분이 경과하면 재인증해야된다는 말)
      */
     public void addToken(String token) {
+
+        //TODO: 이메일 파싱하여 기존 것 제거, 나중에 다시 조치 필요
+        for (String emailContainedString : map.keySet()) {
+            if (emailContainedString.indexOf(token.substring(0, token.length() - 7)) == 0)
+                map.remove(emailContainedString);
+        }
+
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.MINUTE, 5);
@@ -114,8 +121,8 @@ public class TokenMap {
         boolean result = false;
         for (String emailContainedString : map.keySet())
             if (emailContainedString.indexOf(email) == 0) {
-                String successString = (String) map.get(emailContainedString);
-                return successString == "success" ? true : false;
+                String successString = map.get(emailContainedString).toString();
+                return successString.equals("success") ? true : false;
             }
 
         return result;

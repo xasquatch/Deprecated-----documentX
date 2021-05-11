@@ -4,7 +4,6 @@ public abstract class MailServiceDecorator {
 
     protected String email, title, contents;
 
-    protected abstract void createToken(int size);
 
     protected abstract void setEmail(String email);
 
@@ -14,11 +13,10 @@ public abstract class MailServiceDecorator {
 
     protected abstract void send();
 
-    public void sendAuthMail(int tokenSize, String email, String title, String contents) {
+    public void sendAuthMail(String email, String title, String contents) {
         setEmail(email);
         setTitle(title);
         setContents(contents);
-        createToken(tokenSize);
         send();
 
     }

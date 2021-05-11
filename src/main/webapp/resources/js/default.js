@@ -540,25 +540,22 @@ var sign = {
         var emailInput = document.querySelector('#sign-up-email');
         var tokenValue = document.querySelector('#sign-up-email-token');
         //서버 통신 후 성공여부
-        request.submit('GET',
-            '/members/confirm-token/' + emailInput.value + '?token=' + tokenValue.value,
-            function (isConfirmed) {
-                // 성공시
-                if (isConfirmed === 'true') {
-                    sign.successEmailAuthorization();
-                    //실패
-                } else {
-                    window.alert('일치하지않는 토큰번호입니다.\n다시 확인해주세요.');
-                }
-            })
+        request.submit('GET', '/members/confirm-token/' + emailInput.value + '/status', function (isConfirmed) {
+            // 성공시
+            if (isConfirmed === 'true') {
+                sign.successEmailAuthorization();
+                //실패
+            } else {
+                window.alert('인증확인이 되지않았습니다.\n이메일을 다시 확인해주세요.');
+            }
+        });
 
     },
     successEmailAuthorization: function () {
         var msgBox = document.querySelector('#emailHelp');
+        msgBox.style.color = 'green';
         msgBox.innerHTML = '이메일 인증에 성공하였습니다.'
         document.querySelector('#sign-up-email').setAttribute('readonly', 'readonly');
-        document.querySelector('#sign-up-email-token').setAttribute('readonly', 'readonly');
-        document.querySelector('#sign-up-email-token').setAttribute('onclick', '');
         document.querySelector('#sign-up-email-token-submit').setAttribute('onclick', '');
 
     },

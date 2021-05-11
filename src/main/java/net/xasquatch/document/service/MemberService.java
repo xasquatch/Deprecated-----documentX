@@ -67,11 +67,10 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     }
 
     @Override
-    public boolean isConfirmEmail(String email, String token) {
-
+    public boolean isConfirmEmailToken(String token) {
         boolean result = false;
         try {
-            result = tokenMap.confirmToken(email + token);
+            result = tokenMap.confirmToken(token);
         } catch (Exception e) {
             return result;
         }

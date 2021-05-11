@@ -14,11 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.validation.Valid;
-import java.io.File;
 import java.io.UnsupportedEncodingException;
 
 @Slf4j
@@ -56,14 +54,14 @@ public class MemberController {
     public String startTokenCountDown(@RequestParam(required = true, name = "email") String email) {
         String result = "true";
         try {
-            mailService.sendAuthMail(6,
-                    email,
+            String token = mailService.createToken(email, 6);
+            mailService.sendAuthMail(email,
                     "Document X: 이메일 인증",
                     "<div>" +
                             "<h1>[Document X] " + email + "님 환영합니다</h1>" +
                             "<BR><BR><BR>" +
-                            "<a href=\"" + domain + "/confirm-token/" + email + "?" +
-                            "token=" + mailService.getSentToken() + "\">" +
+                            "<a href=\"" + domain + "/members/confirm-token/" + email + "?" +
+                            "token=" + token + "\">" +
                             "해당 링크를 클릭하면 인증이 완료됩니다." +
                             "</a>" +
                             "</div>");
@@ -77,23 +75,15 @@ public class MemberController {
 
     @GetMapping("/confirm-token/{email}")
     @ResponseBody
-    public String confirmEmail(@PathVariable String email,
-                               @RequestParam(required = true, name = "token") String token) {
-        String result = email.concat(": 해당 이메일 인증에 실패하였습니다");
-        if (memberService.isConfirmEmail(email, token))
-            result = email.concat(": 이메일 인증에 성공하였습니다");
-
-
-        return result;
+    public void confirmEmail(@RequestParam(required = true, name = "token") String token) {
+        memberService.isConfirmEmailToken(token);
     }
 
-    @GetMapping("/confirm-token/{email}")
+    @GetMapping("/confirm-token/{email}/status")
     @ResponseBody
     public String isConfirmedEmail(@PathVariable String email) {
-        String result = "false";
-        result = String.valueOf(memberService.isConfirmEmail(email, token));
 
-        return result;
+        return String.valueOf(tokenMap.isConfirmedTokenAuthorization(email));
     }
 
     @GetMapping("/available-nick-name/{nickName}")

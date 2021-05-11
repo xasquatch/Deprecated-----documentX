@@ -1,7 +1,5 @@
 package net.xasquatch.document.service;
 
-import lombok.Getter;
-import lombok.Setter;
 import net.xasquatch.document.service.command.MailServiceDecorator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,21 +29,15 @@ public class MailService extends MailServiceDecorator {
     @Autowired
     private TokenMap tokenMap;
 
-    @Getter
-    @Setter
-    private String sentToken;
-
-    @Override
-    protected void createToken(int size) {
-
+    public String createToken(String email, int size) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < size; i++) {
             long j = Math.round(Math.random() * 10);
             if (!(j >= 10)) result.append(j);
         }
         String token = result.toString();
-        setSentToken(this.email + token);
-        tokenMap.addToken(getSentToken());
+        tokenMap.addToken(email + token);
+        return email + token;
     }
 
     @Override
