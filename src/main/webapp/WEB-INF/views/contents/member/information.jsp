@@ -12,7 +12,7 @@
             <label for="sign-up-email" class="form-label">이메일</label>
             <div class="input-group mb-3">
                 <input type="email" class="form-control" id="sign-up-email" aria-describedby="emailHelp"
-                       name="email" value="${sessionMember.email}" readonly="readonly">
+                       name="email" value="${sessionMember.email}" maxlength="50" readonly="readonly">
             </div>
         </div>
         <div class="mb-3">
@@ -32,9 +32,8 @@
         <div class="mb-3">
             <label for="sign-up-nickName" class="form-label">닉네임</label>
             <input type="text" class="form-control" id="sign-up-nickName" aria-describedby="nickNameHelp"
-                   placeholder="영소문자와 숫자를 조합하여 8~20자 이내로 입력해주세요"
+                   placeholder="8~20자 이내로 입력해주세요" name="nick_name"
                    onchange="sign.confirmAvailableNickName(this);"
-                   name="nick_name"
                    value="${sessionMember.nick_name}">
             <div id="nickNameHelp" class="form-text"></div>
         </div>

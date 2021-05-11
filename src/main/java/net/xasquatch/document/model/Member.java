@@ -16,17 +16,18 @@ public class Member implements UserDetails {
     private Long no;
 
     @NotNull
-    @Pattern(regexp = "/^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$/")
+    @Size(min = 10, max = 50)
+    @Pattern(regexp = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}")
     private String email;
 
     @NotNull
     @Size(min = 8, max = 20)
-    @Pattern(regexp = "/^[a-z0-9]$/")
+    @Pattern(regexp = "^[a-z0-9]{8,20}")
     private String pwd;
 
     @NotNull
     @Size(min = 8, max = 20)
-    @Pattern(regexp = "/^[0-9a-zA-Z]$/")
+    @Pattern(regexp = "^[A-Za-z0-9가-힣 ]{8,20}")
     private String nick_name;
     private Date created_date;
     private boolean enable;

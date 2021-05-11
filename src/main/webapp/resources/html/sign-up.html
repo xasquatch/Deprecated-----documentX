@@ -3,7 +3,7 @@
         <label for="sign-up-email" class="form-label">이메일</label>
         <div class="input-group mb-3">
             <input type="email" class="form-control" id="sign-up-email" aria-describedby="emailHelp"
-                   placeholder="xxxxxxx@gmail.com" name="email"
+                   placeholder="xxxxxxx@gmail.com" name="email" maxlength="50"
                    onchange="sign.confirmAvailableEmail(this)">
             <button type="button" class="input-group-text"
                     onclick="sign.tokenCountDown(this);">
@@ -37,8 +37,7 @@
     <div class="mb-3">
         <label for="sign-up-nickName" class="form-label">닉네임</label>
         <input type="text" class="form-control" id="sign-up-nickName" aria-describedby="nickNameHelp"
-               placeholder="영소문자와 숫자를 조합하여 8~20자 이내로 입력해주세요"
-               name="nick_name"
+               placeholder="8~20자 이내로 입력해주세요" name="nick_name"
                onchange="sign.confirmAvailableNickName(this);">
         <div id="nickNameHelp" class="form-text"></div>
     </div>

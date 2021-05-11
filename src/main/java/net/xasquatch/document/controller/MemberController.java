@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 
 @Slf4j
@@ -54,14 +56,10 @@ public class MemberController {
 
     @PostMapping("/new/{nickName}")
     @ResponseBody
-    public String signUpMember(
-//            @Valid
-            Member member
-//            , BindingResult bindingResult
-    ) {
+    public String signUpMember(@Valid Member member, BindingResult bindingResult) {
         String result = "false";
 
-//        if (bindingResult.hasErrors()) return result;
+        if (bindingResult.hasErrors()) return result;
         result = String.valueOf(memberService.addMember(member));
 
         return result;
@@ -69,8 +67,10 @@ public class MemberController {
 
     @PutMapping("/{nickName}")
     @ResponseBody
-    public String modifyMember(Member member) {
+    public String modifyMember(@Valid Member member, BindingResult bindingResult) {
         String result = "false";
+
+        if (bindingResult.hasErrors()) return result;
         result = String.valueOf(memberService.modifyMember(member));
 
         return result;
