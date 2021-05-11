@@ -69,8 +69,12 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     @Override
     public boolean isConfirmEmail(String email, String token) {
 
-        boolean result;
-        result = tokenMap.confirmToken(email + token);
+        boolean result = false;
+        try {
+            result = tokenMap.confirmToken(email + token);
+        } catch (Exception e) {
+            return result;
+        }
 
         return result;
     }
@@ -88,7 +92,7 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     @Override
     public boolean addMember(Member member) {
         boolean confirmedTokenAuthorization = tokenMap.isConfirmedTokenAuthorization(member.getEmail());
-        
+
         return true;
     }
 
