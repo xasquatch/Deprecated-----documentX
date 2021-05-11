@@ -5,32 +5,50 @@
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
 <section class="wrap reduced-wrap">
-    <table id="member-information-table" class="table table-hover">
-        <thead>
-        <tr>
-            <td colspan="2">col2</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>3</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>7</td>
-        </tr>
-        </tbody>
-    </table>
-
+    <h1>내 정보</h1>
+    <BR>
+    <form id="user-information-form">
+        <div class="mb-3">
+            <label for="sign-up-email" class="form-label">이메일</label>
+            <div class="input-group mb-3">
+                <input type="email" class="form-control" id="sign-up-email" aria-describedby="emailHelp"
+                       name="email" value="${sessionMember.email}" readonly="readonly">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="sign-up-pwd" class="form-label">비밀번호</label>
+            <input type="password" class="form-control" id="sign-up-pwd" aria-describedby="pwdHelp"
+                   placeholder="영소문자와 숫자를 조합하여 8~20자 이내로 입력해주세요"
+                   name="pwd" onchange="sign.confirmAvailablePwd(this);">
+            <div id="pwdHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3">
+            <label for="sign-up-pwd" class="form-label">비밀번호 확인</label>
+            <input type="password" class="form-control" id="sign-up-pwd-confirm" aria-describedby="pwdConfirmHelp"
+                   placeholder="비밀번호 확인"
+                   onchange="sign.confirmSamePwd(this);">
+            <div id="pwdConfirmHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3">
+            <label for="sign-up-nickName" class="form-label">닉네임</label>
+            <input type="text" class="form-control" id="sign-up-nickName" aria-describedby="nickNameHelp"
+                   placeholder="영소문자와 숫자를 조합하여 8~20자 이내로 입력해주세요"
+                   onchange="sign.confirmAvailableNickName(this);"
+                   name="nick_name"
+                   value="${sessionMember.nick_name}">
+            <div id="nickNameHelp" class="form-text"></div>
+        </div>
+        <input id="csrf-input" name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+    </form>
+    <div style="text-align: center;">
+        <button type="button" class="btn btn-dark" onclick="memberInfo.modify('${sessionMember.nick_name}')">
+            수정
+        </button>
+        &nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-danger" onclick="memberInfo.delete('${sessionMember.nick_name}')">
+            회원 탈퇴
+        </button>
+    </div>
 </section>
 
 <c:import url="${path}/WEB-INF/views/include/footer.jsp"/>
