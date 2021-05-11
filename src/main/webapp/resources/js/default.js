@@ -463,15 +463,15 @@ var sign = {
         var signForm = document.querySelector('#sign-up-form');
         signForm.appendChild(document.querySelector('#csrf-input'));
         var formData = new FormData(signForm);
-        request.submit('POST', '/members/' + nickNameInput.value, function (data) {
+        request.submit('POST', '/members/new/' + nickNameInput.value, function (data) {
 
             // data값 boolean여부따라 결정
             if (data === 'false') {
                 nav.acceptMsg(3, '계정 생성에 실패하였습니다. 잠시 후 다시 이용바랍니다.');
                 return;
             }
-
-            nav.acceptMsg(3, '???님 환영합니다.')
+            modal.close();
+            nav.acceptMsg(3, nickNameInput.value + '님 환영합니다.')
             setTimeout(function () {
                 window.location.href = '/';
 
@@ -664,6 +664,6 @@ var memberInfo = {
                 window.alert('[회원 탈퇴 실패]\n탈퇴 과정 중 에러가 발생하였습니다.\n잠시 후 다시 시도해주시기바랍니다.\n문의처:test@test.com');
 
             }
-        },'');
+        }, '');
     }
 }
