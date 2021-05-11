@@ -45,12 +45,16 @@ public class MemberController {
         return result;
     }
 
-    @PostMapping("/{nickName}")
+    @PostMapping("/new/{nickName}")
     @ResponseBody
-    public String signUpMember(@Valid Member member, BindingResult bindingResult) {
+    public String signUpMember(
+//            @Valid
+                    Member member
+//            , BindingResult bindingResult
+    ) {
         String result = "false";
 
-        if (bindingResult.hasErrors()) return result;
+//        if (bindingResult.hasErrors()) return result;
         result = String.valueOf(memberService.addMember(member));
 
         return result;
