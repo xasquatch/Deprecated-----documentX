@@ -85,11 +85,11 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
 
     @Override
     public boolean modifyMember(Member member) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean removeMember(Member member) {
-        return false;
+        return true;
     }
 }

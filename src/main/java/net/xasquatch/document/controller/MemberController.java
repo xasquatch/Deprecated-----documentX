@@ -3,6 +3,7 @@ package net.xasquatch.document.controller;
 import net.xasquatch.document.model.Member;
 import net.xasquatch.document.service.command.MemberServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,30 +58,25 @@ public class MemberController {
 
     @PutMapping("/{nickName}")
     @ResponseBody
-    public String modifyMember(@Valid Member member, BindingResult bindingResult) {
+    public String modifyMember(Member member) {
         String result = "false";
-
-        if (bindingResult.hasErrors()) return result;
         result = String.valueOf(memberService.modifyMember(member));
 
         return result;
     }
 
     @DeleteMapping("/{nickName}")
-    public String removeMember(Model model, Member member) {
-        boolean isRemoved = memberService.removeMember(member);
-        if (!isRemoved) {
-            model.addAttribute("navMassage", "[회원탈퇴 완료] 그 동안 이용해주셔서 감사합니다.");
-            return "contents/login";
+    @ResponseBody
+    public String removeMember(Member member) {
+        String result = "false";
+        result = String.valueOf(memberService.removeMember(member));
 
-        }else{
-            model.addAttribute("navMassage", "[회원탈퇴 에러] 회원탈퇴에 실패하였습니다. 다시시도해주세요");
-            return "contents/member/information";
-        }
+        return result;
     }
 
     @GetMapping("/{nickName}")
-    public String goMemberInfo(@PathVariable String nickName) {
+    public String goMemberInfo(Model model, @AuthenticationPrincipal Member sessionMember) {
+        model.addAttribute("sessionMember", sessionMember);
 
         return "contents/member/information";
     }

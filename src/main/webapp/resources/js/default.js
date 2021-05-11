@@ -461,6 +461,7 @@ var sign = {
         }
 
         var signForm = document.querySelector('#sign-up-form');
+        signForm.appendChild(document.querySelector('#csrf-input'));
         var formData = new FormData(signForm);
         request.submit('POST', '/members/' + nickNameInput.value, function (data) {
 
@@ -531,9 +532,9 @@ var sign = {
         //서버 통신 후 성공여부
         request.submit('GET', '/members/confirm-token/' + emailInput.value, function (isConfirmed) {
             // 성공시
-            if (isConfirmed) {
+            if (isConfirmed === 'true') {
                 sign.successEmailAuthorization();
-            //실패
+                //실패
             } else {
                 window.alert('일치하지않는 토큰번호입니다.\n다시 확인해주세요.');
             }
@@ -630,5 +631,39 @@ var login = {
 
         }
 
+    }
+}
+var memberInfo = {
+
+    modify: function (nickName) {
+        var userInfoForm = document.querySelector('#user-information-form');
+        var formData = new FormData(userInfoForm);
+        request.submit('PUT', '/members/' + nickName, function (isSuccesses) {
+            if (isSuccesses === 'true') {
+                window.alert('[수정 완료]\n수정이 완료되었습니다.\n수정된 정보로 다시 로그인바랍니다.');
+                document.querySelector('#logout').submit();
+            } else {
+                window.alert('[수정 실패]\n수정에 실패하였습니다.\n잠시 후 다시 시도해주시기바랍니다.\n문의처:test@test.com');
+
+            }
+
+        }, 'FORMFILE', formData);
+    },
+    delete: function (nickName) {
+        var userInfoForm = document.querySelector('#user-information-form');
+        var formData = new FormData(userInfoForm);
+        var urlString = '';
+        formData.forEach((value, key) => {
+            urlString += key + '=' + value + '&';
+        })
+        request.submit('DELETE', '/members/' + nickName + '?' + urlString, function (isSuccesses) {
+            if (isSuccesses === 'true') {
+                window.alert('[회원 탈퇴 완료]\n그 동안 이용해 주셔서 감사합니다.');
+                document.querySelector('#logout').submit();
+            } else {
+                window.alert('[회원 탈퇴 실패]\n탈퇴 과정 중 에러가 발생하였습니다.\n잠시 후 다시 시도해주시기바랍니다.\n문의처:test@test.com');
+
+            }
+        },'');
     }
 }
