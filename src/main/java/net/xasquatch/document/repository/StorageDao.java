@@ -10,6 +10,8 @@ public class StorageDao {
 
 
     public boolean insertFileList(List<String> resultFileList) {
+        boolean result = false;
 
+        return result;
     }
 }
