@@ -5,23 +5,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TokenMap implements Runnable {
+public class TokenMap {
 
-    static Map<String, Calendar> map;
+    private Map<String, Calendar> map = new HashMap<String, Calendar>();
 
-    @Override
-    public void run() {
-        map = new HashMap<>();
-    }
-
-    public static void addToken(String token) {
+    public void addToken(String token) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.MINUTE, 5);
         map.put(token, calendar);
     }
 
-    public static boolean confirmToken(String token) {
+    public boolean confirmToken(String token) {
         Calendar date = map.get(token);
         boolean result = false;
         Calendar currentCalendar = Calendar.getInstance();
