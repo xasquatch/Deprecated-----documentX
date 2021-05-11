@@ -2,9 +2,7 @@ package net.xasquatch.document.service.command;
 
 public abstract class MailServiceDecorator {
 
-    protected String tokenSize;
     protected String email, title, contents;
-
 
     protected abstract void createToken(int size);
 

@@ -38,7 +38,6 @@ public class MailService extends MailServiceDecorator {
             if (!(j >= 10)) result.append(j);
         }
         String token = result.toString();
-        this.tokenSize = token;
         tokenMap.addToken(this.email + token);
     }
 
