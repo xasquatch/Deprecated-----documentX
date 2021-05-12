@@ -1,10 +1,10 @@
 var request = {
-    json: 'application/json',
-    form: 'application/x-www-form-urlencoded',
-    formFile: 'multipart/form-data',
+    json: 'application; charset=utf-8',
+    form: 'application/x-www-form-urlencoded; charset=utf-8',
+    formFile: 'multipart/form-data; charset=utf-8',
 
     setContentsType: function (inputContentsType) {
-        var contentsType = 'text/plain';
+        var contentsType = 'text/plain; charset=utf-8';
 
         if (inputContentsType.toUpperCase() === 'FORM') {
             contentsType = request.form;
@@ -42,6 +42,34 @@ var request = {
             xhr.open(method, url, true);
             if (contentsType !== request.formFile)
                 xhr.setRequestHeader('Content-Type', contentsType);
+            xhr.send(sendData);
+        }
+
+    },
+    submitWithCSRF: function (CSRFValue, method, url, callback, inputContentsType, sendData) {
+        var xhr = new XMLHttpRequest();
+
+        var result = null;
+        var contentsType = null;
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    result = xhr.response;
+                    callback(result);
+                }
+            }
+        };
+        if (method.toUpperCase() === 'GET') {
+            xhr.open(method, url);
+            xhr.send();
+        } else if (method.toUpperCase() === 'POST' || method.toUpperCase() === 'PUT' || method.toUpperCase() === 'DELETE' || method.toUpperCase() === 'PATCH') {
+            method = method.toUpperCase();
+            contentsType = request.setContentsType(inputContentsType);
+            xhr.open(method, url, true);
+            if (contentsType !== request.formFile)
+                xhr.setRequestHeader('Content-Type', contentsType);
+            xhr.setRequestHeader('X-CSRFToken', CSRFValue);
             xhr.send(sendData);
         }
 
@@ -514,6 +542,8 @@ var sign = {
         var intervalNumber = setInterval(function () {
             try {
                 if (count < 0) throw new Error('Count zero');
+                if (emailInput.getAttribute('readonly') === 'readonly')
+                    new Error('success Email Authorization');
                 count--;
                 element.innerHTML = originValue + '(' + count + ')';
             } catch (e) {
@@ -582,7 +612,7 @@ var sign = {
         var msgBox = document.querySelector('#nickNameHelp');
         if (sign.isAvailableNickName(element.value)) {
             request.submit('GET', '/members/available-nick-name/' + element.value, function (available) {
-                if (available === 'ture') {
+                if (available === 'true') {
                     msgBox.innerHTML = '사용가능한 닉네임입니다.'
                     msgBox.style.color = 'green';
                 } else {
@@ -655,12 +685,13 @@ var memberInfo = {
         }, 'FORMFILE', formData);
     },
     delete: function (nickName) {
+        if (window.prompt("[회원 탈퇴]\n탈퇴를 진행합니다. 동의하시면 \"동의\"라고 적어주시기바랍니다.") !== '동의') return;
         var userInfoForm = document.querySelector('#user-information-form');
         var formData = new FormData(userInfoForm);
         var urlString = '';
         formData.forEach((value, key) => {
             urlString += key + '=' + value + '&';
-        })
+        });
         request.submit('DELETE', '/members/' + nickName + '?' + urlString, function (isSuccesses) {
             if (isSuccesses === 'true') {
                 window.alert('[회원 탈퇴 완료]\n그 동안 이용해 주셔서 감사합니다.');
