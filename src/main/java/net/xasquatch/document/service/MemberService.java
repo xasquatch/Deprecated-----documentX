@@ -64,7 +64,7 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     //-----------------------MemberServiceInterface------------------------------------------
     @Override
     public boolean isAvailableEmail(String email) {
-        return true;
+        return memberDao.selectByEmail(email) == null ? true : false;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
 
     @Override
     public boolean isAvailableNickName(String nickName) {
-        return true;
+        return memberDao.selectByNickName(nickName) > 0 ? false : true;
     }
 
     @Override
@@ -109,11 +109,13 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
 
     @Override
     public boolean modifyMember(Member member) {
-        return true;
+        String encodedPwd = passwordEncoder.encode(member.getPwd());
+        member.setPwd(encodedPwd);
+        return memberDao.updateMember(member) == 1 ? true : false;
     }
 
     @Override
     public boolean removeMember(Member member) {
-        return true;
+        return memberDao.deleteMember(member) == 1 ? true : false;
     }
 }

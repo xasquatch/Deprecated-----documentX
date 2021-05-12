@@ -18,4 +18,16 @@ public class MemberDao {
     public boolean insertMember(Member member){
         return memberMapper.insertMember(member) == 1;
     }
+
+    public int selectByNickName(String nickName) {
+        return memberMapper.selectByNickName(nickName);
+    }
+
+    public int deleteMember(Member member) {
+        return memberMapper.deleteMember(member);
+    }
+
+    public int updateMember(Member member) {
+        return memberMapper.updateMember(member);
+    }
 }
