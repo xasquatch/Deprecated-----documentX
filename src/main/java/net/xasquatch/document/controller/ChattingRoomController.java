@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path = "/chatting", {"text/plain;charset=UTF-8", MediaType.ALL_VALUE})
+@RequestMapping(path = "/chatting", produces = {"text/plain;charset=UTF-8", MediaType.ALL_VALUE})
 public class ChattingRoomController {
 
     @GetMapping("/room-list")

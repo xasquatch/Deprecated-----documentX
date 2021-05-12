@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @Controller
-@RequestMapping({"text/plain;charset=UTF-8", MediaType.ALL_VALUE})
+@RequestMapping(produces = {"text/plain;charset=UTF-8", MediaType.ALL_VALUE})
 public class HomeController {
 
     @GetMapping("/")
