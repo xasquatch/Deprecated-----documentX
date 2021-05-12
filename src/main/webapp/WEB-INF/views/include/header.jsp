@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="${path}/webjars/fontawesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="${path}/resources/css/style.css"/>
     <link rel="stylesheet" href="${path}/resources/css/reset.css"/>
+    <link rel="stylesheet" href="${path}/resources/css/contentsStyle.css"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap" rel="stylesheet">
     <script defer src="${path}/resources/js/default.js"></script>
