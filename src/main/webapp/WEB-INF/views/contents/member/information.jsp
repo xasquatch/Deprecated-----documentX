@@ -18,7 +18,7 @@
         <div class="mb-3">
             <label for="sign-up-pwd" class="form-label">비밀번호</label>
             <input type="password" class="form-control" id="sign-up-pwd" aria-describedby="pwdHelp"
-                   placeholder="영소문자와 숫자를 조합하여 8~20자 이내로 입력해주세요"
+                   placeholder="8~20자 이내로 입력해주세요"
                    name="pwd" onchange="sign.confirmAvailablePwd(this);">
             <div id="pwdHelp" class="form-text"></div>
         </div>
@@ -32,7 +32,7 @@
         <div class="mb-3">
             <label for="sign-up-nickName" class="form-label">닉네임</label>
             <input type="text" class="form-control" id="sign-up-nickName" aria-describedby="nickNameHelp"
-                   placeholder="8~20자 이내로 입력해주세요" name="nick_name"
+                   placeholder="2~20자 이내로 입력해주세요" name="nick_name"
                    onchange="sign.confirmAvailableNickName(this);"
                    value="${sessionMember.nick_name}">
             <div id="nickNameHelp" class="form-text"></div>

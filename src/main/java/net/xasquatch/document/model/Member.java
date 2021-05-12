@@ -26,8 +26,8 @@ public class Member implements UserDetails {
     private String pwd;
 
     @NotNull
-    @Size(min = 8, max = 20)
-    @Pattern(regexp = "^[A-Za-z0-9가-힣 ]{8,20}")
+    @Size(min = 2, max = 20)
+    @Pattern(regexp = "^[A-Za-z0-9가-힣 ]{2,20}")
     private String nick_name;
     private Date created_date;
     private boolean enable;

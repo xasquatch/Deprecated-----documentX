@@ -484,7 +484,7 @@ var sign = {
         return regExp.test(data);
     },
     isAvailableNickName: function (data) {
-        var regExp = /^[A-Za-z0-9가-힣 ]{8,20}/
+        var regExp = /^[A-Za-z0-9가-힣 ]{2,20}/
         return regExp.test(data);
     },
     confirmAvailableEmail: function (element) {
