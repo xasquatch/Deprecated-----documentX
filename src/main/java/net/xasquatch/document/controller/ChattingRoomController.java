@@ -13,17 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ChattingRoomController {
 
     @GetMapping("/room-list")
-    public String goChattingRoomList(Model model, @AuthenticationPrincipal Member member) {
+    public String goToChattingRoomList(Model model, @AuthenticationPrincipal Member member) {
         model.addAttribute("sessionMember", member);
 
         return "contents/chatting/room-list";
     }
 
     @GetMapping("/{roomTitle}")
-    public String goChattingRoom(Model model, @AuthenticationPrincipal Member member) {
+    public String goToChattingRoom(Model model, @AuthenticationPrincipal Member member) {
         model.addAttribute("sessionMember", member);
 
         return "contents/chatting/room";
     }
+
 
 }

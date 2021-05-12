@@ -128,14 +128,14 @@ public class MemberController {
     }
 
     @GetMapping("/{nickName}")
-    public String goMemberInfo(Model model, @AuthenticationPrincipal Member sessionMember) {
+    public String goToMemberInfo(Model model, @AuthenticationPrincipal Member sessionMember) {
         model.addAttribute("sessionMember", sessionMember);
 
         return "contents/member/information";
     }
 
     @GetMapping("/{nickName}/files")
-    public String goMemberFileList(Model model, @PathVariable String nickName) {
+    public String goToMemberFileList(Model model, @PathVariable String nickName) {
 
 
         return "contents/file/list";
@@ -170,14 +170,14 @@ public class MemberController {
     }
 
     @GetMapping("/{nickName}/chatting-rooms")
-    public String goMemberChattingList(@PathVariable String nickName) {
+    public String goToMemberChattingList(@PathVariable String nickName) {
 
         return "contents/chatting/room-list";
     }
 
     @GetMapping("/{nickName}/chatting-rooms/{chattingRoomTitle}")
-    public String goMemberChattingRoom(@PathVariable String nickName,
-                                       @PathVariable String chattingRoomTitle) {
+    public String goToMemberChattingRoom(@PathVariable String nickName,
+                                         @PathVariable String chattingRoomTitle) {
 
         return "contents/chatting/room";
     }
