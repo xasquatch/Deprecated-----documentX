@@ -471,12 +471,8 @@ var sign = {
                 return;
             }
             modal.close();
-            nav.acceptMsg(3, nickNameInput.value + '님 환영합니다.')
-            setTimeout(function () {
-                window.location.href = '/';
-
-            }, 3000)
-
+            nav.acceptMsg(3, nickNameInput.value + '님 환영합니다. 입력하신 정보로 로그인 후 이용바랍니다.')
+            document.querySelector('#login-email').value = emailInput.value;
         }, 'FORMFILE', formData);
     },
     isAvailableEmail: function (data) {

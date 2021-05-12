@@ -15,5 +15,7 @@ public class MemberDao {
         return memberMapper.selectByEmail(email);
     }
 
-
+    public boolean insertMember(Member member){
+        return memberMapper.insertMember(member) == 1;
+    }
 }

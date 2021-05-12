@@ -62,10 +62,13 @@ public class MemberController {
                             "<BR><BR><BR>" +
                             "<a href=\"" + domain + "/members/confirm-token/" + email + "?" +
                             "token=" + token + "\">" +
-                            "해당 링크를 클릭하면 인증이 완료됩니다." +
-                            "</a>" +
+                            "이 링크를 클릭하면 인증이 완료됩니다.<BR>" +
+                            "</a><BR>" +
+                            "링크 입장이 안될 시<BR>" +
+                            domain + "/members/confirm-token/" + email + "?token=" + token +
+                            "<BR>위의 url을 주소창에 입력해주세요<BR>" +
                             "</div>");
-
+            log.debug("send To: {}", domain + "/members/confirm-token/" + email + "?token=" + token);
         } catch (Exception e) {
             return result;
         }

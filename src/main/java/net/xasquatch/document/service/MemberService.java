@@ -25,13 +25,13 @@ import java.util.List;
 public class MemberService implements UserDetailsService, MemberServiceInterface {
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private MemberDao memberDao;
 
     @Autowired
     private AuthorizationDao authorizationDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private TokenMap tokenMap;
@@ -40,10 +40,11 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Member member = memberDao.selectByEmail(s);
 
-        if (member.getEmail() == null) {
+        if (member.getEmail() == null)
             throw new UsernameNotFoundException(s + "is not found.");
-        }
 
+
+        //이메일
         member.setEmail(member.getUsername());
         member.setPwd(member.getPassword());
         member.setAuthorities(getAuthorities(s));
@@ -91,6 +92,17 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     @Override
     public boolean addMember(Member member) {
         boolean confirmedTokenAuthorization = tokenMap.isConfirmedTokenAuthorization(member.getEmail());
+        if (!confirmedTokenAuthorization) return false;
+
+        //password encode
+        member.setPwd(passwordEncoder.encode(member.getPwd()));
+        boolean insertMemberResult = memberDao.insertMember(member);
+        if (insertMemberResult) {
+            //TODO: 여기 수정해야됨 (임시)
+            boolean insertAuthResult = authorizationDao.insertAuthorization("USER", member.getNo());
+            if (!insertAuthResult) return false;
+
+        }
 
         return true;
     }

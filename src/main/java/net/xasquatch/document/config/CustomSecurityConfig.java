@@ -29,7 +29,6 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/management/**").hasAnyRole("MANAGEMENT")
                 .antMatchers("/members/**").hasAnyRole("MANAGEMENT", "USER")
                 .anyRequest().authenticated();
-
         http
                 .formLogin()
                 .loginPage("/login")

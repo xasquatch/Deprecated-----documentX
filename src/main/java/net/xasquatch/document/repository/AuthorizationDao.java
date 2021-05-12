@@ -18,5 +18,7 @@ public class AuthorizationDao {
 
     }
 
-
+    public boolean insertAuthorization(String authority, Long memberNo) {
+        return authorizationMapper.insertAuthorization(authority, memberNo) >= 1;
+    }
 }
