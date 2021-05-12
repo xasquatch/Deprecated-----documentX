@@ -21,7 +21,7 @@ import java.io.UnsupportedEncodingException;
 
 @Slf4j
 @Controller
-@RequestMapping("/members")
+@RequestMapping(path = "/members", produces = "text/plain;charset=UTF-8")
 @PropertySource("/WEB-INF/setting.properties")
 public class MemberController {
 
@@ -111,10 +111,15 @@ public class MemberController {
 
     @PutMapping("/{nickName}")
     @ResponseBody
-    public String modifyMember(@Valid Member member, BindingResult bindingResult) {
+    public String modifyMember(@AuthenticationPrincipal Member sessionMember,
+                               @Valid Member member, BindingResult bindingResult) {
         String result = "false";
-
         if (bindingResult.hasErrors()) return result;
+
+        member.setNo(sessionMember.getNo());
+        if (member.getPwd() == null) member.setPwd(sessionMember.getPwd());
+        if (member.getNick_name() == null) member.setNick_name(sessionMember.getNick_name());
+
         result = String.valueOf(memberService.modifyMember(member));
 
         return result;
@@ -122,11 +127,8 @@ public class MemberController {
 
     @DeleteMapping("/{nickName}")
     @ResponseBody
-    public String removeMember(Member member) {
-        String result = "false";
-        result = String.valueOf(memberService.removeMember(member));
-
-        return result;
+    public String removeMember(@AuthenticationPrincipal Member member) {
+        return String.valueOf(memberService.removeMember(member));
     }
 
     @GetMapping("/{nickName}")
@@ -170,7 +172,6 @@ public class MemberController {
 
         return null;
     }
-
 
     @GetMapping("/{nickName}/chatting-rooms")
     public String goMemberChattingList(@PathVariable String nickName) {
