@@ -519,7 +519,7 @@ var sign = {
         var msgBox = document.querySelector('#emailHelp');
         if (sign.isAvailableEmail(element.value)) {
             request.submit('GET', '/members/available-email/' + element.value, function (available) {
-                if (available === 'ture') {
+                if (available === 'true') {
                     msgBox.innerHTML = '사용가능한 이메일입니다.'
                     msgBox.style.color = 'green';
                 } else {
