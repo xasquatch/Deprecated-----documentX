@@ -37,39 +37,54 @@
         </article>
         <article id="chatting-contents" class="chatting-container flex-grow-1">
             <div class="form-control">
-
+                <div class="chatting-msg">
+                    <b>nick</b>
+                    <pre id="test">sdfasdfsd
+                sdfasd</pre>
+                </div>
+                <nav>뉴ㅜ가들어옴</nav>
+                <div class="chatting-msg chatting-my-msg">
+                    <b>me</b>
+                    <pre>나임내가 길어지는거에 대해 어떻게 생각해 너는????
+                    대답해봐 이거 가운데 정렬아니지? 헷갈리네대답해봐 이거 가운데 정렬아니지? 헷갈리네대답해봐 이거 가운데 정렬아니지? 헷갈리네</pre>
+                </div>
             </div>
-            <form class="input-group">
-                <textarea class="form-control" style="resize: none"></textarea>
-                <button class="input-group-append btn btn-dark" style="align-items: center;">
+            <div class="input-group">
+                <textarea id="chatting-msg-input" class="form-control" style="resize: none"></textarea>
+                <button type="button" class="input-group-append btn btn-dark"
+                        onclick="document.querySelector('#test').innerHTML = document.querySelector('#chatting-msg-input').value">
                     보내기
                 </button>
-            </form>
+            </div>
         </article>
     </section>
     <section id="chatting-file-list" class="chatting-container">
-        <div style="font-weight:bold; padding: 12px;">파일 업로드</div>
+        <div class="d-flex flex-wrap">
+            <div style="font-weight:bold; padding: 12px;">파일 업로드 (최근 이용파일 10개)</div>
+            <div class="input-group">
+                <input type="search" id="search-file-name" class="form-control" placeholder="search file name">
+                <button type="button" class="input-group-append btn btn-dark">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
         <HR>
-        <div id="file-package">
-
+        <div id="file-package" class="d-flex flex-nowrap">
+            <div> item</div>
+            <div> item</div>
+            <div> item</div>
+            <div> item</div>
+            <div> item</div>
+            <div> item</div>
+            <div> item</div>
+            <div> item</div>
+            <div> item</div>
+            <div> item</div>
+            <div> item</div>
+            <div> item</div>
+            <div> item</div>
         </div>
     </section>
-    <div>
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">&raquo;</a>
-            </li>
-        </ul>
-    </div>
 
 </section>
 

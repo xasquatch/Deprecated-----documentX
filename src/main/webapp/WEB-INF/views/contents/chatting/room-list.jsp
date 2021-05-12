@@ -5,7 +5,7 @@
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
 <section class="wrap reduced-wrap">
-    <div class="chatting-header">
+    <div class="d-flex">
         <form method="GET" action="" class="col-7">
             <div class="input-group">
                 <input type="search" name="chattingSearch" class="form-control" placeholder="search keywords">
@@ -60,8 +60,21 @@
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="4" style="text-align: center;">
-                페이지네이션
+            <td colspan="4">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">&raquo;</a>
+                    </li>
+                </ul>
             </td>
         </tr>
         </tfoot>

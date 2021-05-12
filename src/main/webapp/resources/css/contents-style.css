@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+
+.chatting-container {
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-sizing: content-box;
+    padding: 10px;
+}
+
+#chatting-clients > table {
+    min-height: 50vh;
+
+}
+
+#chatting-file-list {
+
+}
+
+#chatting-contents > div:first-child {
+    min-height: 50vh;
+}
+
+#chatting-contents pre {
+    display: inline-block;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px gray,
+    -1px -1px 1px gray,
+    -1px 1px 1px gray,
+    1px -1px 1px gray;
+    white-space: pre-wrap;
+}
+
+.chatting-msg {
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    margin-left: 0px;
+    margin-right: 50px;
+}
+
+.chatting-my-msg {
+    float: right;
+    margin-left: 50px;
+    margin-right: 0px;
+}
+
+.chatting-my-msg > b {
+    text-align: right;
+}
+
+
+#chatting-contents nav {
+    text-align: center;
+    font-size: 87.5%;
+    font-weight: bold;
+    color: gray;
+
+}
+
+@media (max-width: 768px) {
+
+    #chatting-clients > table {
+        min-height: auto;
+
+    }
+}
+
+#file-package {
+    overflow: auto;
+
+}
+
+#file-package > div {
+    padding: 10px;
+    margin: 10px;
+    transition: all 0.3s;
+}
+
+#file-package > div:HOVER {
+    cursor: pointer;
+    filter: invert(100%);
+}

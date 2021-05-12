@@ -17,10 +17,11 @@
     <link rel="stylesheet" href="${path}/webjars/fontawesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="${path}/resources/css/style.css"/>
     <link rel="stylesheet" href="${path}/resources/css/reset.css"/>
-    <link rel="stylesheet" href="${path}/resources/css/contentsStyle.css"/>
+    <link rel="stylesheet" href="${path}/resources/css/contents-style.css"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap" rel="stylesheet">
     <script defer src="${path}/resources/js/default.js"></script>
+    <script defer src="${path}/resources/js/contents-script.js"></script>
     <script defer src="${path}/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
     <script defer src="${path}/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script src="${path}/webjars/chart.js/3.1.1/dist/chart.min.js"></script>
