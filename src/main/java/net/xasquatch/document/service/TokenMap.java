@@ -36,6 +36,7 @@ public class TokenMap {
             try {
                 Thread.sleep(1000 * 60 * 5);
                 map.remove(token);
+                log.debug("token 제거: 5분초과");
             } catch (InterruptedException e) {
                 log.warn("TokenMap sleep Exception: {}", e.getMessage());
             } finally {
@@ -90,6 +91,7 @@ public class TokenMap {
             if (!removeResult) throw new Exception("Occurred Exception RemoveThread");
 
             map.put(token, "success");
+            log.debug("token 갱신: 인증완료");
             result = true;
 
             Thread thread = new Thread(() -> {
