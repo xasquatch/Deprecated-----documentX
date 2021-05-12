@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/management")
+@RequestMapping(path = "/management", produces = "text/plain;charset=UTF-8")
 public class ManagementController {
 
     @GetMapping("/members")
