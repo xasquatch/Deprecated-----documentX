@@ -41,7 +41,7 @@ public class MemberController {
     @Autowired
     private TokenMap tokenMap;
 
-    @GetMapping("/available-email/{email:.+}")
+    @GetMapping("/available-email/{email}")
     @ResponseBody
     public String isAvailableEmail(@PathVariable("email") String email) {
         return String.valueOf(memberService.isAvailableEmail(email));
@@ -179,8 +179,7 @@ public class MemberController {
     public String goToMemberChattingRoom(@PathVariable String nickName,
                                          @PathVariable String chattingRoomTitle) {
 
+
         return "contents/chatting/room";
     }
-
-
 }
