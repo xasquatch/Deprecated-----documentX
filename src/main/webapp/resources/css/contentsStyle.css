@@ -1,12 +1,30 @@
 @charset "UTF-8";
 
-.chatting-header{
-    display: flex;
+
+.chatting-container{
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-sizing: content-box;
+}
+
+#chatting-clients > table {
+    min-height: 50vh;
 
 }
 
+#chatting-file-list{
 
-@media (max-width: 1200px) {
+}
+
+#chatting-contents > div:first-child {
+    min-height: 50vh;
+}
 
 
+@media (max-width: 768px) {
+
+    #chatting-clients > table {
+        min-height: auto;
+
+    }
 }

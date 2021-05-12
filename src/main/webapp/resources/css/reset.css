@@ -5,10 +5,12 @@
     overscroll-behavior-y: none;
     scroll-behavior: smooth;
 }
-html, body{
+
+html, body {
     margin: 0;
     padding: 0;
 }
+
 *::-webkit-scrollbar {
     width: 5px;
     background: transparent;
@@ -20,4 +22,17 @@ html, body{
 
 *::-webkit-scrollbar-thumb:HOVER {
     background: rgba(150, 0, 0, 1);
+}
+
+/************* custom bootstrap********/
+
+.page-item.active .page-link {
+    color: #fff !important;
+    background-color: gray !important;
+    border-color: gray !important;
+}
+
+.page-link {
+    color: black !important;
+
 }

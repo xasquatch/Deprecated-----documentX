@@ -5,13 +5,13 @@
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
 <section class="wrap reduced-wrap">
-    <section>
-        <article>
+    <section class="d-md-flex flex-md-row-reverse">
+        <article id="chatting-clients" class="chatting-container flex-grow-0">
             <table class="table table-hover">
                 <thead>
                 <tr>
                     <th>
-                        <h3>리스트</h3>
+                        리스트
                     </th>
                 </tr>
                 </thead>
@@ -35,7 +35,10 @@
                 <%-- 50명을 최대로 리밋--%>
             </table>
         </article>
-        <article>
+        <article id="chatting-contents" class="chatting-container flex-grow-1">
+            <div class="form-control">
+
+            </div>
             <form class="input-group">
                 <textarea class="form-control" style="resize: none"></textarea>
                 <button class="input-group-append btn btn-dark" style="align-items: center;">
@@ -44,8 +47,28 @@
             </form>
         </article>
     </section>
+    <section id="chatting-file-list" class="chatting-container">
+        <div style="font-weight:bold; padding: 12px;">파일 업로드</div>
+        <HR>
+        <div id="file-package">
+
+        </div>
+    </section>
     <div>
-        파일 업로드
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+            </li>
+        </ul>
     </div>
 
 </section>
