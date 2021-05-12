@@ -2,6 +2,7 @@ package net.xasquatch.document.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.Member;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @Controller
-@RequestMapping(produces = "text/plain;charset=UTF-8")
+@RequestMapping({"text/plain;charset=UTF-8", MediaType.ALL_VALUE})
 public class HomeController {
 
     @GetMapping("/")

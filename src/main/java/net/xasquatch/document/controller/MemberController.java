@@ -9,6 +9,7 @@ import net.xasquatch.document.service.command.MemberServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,7 @@ import java.io.UnsupportedEncodingException;
 
 @Slf4j
 @Controller
-@RequestMapping(path = "/members", produces = "text/plain;charset=UTF-8")
+@RequestMapping(path = "/members", produces = {"text/plain;charset=UTF-8", MediaType.ALL_VALUE})
 @PropertySource("/WEB-INF/setting.properties")
 public class MemberController {
 
@@ -40,13 +41,11 @@ public class MemberController {
     @Autowired
     private TokenMap tokenMap;
 
-    @GetMapping("/available-email/{email}")
+    @GetMapping("/available-email/{email:.+}")
     @ResponseBody
-    public String isAvailableEmail(@PathVariable String email) {
-        String result = "false";
-        result = String.valueOf(memberService.isAvailableEmail(email));
+    public String isAvailableEmail(@PathVariable("email") String email) {
+        return String.valueOf(memberService.isAvailableEmail(email));
 
-        return result;
     }
 
     @GetMapping("/confirm-token/count-down")
