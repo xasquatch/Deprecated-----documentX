@@ -9,30 +9,30 @@
     <BR>
     <form id="user-information-form">
         <div class="mb-3">
-            <label for="sign-up-email" class="form-label">이메일</label>
+            <label for="info-email" class="form-label">이메일</label>
             <div class="input-group mb-3">
-                <input type="email" class="form-control" id="sign-up-email" aria-describedby="emailHelp"
+                <input type="email" class="form-control" id="info-email" aria-describedby="emailHelp"
                        name="email" value="${sessionMember.email}" maxlength="50" readonly="readonly">
             </div>
         </div>
         <div class="mb-3">
-            <label for="sign-up-pwd" class="form-label">비밀번호</label>
-            <input type="password" class="form-control" id="sign-up-pwd" aria-describedby="pwdHelp"
+            <label for="info-pwd" class="form-label">비밀번호</label>
+            <input type="password" class="form-control" id="info-pwd" aria-describedby="pwdHelp"
                    placeholder="영소문자또는 숫자를 8~20자 이내로 입력해주세요"
                    name="pwd" onchange="sign.confirmAvailablePwd(this);">
             <div id="pwdHelp" class="form-text"></div>
         </div>
         <div class="mb-3">
-            <label for="sign-up-pwd" class="form-label">비밀번호 확인</label>
-            <input type="password" class="form-control" id="sign-up-pwd-confirm" aria-describedby="pwdConfirmHelp"
+            <label for="info-pwd" class="form-label">비밀번호 확인</label>
+            <input type="password" class="form-control" id="info-pwd-confirm" aria-describedby="pwdConfirmHelp"
                    placeholder="비밀번호 확인"
                    onchange="sign.confirmSamePwd(this);">
             <div id="pwdConfirmHelp" class="form-text"></div>
         </div>
         <div class="mb-3">
-            <label for="sign-up-nickName" class="form-label">닉네임</label>
-            <input type="text" class="form-control" id="sign-up-nickName" aria-describedby="nickNameHelp"
-                   placeholder="영문자또는 숫자를 2~20자 이내로 입력해주세요" name="nick_name"
+            <label for="info-nickName" class="form-label">닉네임</label>
+            <input type="text" class="form-control" id="info-nickName" aria-describedby="nickNameHelp"
+                   placeholder="한글, 영문자또는 숫자를 2~20자 이내로 입력해주세요" name="nick_name"
                    onchange="sign.confirmAvailableNickName(this);"
                    value="${sessionMember.nick_name}">
             <div id="nickNameHelp" class="form-text"></div>

@@ -116,9 +116,6 @@ public class MemberController {
         if (bindingResult.hasErrors()) return result;
 
         member.setNo(sessionMember.getNo());
-        if (member.getPwd() == null) member.setPwd(sessionMember.getPwd());
-        if (member.getNick_name() == null) member.setNick_name(sessionMember.getNick_name());
-
         result = String.valueOf(memberService.modifyMember(member));
 
         return result;

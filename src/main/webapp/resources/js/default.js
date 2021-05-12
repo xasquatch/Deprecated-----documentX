@@ -671,6 +671,19 @@ var login = {
 var memberInfo = {
 
     modify: function (nickName) {
+        var pwdInput = document.querySelector('#info-pwd');
+        var pwdConfirmInput = document.querySelector('#info-pwd-confirm');
+        var nickNameInput = document.querySelector('#info-nickName');
+        var msgBox = '[회원가입 실패: 다음을 확인해주세요]\n';
+
+        if (!sign.isAvailablePwd(pwdInput.value)) msgBox += '- 비밀번호 형식이 맞지 않습니다.\n';
+        if (pwdInput.value !== pwdConfirmInput.value) msgBox += '- 비밀번호가 일치하지 않습니다.\n';
+        if (!sign.isAvailableNickName(nickNameInput.value)) msgBox += '- 이름 형식이 맞지 않습니다.\n';
+        if (msgBox !== '[회원가입 실패: 다음을 확인해주세요]\n') {
+            alert(msgBox);
+            return;
+        }
+
         var userInfoForm = document.querySelector('#user-information-form');
         var formData = new FormData(userInfoForm);
         request.submit('PUT', '/members/' + nickName, function (isSuccesses) {

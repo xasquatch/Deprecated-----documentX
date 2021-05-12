@@ -50,7 +50,7 @@ public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplic
         FilterRegistration.Dynamic filter = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
         filter.setInitParameter("encoding", "UTF-8");
         filter.setInitParameter("forceEncoding", "true");
-        filter.addMappingForServletNames(null, false, "dispatcher");
+        filter.addMappingForUrlPatterns(null, false, "/*");
 
         // 멀티파일 설정
         servlet.setMultipartConfig(new MultipartConfigElement(filesSavePath, 1024 * 1024 * 1024, 1024 * 1024 * 1024, 0));
