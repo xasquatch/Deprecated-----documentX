@@ -122,6 +122,12 @@
                 파일 관리
             </span>
             </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                <i class="fa fa-key" aria-hidden="true"></i>
+                <span class="d-none d-xl-inline d-xxl-none">
+                권한 관리
+            </span>
+            </a>
         </sec:authorize>
 
         <%--

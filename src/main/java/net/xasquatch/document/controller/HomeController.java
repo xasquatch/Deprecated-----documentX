@@ -6,12 +6,15 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
 @Slf4j
+@Controller
+@RequestMapping(produces = "text/plain;charset=UTF-8")
 public class HomeController {
 
     @GetMapping("/")
@@ -20,6 +23,11 @@ public class HomeController {
         model.addAttribute("sessionMember", sessionMember);
         model.addAttribute("home", "success");
         return "index";
+    }
+
+    @RequestMapping(path = "/login", method = {RequestMethod.GET, RequestMethod.POST})
+    public String loginPage() {
+        return "contents/login";
     }
 
     @GetMapping("/connection")
