@@ -52,7 +52,7 @@
             <div class="input-group">
                 <textarea id="chatting-msg-input" class="form-control" style="resize: none"></textarea>
                 <button type="button" class="input-group-append btn btn-dark"
-                        onclick="document.querySelector('#test').innerHTML = document.querySelector('#chatting-msg-input').value">
+                        onclick="chat.send(document.querySelector('#chatting-msg-input'));">
                     보내기
                 </button>
             </div>

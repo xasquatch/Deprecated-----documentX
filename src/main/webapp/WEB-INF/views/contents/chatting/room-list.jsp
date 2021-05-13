@@ -22,12 +22,11 @@
                 <option value="25">25</option>
                 <option value="50">50</option>
             </select>
-            <form action="/members/${sessionMember.nick_name}/chatting-rooms/${sessionMember.nick_name}님의_채팅방입니다">
-                <button class="btn btn-dark">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                </button>
-
-            </form>
+            <%--            <form action="/members/${sessionMember.nick_name}/chatting-rooms/${sessionMember.nick_name}님의_채팅방입니다">--%>
+            <button class="btn btn-dark" onclick="chat.clickAddEventConnectChat(${sessionMember.nick_name})">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+            <%--            </form>--%>
         </div>
     </div>
     <HR>
@@ -46,7 +45,7 @@
                 1
             </td>
             <td>
-                <a href="/chatting/faketitle">
+                <a href="/chatting/1">
                     예시
                 </a>
             </td>
@@ -79,7 +78,6 @@
         </tr>
         </tfoot>
     </table>
-
 </section>
 
 <c:import url="${path}/WEB-INF/views/include/footer.jsp"/>
