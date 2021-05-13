@@ -17,6 +17,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 public class WebSocketHandler extends TextWebSocketHandler {
 
     private final ChattingRoomDao chattingRoomDao;
+    private ChattingRoom chatRoom;
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage txtMessage) throws Exception {
@@ -24,7 +25,18 @@ public class WebSocketHandler extends TextWebSocketHandler {
         log.info("메세지 전송 = {} : {}", session, msg);
         ObjectMapper objectMapper = new ObjectMapper();
         Message message = objectMapper.readValue(msg, Message.class);
-        ChattingRoom chatRoom = chattingRoomDao.selectChattingRoom(message.getChatting_room_no());
+
+        ChattingRoom roomInfo = chattingRoomDao.selectChattingRoom(message.getChatting_room_no());
+
+        if (chatRoom == null) {
+            chatRoom = ChattingRoom.getInstance(roomInfo.getName(), roomInfo.getPwd());
+
+        } else {
+            chatRoom.setName(roomInfo.getName());
+            chatRoom.setPwd(roomInfo.getPwd());
+
+        }
+
         chatRoom.handleMessage(session, message, objectMapper);
     }
 
