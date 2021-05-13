@@ -1,17 +1,15 @@
 package net.xasquatch.document.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import net.xasquatch.document.model.ChattingRoom;
 import net.xasquatch.document.model.Member;
-import net.xasquatch.document.repository.ChattingRoomDao;
+import net.xasquatch.document.service.ChattingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ChattingRoomController {
 
     @Autowired
-    private ChattingRoomDao chattingRoomDao;
+    private ChattingService chattingService;
 
     @GetMapping("/room-list")
     public String goToChattingRoomList(Model model, @AuthenticationPrincipal Member member) {
@@ -38,17 +36,20 @@ public class ChattingRoomController {
         return "contents/chatting/room";
     }
 
-    @GetMapping("/new")
-    public String make(Model model) {
-        ChatRoomForm form = new ChatRoomForm();
-        model.addAttribute("form", form);
-        return "newRoom";
-    }
+    @PostMapping("/new/{title}")
+    @ResponseBody
+    public String createChattingRoom(@PathVariable String title,
+                                     @RequestParam(required = false, name = "pwd") String pwd) {
+        String redirectUrl = "false";
+        ChattingRoom chattingRoom = null;
+        try {
+            chattingRoom = chattingService.createChattingRoom(title, pwd);
+            redirectUrl = "/chatting/" + chattingRoom.getNo();
 
-    @PostMapping("/room/new")
-    public String makeRoom(ChatRoomForm form) {
-        chatRoomRepository.createChatRoom(form.getName());
+        } catch (Exception e) {
+            log.error("채팅방 생성에러: {}", e.getMessage());
+        }
 
-        return "redirect:/";
+        return redirectUrl;
     }
 }

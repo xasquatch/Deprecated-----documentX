@@ -19,10 +19,13 @@ public class ChattingRoom {
 
     private Set<WebSocketSession> sessions = new HashSet<>();
 
-    public static ChattingRoom getInstance(long no, String name) {
+    private ChattingRoom() {
+    }
+
+    public static ChattingRoom getInstance(String name, String pwd) {
         ChattingRoom chatRoom = new ChattingRoom();
-        chatRoom.no = no;
         chatRoom.name = name;
+        chatRoom.pwd = pwd;
         return chatRoom;
     }
 

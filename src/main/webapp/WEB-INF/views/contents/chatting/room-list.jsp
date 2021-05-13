@@ -23,7 +23,7 @@
                 <option value="50">50</option>
             </select>
             <%--            <form action="/members/${sessionMember.nick_name}/chatting-rooms/${sessionMember.nick_name}님의_채팅방입니다">--%>
-            <button class="btn btn-dark" onclick="chat.clickAddEventConnectChat(${sessionMember.nick_name})">
+            <button class="btn btn-dark" onclick="chat.createRoom()">
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </button>
             <%--            </form>--%>

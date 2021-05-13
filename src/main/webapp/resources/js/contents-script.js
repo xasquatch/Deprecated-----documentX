@@ -10,9 +10,15 @@ var chat = {
     roomNumber: undefined,
     nickName: undefined,
 
-    clickAddEventConnectChat: function (masterNickName) {
-        chat.nickName = masterNickName;
-        chat.connect();
+    createRoom: function () {
+        var title = window.prompt("[채팅방 생성: 방 제목]\n채팅방을 개설합니다.\n방 제목을 입력해주세요");
+        if (title === null || title === undefined || title === '') return nav.activate(3, '방 개설을 취소합니다');
+        var pwd = window.prompt("[채팅방 생성: 비밀번호]\n설정하실 비밀번호를 입력해주시고\n입력을 원하지 않는 경우\n취소버튼을 누르시기바랍니다");
+        request.submit('POST', '/chatting/new/' + title, function (redirectUrl) {
+            if (redirectUrl !== 'false')
+                window.location.href = redirectUrl + '?status=new';
+
+        }, 'FORM', 'pwd=' + pwd)
     },
     connect: function () {
         webSocket = new WebSocket("ws://localhost/chat");
