@@ -61,6 +61,7 @@ var chat = {
 
         chatroom.appendChild(addElement);
     },
+    //TODO: 보충 필요
     onClose: function () {
         chat.disconnect();
     },

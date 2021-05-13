@@ -5,12 +5,10 @@ file
 - search  (DB)
 - write (IO)
 - drag & drop event (view logic, script)
-- layout 끝
 
 chat
 - websocket: wws TLS 구현
 - message Create (DB) : no update delete
-- must rewind ER diargram neccessary
 
 member
 - search list (DB)
