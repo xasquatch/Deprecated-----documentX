@@ -18,7 +18,7 @@ public class ChattingRoomDao {
 
     }
 
-    public ChattingRoom selectChattingRoom(long roomNo) {
+    public ChattingRoom selectChattingRoom(Object roomNo) {
         return chattingMapper.selectChattingRoom(roomNo);
 
     }

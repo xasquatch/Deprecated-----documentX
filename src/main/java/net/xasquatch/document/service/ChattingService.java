@@ -6,6 +6,8 @@ import net.xasquatch.document.repository.ChattingRoomDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Slf4j
 @Repository
 public class ChattingService {
@@ -22,4 +24,12 @@ public class ChattingService {
     }
 
 
+    public List<ChattingRoom> getChattingRoomList() {
+        return chattingRoomDao.selectChattingRoomList();
+
+    }
+
+    public ChattingRoom getChattingRoom(String roomNo) {
+        return chattingRoomDao.selectChattingRoom(roomNo);
+    }
 }

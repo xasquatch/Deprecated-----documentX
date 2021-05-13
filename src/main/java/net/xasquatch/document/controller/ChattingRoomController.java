@@ -19,10 +19,11 @@ public class ChattingRoomController {
     @Autowired
     private ChattingService chattingService;
 
+    //TODO: 페이지네이션 구현 필요
     @GetMapping("/room-list")
     public String goToChattingRoomList(Model model, @AuthenticationPrincipal Member member) {
         model.addAttribute("sessionMember", member);
-        model.addAttribute("chattingRoomList", chattingRoomDao.selectChattingRoomList());
+        model.addAttribute("chattingRoomList", chattingService.getChattingRoomList());
 
         return "contents/chatting/room-list";
     }
@@ -31,7 +32,7 @@ public class ChattingRoomController {
     public String goToChattingRoom(Model model, @PathVariable String roomNo,
                                    @AuthenticationPrincipal Member member) {
         model.addAttribute("sessionMember", member);
-        model.addAttribute("chattingRoom", chattingRoomDao.selectChattingRoom(Long.parseLong(roomNo)));
+        model.addAttribute("chattingRoom", chattingService.getChattingRoom(roomNo));
 
         return "contents/chatting/room";
     }
