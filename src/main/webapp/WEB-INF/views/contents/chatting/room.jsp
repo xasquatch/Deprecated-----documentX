@@ -5,6 +5,7 @@
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
 <section class="wrap reduced-wrap">
+    <h1>${chattingRoom.name}</h1>
     <section class="d-md-flex flex-md-row-reverse">
         <article id="chatting-clients" class="chatting-container flex-grow-0">
             <table class="table table-hover">
@@ -37,7 +38,7 @@
         </article>
         <article id="chatting-contents" class="chatting-container flex-grow-1">
             <div class="form-control">
-                <div class="chatting-msg">
+                <%--<div class="chatting-msg">
                     <b>nick</b>
                     <pre id="test">sdfasdfsd
                 sdfasd</pre>
@@ -47,7 +48,7 @@
                     <b>me</b>
                     <pre>나임내가 길어지는거에 대해 어떻게 생각해 너는????
                     대답해봐 이거 가운데 정렬아니지? 헷갈리네대답해봐 이거 가운데 정렬아니지? 헷갈리네대답해봐 이거 가운데 정렬아니지? 헷갈리네</pre>
-                </div>
+                </div>--%>
             </div>
             <div class="input-group">
                 <textarea id="chatting-msg-input" class="form-control" style="resize: none"></textarea>

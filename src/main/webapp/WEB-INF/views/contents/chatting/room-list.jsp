@@ -22,40 +22,32 @@
                 <option value="25">25</option>
                 <option value="50">50</option>
             </select>
-            <%--            <form action="/members/${sessionMember.nick_name}/chatting-rooms/${sessionMember.nick_name}님의_채팅방입니다">--%>
             <button class="btn btn-dark" onclick="chat.createRoom()">
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </button>
-            <%--            </form>--%>
         </div>
     </div>
     <HR>
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>No</th>
             <th>방 제목</th>
             <th>참여자 수</th>
-            <th>개설자</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                1
-            </td>
-            <td>
-                <a href="/chatting/1">
-                    예시
-                </a>
-            </td>
-            <td>
-                1
-            </td>
-            <td>
-                xas
-            </td>
-        </tr>
+        <c:forEach var="room" items="${chattingRoomList}">
+            <tr>
+                <td>
+                    <a href="/chatting/${room.no}">
+                            ${room.name}
+                    </a>
+                </td>
+                <td>
+                    ${room.sessions.size()} 명
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
         <tfoot>
         <tr>

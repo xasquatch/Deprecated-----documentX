@@ -35,6 +35,9 @@ public class ChattingRoom {
         switch (message.getMessageType()) {
             case ENTER:
                 sessions.add(session);
+                session.getAttributes().forEach((key, value) -> {
+                    System.out.println(key + ":" + value);
+                });
                 message.setMbr_nick_name(null);
                 message.setContents(message.getMbr_nick_name() + "님이 입장하였습니다.");
                 break;
