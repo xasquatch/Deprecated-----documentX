@@ -1,9 +1,6 @@
 package net.xasquatch.document.config;
 
-import net.xasquatch.document.mapper.AuthorizationMapper;
-import net.xasquatch.document.mapper.ChattingMapper;
-import net.xasquatch.document.mapper.MemberMapper;
-import net.xasquatch.document.mapper.StorageMapper;
+import net.xasquatch.document.mapper.*;
 import net.xasquatch.document.repository.AuthorizationDao;
 import net.xasquatch.document.repository.MemberDao;
 import net.xasquatch.document.service.MemberService;
@@ -16,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
