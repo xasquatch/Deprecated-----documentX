@@ -44,10 +44,6 @@ public class ChattingRoom {
                 message.setMbr_nick_name(null);
                 break;
 
-            default:
-                message.setContents(message.getContents());
-                break;
-
         }
         send(message, objectMapper);
     }

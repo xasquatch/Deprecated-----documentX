@@ -58,7 +58,7 @@ var chat = {
         var chatroom = document.querySelector("#chatting-contents>div:first-child");
         var parsedData = JSON.parse(event.data);
         var addElement = chat.createMsgNode(parsedData.mbr_nick_name, parsedData.contents);
-        //TODO: 추가작업 필요
+
         chatroom.appendChild(addElement);
     },
     onClose: function () {
@@ -79,7 +79,7 @@ var chat = {
         msgContainer.classList.add('chatting-msg');
         if (chat.nickName === nickName) {
             container.classList.add('chatting-my-msg');
-        }else{
+        } else {
             container.classList.add('chatting-other-msg')
         }
         nickNameTag.innerText = nickName;
