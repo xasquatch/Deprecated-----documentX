@@ -17,7 +17,7 @@ public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplic
     @Value("${files.save.path}")
     private String filesSavePath;
 
-    public SecurityWebApplicationInitializer(){
+    public SecurityWebApplicationInitializer() {
         super(CustomRootAppContext.class, CustomSecurityConfig.class);
 
     }
@@ -38,14 +38,6 @@ public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplic
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
 
-        // Bean을 정의하는 클래스를 지정한다
-//        AnnotationConfigWebApplicationContext rootAppContext = new AnnotationConfigWebApplicationContext();
-//        rootAppContext.register(CustomRootAppContext.class);
-//        rootAppContext.register(CustomSecurityConfig.class);
-//
-//        ContextLoaderListener listener = new ContextLoaderListener(rootAppContext);
-//        servletContext.addListener(listener);
-
         // 파라미터 인코딩 설정
         FilterRegistration.Dynamic filter = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
         filter.setInitParameter("encoding", "UTF-8");
@@ -55,6 +47,7 @@ public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplic
         // 멀티파일 설정
         servlet.setMultipartConfig(new MultipartConfigElement(filesSavePath, 1024 * 1024 * 1024, 1024 * 1024 * 1024, 0));
 
+        servlet.setAsyncSupported(true);
 
         //세션 리스너 설정
         servletContext.setSessionTimeout(60 * 60);
