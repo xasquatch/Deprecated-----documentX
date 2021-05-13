@@ -1,6 +1,7 @@
 package net.xasquatch.document.config;
 
 import net.xasquatch.document.mapper.AuthorizationMapper;
+import net.xasquatch.document.mapper.ChattingMapper;
 import net.xasquatch.document.mapper.MemberMapper;
 import net.xasquatch.document.mapper.StorageMapper;
 import net.xasquatch.document.repository.AuthorizationDao;
@@ -85,6 +86,14 @@ public class CustomRootAppContext {
     @Bean
     public MapperFactoryBean<StorageMapper> getStorageMapper(SqlSessionFactory factory) {
         MapperFactoryBean<StorageMapper> factoryBean = new MapperFactoryBean<StorageMapper>(StorageMapper.class);
+        factoryBean.setSqlSessionFactory(factory);
+        return factoryBean;
+
+    }
+
+    @Bean
+    public MapperFactoryBean<ChattingMapper> getChattingMapper(SqlSessionFactory factory) {
+        MapperFactoryBean<ChattingMapper> factoryBean = new MapperFactoryBean<ChattingMapper>(ChattingMapper.class);
         factoryBean.setSqlSessionFactory(factory);
         return factoryBean;
 
