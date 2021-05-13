@@ -38,17 +38,7 @@
         </article>
         <article id="chatting-contents" class="chatting-container flex-grow-1">
             <div class="form-control">
-                <%--<div class="chatting-msg">
-                    <b>nick</b>
-                    <pre id="test">sdfasdfsd
-                sdfasd</pre>
-                </div>
-                <nav>뉴ㅜ가들어옴</nav>
-                <div class="chatting-msg chatting-my-msg">
-                    <b>me</b>
-                    <pre>나임내가 길어지는거에 대해 어떻게 생각해 너는????
-                    대답해봐 이거 가운데 정렬아니지? 헷갈리네대답해봐 이거 가운데 정렬아니지? 헷갈리네대답해봐 이거 가운데 정렬아니지? 헷갈리네</pre>
-                </div>--%>
+
             </div>
             <div class="input-group">
                 <textarea id="chatting-msg-input" class="form-control" style="resize: none"></textarea>
@@ -166,5 +156,9 @@
     </section>
 
 </section>
-
+<script>
+    window.onload = function (event) {
+        chat.connect('${chattingRoom.no}','${sessionMember.nick_name}');
+    }
+</script>
 <c:import url="${path}/WEB-INF/views/include/footer.jsp"/>

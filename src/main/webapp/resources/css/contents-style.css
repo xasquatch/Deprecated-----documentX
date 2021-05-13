@@ -19,6 +19,7 @@
 
 #chatting-contents > div:first-child {
     min-height: 50vh;
+    overflow: auto;
 }
 
 #chatting-contents pre {
@@ -37,20 +38,27 @@
     display: inline-flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    margin-left: 0px;
-    margin-right: 50px;
 }
 
 .chatting-my-msg {
-    float: right;
-    margin-left: 50px;
-    margin-right: 0px;
+    text-align: right;
+    padding-left: 50px;
+    padding-right: 0px;
 }
 
-.chatting-my-msg > b {
+
+.chatting-my-msg b {
     text-align: right;
 }
 
+.chatting-my-msg pre {
+    text-align: left;
+}
+
+.chatting-other-msg {
+    padding-left: 0px;
+    padding-right: 50px;
+}
 
 #chatting-contents nav {
     text-align: center;

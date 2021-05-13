@@ -1,7 +1,6 @@
 package net.xasquatch.document.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.Data;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -35,21 +34,18 @@ public class ChattingRoom {
         switch (message.getMessageType()) {
             case ENTER:
                 sessions.add(session);
-                session.getAttributes().forEach((key, value) -> {
-                    System.out.println(key + ":" + value);
-                });
-                message.setMbr_nick_name(null);
                 message.setContents(message.getMbr_nick_name() + "님이 입장하였습니다.");
+                message.setMbr_nick_name(null);
                 break;
 
             case LEAVE:
                 sessions.remove(session);
-                message.setMbr_nick_name(null);
                 message.setContents(message.getMbr_nick_name() + "님이 퇴장하셨습니다.");
+                message.setMbr_nick_name(null);
                 break;
 
             default:
-                message.setMbr_nick_name(message.getMbr_nick_name());
+                sessions.add(session);
                 message.setContents(message.getContents());
                 break;
 
@@ -58,8 +54,7 @@ public class ChattingRoom {
     }
 
     private void send(Message chatMessage, ObjectMapper objectMapper) throws IOException {
-        ObjectWriter prettyPrinter = objectMapper.writerWithDefaultPrettyPrinter();
-        TextMessage textMessage = new TextMessage(prettyPrinter.writeValueAsString(chatMessage.getContents()));
+        TextMessage textMessage = new TextMessage(objectMapper.writeValueAsString(chatMessage));
         for (WebSocketSession session : sessions) session.sendMessage(textMessage);
 
     }

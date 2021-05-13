@@ -24,12 +24,12 @@ public class WebSocketHandler extends TextWebSocketHandler {
         log.info("메세지 전송 = {} : {}", session, msg);
         ObjectMapper objectMapper = new ObjectMapper();
         Message message = objectMapper.readValue(msg, Message.class);
-        ChattingRoom chatRoom = chattingRoomDao.selectChattingRoom(message.getNo());
+        ChattingRoom chatRoom = chattingRoomDao.selectChattingRoom(message.getChatting_room_no());
         chatRoom.handleMessage(session, message, objectMapper);
     }
+
     @Override
-    public void handleTransportError(
-            WebSocketSession session, Throwable exception) throws Exception {
+    public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
         log.error(session.getId() + " 익셉션 발생: " + exception.getMessage());
     }
 
