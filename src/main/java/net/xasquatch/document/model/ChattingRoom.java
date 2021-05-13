@@ -45,7 +45,6 @@ public class ChattingRoom {
                 break;
 
             default:
-                sessions.add(session);
                 message.setContents(message.getContents());
                 break;
 

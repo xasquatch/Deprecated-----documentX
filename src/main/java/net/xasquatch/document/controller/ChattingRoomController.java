@@ -1,10 +1,10 @@
 package net.xasquatch.document.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.ChattingRoom;
 import net.xasquatch.document.model.Member;
 import net.xasquatch.document.service.ChattingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @Controller
 @RequestMapping(path = "/chatting", produces = {"text/plain;charset=UTF-8", MediaType.ALL_VALUE})
+@RequiredArgsConstructor
 public class ChattingRoomController {
 
-    @Autowired
-    private ChattingService chattingService;
+    private final ChattingService chattingService;
 
     //TODO: 페이지네이션 구현 필요
     @GetMapping("/room-list")
