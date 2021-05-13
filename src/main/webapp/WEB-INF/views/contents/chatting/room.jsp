@@ -18,7 +18,7 @@
                 <tbody>
                 <tr>
                     <td>
-                        <div class="input-group">
+                        <div class="input-group" title="Nick Name (test@test.com)">
                             <select class="btn btn-dark form-control" onchange="">
                                 <option selected value="">
                                     <span class="form-control">Nick Name (test@test.com)</span>
@@ -70,19 +70,97 @@
         </div>
         <HR>
         <div id="file-package" class="d-flex flex-nowrap">
-            <div> item</div>
-            <div> item</div>
-            <div> item</div>
-            <div> item</div>
-            <div> item</div>
-            <div> item</div>
-            <div> item</div>
-            <div> item</div>
-            <div> item</div>
-            <div> item</div>
-            <div> item</div>
-            <div> item</div>
-            <div> item</div>
+            <div title="titldddddddddddddddddddddddde"
+                 onclick="">
+                <div>
+                    <span>
+                    ⢸⠉⢹⣦⡀<BR>
+                    ⢸⠀⠀⠀⣿<BR>
+                    ⢸⣀⣀⣀⡇
+                    </span>
+                    <span></span>
+                </div>
+                <p>titldddddddddddddddddddddddde</p>
+            </div>
+            <div title="title"
+                 onclick="">
+                <div>
+                    <img src="/resources/img/icon/documentX.png">
+                </div>
+                <p>title</p>
+            </div>
+            <div title="title"
+                 onclick="">
+                <div>
+                    ⢸⠉⢹⣦⡀<BR>
+                    ⢸⠀⠀⠀⣿<BR>
+                    ⢸⣀⣀⣀⡇
+                </div>
+                <p>title</p>
+            </div>
+            <div title="title"
+                 onclick="">
+                <div>
+                    ⢸⠉⢹⣦⡀<BR>
+                    ⢸⠀⠀⠀⣿<BR>
+                    ⢸⣀⣀⣀⡇
+                </div>
+                <p>title</p>
+            </div>
+            <div title="title"
+                 onclick="">
+                <div>
+                    ⢸⠉⢹⣦⡀<BR>
+                    ⢸⠀⠀⠀⣿<BR>
+                    ⢸⣀⣀⣀⡇
+                </div>
+                <p>title</p>
+            </div>
+            <div title="title"
+                 onclick="">
+                <div>
+                    ⢸⠉⢹⣦⡀<BR>
+                    ⢸⠀⠀⠀⣿<BR>
+                    ⢸⣀⣀⣀⡇
+                </div>
+                <p>title</p>
+            </div>
+            <div title="title"
+                 onclick="">
+                <div>
+                    ⢸⠉⢹⣦⡀<BR>
+                    ⢸⠀⠀⠀⣿<BR>
+                    ⢸⣀⣀⣀⡇
+                </div>
+                <p>title</p>
+            </div>
+            <div title="title"
+                 onclick="">
+                <div>
+                    ⢸⠉⢹⣦⡀<BR>
+                    ⢸⠀⠀⠀⣿<BR>
+                    ⢸⣀⣀⣀⡇
+                </div>
+                <p>title</p>
+            </div>
+            <div title="title"
+                 onclick="">
+                <div>
+                    ⢸⠉⢹⣦⡀<BR>
+                    ⢸⠀⠀⠀⣿<BR>
+                    ⢸⣀⣀⣀⡇
+                </div>
+                <p>title</p>
+            </div>
+            <div title="title"
+                 onclick="">
+                <div>
+                    ⢸⠉⢹⣦⡀<BR>
+                    ⢸⠀⠀⠀⣿<BR>
+                    ⢸⣀⣀⣀⡇
+                </div>
+                <p>title</p>
+            </div>
         </div>
     </section>
 

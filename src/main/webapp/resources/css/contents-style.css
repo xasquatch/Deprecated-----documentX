@@ -57,6 +57,9 @@
     font-size: 87.5%;
     font-weight: bold;
     color: gray;
+    filter: invert(10%);
+    background: white;
+    border-radius: 5px;
 
 }
 
@@ -73,10 +76,29 @@
 
 }
 
+#file-package p {
+    text-align: center;
+    word-break: break-all;
+    overflow: hidden;
+    width: 60px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 #file-package > div {
     padding: 10px;
-    margin: 10px;
+    margin: auto 10px 10px 10px;
     transition: all 0.3s;
+    background: white;
+    color: black;
+    border-radius: 5px;
+}
+
+#file-package img {
+    width: 60px;
+    height: auto;
+    max-height: 70px;
+
 }
 
 #file-package > div:HOVER {
