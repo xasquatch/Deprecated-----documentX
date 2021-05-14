@@ -189,8 +189,8 @@ public class MemberController {
 
     @DeleteMapping("/{nickName}/files/{fileName}")
     @ResponseBody
-    public String deleteFile(StorageEntity entity) {
-        return String.valueOf(storageService.deleteFile(entity.getNo()));
+    public String deleteFile(@RequestParam(required = true, name = "fileNo") long fileNo) {
+        return String.valueOf(storageService.deleteFile(fileNo));
     }
 
     @GetMapping("/{nickName}/chatting-rooms")

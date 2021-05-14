@@ -148,7 +148,6 @@ var text = {
                     timeCount = false;
 
                 } else if (character === '\\') {
-                    debugger;
                     loopCount++;
 
                 } else {

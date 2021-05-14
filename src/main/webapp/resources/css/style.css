@@ -134,7 +134,8 @@
 .deactivate-nav * {
     display: none;
 }
-#main-nav-count{
+
+#main-nav-count {
     color: darkred;
     font-weight: bold;
 
@@ -179,6 +180,9 @@ footer {
     z-index: 11;
 }
 
+#myModal img {
+    max-width: 100%;
+}
 
 @media (max-width: 1200px) {
     .reduced-main-header {

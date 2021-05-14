@@ -142,13 +142,13 @@ public class StorageService implements StorageServiceInterface {
         try {
 
             //-------------server localFile setting
-            String targetPath = url.substring(filesContextPath.length() - 1);
+            String targetPath = url.substring(filesContextPath.length() - 1 + String.valueOf(entity.getMbr_no()).length());
 
             //TODO: 지우기
             System.out.println("targetPath = " + targetPath);
 
-            String renamePath = renameString.substring(filesContextPath.length() - 1);
-            String renameExtension = renamePath.substring(renamePath.lastIndexOf('.'));
+            String renamePath = filesContextPath + File.separator + renameString;
+            String renameExtension = renamePath.substring(renamePath.lastIndexOf('.')+1);
             //TODO: 지우기
             System.out.println("renamePath = " + renamePath);
 

@@ -20,8 +20,7 @@ public interface StorageMapper {
     List<StorageEntity> selectStorageList(Object memberNo);
 
     @Update("UPDATE storage " +
-            "SET mbr_no = #{mbr_no}, " +
-            "   type = #{dataType}, " +
+            "SET type = #{dataType}, " +
             "   url = #{url}" +
             "WHERE no = #{no}")
     int updateStorage(StorageEntity storageFile);

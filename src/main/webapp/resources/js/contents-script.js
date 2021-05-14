@@ -17,10 +17,26 @@ var file = {
         file.appendListAsObject(element);
     },
     appendListAsObject: function (element) {
+        /*{
+            "no" : 40,
+            "mbr_no" : 1,
+            "mbr_nick_name" : "Xasquatch",
+            "dataType" : "IMAGE",
+            "url" : "/storage/1/file.png",
+            "date" : 1621007457000
+        }*/
         request.submit('GET', '/members/script/files', function (data) {
-
             var parsedData = JSON.parse(data);
             for (var file of parsedData) {
+                var hiddenForm = document.createElement('form');
+                hiddenForm.classList.add('hidden');
+                for (var key in file) {
+                    var hiddenInput = document.createElement('input');
+                    hiddenInput.setAttribute('name', key);
+                    hiddenInput.setAttribute('value', file[key]);
+                    hiddenForm.appendChild(hiddenInput);
+                }
+
                 var container = document.createElement('div');
                 var preview = document.createElement('div');
                 var title = document.createElement('p');
@@ -28,11 +44,13 @@ var file = {
                 //url에서 "/"문자 lastIndex기준으로 잘라내어 파일이름 찾기
                 var fileName = file.url.substr(file.url.lastIndexOf('/') + 1, file.url.length);
 
+                container.appendChild(hiddenForm);
                 container.appendChild(preview);
-                container.setAttribute('title', fileName);
                 container.appendChild(title);
+                container.setAttribute('title', fileName);
+                container.setAttribute('onclick',
+                    'file.readyToManipulation(this)');
                 element.appendChild(container);
-
                 if (file.dataType === 'FILE') {
                     text.insert(preview, ASCIIART.FILE, 10);
 
@@ -45,6 +63,85 @@ var file = {
                 text.insert(title, fileName, 10);
             }
         });
+    },
+    readyToManipulation: function (container) {
+        var url = container.querySelector('form input[name=url]').value;
+        var fileName = url.substr(url.lastIndexOf('/') + 1, url.length);
+        var childNodes = container.querySelector('form').childNodes;
+        var jsonStringData = '{';
+        for (var node of childNodes)
+            jsonStringData += '\"' + node.getAttribute('name') + '\":' + '\"' + node.getAttribute('value') + '\",';
+
+        jsonStringData = jsonStringData.substr(0, jsonStringData.lastIndexOf(','));
+        jsonStringData += '}';
+        console.log(jsonStringData);
+        modal.open('파일 상세보기',
+            '<div style="text-align: center;">' +
+            container.innerHTML + '</div><HR>' +
+            '<div class="input-group">' +
+            '   <input type="text" id="renameString" class="form-control" value="' + fileName + '">' +
+            '   <span class="input-group-append">' +
+            '       <button type="button" class="btn btn-dark" onclick="document.querySelector(\'#renameString\').value = \'' + fileName + '\'">' +
+            '           <i class="fa fa-refresh" aria-hidden="true"></i>' +
+            '       </button>' +
+            '       <button type="button" id="file-remove-btn" class="btn btn-danger">' +
+            '           <i class="fa fa-trash" aria-hidden="true"></i>' +
+            '       </button>' +
+            '   </span>' +
+            '</div>',
+            'file.renameFile(\'' + jsonStringData + '\',document.querySelector(\'#renameString\').value)');
+        document.querySelector('#file-remove-btn').setAttribute('onclick', 'file.deleteFile(\'' + jsonStringData + '\')');
+    },
+    renameFile: function (jsonStringData, renameString) {
+        var parsedData = JSON.parse(jsonStringData);
+        var fileName = parsedData.url.substr(parsedData.url.lastIndexOf('/') + 1, parsedData.url.length);
+        var formData = new FormData();
+        for (var key in parsedData) {
+            if (key === 'date') continue;
+            formData.append(key, parsedData[key]);
+        }
+
+        formData.append('renameString', renameString);
+
+        try {
+            request.submit('PUT', '/members/' + parsedData.mbr_nick_name + '/files/' + fileName, function (data) {
+                if (data === 'false') {
+                    window.alert('수정에 실패하였습니다.\n 새로고침 후 다시 시도해주세요.');
+                    return;
+                }
+                modal.close();
+                var second = 2;
+                nav.acceptMsg(second, renameString + ': 수정이 완료되어 곧 새로고침됩니다.');
+                setTimeout(function () {
+                    window.history.go(0);
+                }, second * 1000);
+            }, 'FORMFILE', formData);
+
+        } catch (e) {
+            modal.close();
+        }
+    },
+    deleteFile: function (jsonStringData) {
+        var parsedData = JSON.parse(jsonStringData);
+        var fileName = parsedData.url.substr(parsedData.url.lastIndexOf('/') + 1, parsedData.url.length);
+
+        try {
+            request.submit('DELETE', '/members/' + parsedData.mbr_nick_name + '/files/' + fileName + '?fileNo=' + parsedData.no, function (data) {
+                if (data === 'false') {
+                    window.alert('삭제에 실패하였습니다.\n 새로고침 후 다시 시도해주세요.');
+                    return;
+                }
+                console.log(data);
+                modal.close();
+                var second = 2;
+                nav.acceptMsg(second, fileName + ': 삭제가 완료되어 곧 새로고침됩니다.');
+                setTimeout(function () {
+                    window.history.go(0);
+                }, second * 1000);
+            }, 'FORM')
+        } catch (e) {
+            modal.close();
+        }
     },
     upload: function (element) {
         var formData = new FormData();

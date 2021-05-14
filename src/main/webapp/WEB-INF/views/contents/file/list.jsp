@@ -23,6 +23,7 @@
 <script>
     window.onload = function (event) {
         file.appendList('#file-package');
+
     }
 </script>
 <c:import url="${path}/WEB-INF/views/include/footer.jsp"/>
