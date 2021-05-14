@@ -3,8 +3,6 @@
 
 file
 - search  (DB)
-- drag & drop event (view logic, script)
-- 덮어써지는 이슈
 
 chat
 - websocket: wws TLS 구현
@@ -19,3 +17,7 @@ management
 service platform
 - ssl 발급 완료
 - server 준비 완료
+  
+보류
+- 덮어써지는 이슈
+- drag & drop event (view logic, script)

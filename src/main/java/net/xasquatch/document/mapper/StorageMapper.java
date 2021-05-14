@@ -19,6 +19,16 @@ public interface StorageMapper {
             "ORDER BY s.date DESC")
     List<StorageEntity> selectStorageList(Object memberNo);
 
+    @Select("SELECT s.no AS no, s.mbr_no AS mbr_no, m.nick_name AS mbr_nick_name, " +
+            "       s.type AS dataType, s.url AS url, s.date AS date " +
+            "FROM storage s " +
+            "LEFT OUTER JOIN mbr m " +
+            "ON s.mbr_no = m.no " +
+            "WHERE m.no = #{arg0} " +
+            "AND s.url LIKE '/storage/#{arg0}/%#{arg1}%' " +
+            "ORDER BY s.date DESC")
+    List<StorageEntity> selectStorageListWhere(Object memberNo, String searchValue);
+
     @Update("UPDATE storage " +
             "SET type = #{dataType}, " +
             "   url = #{url}" +

@@ -3,7 +3,15 @@ package net.xasquatch.document.mapper;
 import net.xasquatch.document.model.Member;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 public interface MemberMapper {
+
+    @Select("SELECT * " +
+            "FROM mbr " +
+            "WHERE email LIKE '%#{arg0}%' " +
+            "OR nick_name LIKE '%#{arg0}%' ")
+    List<Member> selectMemberList(String searchValue);
 
     @Select("SELECT * FROM mbr WHERE email = #{arg0}")
     Member selectByEmail(String email);
