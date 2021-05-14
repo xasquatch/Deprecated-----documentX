@@ -49,6 +49,9 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("pwd")
                 .permitAll();
 
+        //TODO: 너무 제약이 심해서 일단 제한해서 구현완료하고 추가 작업할 예정
+        http
+                .csrf().disable();
         http
                 .sessionManagement()
                 .sessionConcurrency(concurrencyControlConfigurer -> {
