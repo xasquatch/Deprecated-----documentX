@@ -142,23 +142,17 @@ public class StorageService implements StorageServiceInterface {
         try {
 
             //-------------server localFile setting
-            String targetPath = url.substring(filesContextPath.length() - 1 + String.valueOf(entity.getMbr_no()).length());
-
-            //TODO: 지우기
-            System.out.println("targetPath = " + targetPath);
-
-            String renamePath = filesContextPath + File.separator + renameString;
-            String renameExtension = renamePath.substring(renamePath.lastIndexOf('.')+1);
-            //TODO: 지우기
-            System.out.println("renamePath = " + renamePath);
+            String targetPath = url.substring(filesContextPath.length());
+            String renameExtension = renameString.substring(renameString.lastIndexOf('.') + 1);
 
             File targetFile = new File(filesSavePath + File.separator + targetPath);
 
-            targetFile.renameTo(new File(filesSavePath + File.separator + renamePath));
+            result = targetFile.renameTo(new File(filesSavePath + File.separator + entity.getMbr_no() + File.separator + renameString));
+            if (result == false) return result;
 
             //-------------model & DB setting
 
-            entity.setUrl(filesContextPath + File.separator + renamePath);
+            entity.setUrl(filesContextPath + '/' + entity.getMbr_no() + '/' + renameString);
 
             if (isImageExtension(renameExtension)) {
                 entity.setDataType(DataType.IMAGE);
