@@ -29,6 +29,6 @@ public interface StorageMapper {
     int deleteStorage(Object storageNo);
 
     @Insert("INSERT INTO storage(mbr_no, type, url) " +
-            "SET(#{mbr_no}, #{dataType}, #{url})")
+            "VALUES(#{mbr_no}, #{dataType}, #{url})")
     int insertStorage(StorageEntity storageFile);
 }

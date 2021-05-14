@@ -1,5 +1,8 @@
 package net.xasquatch.document.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.Member;
 import net.xasquatch.document.model.StorageEntity;
@@ -136,15 +139,27 @@ public class MemberController {
         return "contents/member/information";
     }
 
-    @GetMapping("/{nickName}/files")
+    @GetMapping("/{nickName}/files/management")
     public String goToMemberFileList(Model model, @AuthenticationPrincipal Member member) {
 
-        List<StorageEntity> fileList = storageService.getFileList(member.getNo());
-
-        model.addAttribute("fileList", fileList);
         model.addAttribute("sessionMember", member);
 
         return "contents/file/list";
+    }
+
+    @GetMapping("/{nickName}/files")
+    @ResponseBody
+    public String getFileList(@AuthenticationPrincipal Member member) {
+
+        List<StorageEntity> fileList = storageService.getFileList(member.getNo());
+        ObjectWriter writer = new ObjectMapper().writerWithDefaultPrettyPrinter();
+        try {
+            return writer.writeValueAsString(fileList);
+
+        } catch (JsonProcessingException e) {
+            log.error("파일리스트 얻기 익셉션: {}", e.getMessage());
+            return null;
+        }
     }
 
     @PostMapping("/{nickName}/files/new")

@@ -4,6 +4,65 @@ var ASCIIART = {
         '⢸⣀⣀⣀⡇',
 
 }
+var file = {
+    appendList: function (parameter) {
+        if (typeof parameter === 'object') {
+            file.appendListAsObject(parameter);
+        } else {
+            file.appendListAsQueryString(parameter);
+        }
+    },
+    appendListAsObject: function (element) {
+
+    },
+    appendListAsQueryString: function (queryString) {
+        var element = document.querySelector(queryString);
+        request.submit('GET', '/members/script/files', function (data) {
+
+            console.log(data);
+            var parsedData = JSON.parse(data);
+            for (var parsedDatum of parsedData) {
+
+            }
+
+
+            // var container = document.createElement('div');
+            // var preview = document.createElement('div');
+            // var title = document.createElement('p');
+
+
+        });
+
+        // container.appendChild(preview);
+        // container.appendChild(title);
+        // element.appendChild(container);
+        //
+        // text.insert(preview, , 1);
+        // text.insert(title, , 1);
+
+
+    },
+    upload: function (element) {
+        var formData = new FormData();
+        var files = element.files;
+        for (var file of files) {
+            formData.append('filePackage', file);
+            console.log(file)
+        }
+        request.submit('POST', '/members/script/files/new', function (data) {
+            if (data === 'false') {
+                window.alert('파일 업로드에 실패하였습니다.');
+
+            } else {
+                nav.acceptMsg(3, data);
+
+            }
+
+        }, 'FORMFILE', formData)
+    }
+
+}
+
 
 var chat = {
     webSocket: undefined,
@@ -12,7 +71,7 @@ var chat = {
 
     createRoom: function () {
         var title = window.prompt("[채팅방 생성: 방 제목]\n채팅방을 개설합니다.\n방 제목을 입력해주세요");
-        if (title === null || title === undefined || title === '') return nav.activate(3, '방 개설을 취소합니다');
+        if (title === null || title === undefined || title === '') return nav.acceptMsg(3, '방 개설을 취소합니다');
         var pwd = window.prompt("[채팅방 생성: 비밀번호]\n설정하실 비밀번호를 입력해주시고\n입력을 원하지 않는 경우\n취소버튼을 누르시기바랍니다");
         request.submit('POST', '/chatting/new/' + title, function (redirectUrl) {
             if (redirectUrl !== 'false')

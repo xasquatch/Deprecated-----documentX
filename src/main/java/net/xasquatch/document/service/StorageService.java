@@ -115,6 +115,7 @@ public class StorageService implements StorageServiceInterface {
 
                     }
                     entity.setUrl(contextPath);
+                    entity.setMbr_no(Long.parseLong(memberNo));
                     resultFileList.add(entity);
                     resultInt += storageDao.insertStorage(entity);
 
@@ -140,7 +141,7 @@ public class StorageService implements StorageServiceInterface {
         String url = entity.getUrl();
         try {
 
-        //-------------server localFile setting
+            //-------------server localFile setting
             String targetPath = url.substring(filesContextPath.length() - 1);
 
             //TODO: 지우기
@@ -155,7 +156,7 @@ public class StorageService implements StorageServiceInterface {
 
             targetFile.renameTo(new File(filesSavePath + File.separator + renamePath));
 
-        //-------------model & DB setting
+            //-------------model & DB setting
 
             entity.setUrl(filesContextPath + File.separator + renamePath);
 
