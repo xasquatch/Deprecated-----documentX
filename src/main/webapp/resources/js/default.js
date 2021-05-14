@@ -46,33 +46,43 @@ var request = {
         }
 
     },
-    submitWithCSRF: function (CSRFValue, method, url, callback, inputContentsType, sendData) {
+    submitWithCSRF: function (method, url, callback, inputContentsType, sendData) {
         var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/', false);
+        xhr.withCredentials = true;
+        xhr.setRequestHeader('x-xsrf-token', 'fetch');
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8")
+        xhr.send();
 
         var result = null;
         var contentsType = null;
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === xhr.DONE) {
-                if (xhr.status === 200 || xhr.status === 201) {
+        if (xhr.readyState === 4) {
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === xhr.DONE && (xhr.status === 200 || xhr.status === 201)) {
                     result = xhr.response;
                     callback(result);
                 }
             }
-        };
-        if (method.toUpperCase() === 'GET') {
-            xhr.open(method, url);
-            xhr.send();
-        } else if (method.toUpperCase() === 'POST' || method.toUpperCase() === 'PUT' || method.toUpperCase() === 'DELETE' || method.toUpperCase() === 'PATCH') {
-            method = method.toUpperCase();
-            contentsType = request.setContentsType(inputContentsType);
-            xhr.open(method, url, true);
-            if (contentsType !== request.formFile)
-                xhr.setRequestHeader('Content-Type', contentsType);
-            xhr.setRequestHeader('X-CSRFToken', CSRFValue);
-            xhr.send(sendData);
-        }
+            switch (method.toUpperCase()) {
+                case 'GET':
+                    xhr.open(method, url);
+                    xhr.send();
+                    break;
 
+                default:
+                    method = method.toUpperCase();
+                    contentsType = request.setContentsType(inputContentsType);
+                    xhr.open(method, url, true);
+                    if (contentsType !== request.formFile)
+                        xhr.setRequestHeader('Content-Type', contentsType);
+                    xhr.send(sendData);
+                    break;
+
+            }
+
+
+        }
     }
 }
 
