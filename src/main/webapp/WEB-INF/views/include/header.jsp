@@ -93,7 +93,7 @@
             </a>
             <a class="list-group-item"
                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Chatting Room"
-               href="/members/${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nick_name}/files">
+               href="/members/${sessionScope.SPRING_SECURITY_CONTEXT.authentication.principal.nick_name}/files/management">
                 <i class="fa fa-file-archive-o " aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
                 파일 관리

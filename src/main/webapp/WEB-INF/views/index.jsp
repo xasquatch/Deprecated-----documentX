@@ -12,7 +12,7 @@
         <li class="list-group-item"><a class="btn" href="${path}/management/files">management file</a></li>
         <li class="list-group-item"><a class="btn" href="${path}/management/chatting-rooms">management chtting room</a></li>
         <li class="list-group-item"><a class="btn" href="${path}/members/test-guest">memberInfo</a></li>
-        <li class="list-group-item"><a class="btn" href="${path}/members/test-guest/files">file</a></li>
+        <li class="list-group-item"><a class="btn" href="${path}/members/test-guest/files/management">file</a></li>
         <li class="list-group-item"><a class="btn" href="${path}/members/test-guest/chatting-rooms">chatting-rooms</a></li>
         <li class="list-group-item"><a class="btn" href="${path}/members/test-guest/chatting-rooms/1">1번 chatting room</a></li>
     </ul>
