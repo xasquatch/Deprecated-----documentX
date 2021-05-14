@@ -2,9 +2,10 @@ package net.xasquatch.document.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.Member;
+import net.xasquatch.document.model.StorageEntity;
 import net.xasquatch.document.service.MailService;
+import net.xasquatch.document.service.StorageService;
 import net.xasquatch.document.service.TokenMap;
-import net.xasquatch.document.service.command.StorageServiceInterface;
 import net.xasquatch.document.service.command.MemberServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -33,7 +35,7 @@ public class MemberController {
     private MemberServiceInterface memberService;
 
     @Autowired
-    private StorageServiceInterface storageService;
+    private StorageService storageService;
 
     @Autowired
     private MailService mailService;
@@ -135,8 +137,12 @@ public class MemberController {
     }
 
     @GetMapping("/{nickName}/files")
-    public String goToMemberFileList(Model model, @PathVariable String nickName) {
+    public String goToMemberFileList(Model model, @AuthenticationPrincipal Member member) {
 
+        List<StorageEntity> fileList = storageService.getFileList(member.getNo());
+
+        model.addAttribute("fileList", fileList);
+        model.addAttribute("sessionMember", member);
 
         return "contents/file/list";
     }
@@ -151,22 +157,25 @@ public class MemberController {
         } catch (UnsupportedEncodingException e) {
             log.warn("acquired ImgUpload Exception");
         }
-        result = String.valueOf(storageService.uploadFile(request, String.valueOf(member.getNo())));
+        int uploadedFileCount = storageService.uploadFile(request, String.valueOf(member.getNo()));
+        if (uploadedFileCount != 0)
+            result = uploadedFileCount + "개의 파일이 업로드가 완료되었습니다.";
+
         return result;
     }
 
-    @DeleteMapping("/{nickName}/files/{fileNo}")
+    @PutMapping("/{nickName}/files/{fileName}")
     @ResponseBody
-    public String deleteFile(@AuthenticationPrincipal Member member,
-                             @PathVariable String fileNo,
-                             MultipartHttpServletRequest request) {
-        try {
-            request.setCharacterEncoding("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            log.warn("acquired ImgUpload Exception");
-        }
+    public String renameFile(StorageEntity entity,
+                             @RequestParam(required = true, name = "renameString") String renameString) {
 
-        return null;
+        return String.valueOf(storageService.renameFile(entity, renameString));
+    }
+
+    @DeleteMapping("/{nickName}/files/{fileName}")
+    @ResponseBody
+    public String deleteFile(StorageEntity entity) {
+        return String.valueOf(storageService.deleteFile(entity.getNo()));
     }
 
     @GetMapping("/{nickName}/chatting-rooms")

@@ -25,8 +25,8 @@ public interface StorageMapper {
             "WHERE no = #{no}")
     int updateStorage(StorageEntity storageFile);
 
-    @Delete("DELETE FROM storage WHERE mbr_no = #{arg0}")
-    int deleteStorage(Object memberNo);
+    @Delete("DELETE FROM storage WHERE no = #{arg0}")
+    int deleteStorage(Object storageNo);
 
     @Insert("INSERT INTO storage(mbr_no, type, url) " +
             "SET(#{mbr_no}, #{dataType}, #{url})")

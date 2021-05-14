@@ -13,13 +13,8 @@ public class StorageDao {
     @Autowired
     private StorageMapper storageMapper;
 
-    public boolean insertFileList(List<String> resultFileList) {
-        boolean result = false;
-
-        return result;
-    }
-
     public List<StorageEntity> selectStorageList(Object memberNo) {
+
         return storageMapper.selectStorageList(memberNo);
     }
 
@@ -33,8 +28,8 @@ public class StorageDao {
 
     }
 
-    public int deleteStorage(Object memberNo) {
-        return storageMapper.deleteStorage(memberNo);
+    public int deleteStorage(Object storageNo) {
+        return storageMapper.deleteStorage(storageNo);
 
     }
 

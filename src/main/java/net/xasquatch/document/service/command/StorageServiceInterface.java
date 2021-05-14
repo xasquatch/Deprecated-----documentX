@@ -10,5 +10,5 @@ public interface StorageServiceInterface {
     boolean isExistedFile(String path);
     boolean removeFiles(String path);
     //이미지 업로드하고 업로드 된 경로를 리스트에 담아 리턴
-    boolean uploadFile(MultipartHttpServletRequest request, String memberNo);
+    int uploadFile(MultipartHttpServletRequest request, String memberNo);
 }
