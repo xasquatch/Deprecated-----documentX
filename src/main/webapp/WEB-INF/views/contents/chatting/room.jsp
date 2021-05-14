@@ -57,101 +57,16 @@
                 <button type="button" class="input-group-append btn btn-dark">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
+                &nbsp;&nbsp;
+                <button class="btn btn-dark" onclick="document.querySelector('#file-upload').click();">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+                <input id="file-upload" class="hidden" type="file" multiple onchange="file.upload(this)">
             </div>
         </div>
         <HR>
         <div id="file-package" class="d-flex flex-nowrap">
-            <div title="titldddddddddddddddddddddddde"
-                 onclick="">
-                <div>
-                    <span>
-                    ⢸⠉⢹⣦⡀<BR>
-                    ⢸⠀⠀⠀⣿<BR>
-                    ⢸⣀⣀⣀⡇
-                    </span>
-                    <span></span>
-                </div>
-                <p>titldddddddddddddddddddddddde</p>
-            </div>
-            <div title="title"
-                 onclick="">
-                <div>
-                    <img src="/resources/img/icon/documentX.png">
-                </div>
-                <p>title</p>
-            </div>
-            <div title="title"
-                 onclick="">
-                <div>
-                    ⢸⠉⢹⣦⡀<BR>
-                    ⢸⠀⠀⠀⣿<BR>
-                    ⢸⣀⣀⣀⡇
-                </div>
-                <p>title</p>
-            </div>
-            <div title="title"
-                 onclick="">
-                <div>
-                    ⢸⠉⢹⣦⡀<BR>
-                    ⢸⠀⠀⠀⣿<BR>
-                    ⢸⣀⣀⣀⡇
-                </div>
-                <p>title</p>
-            </div>
-            <div title="title"
-                 onclick="">
-                <div>
-                    ⢸⠉⢹⣦⡀<BR>
-                    ⢸⠀⠀⠀⣿<BR>
-                    ⢸⣀⣀⣀⡇
-                </div>
-                <p>title</p>
-            </div>
-            <div title="title"
-                 onclick="">
-                <div>
-                    ⢸⠉⢹⣦⡀<BR>
-                    ⢸⠀⠀⠀⣿<BR>
-                    ⢸⣀⣀⣀⡇
-                </div>
-                <p>title</p>
-            </div>
-            <div title="title"
-                 onclick="">
-                <div>
-                    ⢸⠉⢹⣦⡀<BR>
-                    ⢸⠀⠀⠀⣿<BR>
-                    ⢸⣀⣀⣀⡇
-                </div>
-                <p>title</p>
-            </div>
-            <div title="title"
-                 onclick="">
-                <div>
-                    ⢸⠉⢹⣦⡀<BR>
-                    ⢸⠀⠀⠀⣿<BR>
-                    ⢸⣀⣀⣀⡇
-                </div>
-                <p>title</p>
-            </div>
-            <div title="title"
-                 onclick="">
-                <div>
-                    ⢸⠉⢹⣦⡀<BR>
-                    ⢸⠀⠀⠀⣿<BR>
-                    ⢸⣀⣀⣀⡇
-                </div>
-                <p>title</p>
-            </div>
-            <div title="title"
-                 onclick="">
-                <div>
-                    ⢸⠉⢹⣦⡀<BR>
-                    ⢸⠀⠀⠀⣿<BR>
-                    ⢸⣀⣀⣀⡇
-                </div>
-                <p>title</p>
-            </div>
+
         </div>
     </section>
 
@@ -159,6 +74,7 @@
 <script>
     window.onload = function (event) {
         chat.connect('${chattingRoom.no}','${sessionMember.nick_name}');
+        file.appendList('#file-package')
     }
 </script>
 <c:import url="${path}/WEB-INF/views/include/footer.jsp"/>

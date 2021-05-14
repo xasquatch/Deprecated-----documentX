@@ -81,7 +81,26 @@
 
 #file-package {
     overflow: auto;
+}
 
+#file-package > div {
+    padding: 10px;
+    margin: auto 10px 10px 10px;
+    transition: all 0.3s;
+    background: white;
+    color: black;
+    border-radius: 5px;
+
+}
+
+#file-package > div,
+#file-package > div * {
+    cursor: grab;
+    user-select: all;
+    -ms-user-select: all;
+    -moz-user-select: all;
+    -khtml-user-select: all;
+    -webkit-user-select: all;
 }
 
 #file-package p {
@@ -94,14 +113,6 @@
     font-size: 0.8em;
 }
 
-#file-package > div {
-    padding: 10px;
-    margin: auto 10px 10px 10px;
-    transition: all 0.3s;
-    background: white;
-    color: black;
-    border-radius: 5px;
-}
 
 #file-package > div > div {
     text-align: center;
@@ -116,6 +127,5 @@
 }
 
 #file-package > div:HOVER {
-    cursor: pointer;
     filter: invert(100%);
 }

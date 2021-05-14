@@ -3,8 +3,8 @@
 
 file
 - search  (DB)
-- write (IO)
 - drag & drop event (view logic, script)
+- 덮어써지는 이슈
 
 chat
 - websocket: wws TLS 구현

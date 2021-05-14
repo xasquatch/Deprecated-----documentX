@@ -12,11 +12,11 @@ var file = {
             file.appendListAsQueryString(parameter);
         }
     },
-    appendListAsObject: function (element) {
-
-    },
     appendListAsQueryString: function (queryString) {
         var element = document.querySelector(queryString);
+        file.appendListAsObject(element);
+    },
+    appendListAsObject: function (element) {
         request.submit('GET', '/members/script/files', function (data) {
 
             var parsedData = JSON.parse(data);
@@ -34,7 +34,7 @@ var file = {
                 element.appendChild(container);
 
                 if (file.dataType === 'FILE') {
-                    text.insert(preview, ASCIIART.FILE, 1);
+                    text.insert(preview, ASCIIART.FILE, 10);
 
                 } else {
                     var img = document.createElement('img');
@@ -44,30 +44,29 @@ var file = {
                 }
                 text.insert(title, fileName, 10);
             }
-
-
         });
-
-
     },
     upload: function (element) {
         var formData = new FormData();
         var files = element.files;
         for (var file of files) {
             formData.append('filePackage', file);
-            console.log(file)
         }
         request.submit('POST', '/members/script/files/new', function (data) {
             if (data === 'false') {
                 window.alert('파일 업로드에 실패하였습니다.');
 
             } else {
-                nav.acceptMsg(3, data);
+                var second = 1;
+                nav.acceptMsg(second, data);
+                setTimeout(function () {
+                    window.history.go(0);
 
+                }, second * 1000);
             }
 
         }, 'FORMFILE', formData)
-    }
+    },
 
 }
 

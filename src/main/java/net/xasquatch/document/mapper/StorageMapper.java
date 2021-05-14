@@ -15,7 +15,8 @@ public interface StorageMapper {
             "FROM storage s " +
             "LEFT OUTER JOIN mbr m " +
             "ON s.mbr_no = m.no " +
-            "WHERE m.no = #{arg0}")
+            "WHERE m.no = #{arg0} " +
+            "ORDER BY s.date DESC")
     List<StorageEntity> selectStorageList(Object memberNo);
 
     @Update("UPDATE storage " +
