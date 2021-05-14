@@ -104,7 +104,7 @@ public class StorageService implements StorageServiceInterface {
                 try {
                     String targetName = multipartFile.getOriginalFilename();
                     String contextPath = writeFile(multipartFile.getBytes(), File.separator + memberNo, targetName);
-                    String targetExtension = targetName.substring(targetName.lastIndexOf('.'));
+                    String targetExtension = targetName.substring(targetName.lastIndexOf('.') + 1);
 
                     StorageEntity entity = new StorageEntity();
                     if (isImageExtension(targetExtension)) {

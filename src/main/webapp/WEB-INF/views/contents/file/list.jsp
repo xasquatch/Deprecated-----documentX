@@ -16,7 +16,7 @@
         </button>
         <input id="file-upload" class="hidden" type="file" multiple onchange="file.upload(this)">
     </div>
-    <div id="file-package" class="d-flex flex-nowrap">
+    <div id="file-package" class="d-flex flex-wrap">
 
     </div>
 </section>

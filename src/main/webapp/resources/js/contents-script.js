@@ -1,7 +1,7 @@
 var ASCIIART = {
-    FILE: '⢸⠉⢹⣦⡀<BR>' +
-        '⢸⠀⠀⠀⣿<BR>' +
-        '⢸⣀⣀⣀⡇',
+    FILE: '⣿⢹⣦⡀<BR>' +
+        '⣿⣿⣿⣿<BR>' +
+        '⣿⣿⣿⣿',
 
 }
 var file = {
@@ -19,26 +19,34 @@ var file = {
         var element = document.querySelector(queryString);
         request.submit('GET', '/members/script/files', function (data) {
 
-            console.log(data);
             var parsedData = JSON.parse(data);
-            for (var parsedDatum of parsedData) {
+            for (var file of parsedData) {
+                var container = document.createElement('div');
+                var preview = document.createElement('div');
+                var title = document.createElement('p');
 
+                //url에서 "/"문자 lastIndex기준으로 잘라내어 파일이름 찾기
+                var fileName = file.url.substr(file.url.lastIndexOf('/') + 1, file.url.length);
+
+                container.appendChild(preview);
+                container.setAttribute('title', fileName);
+                container.appendChild(title);
+                element.appendChild(container);
+
+                if (file.dataType === 'FILE') {
+                    text.insert(preview, ASCIIART.FILE, 1);
+
+                } else {
+                    var img = document.createElement('img');
+                    img.src = file.url;
+                    preview.appendChild(img);
+
+                }
+                text.insert(title, fileName, 10);
             }
 
 
-            // var container = document.createElement('div');
-            // var preview = document.createElement('div');
-            // var title = document.createElement('p');
-
-
         });
-
-        // container.appendChild(preview);
-        // container.appendChild(title);
-        // element.appendChild(container);
-        //
-        // text.insert(preview, , 1);
-        // text.insert(title, , 1);
 
 
     },

@@ -88,9 +88,10 @@
     text-align: center;
     word-break: break-all;
     overflow: hidden;
-    width: 60px;
+    width: 100px;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 0.8em;
 }
 
 #file-package > div {
@@ -102,8 +103,13 @@
     border-radius: 5px;
 }
 
+#file-package > div > div {
+    text-align: center;
+
+}
+
 #file-package img {
-    width: 60px;
+    max-width: 100px;
     height: auto;
     max-height: 70px;
 
