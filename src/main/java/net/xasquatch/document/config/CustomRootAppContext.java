@@ -95,6 +95,14 @@ public class CustomRootAppContext {
 
     }
 
+    @Bean
+    public MapperFactoryBean<MnagementMapper> getMnagementMapper(SqlSessionFactory factory) {
+        MapperFactoryBean<MnagementMapper> factoryBean = new MapperFactoryBean<MnagementMapper>(MnagementMapper.class);
+        factoryBean.setSqlSessionFactory(factory);
+        return factoryBean;
+
+    }
+
     //------------------------------------------------------
     @Bean
     public MultipartResolver multipartResolver() {
