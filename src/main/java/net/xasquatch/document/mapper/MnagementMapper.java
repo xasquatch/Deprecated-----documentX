@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface MnagementMapper {
 
-    List<Member> selectMemberList(String searchValue);
+    List<Member> selectMemberList(Object searchValue, Object currentPage, Object pageLimit);
+
+
 }

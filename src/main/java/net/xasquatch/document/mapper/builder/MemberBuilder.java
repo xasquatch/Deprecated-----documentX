@@ -4,7 +4,7 @@ import org.apache.ibatis.jdbc.SQL;
 
 public class MemberBuilder {
 
-    public static final String selectMemberList(String searchValue) {
+    public static final String selectMemberList(Object searchValue, Object currentPage, Object pageLimit) {
         return new SQL() {{
             //SQL 조건 설정
             boolean whereCase = true;
@@ -19,18 +19,40 @@ public class MemberBuilder {
             FROM("mbr m");
             RIGHT_OUTER_JOIN("authorization a ON m.no = a.mbr_no");
             if (whereCase) {
-                WHERE("m.email LIKE '%memberEmail%'");
+                WHERE("m.email LIKE '%" + searchValue + "%'");
                 OR();
-                WHERE("m.email LIKE '%memberName%'");
+                WHERE("m.nick_name LIKE '%" + searchValue + "%'");
                 OR();
-                WHERE("a.name LIKE '%Auth%'");
+                WHERE("a.name LIKE '%" + searchValue + "%'");
             }
             ORDER_BY("rownum DESC");
+            LIMIT(currentPage + ", " + pageLimit);
         }}.toString();
     }
 
+    public static final String selectMemberListCount(Object searchValue) {
+        return new SQL() {{
+            //SQL 조건 설정
+            boolean whereCase = true;
+            if (searchValue == null || searchValue.equals(""))
+                whereCase = false;
+            //QUERY
+            SELECT("COUNT(*)");
+            FROM("mbr m");
+            RIGHT_OUTER_JOIN("authorization s ON m.no = s.mbr_no");
+            if (whereCase) {
+                WHERE("m.email LIKE '%" + searchValue + "%'");
+                OR();
+                WHERE("m.nick_name LIKE '%" + searchValue + "%'");
+                OR();
+                WHERE("a.name LIKE '%" + searchValue + "%'");
+            }
+        }}.toString();
+    }
+
+
     public static void main(String[] args) {
-        String query = MemberBuilder.selectMemberList("test");
+        String query = StorageBuilder.selectStorageListCount("b");
         System.out.println(query);
     }
 }
