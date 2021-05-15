@@ -149,9 +149,10 @@ public class MemberController {
 
     @GetMapping("/{nickName}/files")
     @ResponseBody
-    public String getFileList(@AuthenticationPrincipal Member member) {
+    public String getFileList(@AuthenticationPrincipal Member member,
+                              @RequestParam(required = false, name = "search-value") String searchValue) {
 
-        List<StorageEntity> fileList = storageService.getFileList(member);
+        List<StorageEntity> fileList = storageService.getFileList(member, searchValue);
         ObjectWriter writer = new ObjectMapper().writerWithDefaultPrettyPrinter();
         try {
             return writer.writeValueAsString(fileList);

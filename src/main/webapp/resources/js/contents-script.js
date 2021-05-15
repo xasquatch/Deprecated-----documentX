@@ -5,18 +5,18 @@ var ASCIIART = {
 
 }
 var file = {
-    appendList: function (parameter) {
+    appendList: function (parameter, searchValue) {
         if (typeof parameter === 'object') {
-            file.appendListAsObject(parameter);
+            file.appendListAsObject(parameter, searchValue);
         } else {
-            file.appendListAsQueryString(parameter);
+            file.appendListAsQueryString(parameter, searchValue);
         }
     },
-    appendListAsQueryString: function (queryString) {
+    appendListAsQueryString: function (queryString, searchValue) {
         var element = document.querySelector(queryString);
-        file.appendListAsObject(element);
+        file.appendListAsObject(element, searchValue);
     },
-    appendListAsObject: function (element) {
+    appendListAsObject: function (element, searchValue) {
         /*{
             "no" : 40,
             "mbr_no" : 1,
@@ -25,7 +25,21 @@ var file = {
             "url" : "/storage/1/file.png",
             "date" : 1621007457000
         }*/
-        request.submit('GET', '/members/script/files', function (data) {
+        element.innerHTML = '';
+        var searchValueQuery = '';
+        if (searchValue == undefined || searchValue == null) {
+            searchValueQuery = '';
+
+        } else {
+            searchValueQuery = '?search-value=' + searchValue;
+
+        }
+
+        request.submit('GET', '/members/script/files' + searchValueQuery, function (data) {
+            if (data == '[ ]') {
+                nav.acceptMsg(5,'아직 등록된 파일이 없으시네요! 화면 상단 우측의 +버튼을 눌러 파일을 추가해보세요!');
+                return;
+            }
             var parsedData = JSON.parse(data);
             for (var file of parsedData) {
                 var hiddenForm = document.createElement('form');

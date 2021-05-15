@@ -3,7 +3,6 @@ package net.xasquatch.document.service;
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.Member;
 import net.xasquatch.document.model.StorageEntity;
-import net.xasquatch.document.model.enumulation.AccessRight;
 import net.xasquatch.document.model.enumulation.DataType;
 import net.xasquatch.document.repository.StorageDao;
 import net.xasquatch.document.service.command.StorageServiceInterface;
@@ -132,11 +131,11 @@ public class StorageService implements StorageServiceInterface {
         return resultInt;
     }
 
-    public List<StorageEntity> getFileList(Member member) {
+    public List<StorageEntity> getFileList(Member member, String searchValue) {
 
         for (GrantedAuthority authority : member.getAuthorities()) {
-            if (authority.getAuthority().equals("USER"))
-                return storageDao.selectStorageList(AccessRight.USER, member, null, 0, 10);
+            if (authority.getAuthority().equals("ROLE_USER"))
+                return storageDao.selectStorageList(member, searchValue, 0, 10);
         }
         return null;
     }

@@ -51,8 +51,4 @@ public class MemberBuilder {
         }}.toString();
     }
 
-    public static void main(String[] args) {
-        String query = MemberBuilder.selectMemberList(AccessRight.MANAGEMENT, "b",0,10);
-        System.out.println(query);
-    }
 }

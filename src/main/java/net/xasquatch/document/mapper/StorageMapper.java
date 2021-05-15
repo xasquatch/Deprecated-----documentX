@@ -3,15 +3,17 @@ package net.xasquatch.document.mapper;
 import net.xasquatch.document.mapper.builder.StorageBuilder;
 import net.xasquatch.document.model.Member;
 import net.xasquatch.document.model.StorageEntity;
-import net.xasquatch.document.model.enumulation.AccessRight;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
 public interface StorageMapper {
 
     @SelectProvider(type = StorageBuilder.class, method = "selectStorageList")
-    List<StorageEntity> selectStorageList(AccessRight accessAuth, Member member, Object searchValue, Object currentPage, Object pageLimit);
+    List<StorageEntity> selectStorageList(Member member, Object searchValue, Object currentPage, Object pageLimit);
 
     @Update("UPDATE storage " +
             "SET type = #{dataType}, " +

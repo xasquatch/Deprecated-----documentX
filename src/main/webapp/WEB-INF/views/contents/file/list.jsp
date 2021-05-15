@@ -7,7 +7,8 @@
 <section class="wrap reduced-wrap">
     <div class="input-group">
         <input type="search" id="search-file-name" class="form-control" placeholder="search file name">
-        <button type="button" class="input-group-append btn btn-dark">
+        <button type="button" class="input-group-append btn btn-dark"
+                onclick="file.appendList('#file-package',document.querySelector('#search-file-name').value)">
             <i class="fa fa-search" aria-hidden="true"></i>
         </button>
         &nbsp;&nbsp;
