@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +52,7 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
         return member;
     }
 
-    public Collection<GrantedAuthority> getAuthorities(String username) {
+    public List<GrantedAuthority> getAuthorities(String username) {
         List<Authorization> authList = authorizationDao.selectByEmail(username);
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Authorization Authorization : authList) {
@@ -86,8 +85,8 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     }
 
     @Override
-    public Map<String, Object> searchMemberList(String emailOrNickName) {
-        Map<String, Object> resultMap = memberDao.selectMemberList(emailOrNickName);
+    public Map<String, Object> searchMemberList(String emailOrNickName, Object currentPage, Object pageLimit) {
+        Map<String, Object> resultMap = memberDao.selectMemberList(emailOrNickName, 0, 10);
         //TODO: 페이지네이션 작업
         resultMap.put("pagination", resultMap.get("count"));
 

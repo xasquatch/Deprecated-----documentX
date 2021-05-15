@@ -23,11 +23,25 @@ public class ManagementController {
     @GetMapping("/members")
     public String manageMembers(Model model,
                                 @AuthenticationPrincipal Member member,
-                                @RequestParam(required = false, name = "search-value") String searchValue) {
+                                @RequestParam(required = false, name = "search-value") String searchValue,
+                                @RequestParam(required = false, name = "current-page", defaultValue = "1") String currentPage,
+                                @RequestParam(required = false, name = "row-count", defaultValue = "50") String pageLimit) {
 
-        Map<String, Object> resultMap = memberService.searchMemberList(searchValue);
+        Map<String, Object> resultMap = memberService.searchMemberList(searchValue, currentPage, pageLimit);
         model.addAttribute("memberList", resultMap.get("memberList"));
         model.addAttribute("pagination", resultMap.get("pagination"));
+        model.addAttribute("sessionMember", member);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("searchValue", searchValue);
+        model.addAttribute("rowCount", pageLimit);
+
+        return "contents/management/member-list";
+    }
+
+    @GetMapping("/members/{nick-name}")
+    public String manageMember(Model model, Member member,
+                               @AuthenticationPrincipal Member sessionMember) {
+
 
         return "contents/management/member-list";
     }

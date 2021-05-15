@@ -1,16 +1,20 @@
 package net.xasquatch.document.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
-@Data
+@Setter
+@Getter
 public class Member implements UserDetails {
 
     private Long no;
@@ -30,8 +34,27 @@ public class Member implements UserDetails {
     @Pattern(regexp = "^[A-Za-z0-9가-힣 ]{2,20}")
     private String nick_name;
     private Date created_date;
+
+//    ---아래 두 필드는 단순 출력용도로만 이용된다(보완필요)--------
+    private String auth;
+    private List<String> authList = new ArrayList<>();
+//    ------------------------------------------------------
+
     private boolean enable;
-    private Collection<? extends GrantedAuthority> authorities;
+    private List<? extends GrantedAuthority> authorities;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return Objects.equals(no, member.no);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(no);
+    }
 
     @Override
     public String getPassword() {

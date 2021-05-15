@@ -9,9 +9,9 @@
         <form method="GET" id="searchMemberForm" action="${path}/management/members" class="col-7">
             <div class="input-group">
                 <input type="search" name="search-value" class="form-control" placeholder="search keywords"
-                       value="${search-value}">
-                <input type="hidden" name="row-count" value="<%--여기 로우카운트값--%>"
-                       value="${row-count}">
+                       value="${searchValue}">
+                <input type="hidden" name="row-count" value="${rowCount}">
+                <input type="hidden" name="current-page" value="${currentPage}">
                 <button type="submit" class="input-group-append btn btn-dark">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
@@ -19,10 +19,11 @@
         </form>
         <div class="col-5" style="display: flex; text-align: right;">
             <select class="custom-select" aria-label="row-count"
-                    onchange="document.querySelector('searchMemberForm').submit();">
-                <option value="10" selected>10</option>
-                <option value="25">25</option>
+                    onchange="var searchForm = document.querySelector('#searchMemberForm'); searchForm.querySelector('input[name=row-count]').value = this.value; searchForm.submit();">
+                <option value="${rowCount}" selected>${rowCount}</option>
                 <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
             </select>
         </div>
     </div>
@@ -55,7 +56,11 @@
                         ${member.created_date}
                 </td>
                 <td>
-                        ${member.authorities}
+                    [
+                    <c:forEach var="auth" items="${member.authList}">
+                        ${auth}&nbsp;
+                    </c:forEach>
+                    ]
                 </td>
             </tr>
         </c:forEach>

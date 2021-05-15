@@ -5,9 +5,7 @@ import net.xasquatch.document.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class MemberDao {
@@ -15,10 +13,33 @@ public class MemberDao {
     @Autowired
     private MemberMapper memberMapper;
 
-    public Map<String, Object> selectMemberList(String searchValue){
+    public Map<String, Object> selectMemberList(Object searchValue, Object currentPage, Object pageLimit) {
         Map<String, Object> resultMap = new HashMap<>();
 
-        List<Member> members = memberMapper.selectMemberList(searchValue, 0, 10);
+//TODO: 테이블에서 조인하여 중복으로 조회된 여러개의 권한을 컬렉션형태로 담기 위해
+//  이렇게 해놓았지만 되게 비효율 적이다. 수정이 필요하다
+
+        List<Member> members = memberMapper.selectMemberList(searchValue, currentPage, pageLimit);
+        Map<Long, Member> memberMap = new HashMap<>();
+        for (Member member : members) {
+            if (!memberMap.keySet().contains(member.getNo())) {
+                List<String> authList = member.getAuthList();
+                authList.add(member.getAuth());
+                memberMap.put(member.getNo(), member);
+
+            } else {
+                Member memberEntity = memberMap.get(member.getNo());
+                List<String> authList = memberEntity.getAuthList();
+                authList.add(member.getAuth());
+                memberMap.put(memberEntity.getNo(), memberEntity);
+
+            }
+
+        }
+        members = new ArrayList<Member>();
+        for (Map.Entry<Long, Member> entry : memberMap.entrySet())
+            members.add(entry.getValue());
+
         int count = memberMapper.selectMemberListCount(searchValue);
 
         resultMap.put("memberList", members);
@@ -31,7 +52,7 @@ public class MemberDao {
         return memberMapper.selectByEmail(email);
     }
 
-    public boolean insertMember(Member member){
+    public boolean insertMember(Member member) {
         return memberMapper.insertMember(member) == 1;
     }
 

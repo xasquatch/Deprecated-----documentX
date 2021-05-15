@@ -15,7 +15,7 @@ public class MemberBuilder {
             SET("@rownum:=0");
             SELECT("(@rownum:= @rownum + 1) AS rownum, " +
                     "m.no AS no, m.email AS email, m.created_date AS created_date, " +
-                    "m.nick_name AS nick_name, a.name AS authorization");
+                    "m.nick_name AS nick_name, a.name AS auth");
             FROM("mbr m");
             RIGHT_OUTER_JOIN("authorization a ON m.no = a.mbr_no");
             if (whereCase) {
@@ -25,7 +25,7 @@ public class MemberBuilder {
                 OR();
                 WHERE("a.name LIKE '%" + searchValue + "%'");
             }
-            ORDER_BY("rownum DESC");
+            ORDER_BY("m.no ASC, a.name ASC");
             LIMIT(currentPage + ", " + pageLimit);
         }}.toString();
     }
@@ -40,7 +40,7 @@ public class MemberBuilder {
             //QUERY
             SELECT("COUNT(*)");
             FROM("mbr m");
-            LEFT_OUTER_JOIN("authorization s ON m.no = s.mbr_no");
+            LEFT_OUTER_JOIN("authorization a ON m.no = a.mbr_no");
             if (whereCase) {
                 WHERE("m.email LIKE '%" + searchValue + "%'");
                 OR();

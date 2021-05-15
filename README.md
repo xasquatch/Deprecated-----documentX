@@ -5,15 +5,8 @@ chat
 - websocket: wws TLS 구현
 - message Create (DB) : no update delete
 
-member
-- search list (DB)
-
 management
 - 완
-
-service platform
-- ssl 발급 완료
-- server 준비 완료
   
 보류
 - 파일이 같은 이름이면 덮어써지는 이슈
