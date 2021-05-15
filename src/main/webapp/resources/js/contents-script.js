@@ -36,12 +36,13 @@ var file = {
         }
 
         request.submit('GET', '/members/script/files' + searchValueQuery, function (data) {
-            if (data == '[ ]') {
+            var parsedData = JSON.parse(data);
+            if (parsedData['storageList'].length <= 0) {
                 nav.acceptMsg(5,'아직 등록된 파일이 없으시네요! 화면 상단 우측의 +버튼을 눌러 파일을 추가해보세요!');
                 return;
             }
-            var parsedData = JSON.parse(data);
-            for (var file of parsedData) {
+            var storageList = parsedData['storageList'];
+            for (var file of storageList) {
                 var hiddenForm = document.createElement('form');
                 hiddenForm.classList.add('hidden');
                 for (var key in file) {

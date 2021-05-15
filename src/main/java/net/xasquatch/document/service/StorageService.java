@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -131,11 +132,21 @@ public class StorageService implements StorageServiceInterface {
         return resultInt;
     }
 
-    public List<StorageEntity> getFileList(Member member, String searchValue) {
+    public Map<String, Object> manageMentFileLIst(Member member, String searchValue) {
+        for (GrantedAuthority authority : member.getAuthorities()) {
+            if (authority.getAuthority().equals("ROLE_MANAGEMENT")){
+                return storageDao.selectStorageList(member, searchValue, 0, 10);
+            }
+        }
+        return null;
+    }
+
+    public Map<String, Object> getFileList(Member member, String searchValue) {
 
         for (GrantedAuthority authority : member.getAuthorities()) {
             if (authority.getAuthority().equals("ROLE_USER"))
                 return storageDao.selectStorageList(member, searchValue, 0, 10);
+                
         }
         return null;
     }

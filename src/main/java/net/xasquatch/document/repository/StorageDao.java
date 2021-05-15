@@ -6,7 +6,9 @@ import net.xasquatch.document.model.StorageEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class StorageDao {
@@ -14,9 +16,30 @@ public class StorageDao {
     @Autowired
     private StorageMapper storageMapper;
 
-    public List<StorageEntity> selectStorageList(Member member, Object searchValue, Object currentPage, Object pageLimit) {
 
-        return storageMapper.selectStorageList(member, searchValue, currentPage, pageLimit);
+    public Map<String, Object> selectStorageList(Member member, Object searchValue, Object currentPage, Object pageLimit) {
+
+        Map<String, Object> resultMap = new HashMap<>();
+        List<StorageEntity> storageList = storageMapper.selectStorageList(member, searchValue, currentPage, pageLimit);
+        int count = storageMapper.selectStorageListCount(member, searchValue, currentPage, pageLimit);
+
+        resultMap.put("storageList", storageList);
+        resultMap.put("count", count);
+
+        return resultMap;
+    }
+
+    public Map<String, Object> selectStorageListForManageMent(Member member, Object searchValue, Object currentPage, Object pageLimit) {
+
+        Map<String, Object> resultMap = new HashMap<>();
+
+        List<StorageEntity> storageList = storageMapper.selectStorageListForManageMent(member, searchValue, currentPage, pageLimit);
+        int count = storageMapper.selectStorageListForManageMentCount(member, searchValue, currentPage, pageLimit);
+
+        resultMap.put("storageList", storageList);
+        resultMap.put("count", count);
+
+        return resultMap;
     }
 
     public int insertStorage(StorageEntity storageFile) {

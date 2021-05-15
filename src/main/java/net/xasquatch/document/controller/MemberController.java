@@ -23,7 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -152,10 +152,10 @@ public class MemberController {
     public String getFileList(@AuthenticationPrincipal Member member,
                               @RequestParam(required = false, name = "search-value") String searchValue) {
 
-        List<StorageEntity> fileList = storageService.getFileList(member, searchValue);
+        Map<String, Object> resultMap = storageService.getFileList(member, searchValue);
         ObjectWriter writer = new ObjectMapper().writerWithDefaultPrettyPrinter();
         try {
-            return writer.writeValueAsString(fileList);
+            return writer.writeValueAsString(resultMap);
 
         } catch (JsonProcessingException e) {
             log.error("파일리스트 얻기 익셉션: {}", e.getMessage());
