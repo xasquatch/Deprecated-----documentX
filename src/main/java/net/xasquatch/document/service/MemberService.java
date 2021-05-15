@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 
 @Slf4j
@@ -85,8 +86,12 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     }
 
     @Override
-    public List<Member> searchMemberList(String emailOrNickName) {
-        return null;
+    public Map<String, Object> searchMemberList(String emailOrNickName) {
+        Map<String, Object> resultMap = memberDao.selectMemberList(emailOrNickName);
+        //TODO: 페이지네이션 작업
+        resultMap.put("pagination", resultMap.get("count"));
+
+        return resultMap;
     }
 
     @Override

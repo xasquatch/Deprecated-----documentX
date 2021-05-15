@@ -2,14 +2,14 @@ package net.xasquatch.document.service.command;
 
 import net.xasquatch.document.model.Member;
 
-import java.util.List;
+import java.util.Map;
 
 public interface MemberServiceInterface {
 
     boolean isAvailableEmail(String email);
     boolean isConfirmEmailToken(String token);
     boolean isAvailableNickName(String nickName);
-    List<Member> searchMemberList(String emailOrNickName);
+    Map<String, Object> searchMemberList(String emailOrNickName);
     boolean addMember(Member member);
     boolean modifyMember(Member member);
     boolean removeMember(Member member);
