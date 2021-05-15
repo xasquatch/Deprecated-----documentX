@@ -1,13 +1,16 @@
 package net.xasquatch.document.service;
 
 import lombok.extern.slf4j.Slf4j;
+import net.xasquatch.document.model.Member;
 import net.xasquatch.document.model.StorageEntity;
+import net.xasquatch.document.model.enumulation.AccessRight;
 import net.xasquatch.document.model.enumulation.DataType;
 import net.xasquatch.document.repository.StorageDao;
 import net.xasquatch.document.service.command.StorageServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -129,9 +132,13 @@ public class StorageService implements StorageServiceInterface {
         return resultInt;
     }
 
-    public List<StorageEntity> getFileList(Object memberNo) {
-        return storageDao.selectStorageList(memberNo);
+    public List<StorageEntity> getFileList(Member member) {
 
+        for (GrantedAuthority authority : member.getAuthorities()) {
+            if (authority.getAuthority().equals("USER"))
+                return storageDao.selectStorageList(AccessRight.USER, member, null, 0, 10);
+        }
+        return null;
     }
 
     public boolean renameFile(StorageEntity entity, String renameString) {

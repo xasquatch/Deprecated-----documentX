@@ -151,7 +151,7 @@ public class MemberController {
     @ResponseBody
     public String getFileList(@AuthenticationPrincipal Member member) {
 
-        List<StorageEntity> fileList = storageService.getFileList(member.getNo());
+        List<StorageEntity> fileList = storageService.getFileList(member);
         ObjectWriter writer = new ObjectMapper().writerWithDefaultPrettyPrinter();
         try {
             return writer.writeValueAsString(fileList);

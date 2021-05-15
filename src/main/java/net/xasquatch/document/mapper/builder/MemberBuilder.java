@@ -1,10 +1,11 @@
 package net.xasquatch.document.mapper.builder;
 
+import net.xasquatch.document.model.enumulation.AccessRight;
 import org.apache.ibatis.jdbc.SQL;
 
 public class MemberBuilder {
 
-    public static final String selectMemberList(Object searchValue, Object currentPage, Object pageLimit) {
+    public static final String selectMemberList(AccessRight accessRight, Object searchValue, Object currentPage, Object pageLimit) {
         return new SQL() {{
             //SQL 조건 설정
             boolean whereCase = true;
@@ -30,7 +31,7 @@ public class MemberBuilder {
         }}.toString();
     }
 
-    public static final String selectMemberListCount(Object searchValue) {
+    public static final String selectMemberListCount(AccessRight accessRight, Object searchValue) {
         return new SQL() {{
             //SQL 조건 설정
             boolean whereCase = true;
@@ -50,9 +51,8 @@ public class MemberBuilder {
         }}.toString();
     }
 
-
     public static void main(String[] args) {
-        String query = StorageBuilder.selectStorageListCount("b");
+        String query = MemberBuilder.selectMemberList(AccessRight.MANAGEMENT, "b",0,10);
         System.out.println(query);
     }
 }
