@@ -16,5 +16,5 @@ service platform
 - server 준비 완료
   
 보류
-- 덮어써지는 이슈
+- 파일이 같은 이름이면 덮어써지는 이슈
 - drag & drop event (view logic, script)
