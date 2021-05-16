@@ -132,21 +132,32 @@ public class StorageService implements StorageServiceInterface {
         return resultInt;
     }
 
-    public Map<String, Object> manageMentFileLIst(Member member, String searchValue) {
+    public Map<String, Object> searchFileLIst(Member member, String searchValue, Object currentPage, Object pageLimit) {
         for (GrantedAuthority authority : member.getAuthorities()) {
-            if (authority.getAuthority().equals("ROLE_MANAGEMENT")){
-                return storageDao.selectStorageList(member, searchValue, 0, 10);
+            if (authority.getAuthority().equals("ROLE_MANAGEMENT")) {
+                Map<String, Object> resultMap = storageDao.selectStorageListForManagement(member, searchValue, currentPage, pageLimit);
+
+//TODO: pagination필요
+                int count = (int) resultMap.get("count");
+                resultMap.put("count", count);
+
+                return resultMap;
             }
         }
         return null;
     }
 
-    public Map<String, Object> getFileList(Member member, String searchValue) {
-
+    public Map<String, Object> getFileList(Member member, String searchValue, Object currentPage, Object pageLimit) {
         for (GrantedAuthority authority : member.getAuthorities()) {
-            if (authority.getAuthority().equals("ROLE_USER"))
-                return storageDao.selectStorageList(member, searchValue, 0, 10);
-                
+            if (authority.getAuthority().equals("ROLE_USER")) {
+                Map<String, Object> resultMap = storageDao.selectStorageList(member, searchValue, currentPage, pageLimit);
+
+//TODO: pagination필요
+                int count = (int) resultMap.get("count");
+                resultMap.put("count", count);
+
+                return resultMap;
+            }
         }
         return null;
     }
