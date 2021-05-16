@@ -3,7 +3,23 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
-
+<script>
+    function deleteFile(form) {
+        var fileNo = form.querySelector('input[name=fileNo]').value;
+        var nickName = form.querySelector('input[name=mbr_nick_name]').value;
+        request.submit('DELETE', '/members/' + nickName + '/files/' + fileNo + '?fileNo=' + fileNo, function (data) {
+            if (data === 'false') {
+                window.alert('삭제에 실패하였습니다.\n 새로고침 후 다시 시도해주세요.');
+                return;
+            }
+            var second = 1;
+            nav.acceptMsg(second, '삭제완료');
+            setTimeout(function () {
+                window.history.go(0);
+            }, second * 1000);
+        }, 'FORM');
+    }
+</script>
 <section class="wrap reduced-wrap">
     <form class="input-group">
         <input type="search" id="search-file-name" class="form-control" placeholder="search file name">
@@ -20,9 +36,8 @@
     <div id="file-package">
         <c:forEach var="file" items="${fileList}">
             <div class="d-flex flex-row" title="${file.url}" style="cursor: auto;">
-                <form id="management-file-form-${file.no}" method="DELETE"
-                      action="" class="hidden">
-                    <input name="no" value="${file.no}">
+                <form id="management-file-form-${file.no}" class="hidden">
+                    <input name="fileNo" value="${file.no}">
                     <input name="mbr_no" value="${file.mbr_no}">
                     <input name="mbr_nick_name" value="${file.mbr_nick_name}">
                     <input name="dataType" value="${file.dataType}">
@@ -56,7 +71,7 @@
                     </section>
                     <section class="d-flex flex-column flex-grow-0">
                         <button type="button" class="btn btn-danger"
-                        onclick="document.querySelector('#management-file-form-${file.no}').submit();">
+                                onclick="deleteFile(document.querySelector('#management-file-form-${file.no}'));">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
                     </section>

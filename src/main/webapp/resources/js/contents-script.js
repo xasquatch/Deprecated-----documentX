@@ -146,7 +146,6 @@ var file = {
                     window.alert('삭제에 실패하였습니다.\n 새로고침 후 다시 시도해주세요.');
                     return;
                 }
-                console.log(data);
                 modal.close();
                 var second = 2;
                 nav.acceptMsg(second, fileName + ': 삭제가 완료되어 곧 새로고침됩니다.');
