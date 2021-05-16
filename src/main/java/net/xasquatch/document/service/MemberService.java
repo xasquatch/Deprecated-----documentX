@@ -122,4 +122,9 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     public boolean removeMember(Member member) {
         return memberDao.deleteMember(member) == 1 ? true : false;
     }
+
+    public Member getMemberToNumber(long memberNo) {
+       return memberDao.selectMember(memberNo);
+
+    }
 }

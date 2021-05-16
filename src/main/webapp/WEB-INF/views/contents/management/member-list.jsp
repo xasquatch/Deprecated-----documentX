@@ -48,7 +48,7 @@
                         ${member.nick_name}
                 </td>
                 <td>
-                    <a href="${path}/management/members/${member.nick_name}">
+                    <a href="${path}/management/members/${member.no}">
                             ${member.email}
                     </a>
                 </td>

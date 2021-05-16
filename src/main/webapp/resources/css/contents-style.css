@@ -129,5 +129,5 @@
 }
 
 #file-package > div:HOVER {
-    filter: invert(100%);
+    filter: invert(10%);
 }

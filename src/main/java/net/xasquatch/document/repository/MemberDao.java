@@ -67,4 +67,15 @@ public class MemberDao {
     public int updateMember(Member member) {
         return memberMapper.updateMember(member);
     }
+
+    public Member selectMember(long memberNo) {
+
+        Member resultMember = new Member();
+        List<Member> members = memberMapper.selectMember(memberNo);
+        for (Member member : members) {
+            if (!resultMember.equals(member)) resultMember = member;
+            resultMember.getAuthList().add(member.getAuth());
+        }
+        return resultMember;
+    }
 }

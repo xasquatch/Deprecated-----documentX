@@ -63,7 +63,10 @@
                             <b>url</b> : ${file.url}
                         </article>
                         <article>
-                            <b>uploader</b> : ${file.mbr_nick_name}(<b>Serial Number</b>:${file.mbr_no})
+                            <b>uploader</b> :
+                            <a href="${path}/management/members/${file.mbr_no}">
+                                    ${file.mbr_nick_name}(<b>Serial Number</b>:${file.mbr_no})
+                            </a>
                         </article>
                         <article>
                             <b>Created Date</b> : ${file.date}
