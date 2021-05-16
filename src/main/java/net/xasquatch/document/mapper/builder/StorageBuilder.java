@@ -33,9 +33,8 @@ public class StorageBuilder {
                 OR();
                 WHERE("m.nick_name LIKE '%" + searchValue + "%'");
                 OR();
-                WHERE("s.url LIKE '" + filesContextPath + userDir + "/%" + searchValue + "%'");
-
             }
+            WHERE("s.url LIKE '" + filesContextPath + userDir + "/%" + searchValue + "%'");
             ORDER_BY("rownum DESC");
             LIMIT(currentPage + ", " + pageLimit);
         }}.toString();
@@ -60,10 +59,11 @@ public class StorageBuilder {
                 OR();
                 WHERE("m.nick_name LIKE '%" + searchValue + "%'");
                 OR();
-                WHERE("s.url LIKE '" + filesContextPath + userDir + "/%" + searchValue + "%'");
             }
+            WHERE("s.url LIKE '" + filesContextPath + userDir + "/%" + searchValue + "%'");
         }}.toString();
     }
+
     public static final String selectStorageListForManageMent(Member member, Object searchValue, Object currentPage, Object pageLimit) {
         return new SQL() {{
             //SQL 조건 설정
