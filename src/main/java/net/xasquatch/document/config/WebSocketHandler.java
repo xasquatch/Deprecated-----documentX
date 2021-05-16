@@ -18,7 +18,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     @Autowired
     private ChattingRoomDao chattingRoomDao;
-
     private ChattingRoom chatRoom;
 
     @Override
@@ -59,5 +58,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         log.error(session.getId() + " 익셉션 발생: " + exception.getMessage());
         chatRoom.addSession(session);
     }
+
+
 
 }

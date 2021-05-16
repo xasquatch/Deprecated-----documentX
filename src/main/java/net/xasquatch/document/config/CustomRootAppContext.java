@@ -129,6 +129,7 @@ public class CustomRootAppContext {
         return mailSender;
     }
 
+//    ---------------security----------------
     @Bean
     public MemberService memberService() {
         return new MemberService();
@@ -144,6 +145,7 @@ public class CustomRootAppContext {
         return new AuthorizationDao();
     }
 
+//    ---------email인증 tokenMap-----------
     @Bean
     public TokenMap tokenMap() {
         return new TokenMap();

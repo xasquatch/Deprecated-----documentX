@@ -18,7 +18,7 @@ public class ChatInterceptor implements HandshakeInterceptor {
                                    ServerHttpResponse response,
                                    WebSocketHandler wsHandler,
                                    Map<String, Object> attributes) throws Exception {
-        
+
         return false;
     }
 
