@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
@@ -44,7 +45,7 @@
                     </a>
                 </td>
                 <td>
-                    ${room.sessions.size()} 명
+                    ${fn:length(room.sessions)} 명
                 </td>
             </tr>
         </c:forEach>
