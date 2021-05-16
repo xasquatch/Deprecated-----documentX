@@ -2,9 +2,11 @@ package net.xasquatch.document.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import net.xasquatch.document.service.ChattingService;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import javax.inject.Inject;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +19,9 @@ public class ChattingRoom {
     private String pwd;
 
     private Set<WebSocketSession> sessions = new HashSet<>();
+
+    @Inject
+    private ChattingService chattingService;
 
     private ChattingRoom() {
     }
@@ -54,6 +59,7 @@ public class ChattingRoom {
                 break;
 
         }
+        chattingService.createMessage(message);
         send(message, objectMapper);
     }
 

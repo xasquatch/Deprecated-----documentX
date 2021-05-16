@@ -5,10 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.ChattingRoom;
 import net.xasquatch.document.model.Message;
 import net.xasquatch.document.repository.ChattingRoomDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.WebSocketSession;
 
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +19,7 @@ import java.util.Set;
 @Service
 public class ChattingService {
 
-    @Autowired
+    @Inject
     private ChattingRoomDao chattingRoomDao;
     private Map<Long, Set<WebSocketSession>> webSocketSessionMap = new HashMap<>();
 
@@ -50,13 +50,11 @@ public class ChattingService {
     }
 
     public boolean createMessage(Message message){
-        boolean result = false;
-        chattingRoomDao.insertMessage(message);
 //        chattingRoomDao.selectMessageList(roomNo);
 //        chattingRoomDao.deleteChattingRoom(room);
 //        chattingRoomDao.updateChattingRoom(room);
 
-        return result;
+        return chattingRoomDao.insertMessage(message) == 1? true:false;
     }
 
 

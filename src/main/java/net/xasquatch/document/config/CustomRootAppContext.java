@@ -129,7 +129,7 @@ public class CustomRootAppContext {
         return mailSender;
     }
 
-//    ---------------security----------------
+    //    ---------------security----------------
     @Bean
     public MemberService memberService() {
         return new MemberService();
@@ -145,10 +145,22 @@ public class CustomRootAppContext {
         return new AuthorizationDao();
     }
 
-//    ---------email인증 tokenMap-----------
+    //    ---------email인증 tokenMap-----------
     @Bean
     public TokenMap tokenMap() {
         return new TokenMap();
     }
+
+//    ---------chatting 서비스-----------
+//    @Bean
+//    public ChattingService chattingService() {
+//        return new ChattingService();
+//    }
+//
+//    @Bean
+//    public ChattingRoomDao chattingRoomDao() {
+//        return new ChattingRoomDao();
+//    }
+
 }
 
