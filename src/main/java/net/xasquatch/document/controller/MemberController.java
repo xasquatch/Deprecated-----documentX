@@ -150,9 +150,11 @@ public class MemberController {
     @GetMapping("/{nickName}/files")
     @ResponseBody
     public String getFileList(@AuthenticationPrincipal Member member,
-                              @RequestParam(required = false, name = "search-value") String searchValue) {
+                              @RequestParam(required = false, name = "search-value") String searchValue,
+                              @RequestParam(required = false, name = "current-page", defaultValue = "1") String currentPage,
+                              @RequestParam(required = false, name = "row-count", defaultValue = "50") String pageLimit) {
 
-        Map<String, Object> resultMap = storageService.getFileList(member, searchValue);
+        Map<String, Object> resultMap = storageService.getFileList(member, searchValue, currentPage, pageLimit);
         ObjectWriter writer = new ObjectMapper().writerWithDefaultPrettyPrinter();
         try {
             return writer.writeValueAsString(resultMap);
@@ -165,8 +167,8 @@ public class MemberController {
 
     @PostMapping("/{nickName}/files/new")
     @ResponseBody
-    public String uploadFileList(@AuthenticationPrincipal Member member,
-                                 MultipartHttpServletRequest request) {
+    public String uploadFileList(MultipartHttpServletRequest request,
+                                 @AuthenticationPrincipal Member member) {
         String result = "false";
         try {
             request.setCharacterEncoding("UTF-8");
