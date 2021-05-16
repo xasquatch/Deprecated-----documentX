@@ -201,13 +201,12 @@ var chat = {
         chat.webSocket = new WebSocket("ws://localhost/chat");
         chat.roomNumber = roomNo;
         chat.nickName = nickName;
-        history.replaceState('',null,window.location.href);
         chat.webSocket.onclose = function () {
             chat.disconnect();
             chat.webSocket = null;
-            setTimeout(function (){
-                chat.connect(roomNo, nickName);
-            }, 3000);
+            // setTimeout(function (){
+            //     chat.connect(roomNo, nickName);
+            // }, 3000);
         }
         chat.webSocket.onopen = chat.onOpen;
         chat.webSocket.onmessage = chat.onMessage;
@@ -218,7 +217,7 @@ var chat = {
             messageType: 'LEAVE',
             mbr_nick_name: chat.nickName
         }));
-        // webSocket.close();
+        chat.webSocket.close();
     },
     send: function (element) {
         msg = element.value;
