@@ -9,7 +9,9 @@ public class ChattingBuilder {
         return new SQL() {{
             INSERT_INTO("chatting_room");
             INTO_COLUMNS("name", "pwd", "enable");
-            INTO_VALUES(room.getName(), room.getPwd(), "1");
+            INTO_VALUES("'" + room.getName() + "'",
+                    "'" + room.getPwd() + "'", "1");
+
         }}.toString();
     }
 }
