@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,7 +32,7 @@ public class Member implements UserDetails {
     @Size(min = 2, max = 20)
     @Pattern(regexp = "^[A-Za-z0-9가-힣 ]{2,20}")
     private String nick_name;
-    private Date created_date;
+    private String created_date;
 
 //    ---아래 두 필드는 단순 출력용도로만 이용된다(보완필요)--------
     private String auth;

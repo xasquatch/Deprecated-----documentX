@@ -8,7 +8,8 @@ public class MemberBuilder {
         return new SQL() {{
             SET("@rownum:=0");
             SELECT("(@rownum:= @rownum + 1) AS rownum, " +
-                    "m.no AS no, m.email AS email, m.created_date AS created_date, " +
+                    "m.no AS no, m.email AS email, " +
+                    "DATE_FORMAT(m.created_date, '%Y.%m.%d %H:%i:%s') AS created_date, " +
                     "m.nick_name AS nick_name, a.name AS auth");
             FROM("mbr m");
             RIGHT_OUTER_JOIN("authorization a ON m.no = a.mbr_no");
@@ -27,7 +28,8 @@ public class MemberBuilder {
             //QUERY
             SET("@rownum:=0");
             SELECT("(@rownum:= @rownum + 1) AS rownum, " +
-                    "m.no AS no, m.email AS email, m.created_date AS created_date, " +
+                    "m.no AS no, m.email AS email, " +
+                    "DATE_FORMAT(m.created_date, '%Y.%m.%d %H:%i:%s') AS created_date, " +
                     "m.nick_name AS nick_name, a.name AS auth");
             FROM("mbr m");
             RIGHT_OUTER_JOIN("authorization a ON m.no = a.mbr_no");

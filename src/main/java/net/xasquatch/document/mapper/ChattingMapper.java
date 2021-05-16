@@ -2,10 +2,8 @@ package net.xasquatch.document.mapper;
 
 import net.xasquatch.document.mapper.builder.ChattingBuilder;
 import net.xasquatch.document.model.ChattingRoom;
-import org.apache.ibatis.annotations.InsertProvider;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+import net.xasquatch.document.model.Message;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -26,4 +24,14 @@ public interface ChattingMapper {
 
     @Update("UPDATE chatting_room SET enable=0 WEHRE no = #{no}")
     int deleteChattingRoom(ChattingRoom room);
+
+    @SelectProvider(type = ChattingBuilder.class, method = "selectMessageList")
+    List<Message> selectMessageList(Object roomNo);
+
+    @Insert("INSERT INTO msg(mbr_no, chatting_room_no, contents, ip_address) " +
+            "VALUES(#{mbr_no},#{chatting_room_no},#{contents},#{ip_address})")
+    int insertMessage(Message message);
+
+
+
 }
