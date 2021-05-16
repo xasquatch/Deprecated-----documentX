@@ -29,12 +29,12 @@ public class StorageDao {
         return resultMap;
     }
 
-    public Map<String, Object> selectStorageListForManageMent(Member member, Object searchValue, Object currentPage, Object pageLimit) {
+    public Map<String, Object> selectStorageListForManagement(Member member, Object searchValue, Object currentPage, Object pageLimit) {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        List<StorageEntity> storageList = storageMapper.selectStorageListForManageMent(member, searchValue, currentPage, pageLimit);
-        int count = storageMapper.selectStorageListForManageMentCount(member, searchValue, currentPage, pageLimit);
+        List<StorageEntity> storageList = storageMapper.selectStorageListForManagement(member, searchValue, currentPage, pageLimit);
+        int count = storageMapper.selectStorageListForManagementCount(member, searchValue, currentPage, pageLimit);
 
         resultMap.put("storageList", storageList);
         resultMap.put("count", count);

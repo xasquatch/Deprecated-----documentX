@@ -64,7 +64,7 @@ public class StorageBuilder {
         }}.toString();
     }
 
-    public static final String selectStorageListForManageMent(Member member, Object searchValue, Object currentPage, Object pageLimit) {
+    public static final String selectStorageListForManagement(Member member, Object searchValue, Object currentPage, Object pageLimit) {
         return new SQL() {{
             //SQL 조건 설정
             boolean whereCase = true;
@@ -93,7 +93,7 @@ public class StorageBuilder {
         }}.toString();
     }
 
-    public static final String selectStorageListForManageMentCount(Member member, Object searchValue) {
+    public static final String selectStorageListForManagementCount(Member member, Object searchValue) {
         return new SQL() {{
             //SQL 조건 설정
             boolean whereCase = true;

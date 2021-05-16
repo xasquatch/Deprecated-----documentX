@@ -18,11 +18,11 @@ public interface StorageMapper {
     @SelectProvider(type = StorageBuilder.class, method = "selectStorageListCount")
     int selectStorageListCount(Member member, Object searchValue, Object currentPage, Object pageLimit);
 
-    @SelectProvider(type = StorageBuilder.class, method = "selectStorageListForManageMent")
-    List<StorageEntity> selectStorageListForManageMent(Member member, Object searchValue, Object currentPage, Object pageLimit);
+    @SelectProvider(type = StorageBuilder.class, method = "selectStorageListForManagement")
+    List<StorageEntity> selectStorageListForManagement(Member member, Object searchValue, Object currentPage, Object pageLimit);
 
-    @SelectProvider(type = StorageBuilder.class, method = "selectStorageListForManageMentCount")
-    int selectStorageListForManageMentCount(Member member, Object searchValue, Object currentPage, Object pageLimit);
+    @SelectProvider(type = StorageBuilder.class, method = "selectStorageListForManagementCount")
+    int selectStorageListForManagementCount(Member member, Object searchValue, Object currentPage, Object pageLimit);
 
 
     @Update("UPDATE storage " +
