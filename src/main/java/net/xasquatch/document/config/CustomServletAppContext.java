@@ -1,5 +1,7 @@
 package net.xasquatch.document.config;
 
+import net.xasquatch.document.interceptor.ChatInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,11 +10,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.NoHandlerFoundException;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 import java.util.Properties;
 
@@ -33,14 +33,15 @@ public class CustomServletAppContext implements WebMvcConfigurer {
     @Value("${files.context.path}")
     private String filesContextPath;
 
-    // Controller의 메서드가 반환하는 jsp의 이름 앞뒤에 경로와 확장자를 붙혀주도록 설정한다.
+    @Autowired
+    private ChatInterceptor interceptor;
+
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         WebMvcConfigurer.super.configureViewResolvers(registry);
         registry.jsp("/WEB-INF/views/", ".jsp");
     }
 
-    // 정적 파일의 경로를 매핑한다.
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         WebMvcConfigurer.super.addResourceHandlers(registry);
@@ -71,5 +72,10 @@ public class CustomServletAppContext implements WebMvcConfigurer {
         return resolver;
     }
 
-
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor((HandlerInterceptor) interceptor)
+                .addPathPatterns("/chat**");
+        WebMvcConfigurer.super.addInterceptors(registry);
+    }
 }
