@@ -132,7 +132,7 @@ public class StorageService implements StorageServiceInterface {
         return resultInt;
     }
 
-    public Map<String, Object> searchFileLIst(Member member, String searchValue, Object currentPage, Object pageLimit) {
+    public Map<String, Object> searchFileLIst(Member member, String searchValue, int currentPage, Object pageLimit) {
         for (GrantedAuthority authority : member.getAuthorities()) {
             if (authority.getAuthority().equals("ROLE_MANAGEMENT")) {
                 Map<String, Object> resultMap = storageDao.selectStorageListForManagement(member, searchValue, currentPage, pageLimit);
@@ -147,7 +147,7 @@ public class StorageService implements StorageServiceInterface {
         return null;
     }
 
-    public Map<String, Object> getFileList(Member member, String searchValue, Object currentPage, Object pageLimit) {
+    public Map<String, Object> getFileList(Member member, String searchValue, int currentPage, Object pageLimit) {
         for (GrantedAuthority authority : member.getAuthorities()) {
             if (authority.getAuthority().equals("ROLE_USER")) {
                 Map<String, Object> resultMap = storageDao.selectStorageList(member, searchValue, currentPage, pageLimit);

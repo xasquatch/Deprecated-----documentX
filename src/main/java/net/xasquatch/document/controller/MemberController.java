@@ -151,8 +151,8 @@ public class MemberController {
     @ResponseBody
     public String getFileList(@AuthenticationPrincipal Member member,
                               @RequestParam(required = false, name = "search-value") String searchValue,
-                              @RequestParam(required = false, name = "current-page", defaultValue = "1") String currentPage,
-                              @RequestParam(required = false, name = "row-count", defaultValue = "50") String pageLimit) {
+                              @RequestParam(required = false, name = "current-page", defaultValue = "1") int currentPage,
+                              @RequestParam(required = false, name = "row-count", defaultValue = "50") int pageLimit) {
 
         Map<String, Object> resultMap = storageService.getFileList(member, searchValue, currentPage, pageLimit);
         ObjectWriter writer = new ObjectMapper().writerWithDefaultPrettyPrinter();

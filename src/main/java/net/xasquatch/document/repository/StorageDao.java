@@ -17,11 +17,11 @@ public class StorageDao {
     private StorageMapper storageMapper;
 
 
-    public Map<String, Object> selectStorageList(Member member, Object searchValue, Object currentPage, Object pageLimit) {
+    public Map<String, Object> selectStorageList(Member member, Object searchValue, int currentPage, Object pageLimit) {
 
         Map<String, Object> resultMap = new HashMap<>();
-        List<StorageEntity> storageList = storageMapper.selectStorageList(member, searchValue, currentPage, pageLimit);
-        int count = storageMapper.selectStorageListCount(member, searchValue, currentPage, pageLimit);
+        List<StorageEntity> storageList = storageMapper.selectStorageList(member, searchValue, currentPage - 1, pageLimit);
+        int count = storageMapper.selectStorageListCount(member, searchValue, currentPage - 1, pageLimit);
 
         resultMap.put("storageList", storageList);
         resultMap.put("count", count);
@@ -29,12 +29,12 @@ public class StorageDao {
         return resultMap;
     }
 
-    public Map<String, Object> selectStorageListForManagement(Member member, Object searchValue, Object currentPage, Object pageLimit) {
+    public Map<String, Object> selectStorageListForManagement(Member member, Object searchValue, int currentPage, Object pageLimit) {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        List<StorageEntity> storageList = storageMapper.selectStorageListForManagement(member, searchValue, currentPage, pageLimit);
-        int count = storageMapper.selectStorageListForManagementCount(member, searchValue, currentPage, pageLimit);
+        List<StorageEntity> storageList = storageMapper.selectStorageListForManagement(member, searchValue, currentPage - 1, pageLimit);
+        int count = storageMapper.selectStorageListForManagementCount(member, searchValue, currentPage - 1, pageLimit);
 
         resultMap.put("storageList", storageList);
         resultMap.put("count", count);

@@ -75,8 +75,8 @@ public class ManagementController {
     public String goToManageFiles(Model model,
                                   @AuthenticationPrincipal Member member,
                                   @RequestParam(required = false, name = "search-value") String searchValue,
-                                  @RequestParam(required = false, name = "current-page", defaultValue = "1") String currentPage,
-                                  @RequestParam(required = false, name = "row-count", defaultValue = "50") String pageLimit) {
+                                  @RequestParam(required = false, name = "current-page", defaultValue = "1") int currentPage,
+                                  @RequestParam(required = false, name = "row-count", defaultValue = "50") int pageLimit) {
 
         Map<String, Object> resultMap = storageService.searchFileLIst(member, searchValue, currentPage, pageLimit);
 
