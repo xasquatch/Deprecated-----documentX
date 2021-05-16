@@ -172,7 +172,6 @@ var file = {
                 nav.acceptMsg(second, data);
                 setTimeout(function () {
                     window.history.go(0);
-
                 }, second * 1000);
             }
 
@@ -244,6 +243,7 @@ var chat = {
         var addElement = chat.createMsgNode(parsedData.mbr_nick_name, parsedData.contents);
 
         chatroom.appendChild(addElement);
+        chatroom.scrollTo(0, chatroom.scrollHeight);
     },
     createMsgNode: function (nickName, contents) {
         if (nickName === null || nickName === '') {

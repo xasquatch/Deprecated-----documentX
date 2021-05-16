@@ -74,7 +74,7 @@
 <script>
     window.onload = function (event) {
         chat.connect('${chattingRoom.no}','${sessionMember.nick_name}');
-        file.appendList('#file-package')
+        file.appendList('#file-package');
     }
 </script>
 <c:import url="${path}/WEB-INF/views/include/footer.jsp"/>
