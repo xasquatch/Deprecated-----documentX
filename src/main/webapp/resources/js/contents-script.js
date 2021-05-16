@@ -205,6 +205,7 @@ var chat = {
         webSocket.onopen = chat.onOpen;
         webSocket.onclose = chat.onClose;
         webSocket.onmessage = chat.onMessage;
+        window.onpopstate = chat.disconnect;
     },
     disconnect: function () {
         webSocket.send(JSON.stringify({
