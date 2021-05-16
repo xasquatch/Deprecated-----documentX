@@ -1,23 +1,31 @@
 package net.xasquatch.document.service;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.ChattingRoom;
+import net.xasquatch.document.model.Message;
 import net.xasquatch.document.repository.ChattingRoomDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.web.socket.WebSocketSession;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Slf4j
-@Repository
+@Getter
+@Service
 public class ChattingService {
 
     @Autowired
     private ChattingRoomDao chattingRoomDao;
+    private Map<Long, Set<WebSocketSession>> webSocketSessionMap = new HashMap<>();
 
-
-    public ChattingRoom createChattingRoom(String title, String pwd) {
+    public ChattingRoom createChattingRoom(long memberNo, String title, String pwd) {
         ChattingRoom chattingRoom = ChattingRoom.getInstance(title, pwd);
+        chattingRoom.setNo(memberNo);
         int resultInt = chattingRoomDao.insertChattingRoom(chattingRoom);
         if (resultInt != 1) log.error("채팅방 생성에러: {}", title);
         return chattingRoom;
@@ -25,11 +33,31 @@ public class ChattingService {
 
 
     public List<ChattingRoom> getChattingRoomList() {
-        return chattingRoomDao.selectChattingRoomList();
+        List<ChattingRoom> chattingRooms = chattingRoomDao.selectChattingRoomList();
+        for (ChattingRoom chattingRoom : chattingRooms) {
+            for (Map.Entry<Long, Set<WebSocketSession>> entry : webSocketSessionMap.entrySet()) {
+                if (entry.getKey() == chattingRoom.getNo())
+                    chattingRoom.setSessions(entry.getValue());
+            }
+        }
+
+        return chattingRooms;
 
     }
 
     public ChattingRoom getChattingRoom(String roomNo) {
         return chattingRoomDao.selectChattingRoom(roomNo);
     }
+
+    public boolean createMessage(Message message){
+        boolean result = false;
+        chattingRoomDao.insertMessage(message);
+//        chattingRoomDao.selectMessageList(roomNo);
+//        chattingRoomDao.deleteChattingRoom(room);
+//        chattingRoomDao.updateChattingRoom(room);
+
+        return result;
+    }
+
+
 }

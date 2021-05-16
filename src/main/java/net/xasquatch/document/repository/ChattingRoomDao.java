@@ -2,6 +2,7 @@ package net.xasquatch.document.repository;
 
 import net.xasquatch.document.mapper.ChattingMapper;
 import net.xasquatch.document.model.ChattingRoom;
+import net.xasquatch.document.model.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +28,21 @@ public class ChattingRoomDao {
         return chattingMapper.insertChattingRoom(chattingRoom);
 
     }
+
+    public int updateChattingRoom(ChattingRoom room){
+        return updateChattingRoom(room);
+    }
+
+    public int deleteChattingRoom(ChattingRoom room){
+        return chattingMapper.deleteChattingRoom(room);
+    }
+
+    public List<Message> selectMessageList(Object roomNo){
+        return chattingMapper.selectMessageList(roomNo);
+    }
+
+    public int insertMessage(Message message){
+        return chattingMapper.insertMessage(message);
+    }
+
 }

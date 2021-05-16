@@ -40,11 +40,12 @@ public class ChattingRoomController {
     @PostMapping("/new/{title}")
     @ResponseBody
     public String createChattingRoom(@PathVariable String title,
+                                     @AuthenticationPrincipal Member member,
                                      @RequestParam(required = false, name = "pwd") String pwd) {
         String redirectUrl = "false";
         ChattingRoom chattingRoom = null;
         try {
-            chattingRoom = chattingService.createChattingRoom(title, pwd);
+            chattingRoom = chattingService.createChattingRoom(member.getNo(), title, pwd);
             redirectUrl = "/chatting/" + chattingRoom.getNo();
 
         } catch (Exception e) {
