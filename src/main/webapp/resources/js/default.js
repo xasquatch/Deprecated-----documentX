@@ -525,9 +525,11 @@ var sign = {
         return regExp.test(data);
     },
     confirmAvailableEmail: function (element) {
+        //마지막 인덱스의 dot(.)이 확장자로 인식되어 짤리는 문제 떄문에 추가
+
         var msgBox = document.querySelector('#emailHelp');
         if (sign.isAvailableEmail(element.value)) {
-            request.submit('GET', '/members/available-email/' + element.value, function (available) {
+            request.submit('GET', '/members/available-email/' + element.value + '.', function (available) {
                 if (available === 'true') {
                     msgBox.innerHTML = '사용가능한 이메일입니다.'
                     msgBox.style.color = 'green';

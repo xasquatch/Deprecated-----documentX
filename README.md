@@ -9,6 +9,5 @@ management
 - 완
   
 보류
-- url매핑 시 dot(.) MEDIATYPE 에러
 - 파일이 같은 이름이면 덮어써지는 이슈
 - drag & drop event (view logic, script)
