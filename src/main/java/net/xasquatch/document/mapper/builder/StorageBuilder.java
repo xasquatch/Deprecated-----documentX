@@ -16,9 +16,10 @@ public class StorageBuilder {
         return new SQL() {{
             //SQL 조건 설정
             boolean whereCase = true;
-            String userDir = "";
-            if (searchValue == null || searchValue.equals("")) whereCase = false;
-            userDir = "/" + member.getNo();
+            String userDir = "/" + member.getNo();
+
+            if (searchValue == null || searchValue.equals(""))
+                whereCase = false;
 
             //QUERY
             SET("@rownum:=0");
@@ -33,8 +34,12 @@ public class StorageBuilder {
                 OR();
                 WHERE("m.nick_name LIKE '%" + searchValue + "%'");
                 OR();
+                WHERE("s.url LIKE '" + filesContextPath + userDir + "/%" + searchValue + "%'");
+
+            } else {
+                WHERE("s.url LIKE '" + filesContextPath + userDir + "/%'");
+
             }
-            WHERE("s.url LIKE '" + filesContextPath + userDir + "/%" + searchValue + "%'");
             ORDER_BY("rownum DESC");
             LIMIT(currentPage + ", " + pageLimit);
         }}.toString();
@@ -44,10 +49,10 @@ public class StorageBuilder {
         return new SQL() {{
             //SQL 조건 설정
             boolean whereCase = true;
-            String userDir = "";
+            String userDir = "/" + member.getNo();
 
-            if (searchValue == null || searchValue.equals("")) whereCase = false;
-            userDir = "/" + member.getNo();
+            if (searchValue == null || searchValue.equals(""))
+                whereCase = false;
 
             //QUERY
             SELECT("COUNT(*)");
@@ -59,8 +64,12 @@ public class StorageBuilder {
                 OR();
                 WHERE("m.nick_name LIKE '%" + searchValue + "%'");
                 OR();
+                WHERE("s.url LIKE '" + filesContextPath + userDir + "/%" + searchValue + "%'");
+
+            } else {
+                WHERE("s.url LIKE '" + filesContextPath + userDir + "/%'");
+
             }
-            WHERE("s.url LIKE '" + filesContextPath + userDir + "/%" + searchValue + "%'");
         }}.toString();
     }
 
@@ -68,9 +77,7 @@ public class StorageBuilder {
         return new SQL() {{
             //SQL 조건 설정
             boolean whereCase = true;
-            String userDir = "";
             if (searchValue == null || searchValue.equals("")) whereCase = false;
-            userDir = "/" + member.getNo();
 
             //QUERY
             SET("@rownum:=0");
@@ -97,7 +104,7 @@ public class StorageBuilder {
         return new SQL() {{
             //SQL 조건 설정
             boolean whereCase = true;
-            String userDir = "";
+            if (searchValue == null || searchValue.equals("")) whereCase = false;
 
             //QUERY
             SELECT("COUNT(*)");
