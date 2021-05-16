@@ -38,7 +38,7 @@ var file = {
         request.submit('GET', '/members/script/files' + searchValueQuery, function (data) {
             var parsedData = JSON.parse(data);
             if (parsedData['storageList'].length <= 0) {
-                nav.acceptMsg(5,'아직 등록된 파일이 없으시네요! 화면 상단 우측의 +버튼을 눌러 파일을 추가해보세요!');
+                nav.acceptMsg(5, '아직 등록된 파일이 없으시네요! 화면 상단 우측의 +버튼을 눌러 파일을 추가해보세요!');
                 return;
             }
             var storageList = parsedData['storageList'];
@@ -198,25 +198,32 @@ var chat = {
         }, 'FORM', 'pwd=' + pwd)
     },
     connect: function (roomNo, nickName) {
-        webSocket = new WebSocket("ws://localhost/chat");
+        chat.webSocket = new WebSocket("ws://localhost/chat");
         chat.roomNumber = roomNo;
         chat.nickName = nickName;
-        webSocket.onopen = chat.onOpen;
-        webSocket.onclose = chat.onClose;
-        webSocket.onmessage = chat.onMessage;
-        window.onpopstate = chat.disconnect;
+        history.replaceState('',null,window.location.href);
+        chat.webSocket.onclose = function () {
+            chat.disconnect();
+            chat.webSocket = null;
+            setTimeout(function (){
+                chat.connect(roomNo, nickName);
+            }, 3000);
+        }
+        chat.webSocket.onopen = chat.onOpen;
+        chat.webSocket.onmessage = chat.onMessage;
     },
     disconnect: function () {
-        webSocket.send(JSON.stringify({
+        chat.webSocket.send(JSON.stringify({
             chatting_room_no: chat.roomNumber,
             messageType: 'LEAVE',
             mbr_nick_name: chat.nickName
         }));
-        webSocket.close();
+        // webSocket.close();
     },
     send: function (element) {
         msg = element.value;
-        webSocket.send(JSON.stringify({
+        if (msg.length == 0) return;
+        chat.webSocket.send(JSON.stringify({
             chatting_room_no: chat.roomNumber,
             messageType: 'CHAT',
             mbr_nick_name: chat.nickName,
@@ -225,7 +232,7 @@ var chat = {
         element.value = "";
     },
     onOpen: function () {
-        webSocket.send(JSON.stringify({
+        chat.webSocket.send(JSON.stringify({
             chatting_room_no: chat.roomNumber,
             messageType: 'ENTER',
             mbr_nick_name: chat.nickName
@@ -238,10 +245,6 @@ var chat = {
         var addElement = chat.createMsgNode(parsedData.mbr_nick_name, parsedData.contents);
 
         chatroom.appendChild(addElement);
-    },
-    //TODO: 보충 필요
-    onClose: function () {
-        chat.disconnect();
     },
     createMsgNode: function (nickName, contents) {
         if (nickName === null || nickName === '') {

@@ -7,6 +7,7 @@ import net.xasquatch.document.model.Message;
 import net.xasquatch.document.repository.ChattingRoomDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -42,8 +43,21 @@ public class WebSocketHandler extends TextWebSocketHandler {
     }
 
     @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        super.afterConnectionClosed(session, status);
+        chatRoom.removeSession(session);
+
+    }
+
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        super.afterConnectionEstablished(session);
+    }
+
+    @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
         log.error(session.getId() + " 익셉션 발생: " + exception.getMessage());
+        chatRoom.addSession(session);
     }
 
 }

@@ -28,6 +28,15 @@ public class ChattingRoom {
         return chatRoom;
     }
 
+    public void removeSession(WebSocketSession session) {
+        sessions.remove(session);
+
+    }
+    public void addSession(WebSocketSession session) {
+        sessions.add(session);
+
+    }
+
     public void handleMessage(WebSocketSession session, Message message,
                               ObjectMapper objectMapper) throws IOException {
 
