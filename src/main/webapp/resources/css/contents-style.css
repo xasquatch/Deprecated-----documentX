@@ -94,7 +94,9 @@
 }
 
 #file-package > div,
-#file-package > div * {
+#file-package > div div,
+#file-package > div p,
+#file-package > div img{
     cursor: grab;
     user-select: all;
     -ms-user-select: all;

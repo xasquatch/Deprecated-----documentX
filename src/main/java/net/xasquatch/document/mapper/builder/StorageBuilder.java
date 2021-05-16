@@ -40,7 +40,7 @@ public class StorageBuilder {
                 WHERE("s.url LIKE '" + filesContextPath + userDir + "/%'");
 
             }
-            ORDER_BY("rownum DESC");
+            ORDER_BY("s.no DESC");
             LIMIT(currentPage + ", " + pageLimit);
         }}.toString();
     }
@@ -95,7 +95,7 @@ public class StorageBuilder {
                 WHERE("s.url LIKE '" + filesContextPath + "/%" + searchValue + "%'");
 
             }
-            ORDER_BY("rownum DESC");
+            ORDER_BY("s.no DESC");
             LIMIT(currentPage + ", " + pageLimit);
         }}.toString();
     }

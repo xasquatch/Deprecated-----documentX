@@ -12,34 +12,55 @@
             <i class="fa fa-search" aria-hidden="true"></i>
         </button>
         &nbsp;&nbsp;
-        <button class="btn btn-dark" onclick="document.querySelector('#file-upload').click();">
+        <button class="btn btn-dark" type="button" onclick="document.querySelector('#file-upload').click();">
             <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
         <input id="file-upload" class="hidden" type="file" multiple onchange="file.upload(this)">
     </form>
-    <div id="file-package" class="">
+    <div id="file-package">
         <c:forEach var="file" items="${fileList}">
-            <div title="${file.url}" onclick="file.readyToManipulation(this)">
-                <form class="hidden">
+            <div class="d-flex flex-row" title="${file.url}" style="cursor: auto;">
+                <form id="management-file-form-${file.no}" method="DELETE"
+                      action="" class="hidden">
                     <input name="no" value="${file.no}">
                     <input name="mbr_no" value="${file.mbr_no}">
                     <input name="mbr_nick_name" value="${file.mbr_nick_name}">
                     <input name="dataType" value="${file.dataType}">
                     <input name="url" name="date" value="${file.date}">
                 </form>
-                <div>
+                <section style="text-align:center; width: 70px;"
+                         onclick="window.open('${path}${file.url}','${file.url}','${file.dataType}',false)">
                     <c:choose>
                         <c:when test="${file.dataType eq 'IMAGE'}">
-                            <img src="${file.url}">
+                            <img style="cursor: pointer;" src="${file.url}">
                         </c:when>
                         <c:otherwise>
                             <img class="loading-icon" src="${path}/resources/img/loading.gif" width="50" height="50">
                         </c:otherwise>
                     </c:choose>
-                </div>
-                <p style="width:100%">
-                        ${file.url}
-                </p>
+                </section>
+                <section class="d-flex flex-row flex-grow-1">
+                    <section class="d-flex flex-column flex-grow-1" style="margin-left: 20px;">
+                        <article>
+                            <b>Serial Number</b> : ${file.no}
+                        </article>
+                        <article>
+                            <b>url</b> : ${file.url}
+                        </article>
+                        <article>
+                            <b>uploader</b> : ${file.mbr_nick_name}(<b>Serial Number</b>:${file.mbr_no})
+                        </article>
+                        <article>
+                            <b>Created Date</b> : ${file.date}
+                        </article>
+                    </section>
+                    <section class="d-flex flex-column flex-grow-0">
+                        <button type="button" class="btn btn-danger"
+                        onclick="document.querySelector('#management-file-form-${file.no}').submit();">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </button>
+                    </section>
+                </section>
             </div>
         </c:forEach>
     </div>
