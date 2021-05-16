@@ -10,7 +10,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.*;
 
@@ -72,10 +71,10 @@ public class CustomServletAppContext implements WebMvcConfigurer {
         return resolver;
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor((HandlerInterceptor) interceptor)
-                .addPathPatterns("/chat**");
-        WebMvcConfigurer.super.addInterceptors(registry);
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor((HandlerInterceptor) interceptor)
+//                .addPathPatterns("/chat**");
+//        WebMvcConfigurer.super.addInterceptors(registry);
+//    }
 }
