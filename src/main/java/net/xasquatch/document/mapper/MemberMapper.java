@@ -30,6 +30,9 @@ public interface MemberMapper {
     @Update("UPDATE mbr SET pwd = #{pwd}, nick_name = #{nick_name} WHERE no = #{no}")
     int updateMember(Member member);
 
+    @Update("UPDATE mbr SET email = #{email}, nick_name = #{nick_name} WHERE no = #{no}")
+    int updateMemberWithOutPwd(Member member);
+
     @SelectProvider(type = MemberBuilder.class, method = "selectMember")
     List<Member> selectMember(Object memberNo);
 }

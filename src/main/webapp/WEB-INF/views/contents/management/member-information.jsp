@@ -11,10 +11,10 @@
         var memberNo = form.querySelector('input[name=no]').value;
 
         request.submit('DELETE', '/management/members/' + memberNo + '?email=' + email, function (data) {
-            if (data === 'true'){
+            if (data === 'true') {
                 window.alert('삭제가 완료되었습니다.');
                 history.back();
-            }else{
+            } else {
                 window.alert('삭제가 실패하였습니다.\n새로고침 후 다시 시도해주세요');
 
             }
@@ -22,10 +22,24 @@
         }, 'FORM');
     }
 
+    function modifyMember(query) {
+        if (!window.confirm('회원정보 수정을 진행합니다')) return;
+        var form = document.querySelector(query);
+        var memberNo = form.querySelector('input[name=no]').value;
+        var formData = new FormData(form);
+        request.submit('PUT', '/management/members/' + memberNo, function (data) {
+            if (data === 'true') {
+                window.alert('수정이 완료되었습니다.');
+                history.go(0);
+            } else {
+                window.alert('수정에 실패하였습니다.\n새로고침 후 다시 시도해주세요');
 
+            }
+
+        }, 'FORMFILE', formData);
+
+    }
 </script>
-
-
 <section class="wrap reduced-wrap">
     <h1>${member.nick_name}(${member.email})</h1>
     <BR>
@@ -41,21 +55,9 @@
             <label for="info-email" class="form-label">이메일</label>
             <div class="input-group mb-3">
                 <input type="email" class="form-control" id="info-email" aria-describedby="emailHelp"
-                       name="email" value="${member.email}" maxlength="50" readonly="readonly">
+                       name="email" value="${member.email}" maxlength="50" onchange="sign.confirmAvailableEmail(this)">
+                <div id="emailHelp" class="form-text"></div>
             </div>
-        </div>
-        <div class="mb-3">
-            <label for="info-pwd" class="form-label">비밀번호</label>
-            <input type="password" class="form-control" id="info-pwd" aria-describedby="pwdHelp"
-                   placeholder="영소문자또는 숫자를 8~20자 이내로 입력해주세요"
-                   name="pwd">
-            <div id="pwdHelp" class="form-text"></div>
-        </div>
-        <div class="mb-3">
-            <label for="info-pwd" class="form-label">비밀번호 확인</label>
-            <input type="password" class="form-control" id="info-pwd-confirm" aria-describedby="pwdConfirmHelp"
-                   placeholder="비밀번호 확인">
-            <div id="pwdConfirmHelp" class="form-text"></div>
         </div>
         <div class="mb-3">
             <label for="info-nickName" class="form-label">닉네임</label>
@@ -68,7 +70,7 @@
         <input id="csrf-input" name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
     </form>
     <div style="text-align: center;">
-        <button type="button" class="btn btn-dark" onclick="">
+        <button type="button" class="btn btn-dark" onclick="modifyMember('#user-information-form');">
             수정
         </button>
         &nbsp;&nbsp;&nbsp;

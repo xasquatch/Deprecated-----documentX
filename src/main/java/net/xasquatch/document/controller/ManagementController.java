@@ -60,6 +60,12 @@ public class ManagementController {
         return String.valueOf(memberService.removeMember(tempMember));
     }
 
+    @PutMapping("/members/{memberNo}")
+    @ResponseBody
+    public String modifyMember(Member member) {
+        return String.valueOf(memberService.modifyMemberForManagement(member));
+    }
+
     @GetMapping("/chatting-rooms")
     public String goToManageChattingList() {
         return "contents/management/chatting-room-list";

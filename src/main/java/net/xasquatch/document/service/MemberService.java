@@ -118,6 +118,10 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
         return memberDao.updateMember(member) == 1 ? true : false;
     }
 
+    public boolean modifyMemberForManagement(Member member) {
+        return memberDao.updateMemberWithOutPwd(member) == 1 ? true : false;
+    }
+
     @Override
     public boolean removeMember(Member member) {
         return memberDao.deleteMember(member) == 1 ? true : false;

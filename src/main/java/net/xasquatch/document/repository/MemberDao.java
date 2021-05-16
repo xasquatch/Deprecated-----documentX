@@ -68,6 +68,11 @@ public class MemberDao {
         return memberMapper.updateMember(member);
     }
 
+    public int updateMemberWithOutPwd(Member member) {
+        return memberMapper.updateMemberWithOutPwd(member);
+    }
+
+
     public Member selectMember(long memberNo) {
 
         Member resultMember = new Member();
