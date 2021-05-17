@@ -1,7 +1,7 @@
 var ASCIIART = {
     FILE: '⣿⢹⣦⡀<BR>' +
         '⣿⣿⣿⣿<BR>' +
-        '⣿⣿⣿⣿',
+        '⣿⣿⣿⣿'
 
 }
 var file = {
@@ -62,6 +62,8 @@ var file = {
                 container.appendChild(hiddenForm);
                 container.appendChild(preview);
                 container.appendChild(title);
+                container.setAttribute('draggable', 'true');
+                container.setAttribute('ondragend', 'chat.uploadDragFile(this)');
                 container.setAttribute('title', fileName);
                 container.setAttribute('onclick',
                     'file.readyToManipulation(this)');
@@ -160,9 +162,9 @@ var file = {
     upload: function (element) {
         var formData = new FormData();
         var files = element.files;
-        for (var file of files) {
+        for (var file of files)
             formData.append('filePackage', file);
-        }
+
         request.submit('POST', '/members/script/files/new', function (data) {
             if (data === 'false') {
                 window.alert('파일 업로드에 실패하였습니다.');
@@ -219,7 +221,7 @@ var chat = {
         chat.webSocket.close();
     },
     send: function (element) {
-        msg = element.value;
+        var msg = element.value;
         if (msg.length == 0) return;
         chat.webSocket.send(JSON.stringify({
             chatting_room_no: chat.roomNumber,
@@ -228,6 +230,25 @@ var chat = {
             contents: msg
         }));
         element.value = "";
+
+    },
+    uploadDragFile: function (element) {
+        var $drop = $("#chatting-contents>div:first-child");
+        $drop.on("dragover", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }).on('drop', function (e) {
+            e.preventDefault();
+            var chatInput = document.querySelector('#chatting-msg-input');
+            var urlValue = element.querySelector('form input[name=url]').value;
+            var uploadTarget = element.querySelector('div');
+            var container = document.createElement('div');
+            uploadTarget.setAttribute('onclick', 'window.open("' + urlValue + '",null,null,false);')
+            uploadTarget.style.cursor = 'pointer';
+            container.appendChild(uploadTarget.cloneNode(true));
+            chatInput.value = container.innerHTML;
+            document.querySelector('#chatting-send-btn').click();
+        });
     },
     onOpen: function () {
         chat.webSocket.send(JSON.stringify({
@@ -271,4 +292,5 @@ var chat = {
         container.appendChild(msgContainer)
         return container;
     }
+
 }

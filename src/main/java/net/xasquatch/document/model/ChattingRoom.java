@@ -2,11 +2,9 @@ package net.xasquatch.document.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
-import net.xasquatch.document.service.ChattingService;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import javax.inject.Inject;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,9 +17,11 @@ public class ChattingRoom {
     private String pwd;
 
     private Set<WebSocketSession> sessions = new HashSet<>();
-
+/*
+    @autowired @Inject 다 해봤지만 null값으로 처리됨
     @Inject
     private ChattingService chattingService;
+*/
 
     private ChattingRoom() {
     }
@@ -59,7 +59,7 @@ public class ChattingRoom {
                 break;
 
         }
-        chattingService.createMessage(message);
+//        chattingService.createMessage(message);
         send(message, objectMapper);
     }
 

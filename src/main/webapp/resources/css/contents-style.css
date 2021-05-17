@@ -24,6 +24,7 @@
 
 #chatting-contents pre {
     display: inline-block;
+    max-width: 40vw;
     padding: 5px;
     margin: 10px;
     border-radius: 5px;
@@ -33,7 +34,9 @@
     1px -1px 1px gray;
     white-space: pre-wrap;
 }
-
+#chatting-contents pre *{
+    width: 100%;
+}
 .chatting-msg {
     display: inline-flex;
     flex-direction: column;
@@ -93,16 +96,8 @@
 
 }
 
-#file-package > div,
-#file-package > div div,
-#file-package > div p,
-#file-package > div img{
+#file-package > div{
     cursor: grab;
-    user-select: all;
-    -ms-user-select: all;
-    -moz-user-select: all;
-    -khtml-user-select: all;
-    -webkit-user-select: all;
 }
 
 #file-package p {

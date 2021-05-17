@@ -42,7 +42,7 @@
             </div>
             <div class="input-group">
                 <textarea id="chatting-msg-input" class="form-control" style="resize: none"></textarea>
-                <button type="button" class="input-group-append btn btn-dark"
+                <button type="button" id="chatting-send-btn" class="input-group-append btn btn-dark"
                         onclick="chat.send(document.querySelector('#chatting-msg-input'));">
                     보내기
                 </button>
@@ -66,15 +66,16 @@
         </div>
         <HR>
         <div id="file-package" class="d-flex flex-nowrap">
-
         </div>
     </section>
 
 </section>
 <script>
     window.onload = function (event) {
-        chat.connect('${chattingRoom.no}','${sessionMember.nick_name}');
+        chat.connect('${chattingRoom.no}', '${sessionMember.nick_name}');
         file.appendList('#file-package');
+
     }
+
 </script>
 <c:import url="${path}/WEB-INF/views/include/footer.jsp"/>
