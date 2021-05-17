@@ -1,7 +1,6 @@
 package net.xasquatch.document.service;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.ChattingRoom;
 import net.xasquatch.document.model.Message;
@@ -34,7 +33,6 @@ public class ChattingService {
         if (resultInt != 1) log.error("채팅방 생성에러: {}", title);
         return chattingRoom;
     }
-
 
     public List<ChattingRoom> getChattingRoomList() {
         List<ChattingRoom> chattingRooms = chattingRoomDao.selectChattingRoomList();

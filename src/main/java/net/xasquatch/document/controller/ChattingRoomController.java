@@ -31,6 +31,7 @@ public class ChattingRoomController {
     @GetMapping("/{roomNo}")
     public String goToChattingRoom(Model model, @PathVariable long roomNo,
                                    @AuthenticationPrincipal Member member) {
+
         model.addAttribute("sessionMember", member);
         model.addAttribute("chattingRoom", chattingService.getChattingRoom(roomNo));
 

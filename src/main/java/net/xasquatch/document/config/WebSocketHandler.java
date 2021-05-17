@@ -25,20 +25,10 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     private Map<Long, ChattingRoom> chatRoomMap = new HashMap<>();
 
-    private void sessionMapSetting(Message message, long targetRoomNumber) {
-        Set<WebSocketSession> sessions;
-        switch (message.getMessageType()) {
-            case ENTER:
-                sessions = chatRoomMap.get(targetRoomNumber).getSessions();
-                chattingService.getWebSocketSessionMap().put(targetRoomNumber, sessions);
-                break;
+    private void sessionMapSetting(long targetRoomNumber) {
+        Set<WebSocketSession> sessions = chatRoomMap.get(targetRoomNumber).getSessions();
+        chattingService.getWebSocketSessionMap().put(targetRoomNumber, sessions);
 
-            case LEAVE:
-                sessions = chatRoomMap.get(targetRoomNumber).getSessions();
-                chattingService.getWebSocketSessionMap().put(targetRoomNumber, sessions);
-                break;
-
-        }
     }
 
     @Override
@@ -55,8 +45,9 @@ public class WebSocketHandler extends TextWebSocketHandler {
             chatRoomMap.put(targetRoomNumber, chatRoom);
 
         chatRoomMap.get(targetRoomNumber).handleMessage(session, message, objectMapper);
+        chattingService.createMessage(message);
+        sessionMapSetting(targetRoomNumber);
 
-        sessionMapSetting(message, targetRoomNumber);
     }
 
     @Override
