@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping(produces = {"text/plain;charset=UTF-8", MediaType.ALL_VALUE})
 public class HomeController {
+
+
 
 
     @GetMapping("/")
@@ -31,15 +32,6 @@ public class HomeController {
     @RequestMapping(path = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public String loginPage() {
         return "contents/login";
-    }
-
-    @GetMapping("/connection")
-    @ResponseBody
-    public String isConnect() {
-
-        log.debug("hi");
-
-        return "true";
     }
 
 }

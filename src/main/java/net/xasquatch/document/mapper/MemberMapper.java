@@ -1,6 +1,7 @@
 package net.xasquatch.document.mapper;
 
 import net.xasquatch.document.mapper.builder.MemberBuilder;
+import net.xasquatch.document.model.History;
 import net.xasquatch.document.model.Member;
 import org.apache.ibatis.annotations.*;
 
@@ -35,4 +36,12 @@ public interface MemberMapper {
 
     @SelectProvider(type = MemberBuilder.class, method = "selectMember")
     List<Member> selectMember(Object memberNo);
+
+    @Insert("INSERT INTO history(mbr_no, destination, ip_address) VALUES()")
+    int insertHistory(History history);
+
+    @SelectProvider(type = MemberBuilder.class, method = "selectHistoryList")
+    List<History> selectHistoryList(long memberNo);
+
+
 }

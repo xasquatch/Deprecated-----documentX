@@ -74,7 +74,9 @@ public class CustomServletAppContext implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor)
-                .addPathPatterns("/**");
+                .addPathPatterns("/management/**")
+                .addPathPatterns("/chatting/**")
+                .addPathPatterns("/members/**");
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 }

@@ -67,4 +67,14 @@ public class MemberBuilder {
         }}.toString();
     }
 
+    public static final String selectHistoryList(long memberNo) {
+        return new SQL() {{
+            SELECT("no, mbr_no, destination, " +
+                    "REPLACE(ip_address, RIGHT(ip_address, 4),'.***') AS ip_address, " +
+                    "DATE_FORMAT(date, '%Y.%m.%d %H:%i:%s') AS date");
+            FROM("history");
+            WHERE("mbr_no=" + memberNo);
+        }}.toString();
+    }
+
 }

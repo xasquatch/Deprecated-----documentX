@@ -1,11 +1,15 @@
 package net.xasquatch.document.repository;
 
 import net.xasquatch.document.mapper.MemberMapper;
+import net.xasquatch.document.model.History;
 import net.xasquatch.document.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class MemberDao {
@@ -86,4 +90,13 @@ public class MemberDao {
         }
         return resultMember;
     }
+
+    public int insertHistory(History history) {
+        return memberMapper.insertHistory(history);
+    }
+
+    public List<History> selectHistoryList(long memberNo) {
+        return memberMapper.selectHistoryList(memberNo);
+    }
+
 }
