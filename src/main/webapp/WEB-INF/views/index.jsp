@@ -5,55 +5,39 @@
 <c:import url="include/header.jsp"/>
 
 <section class="wrap reduced-wrap">
+    <h2>dashboard</h2>
+    <div class="d-flex">
+        <div class="container">
+            <canvas id="myChart"></canvas>
+        </div>
 
-    <ul class="list-group">
-        <li class="list-group-item">${sessionMember.nick_name}</li>
-        <li class="list-group-item"><a class="btn" href="${path}/management/members">management member</a></li>
-        <li class="list-group-item"><a class="btn" href="${path}/management/files">management file</a></li>
-        <li class="list-group-item"><a class="btn" href="${path}/management/chatting-rooms">management chtting room</a></li>
-        <li class="list-group-item"><a class="btn" href="${path}/members/test-guest">memberInfo</a></li>
-        <li class="list-group-item"><a class="btn" href="${path}/members/test-guest/files/management">file</a></li>
-        <li class="list-group-item"><a class="btn" href="${path}/members/test-guest/chatting-rooms">chatting-rooms</a></li>
-        <li class="list-group-item"><a class="btn" href="${path}/members/test-guest/chatting-rooms/1">1번 chatting room</a></li>
-    </ul>
-
-    <div class="container">
-        <canvas id="myChart"></canvas>
-    </div>
-    <div class="container">
-        <canvas id="myChart2"></canvas>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <canvas id="myChart4" class="col-6"></canvas>
-            <canvas id="myChart5" class="col-6"></canvas>
+        <div class="container">
+            <canvas id="myChart2"></canvas>
         </div>
     </div>
-    <div class="container">
-        <div class="row my-3">
-            <div class="col"><h4>Bootstrap 4 Chart.js - pie to donut</h4></div>
+
+    <hr>
+
+    <h2>title</h2>
+    <div class="d-flex">
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chDonut1"></canvas>
+                </div>
+            </div>
         </div>
-        <div class="row py-2">
-            <div class="col-md-4 py-1">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="chDonut1"></canvas>
-                    </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chDonut2"></canvas>
                 </div>
             </div>
-            <div class="col-md-4 py-1">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="chDonut2"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 py-1">
-                <div class="card">
-                    <div class="card-body">
-                        <canvas id="chDonut3"></canvas>
-                    </div>
+        </div>
+        <div class="col-md-4 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chDonut3"></canvas>
                 </div>
             </div>
         </div>
@@ -63,6 +47,7 @@
 <script>
 
     function chart1() {
+
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
             type: 'bar',
@@ -71,8 +56,8 @@
                 datasets: [{
                     label: ' of Votes',
                     data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
-                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+                    backgroundColor: ['rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)'],
+                    borderColor: ['rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)'],
                     borderWidth: 1
                 }]
             },
@@ -106,23 +91,8 @@
         });
     }
 
-    function chart3() {
-        data = {
-            datasets: [{backgroundColor: ['red', 'yellow', 'blue'], data: [10, 20, 30]}],
-            // 라벨의 이름이 툴팁처럼 마우스가 근처에 오면 나타남
-            labels: ['red', 'yellow', 'blue']
-        };
-        // 가운데 구멍이 없는 파이형 차트
-        var ctx1 = document.getElementById("myChart4");
-        var myPieChart = new Chart(ctx1, {type: 'pie', data: data, options: {}});
-        // 도넛형 차트
-        var ctx2 = document.getElementById("myChart5");
-        var myDoughnutChart = new Chart(ctx2, {type: 'doughnut', data: data, options: {}});
-
-    }
-
     function chart4() {
-        var colors = ['darkred', 'gray', 'aqua', '#c3e6cb', '#dc3545', '#6c757d'];
+        var colors = ['rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)'];
         var donutOptions = {
             cutoutPercentage: 10, //도넛두께 : 값이 클수록 얇아짐
             legend: {
@@ -198,7 +168,6 @@
 
     chart1();
     chart2();
-    chart3();
     chart4();
 
 </script>
