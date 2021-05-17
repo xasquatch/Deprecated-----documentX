@@ -20,6 +20,10 @@
     <div id="file-package" class="d-flex flex-wrap">
 
     </div>
+    <div id="pagination">
+
+    </div>
+
 </section>
 <script>
     window.onload = function (event) {

@@ -103,8 +103,6 @@ var file = {
 
                 }
             }
-
-
             pageContainer.appendChild(ulTag);
 
         });
