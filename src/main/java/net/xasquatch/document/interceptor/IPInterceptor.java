@@ -16,6 +16,8 @@ public class IPInterceptor implements HandlerInterceptor {
     @Autowired
     private AccessorInfo accessorInfo;
 
+
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         boolean permit = false;

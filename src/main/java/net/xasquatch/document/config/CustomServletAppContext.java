@@ -1,6 +1,6 @@
 package net.xasquatch.document.config;
 
-import net.xasquatch.document.interceptor.ChatInterceptor;
+import net.xasquatch.document.interceptor.IPInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -33,7 +33,7 @@ public class CustomServletAppContext implements WebMvcConfigurer {
     private String filesContextPath;
 
     @Autowired
-    private ChatInterceptor interceptor;
+    private IPInterceptor interceptor;
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -71,10 +71,10 @@ public class CustomServletAppContext implements WebMvcConfigurer {
         return resolver;
     }
 
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor((HandlerInterceptor) interceptor)
-//                .addPathPatterns("/chat**");
-//        WebMvcConfigurer.super.addInterceptors(registry);
-//    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(interceptor)
+                .addPathPatterns("/**");
+        WebMvcConfigurer.super.addInterceptors(registry);
+    }
 }
