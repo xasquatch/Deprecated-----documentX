@@ -3,7 +3,9 @@ package net.xasquatch.document.config;
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,8 +14,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Slf4j
+@PropertySource("/WEB-INF/setting.properties")
 @EnableWebSecurity
 public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Value("${security.remember.me}")
+    private String rememberKey;
 
     @Autowired
     private MemberService memberService;
@@ -58,6 +64,11 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                     concurrencyControlConfigurer.maximumSessions(1);
                     concurrencyControlConfigurer.maxSessionsPreventsLogin(false);
                 });
+
+        http
+                .rememberMe().key(rememberKey);
+
+
     }
 
     @Override
