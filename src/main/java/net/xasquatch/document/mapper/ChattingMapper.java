@@ -24,7 +24,7 @@ public interface ChattingMapper {
     @Update("UPDATE chatting_room SET name=#{name}, pwd=#{pwd} WEHRE no = #{no}")
     int updateChattingRoom(ChattingRoom room);
 
-    @Update("UPDATE chatting_room SET enable=0 WEHRE no = #{no}")
+    @Update("UPDATE chatting_room SET enable=0 WHERE no = #{no}")
     int deleteChattingRoom(ChattingRoom room);
 
     @SelectProvider(type = ChattingBuilder.class, method = "selectMessageList")

@@ -17,7 +17,7 @@ public class ChattingBuilder {
 
     public static final String selectMessageList(Object roomNo) {
         return new SQL() {{
-            SELECT("SELECT ms.no AS no, " +
+            SELECT("ms.no AS no, " +
                     "ms.mbr_no AS mbr_no, " +
                     "m.nick_name AS mbr_nick_name, " +
                     "ms.chatting_room_no AS chatting_room_no, " +
