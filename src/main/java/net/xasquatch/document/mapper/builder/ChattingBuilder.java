@@ -5,6 +5,21 @@ import org.apache.ibatis.jdbc.SQL;
 
 public class ChattingBuilder {
 
+    public static final String selectChattingRoomList(Object searchValue) {
+        return new SQL() {{
+            SELECT("no, name, pwd, " +
+                    "DATE_FORMAT(date, '%Y.%m.%d %H:%i:%s') AS date");
+            FROM("chatting_room");
+            WHERE("enable = 1");
+            if (searchValue != null) {
+                AND();
+                WHERE("name LIKE '%" + searchValue + "%'");
+            }
+        }}.toString();
+
+    }
+
+
     public static final String insertChattingRoom(ChattingRoom room) {
         return new SQL() {{
             INSERT_INTO("chatting_room");

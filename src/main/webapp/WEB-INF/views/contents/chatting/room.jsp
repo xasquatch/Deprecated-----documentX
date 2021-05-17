@@ -59,7 +59,7 @@
 <script>
     window.onload = function (event) {
         chat.connect('${chattingRoom.no}', '${sessionMember.nick_name}', '${sessionMember.no}');
-        file.appendList('#file-package', '${searchValue}', '${currentPage}', '${rowCount}');
+        file.appendList('#file-package', '${searchValue}', '1', '10');
 
         var $drop = $('#chatting-contents > div:first-child');
         $drop.on('dragover', function (e) {

@@ -40,8 +40,8 @@ public class ChattingService {
         return chattingRoom;
     }
 
-    public List<ChattingRoom> getChattingRoomList() {
-        List<ChattingRoom> chattingRooms = chattingRoomDao.selectChattingRoomList();
+    public List<ChattingRoom> getChattingRoomList(String searchValue) {
+        List<ChattingRoom> chattingRooms = chattingRoomDao.selectChattingRoomList(searchValue);
         for (ChattingRoom chattingRoom : chattingRooms) {
             for (Map.Entry<Long, Set<WebSocketSession>> entry : webSocketSessionMap.entrySet()) {
                 if (entry.getKey() == chattingRoom.getNo())

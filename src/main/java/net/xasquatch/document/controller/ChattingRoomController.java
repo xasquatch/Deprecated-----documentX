@@ -19,11 +19,12 @@ public class ChattingRoomController {
     @Autowired
     private ChattingService chattingService;
 
-    //TODO: 페이지네이션 구현 필요
     @GetMapping("/room-list")
-    public String goToChattingRoomList(Model model, @AuthenticationPrincipal Member member) {
+    public String goToChattingRoomList(Model model,
+                                       @RequestParam(required = false, name = "search-value") String searchValue,
+                                       @AuthenticationPrincipal Member member) {
         model.addAttribute("sessionMember", member);
-        model.addAttribute("chattingRoomList", chattingService.getChattingRoomList());
+        model.addAttribute("chattingRoomList", chattingService.getChattingRoomList(searchValue));
 
         return "contents/chatting/room-list";
     }

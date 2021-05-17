@@ -9,10 +9,11 @@ import java.util.List;
 
 public interface ChattingMapper {
 
-    @Select("SELECT no, name, pwd, " +
-            "DATE_FORMAT(date, '%Y.%m.%d %H:%i:%s') AS date " +
-            "FROM chatting_room WHERE enable = 1")
-    List<ChattingRoom> selectChattingRoomList();
+//    @Select("SELECT no, name, pwd, " +
+//            "DATE_FORMAT(date, '%Y.%m.%d %H:%i:%s') AS date " +
+//            "FROM chatting_room WHERE enable = 1")
+    @SelectProvider(type = ChattingBuilder.class, method = "selectChattingRoomList")
+    List<ChattingRoom> selectChattingRoomList(Object searchValue);
 
     @Select("SELECT * FROM chatting_room WHERE enable = 1 AND no = #{arg0}")
     ChattingRoom selectChattingRoom(Object roomNo);

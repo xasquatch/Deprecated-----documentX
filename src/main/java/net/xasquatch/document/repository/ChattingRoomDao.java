@@ -14,8 +14,8 @@ public class ChattingRoomDao {
     @Autowired
     private ChattingMapper chattingMapper;
 
-    public List<ChattingRoom> selectChattingRoomList() {
-        return chattingMapper.selectChattingRoomList();
+    public List<ChattingRoom> selectChattingRoomList(String searchValue) {
+        return chattingMapper.selectChattingRoomList(searchValue);
 
     }
 

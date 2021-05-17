@@ -7,11 +7,11 @@
 
 <section class="wrap reduced-wrap">
     <div class="d-flex">
-        <form method="GET" action="" class="col-10">
+        <form method="GET" action="/chatting/room-list" class="col-10">
             <div class="input-group">
-                <input type="search" name="chattingSearch" class="form-control" placeholder="search keywords">
-                <input type="hidden" name="chattingRowCount" value="<%--여기 로우카운트값--%>">
-                <button type="button" class="input-group-append btn btn-dark">
+                <input type="search" name="search-value" class="form-control" placeholder="search keywords">
+<%--                <input type="hidden" name="chattingRowCount" value="&lt;%&ndash;여기 로우카운트값&ndash;%&gt;">--%>
+                <button type="submit" class="input-group-append btn btn-dark">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
             </div>

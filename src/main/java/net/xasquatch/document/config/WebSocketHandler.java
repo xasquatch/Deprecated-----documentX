@@ -75,7 +75,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         //DB관리 맵에서도 해당 룸의 정보를 삭제한다.
         if (targetRoomSessionCount == 0) {
             chattingService.removeChattingRoom(roomDataForMap);
-            chattingService.getChattingRoomList().remove(targetRoomNumber);
+            chattingService.getChattingRoomList("").remove(targetRoomNumber);
             chatRoomMap.remove(targetRoomNumber);
         }
 
