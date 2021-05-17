@@ -13,6 +13,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -36,16 +37,42 @@ public class WebSocketHandler extends TextWebSocketHandler {
         String msg = txtMessage.getPayload();
         ObjectMapper objectMapper = new ObjectMapper();
         Message message = objectMapper.readValue(msg, Message.class);
-
         long targetRoomNumber = message.getChatting_room_no();
 
+        //DB에서 채팅방가져오기
         ChattingRoom chatRoom = chattingService.getChattingRoom(targetRoomNumber);
+        ChattingRoom roomDataForMap = null;
 
-        if (!chatRoomMap.keySet().contains(targetRoomNumber))
+        //서버의 Map에 저장되있는 데이터와 대조하여 DB와 일치하게 조작
+        if (!chatRoomMap.keySet().contains(targetRoomNumber)) {
             chatRoomMap.put(targetRoomNumber, chatRoom);
+            roomDataForMap = chatRoomMap.get(targetRoomNumber);
+            List<Message> messageHistory = chattingService.getMessageList(targetRoomNumber);
 
-        chatRoomMap.get(targetRoomNumber).handleMessage(session, message, objectMapper);
+            for (Message msgHistory : messageHistory)
+                roomDataForMap.handleMessage(session, message, objectMapper);
+
+        }
+
+        //서버의 Map에 저장되있는 채팅룸 인스턴스 정보를 가져와
+        //해당 채팅룸에 메시지를 전송하고
+        //채팅룸에 접속한 클라이언트 수(세션사이즈)를 반환 받는다
+        roomDataForMap = chatRoomMap.get(targetRoomNumber);
+        int targetRoomSessionCount = roomDataForMap.handleMessage(session, message, objectMapper);
+
+        //세션사이즈가 0이면 클라이언트가 없으므로
+        //채팅룸 DB에서 enable = 0으로 UPDATE 쿼리를 날린다.
+        //서버(WebSocketHandler, ChattingService클래스)의
+        //DB관리 맵에서도 해당 룸의 정보를 삭제한다.
+        if (targetRoomSessionCount == 0) {
+            chattingService.removeChattingRoom(roomDataForMap);
+            chattingService.getChattingRoomList().remove(targetRoomNumber);
+            chatRoomMap.remove(targetRoomNumber);
+        }
+
+        //메시지를 DB로 저장
         chattingService.createMessage(message);
+
         sessionMapSetting(targetRoomNumber);
 
     }

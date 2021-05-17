@@ -52,11 +52,19 @@ public class ChattingService {
     }
 
     public boolean createMessage(Message message) {
-//        chattingRoomDao.selectMessageList(roomNo);
-//        chattingRoomDao.deleteChattingRoom(room);
-//        chattingRoomDao.updateChattingRoom(room);
-
         return chattingRoomDao.insertMessage(message) == 1 ? true : false;
+    }
+
+    public boolean modifyChattingRoom(ChattingRoom room) {
+        return chattingRoomDao.updateChattingRoom(room) == 1 ? true : false;
+    }
+
+    public boolean removeChattingRoom(ChattingRoom room) {
+        return chattingRoomDao.deleteChattingRoom(room) == 1 ? true : false;
+    }
+
+    public List<Message> getMessageList(long roomNo) {
+        return chattingRoomDao.selectMessageList(roomNo);
     }
 
 
