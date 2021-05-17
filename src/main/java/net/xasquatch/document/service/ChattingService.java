@@ -5,10 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.ChattingRoom;
 import net.xasquatch.document.model.Message;
 import net.xasquatch.document.repository.ChattingRoomDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.WebSocketSession;
 
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,13 +19,16 @@ import java.util.Set;
 @Service
 public class ChattingService {
 
-    @Inject
+    @Autowired
     private ChattingRoomDao chattingRoomDao;
     private Map<Long, Set<WebSocketSession>> webSocketSessionMap = new HashMap<>();
 
     public ChattingRoom createChattingRoom(long memberNo, String title, String pwd) {
-        ChattingRoom chattingRoom = ChattingRoom.getInstance(title, pwd);
-        chattingRoom.setNo(memberNo);
+        ChattingRoom chattingRoom = new ChattingRoom();
+        chattingRoom.setMasterNo(memberNo);
+        chattingRoom.setName(title);
+        chattingRoom.setPwd(pwd);
+
         int resultInt = chattingRoomDao.insertChattingRoom(chattingRoom);
         if (resultInt != 1) log.error("채팅방 생성에러: {}", title);
         return chattingRoom;
@@ -49,12 +52,12 @@ public class ChattingService {
         return chattingRoomDao.selectChattingRoom(roomNo);
     }
 
-    public boolean createMessage(Message message){
+    public boolean createMessage(Message message) {
 //        chattingRoomDao.selectMessageList(roomNo);
 //        chattingRoomDao.deleteChattingRoom(room);
 //        chattingRoomDao.updateChattingRoom(room);
 
-        return chattingRoomDao.insertMessage(message) == 1? true:false;
+        return chattingRoomDao.insertMessage(message) == 1 ? true : false;
     }
 
 

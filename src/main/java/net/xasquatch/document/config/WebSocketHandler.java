@@ -12,39 +12,36 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 @Component
 public class WebSocketHandler extends TextWebSocketHandler {
 
     @Autowired
     private ChattingRoomDao chattingRoomDao;
-    private ChattingRoom chatRoom;
+    private Map<Long, ChattingRoom> chatRoomSet = new HashMap<>();
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage txtMessage) throws Exception {
         String msg = txtMessage.getPayload();
-        log.info("메세지 전송 = {} : {}", session, msg);
         ObjectMapper objectMapper = new ObjectMapper();
         Message message = objectMapper.readValue(msg, Message.class);
 
-        ChattingRoom roomInfo = chattingRoomDao.selectChattingRoom(message.getChatting_room_no());
+        long targetRoomNumber = message.getChatting_room_no();
+        ChattingRoom chatRoom = chattingRoomDao.selectChattingRoom(targetRoomNumber);
 
-        if (chatRoom == null) {
-            chatRoom = ChattingRoom.getInstance(roomInfo.getName(), roomInfo.getPwd());
+        if (!chatRoomSet.keySet().contains(targetRoomNumber))
+            chatRoomSet.put(targetRoomNumber, chatRoom);
 
-        } else {
-            chatRoom.setName(roomInfo.getName());
-            chatRoom.setPwd(roomInfo.getPwd());
-
-        }
-
-        chatRoom.handleMessage(session, message, objectMapper);
+        chatRoomSet.get(targetRoomNumber).handleMessage(session, message, objectMapper);
     }
+
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         super.afterConnectionClosed(session, status);
-        chatRoom.removeSession(session);
 
     }
 
@@ -56,9 +53,5 @@ public class WebSocketHandler extends TextWebSocketHandler {
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
         log.error(session.getId() + " 익셉션 발생: " + exception.getMessage());
-        chatRoom.addSession(session);
     }
-
-
-
 }

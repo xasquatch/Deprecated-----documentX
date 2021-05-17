@@ -1,45 +1,38 @@
 package net.xasquatch.document.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
-@Data
+@Setter
+@Getter
 public class ChattingRoom {
     private long no;
-    private long masterNo;
     private String name;
     private String pwd;
+    private String date;
 
+    private long masterNo;
     private Set<WebSocketSession> sessions = new HashSet<>();
-/*
-    @autowired @Inject 다 해봤지만 null값으로 처리됨
-    @Inject
-    private ChattingService chattingService;
-*/
 
-    private ChattingRoom() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChattingRoom that = (ChattingRoom) o;
+        return no == that.no;
     }
 
-    public static ChattingRoom getInstance(String name, String pwd) {
-        ChattingRoom chatRoom = new ChattingRoom();
-        chatRoom.name = name;
-        chatRoom.pwd = pwd;
-        return chatRoom;
-    }
-
-    public void removeSession(WebSocketSession session) {
-        sessions.remove(session);
-
-    }
-    public void addSession(WebSocketSession session) {
-        sessions.add(session);
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(no);
     }
 
     public void handleMessage(WebSocketSession session, Message message,
@@ -59,7 +52,6 @@ public class ChattingRoom {
                 break;
 
         }
-//        chattingService.createMessage(message);
         send(message, objectMapper);
     }
 
