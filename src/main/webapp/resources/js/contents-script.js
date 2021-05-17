@@ -223,7 +223,7 @@ var chat = {
         }, 'FORM', 'pwd=' + pwd)
     },
     connect: function (roomNo, nickName, clientNo) {
-        chat.webSocket = new WebSocket("ws://localhost/chat");
+        chat.webSocket = new WebSocket("wss://document.xasquatch.net/chat");
         chat.roomNumber = roomNo;
         chat.nickName = nickName;
         chat.clientNo = clientNo;

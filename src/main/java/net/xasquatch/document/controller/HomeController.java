@@ -18,11 +18,13 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(produces = {"text/plain;charset=UTF-8", MediaType.ALL_VALUE})
 public class HomeController {
 
+
     @GetMapping("/")
-    public String Home(Model model, HttpServletRequest request, @AuthenticationPrincipal Member sessionMember) {
+    public String Home(Model model, HttpServletRequest request,
+                       @AuthenticationPrincipal Member sessionMember) {
 
         model.addAttribute("sessionMember", sessionMember);
-        model.addAttribute("home", "success");
+
         return "index";
     }
 
