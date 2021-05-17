@@ -23,8 +23,8 @@ public interface AuthorizationMapper {
     @Update("UPDATE authorization SET name = #{arg1} WHERE mbr_no = #{arg0}")
     int updateAuthorization(Object memberNo, Object authName);
 
-    @Delete("DELETE FROM authorization WEHRE no = #{arg0}")
-    int deleteAuthorization(Object authNo);
+    @Delete("DELETE FROM authorization WHERE mbr_no = #{arg0} AND name = #{arg1}")
+    int deleteAuthorization(long memberNo, String authName);
 
     @Select("SELECT name AS permission FROM authorization group by name")
     List<String> selectAuthorizationList();

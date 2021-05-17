@@ -64,7 +64,7 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
         return authorities;
     }
 
-    public List<String> getPermissionList(){
+    public List<String> getPermissionList() {
         return authorizationDao.selectAuthorizationList();
     }
 
@@ -72,11 +72,13 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
         return authorizationDao.updateAuthorization(memberNo, authName) == 1 ? true : false;
     }
 
-    public boolean removePermission(long authNo) {
-        return authorizationDao.deleteAuthorization(authNo) == 1 ? true : false;
+    public boolean removePermission(long memberNo, String authName) {
+        return authorizationDao.deleteAuthorization(memberNo, authName) == 1 ? true : false;
     }
 
-
+    public boolean addPermission(long memberNo, String authName) {
+        return authorizationDao.insertAuthorization(authName, memberNo);
+    }
 
 
     //-----------------------MemberServiceInterface------------------------------------------

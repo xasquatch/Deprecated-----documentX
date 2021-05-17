@@ -94,6 +94,14 @@ public class ManagementController {
         return "contents/management/file-list";
     }
 
+    @PostMapping("/members/{memberNo}/permissions")
+    @ResponseBody
+    public String addPermission(@PathVariable long memberNo,
+                                   @RequestParam(required = true, name = "permission") String authName) {
+
+        return String.valueOf(memberService.addPermission(memberNo, authName));
+    }
+
     @PatchMapping("/members/{memberNo}/permissions")
     @ResponseBody
     public String modifyPermission(@PathVariable long memberNo,
@@ -104,9 +112,9 @@ public class ManagementController {
 
     @DeleteMapping("/members/{memberNo}/permissions")
     @ResponseBody
-    public String modifyPermission(@RequestParam(required = true, name = "permission-number") long authNo) {
-
-        return String.valueOf(memberService.removePermission(authNo));
+    public String removePermission(@PathVariable long memberNo,
+                                   @RequestParam(required = true, name = "permission") String authName){
+        return String.valueOf(memberService.removePermission(memberNo, authName));
     }
 
     @GetMapping("/permissions")

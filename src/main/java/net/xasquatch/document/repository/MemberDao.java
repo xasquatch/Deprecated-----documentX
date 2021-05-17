@@ -13,13 +13,13 @@ public class MemberDao {
     @Autowired
     private MemberMapper memberMapper;
 
-    public Map<String, Object> selectMemberList(Object searchValue, Object currentPage, Object pageLimit) {
+    public Map<String, Object> selectMemberList(Object searchValue, int currentPage, int pageLimit) {
         Map<String, Object> resultMap = new HashMap<>();
 
 //TODO: 테이블에서 조인하여 중복으로 조회된 여러개의 권한을 컬렉션형태로 담기 위해
 //  이렇게 해놓았지만 되게 비효율 적이다. 수정이 필요하다
 
-        List<Member> members = memberMapper.selectMemberList(searchValue, currentPage, pageLimit);
+        List<Member> members = memberMapper.selectMemberList(searchValue, currentPage - 1, pageLimit);
         Map<Long, Member> memberMap = new HashMap<>();
         for (Member member : members) {
             if (!memberMap.keySet().contains(member.getNo())) {

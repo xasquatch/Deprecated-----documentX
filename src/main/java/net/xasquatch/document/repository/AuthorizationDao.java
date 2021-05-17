@@ -14,7 +14,7 @@ public class AuthorizationDao {
     private AuthorizationMapper authorizationMapper;
 
 
-    public List<String> selectAuthorizationList(){
+    public List<String> selectAuthorizationList() {
         return authorizationMapper.selectAuthorizationList();
     }
 
@@ -29,7 +29,8 @@ public class AuthorizationDao {
     public int updateAuthorization(Object memberNo, Object authName) {
         return authorizationMapper.updateAuthorization(memberNo, authName);
     }
-    public int deleteAuthorization(Object authNo) {
-        return authorizationMapper.deleteAuthorization(authNo);
+
+    public int deleteAuthorization(long memberNo, String authName) {
+        return authorizationMapper.deleteAuthorization(memberNo, authName);
     }
 }

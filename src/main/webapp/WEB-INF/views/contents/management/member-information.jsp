@@ -31,6 +31,7 @@
             if (data === 'true') {
                 window.alert('수정이 완료되었습니다.');
                 history.go(0);
+
             } else {
                 window.alert('수정에 실패하였습니다.\n새로고침 후 다시 시도해주세요');
 
@@ -39,7 +40,34 @@
         }, 'FORMFILE', formData);
 
     }
+
+    function manipulatePermission(element) {
+        var checkEvent = element.checked
+        var permissionName = element.value;
+        if (checkEvent) {
+            request.submit('POST', '/management/members/${member.no}/permissions', function (data) {
+                if (data === 'true') {
+                    nav.acceptMsg(2, permissionName + ': 권한 부여가 완료되었습니다.');
+                } else {
+                    nav.acceptMsg(2, ' 권한 부여에러: 새로고침 후 다시 시도해주세요');
+                }
+
+            }, 'FORM', 'permission=' + permissionName);
+
+        } else {
+            request.submit('DELETE', '/management/members/${member.no}/permissions?permission=' + permissionName, function (data) {
+                if (data === 'true') {
+                    nav.acceptMsg(2, permissionName + ': 권한 제거가 완료되었습니다.');
+                } else {
+                    nav.acceptMsg(2, ' 권한 제거에러: 새로고침 후 다시 시도해주세요');
+                }
+
+            }, 'FORM');
+        }
+    }
+
 </script>
+
 <section class="wrap reduced-wrap">
     <h1>${member.nick_name}(${member.email})</h1>
     <BR>
@@ -82,22 +110,18 @@
     <div class="mb-3">
         <div>
             <label for="info-permission" class="form-label">권한</label>
-            <button type="button" class="btn btn-dark btn-sm">
-                권한 설정
-            </button>
         </div>
         <div class="input-group">
             <c:forEach var="permission" items="${permissionList}">
                 <div class="input-group-text">
                     <c:choose>
                         <c:when test="${member.authList.contains(permission)}">
-                            <input type="checkbox" id="info-permission" name="permission"
-                                   value="${permission}"
-                                   checked>
+                            <input type="checkbox" id="info-permission" value="${permission}" checked
+                                   onchange="manipulatePermission(this)">
                         </c:when>
                         <c:otherwise>
-                            <input type="checkbox" id="info-permission" name="permission"
-                                   value="${permission}">
+                            <input type="checkbox" id="info-permission" value="${permission}"
+                                   onchange="manipulatePermission(this)">
                         </c:otherwise>
                     </c:choose>
                 </div>
