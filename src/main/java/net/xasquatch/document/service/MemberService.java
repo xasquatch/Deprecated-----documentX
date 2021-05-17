@@ -36,6 +36,9 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     @Autowired
     private TokenMap tokenMap;
 
+    @Autowired
+    private PaginationService paginationService;
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Member member = memberDao.selectByEmail(s);
@@ -85,10 +88,11 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     }
 
     @Override
-    public Map<String, Object> searchMemberList(String emailOrNickName, Object currentPage, Object pageLimit) {
+    public Map<String, Object> searchMemberList(String emailOrNickName, int currentPage, int pageLimit) {
         Map<String, Object> resultMap = memberDao.selectMemberList(emailOrNickName, 0, 10);
-        //TODO: 페이지네이션 작업
-        resultMap.put("pagination", resultMap.get("count"));
+        List<String> pagination = paginationService.getPageBlockList(pageLimit, currentPage, (Integer) resultMap.get("count"));
+
+        resultMap.put("pagination", pagination);
 
         return resultMap;
     }
@@ -128,7 +132,7 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
     }
 
     public Member getMemberToNumber(long memberNo) {
-       return memberDao.selectMember(memberNo);
+        return memberDao.selectMember(memberNo);
 
     }
 }

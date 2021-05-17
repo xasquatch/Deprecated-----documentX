@@ -37,6 +37,9 @@ public class StorageService implements StorageServiceInterface {
     @Autowired
     private StorageDao storageDao;
 
+    @Autowired
+    private PaginationService paginationService;
+
     //생성된 경로 리턴
     @Override
     public String writeFile(byte[] byteArray, String path, String saveFileName) {
@@ -132,14 +135,13 @@ public class StorageService implements StorageServiceInterface {
         return resultInt;
     }
 
-    public Map<String, Object> searchFileLIst(Member member, String searchValue, int currentPage, Object pageLimit) {
+    public Map<String, Object> searchFileLIst(Member member, String searchValue, int currentPage, int pageLimit) {
         for (GrantedAuthority authority : member.getAuthorities()) {
             if (authority.getAuthority().equals("ROLE_MANAGEMENT")) {
                 Map<String, Object> resultMap = storageDao.selectStorageListForManagement(member, searchValue, currentPage, pageLimit);
+                List<String> pagination = paginationService.getPageBlockList(pageLimit, currentPage, (int) resultMap.get("count"));
 
-//TODO: pagination필요
-                int count = (int) resultMap.get("count");
-                resultMap.put("count", count);
+                resultMap.put("pagination", pagination);
 
                 return resultMap;
             }
@@ -147,14 +149,13 @@ public class StorageService implements StorageServiceInterface {
         return null;
     }
 
-    public Map<String, Object> getFileList(Member member, String searchValue, int currentPage, Object pageLimit) {
+    public Map<String, Object> getFileList(Member member, String searchValue, int currentPage, int pageLimit) {
         for (GrantedAuthority authority : member.getAuthorities()) {
             if (authority.getAuthority().equals("ROLE_USER")) {
                 Map<String, Object> resultMap = storageDao.selectStorageList(member, searchValue, currentPage, pageLimit);
+                List<String> pagination = paginationService.getPageBlockList(pageLimit, currentPage, (int) resultMap.get("count"));
 
-//TODO: pagination필요
-                int count = (int) resultMap.get("count");
-                resultMap.put("count", count);
+                resultMap.put("pagination", pagination);
 
                 return resultMap;
             }

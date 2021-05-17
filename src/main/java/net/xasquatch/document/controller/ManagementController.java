@@ -26,8 +26,8 @@ public class ManagementController {
     public String goToManageMembers(Model model,
                                     @AuthenticationPrincipal Member member,
                                     @RequestParam(required = false, name = "search-value") String searchValue,
-                                    @RequestParam(required = false, name = "current-page", defaultValue = "1") String currentPage,
-                                    @RequestParam(required = false, name = "row-count", defaultValue = "50") String pageLimit) {
+                                    @RequestParam(required = false, name = "current-page", defaultValue = "1") int currentPage,
+                                    @RequestParam(required = false, name = "row-count", defaultValue = "50") int pageLimit) {
 
         Map<String, Object> resultMap = memberService.searchMemberList(searchValue, currentPage, pageLimit);
         model.addAttribute("memberList", resultMap.get("memberList"));
