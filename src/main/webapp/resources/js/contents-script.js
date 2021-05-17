@@ -210,6 +210,7 @@ var chat = {
     webSocket: undefined,
     roomNumber: undefined,
     nickName: undefined,
+    clientNo: undefined,
 
     createRoom: function () {
         var title = window.prompt("[채팅방 생성: 방 제목]\n채팅방을 개설합니다.\n방 제목을 입력해주세요");
@@ -221,10 +222,11 @@ var chat = {
 
         }, 'FORM', 'pwd=' + pwd)
     },
-    connect: function (roomNo, nickName) {
+    connect: function (roomNo, nickName, clientNo) {
         chat.webSocket = new WebSocket("ws://localhost/chat");
         chat.roomNumber = roomNo;
         chat.nickName = nickName;
+        chat.clientNo = clientNo;
         window.onbeforeunload = function () {
             chat.disconnect();
             chat.webSocket = null;
@@ -243,7 +245,8 @@ var chat = {
         chat.webSocket.send(JSON.stringify({
             chatting_room_no: chat.roomNumber,
             messageType: 'LEAVE',
-            mbr_nick_name: chat.nickName
+            mbr_nick_name: chat.nickName,
+            mbr_no: chat.clientNo
         }));
         chat.webSocket.close();
     },
@@ -254,7 +257,8 @@ var chat = {
             chatting_room_no: chat.roomNumber,
             messageType: 'CHAT',
             mbr_nick_name: chat.nickName,
-            contents: msg
+            contents: msg,
+            mbr_no: chat.clientNo
         }));
         element.value = "";
 
@@ -275,7 +279,8 @@ var chat = {
         chat.webSocket.send(JSON.stringify({
             chatting_room_no: chat.roomNumber,
             messageType: 'ENTER',
-            mbr_nick_name: chat.nickName
+            mbr_nick_name: chat.nickName,
+            mbr_no: chat.clientNo
         }));
     },
     //메시지 갱신
@@ -294,7 +299,6 @@ var chat = {
             return navTag;
         }
         var container = document.createElement('div');
-
         var msgContainer = document.createElement('div');
         var nickNameTag = document.createElement('b');
         var contentsTag = document.createElement('pre');
@@ -312,6 +316,24 @@ var chat = {
         msgContainer.appendChild(contentsTag);
         container.appendChild(msgContainer)
         return container;
-    }
+    },
+    getUserList: function (targetElement, nickName, email) {
+        var component =
+            '<tr>' +
+            '   <td>' +
+            '      <div class="input-group" title="' + nickName + ' (' + email + ')">' +
+            '          <select class="btn btn-dark form-control" onchange="">' + //TODO: 함수 넣어야됨
+            '              <option selected value="">' +
+            '                  <span class="form-control">' + nickName + ' (' + email + ')</span>' +
+            '              </option>' +
+            '              <option value="info">정보보기</option>' +
+            '              <option value="ban">강퇴</option>' +
+            '              <option value="">위임하기</option>' +
+            '          </select>' +
+            '      </div>' +
+            '   </td>' +
+            '</tr>';
 
+        targetElement.innerHTML += component;
+    }
 }

@@ -8,12 +8,13 @@
     padding: 10px;
 }
 
-#chatting-clients > table {
-    min-height: 50vh;
-
+#chatting-clients{
+    overflow: auto;
+    height: 550px;
 }
 
-#chatting-file-list {
+#chatting-clients > table {
+    min-height: 50vh;
 
 }
 
