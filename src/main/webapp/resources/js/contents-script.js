@@ -233,22 +233,16 @@ var chat = {
 
     },
     uploadDragFile: function (element) {
-        var $drop = $("#chatting-contents>div:first-child");
-        $drop.on("dragover", function (e) {
-            e.stopPropagation();
-            e.preventDefault();
-        }).on('drop', function (e) {
-            e.preventDefault();
-            var chatInput = document.querySelector('#chatting-msg-input');
-            var urlValue = element.querySelector('form input[name=url]').value;
-            var uploadTarget = element.querySelector('div');
-            var container = document.createElement('div');
-            uploadTarget.setAttribute('onclick', 'window.open("' + urlValue + '",null,null,false);')
-            uploadTarget.style.cursor = 'pointer';
-            container.appendChild(uploadTarget.cloneNode(true));
-            chatInput.value = container.innerHTML;
-            document.querySelector('#chatting-send-btn').click();
-        });
+        var chatInput = document.querySelector('#chatting-msg-input');
+        var urlValue = element.querySelector('form input[name=url]').value;
+        var uploadTarget = element.querySelector('div').cloneNode(true);
+        var container = document.createElement('div');
+        uploadTarget.setAttribute('onclick', 'window.open("' + urlValue + '",null,null,false);')
+        uploadTarget.style.cursor = 'pointer';
+        container.appendChild(uploadTarget);
+        chatInput.value = container.innerHTML;
+        document.querySelector('#chatting-send-btn').click();
+
     },
     onOpen: function () {
         chat.webSocket.send(JSON.stringify({

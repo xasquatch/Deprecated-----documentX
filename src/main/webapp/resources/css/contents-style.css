@@ -33,6 +33,7 @@
     -1px 1px 1px gray,
     1px -1px 1px gray;
     white-space: pre-wrap;
+    word-break: break-all;
 }
 #chatting-contents pre *{
     width: 100%;

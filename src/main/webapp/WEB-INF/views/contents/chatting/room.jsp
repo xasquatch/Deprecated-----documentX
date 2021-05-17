@@ -75,6 +75,13 @@
         chat.connect('${chattingRoom.no}', '${sessionMember.nick_name}');
         file.appendList('#file-package');
 
+        var $drop = $('#chatting-contents > div:first-child');
+        $drop.on('dragover', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }).on('drop', function (e) {
+            e.preventDefault();
+        });
     }
 
 </script>
