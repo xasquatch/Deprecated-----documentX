@@ -1,6 +1,7 @@
 package net.xasquatch.document.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.ChattingRoom;
 import net.xasquatch.document.model.Message;
@@ -16,6 +17,7 @@ import java.security.Principal;
 import java.util.*;
 
 @Slf4j
+@Getter
 @Component
 public class WebSocketHandler extends TextWebSocketHandler {
 

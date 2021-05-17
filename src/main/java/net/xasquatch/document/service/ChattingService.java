@@ -2,6 +2,7 @@ package net.xasquatch.document.service;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import net.xasquatch.document.config.WebSocketHandler;
 import net.xasquatch.document.model.ChattingRoom;
 import net.xasquatch.document.model.Message;
 import net.xasquatch.document.repository.ChattingRoomDao;
@@ -21,6 +22,9 @@ public class ChattingService {
 
     @Autowired
     private ChattingRoomDao chattingRoomDao;
+    @Autowired
+    private WebSocketHandler webSocketHandler;
+
     private Map<Long, Set<WebSocketSession>> webSocketSessionMap = new HashMap<>();
 
     public ChattingRoom createChattingRoom(long memberNo, String title, String pwd) {
@@ -30,6 +34,8 @@ public class ChattingService {
         chattingRoom.setPwd(pwd);
 
         int resultInt = chattingRoomDao.insertChattingRoom(chattingRoom);
+        webSocketHandler.getChatRoomMap().put(chattingRoom.getNo(), chattingRoom);
+
         if (resultInt != 1) log.error("채팅방 생성에러: {}", title);
         return chattingRoom;
     }
