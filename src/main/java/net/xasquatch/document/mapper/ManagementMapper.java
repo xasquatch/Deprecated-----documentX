@@ -4,7 +4,7 @@ import net.xasquatch.document.model.Member;
 
 import java.util.List;
 
-public interface MnagementMapper {
+public interface ManagementMapper {
 
     List<Member> selectMemberList(Object searchValue, Object currentPage, Object pageLimit);
 

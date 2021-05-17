@@ -209,9 +209,17 @@ public class MemberController {
     }
 
     @GetMapping("/{nickName}/chatting-rooms/{chattingRoomTitle}")
-    public String goToMemberChattingRoom(@PathVariable String nickName,
-                                         @PathVariable String chattingRoomTitle) {
+    public String goToMemberChattingRoom(Model model, @AuthenticationPrincipal Member sessionMember,
+                                         @PathVariable String nickName,
+                                         @PathVariable String chattingRoomTitle,
+                                         @RequestParam(required = false, name = "search-value") String searchValue,
+                                         @RequestParam(required = false, name = "current-page", defaultValue = "1") int currentPage,
+                                         @RequestParam(required = false, name = "row-count", defaultValue = "30") int pageLimit) {
 
+        model.addAttribute("sessionMember", sessionMember);
+        model.addAttribute("searchValue", searchValue);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("rowCount", pageLimit);
 
         return "contents/chatting/room";
     }
