@@ -1,6 +1,7 @@
 package net.xasquatch.document.service;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.ChattingRoom;
 import net.xasquatch.document.model.Message;
@@ -48,7 +49,7 @@ public class ChattingService {
 
     }
 
-    public ChattingRoom getChattingRoom(String roomNo) {
+    public ChattingRoom getChattingRoom(long roomNo) {
         return chattingRoomDao.selectChattingRoom(roomNo);
     }
 
