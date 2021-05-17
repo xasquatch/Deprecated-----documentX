@@ -13,5 +13,5 @@ public interface MemberServiceInterface {
     boolean addMember(Member member);
     boolean modifyMember(Member member);
     boolean removeMember(Member member);
-
+    Map<String ,Object> getMemberInfoByEmail(String email);
 }

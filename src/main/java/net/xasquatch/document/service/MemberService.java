@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -152,4 +153,24 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
         return memberDao.selectMember(memberNo);
 
     }
+
+    @Override
+    public Map<String, Object> getMemberInfoByEmail(String email) {
+        Member member = memberDao.selectByEmail(email);
+        HashMap<String, Object> memberInfoMap = new HashMap<>();
+        memberInfoMap.put("no", member.getNo());
+        memberInfoMap.put("email", member.getEmail());
+        memberInfoMap.put("nickName", member.getNick_name());
+        memberInfoMap.put("date", member.getCreated_date());
+
+        return memberInfoMap;
+    }
+
+    //-------------index----------------
+    public List<Map<String, Object>> getMemberMessageCount(long memberNo) {
+        List<Map<String, Object>> countMap = memberDao.selectMeassageGroupByMemberCount();
+
+        return null;
+    }
+
 }

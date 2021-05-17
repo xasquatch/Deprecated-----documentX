@@ -99,4 +99,8 @@ public class MemberDao {
         return memberMapper.selectHistoryList(memberNo);
     }
 
+    public List<Map<String ,Object>> selectMeassageGroupByMemberCount(){
+        return memberMapper.selectMeassageGroupByMemberCount();
+    }
+
 }

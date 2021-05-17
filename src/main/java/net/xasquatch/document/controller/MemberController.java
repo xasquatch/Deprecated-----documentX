@@ -223,4 +223,13 @@ public class MemberController {
 
         return "contents/chatting/room";
     }
+
+    @GetMapping("/email/{email}")
+    @ResponseBody
+    public String getMemberInfoByEmail(@PathVariable String email) throws JsonProcessingException {
+        Map<String, Object> clientInfo = memberService.getMemberInfoByEmail(email);
+        ObjectWriter objectWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
+
+        return objectWriter.writeValueAsString(clientInfo);
+    }
 }

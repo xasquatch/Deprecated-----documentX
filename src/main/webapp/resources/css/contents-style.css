@@ -79,6 +79,10 @@
 
 @media (max-width: 768px) {
 
+    #chatting-clients{
+        height: 200px;
+    }
+
     #chatting-clients > table {
         min-height: auto;
 

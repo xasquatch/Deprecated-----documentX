@@ -205,7 +205,6 @@ var file = {
 
 }
 
-
 var chat = {
     webSocket: undefined,
     roomNumber: undefined,
@@ -331,18 +330,40 @@ var chat = {
             '<tr>' +
             '   <td>' +
             '      <div class="input-group" title="' + nickName + ' (' + email + ')">' +
-            '          <select class="btn btn-dark form-control" onchange="">' + //TODO: 함수 넣어야됨
-            '              <option selected value="">' +
+            '          <select class="btn btn-dark form-control" onchange="chat.manipulateClient(this)">' + //TODO: 함수 넣어야됨
+            '              <option selected value="default" readonly="readonly">' +
             '                  <span class="form-control">' + nickName + ' (' + email + ')</span>' +
             '              </option>' +
             '              <option value="info">정보보기</option>' +
-            '              <option value="ban">강퇴</option>' +
-            '              <option value="">위임하기</option>' +
+            // '              <option value="ban">강퇴</option>' +
+            // '              <option value="">위임하기</option>' +
             '          </select>' +
             '      </div>' +
             '   </td>' +
             '</tr>';
 
         targetElement.innerHTML += component;
+    },
+    manipulateClient: function (element) {
+        element.value = 'default';
+        var userInfoString = element.querySelector('option[value=default]').innerText;
+        var targetEmail = userInfoString.substring(userInfoString.indexOf('(') + 1, userInfoString.lastIndexOf(')'));
+        request.submit('GET', '/members/email/' + targetEmail + '.', function (data) {
+            var parsedData = JSON.parse(data);
+            modal.open('User Information',
+                '<div class="mb-3">' +
+                '               <label class="form-label">Nick Name</label>' +
+                '               <input type="text" class="form-control" readonly value="' + parsedData['nickName'] + '">' +
+                '           </div>' +
+                '           <div class="mb-3">' +
+                '               <label class="form-label">Email</label>' +
+                '               <input type="text" class="form-control" readonly value="' + parsedData['email'] + '">' +
+                '           </div>' +
+                '           <div class="mb-3">' +
+                '               <label class="form-label">가입일</label>' +
+                '               <input type="text" class="form-control" readonly value="' + parsedData['date'] + '">' +
+                '           </div>', 'modal.close()');
+
+        });
     }
 }
