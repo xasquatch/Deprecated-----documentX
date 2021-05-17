@@ -6,6 +6,7 @@
     border-radius: 5px;
     box-sizing: content-box;
     padding: 10px;
+    height: 550px;
 }
 
 #chatting-clients{
@@ -19,7 +20,7 @@
 }
 
 #chatting-contents > div:first-child {
-    min-height: 50vh;
+    height: 470px;
     overflow: auto;
 }
 
