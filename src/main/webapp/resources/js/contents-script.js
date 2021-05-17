@@ -17,17 +17,9 @@ var file = {
         file.appendListAsObject(element, searchValue, currentPage, pageLimit);
     },
     appendListAsObject: function (element, searchValue, currentPage, pageLimit) {
-        /*{
-            "no" : 40,
-            "mbr_no" : 1,
-            "mbr_nick_name" : "Xasquatch",
-            "dataType" : "IMAGE",
-            "url" : "/storage/1/file.png",
-            "date" : 1621007457000
-        }*/
         element.innerHTML = '';
         var searchValueQuery = '?current-page=' + currentPage + '&row-count=' + pageLimit;
-        if (searchValue != undefined && searchValue != null && searchValue != '')
+        if (searchValue !== undefined && searchValue !== null && searchValue !== '')
             searchValueQuery += '&search-value=' + searchValue;
 
         request.submit('GET', '/members/script/files' + searchValueQuery, function (data) {
@@ -77,8 +69,9 @@ var file = {
                 text.insert(title, fileName, 10);
             }
 
-            var pageList = parsedData['pagination'];
             var pageContainer = document.querySelector('#pagination');
+            if (pageContainer === null) return;
+            var pageList = parsedData['pagination'];
             var ulTag = document.createElement('ul');
             ulTag.className = 'pagination justify-content-center';
             for (var page of pageList) {
