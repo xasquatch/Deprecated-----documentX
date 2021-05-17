@@ -285,12 +285,21 @@ var chat = {
     },
     //메시지 갱신
     onMessage: function (event) {
-        var chatroom = document.querySelector("#chatting-contents>div:first-child");
+        var chatroom = document.querySelector('#chatting-contents>div:first-child');
         var parsedData = JSON.parse(event.data);
-        var addElement = chat.createMsgNode(parsedData.mbr_nick_name, parsedData.contents);
+        if (parsedData.contents === undefined) {
+            var clientList = document.querySelector('#chatting-client-list');
+            clientList.innerHTML = '';
+            for (var client of parsedData)
+                chat.getUserList(clientList, client['principal'].nick_name, client['principal'].email);
 
-        chatroom.appendChild(addElement);
-        chatroom.scrollTo(0, chatroom.scrollHeight);
+        } else {
+            var addElement = chat.createMsgNode(parsedData.mbr_nick_name, parsedData.contents);
+
+            chatroom.appendChild(addElement);
+            chatroom.scrollTo(0, chatroom.scrollHeight);
+        }
+
     },
     createMsgNode: function (nickName, contents) {
         if (nickName === null || nickName === '') {

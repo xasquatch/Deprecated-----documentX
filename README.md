@@ -3,7 +3,6 @@
 
 chat
 - websocket: wws TLS 구현
-- message Create (DB) : no update delete
 
 보류
 - 파일이 같은 이름이면 덮어써지는 이슈

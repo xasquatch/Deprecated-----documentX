@@ -16,22 +16,8 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <div class="input-group" title="Nick Name (test@test.com)">
-                            <select class="btn btn-dark form-control" onchange="">
-                                <option selected value="">
-                                    <span class="form-control">Nick Name (test@test.com)</span>
-                                </option>
-                                <option value="">정보보기</option>
-                                <%--권한필요--%>
-                                <option value="">강퇴</option>
-                                <option value="">위임하기</option>
-                            </select>
-                        </div>
-                    </td>
-                </tr>
+                <tbody id="chatting-client-list">
+
                 </tbody>
                 <%-- 50명을 최대로 리밋--%>
             </table>
@@ -72,7 +58,7 @@
 </section>
 <script>
     window.onload = function (event) {
-        chat.connect('${chattingRoom.no}', '${sessionMember.nick_name}');
+        chat.connect('${chattingRoom.no}', '${sessionMember.nick_name}', '${sessionMember.no}');
         file.appendList('#file-package', '${searchValue}', '${currentPage}', '${rowCount}');
 
         var $drop = $('#chatting-contents > div:first-child');
