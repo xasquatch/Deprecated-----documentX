@@ -63,6 +63,7 @@ public class MemberBuilder {
                 OR();
                 WHERE("a.name LIKE '%" + searchValue + "%'");
             }
+            GROUP_BY("m.no");
         }}.toString();
     }
 

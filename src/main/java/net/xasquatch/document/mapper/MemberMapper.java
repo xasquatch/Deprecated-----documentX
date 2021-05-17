@@ -12,7 +12,7 @@ public interface MemberMapper {
     List<Member> selectMemberList(Object searchValue, Object currentPage, Object pageLimit);
 
     @SelectProvider(type = MemberBuilder.class, method = "selectMemberListCount")
-    int selectMemberListCount(Object searchValue);
+    List<Integer> selectMemberListCount(Object searchValue);
 
     @Select("SELECT * FROM mbr WHERE email = #{arg0}")
     Member selectByEmail(String email);

@@ -143,7 +143,7 @@ public class MemberController {
     public String goToMemberFileList(Model model, @AuthenticationPrincipal Member member,
                                      @RequestParam(required = false, name = "search-value") String searchValue,
                                      @RequestParam(required = false, name = "current-page", defaultValue = "1") int currentPage,
-                                     @RequestParam(required = false, name = "row-count", defaultValue = "50") int pageLimit) {
+                                     @RequestParam(required = false, name = "row-count", defaultValue = "30") int pageLimit) {
 
         model.addAttribute("sessionMember", member);
         model.addAttribute("searchValue", searchValue);
@@ -158,7 +158,7 @@ public class MemberController {
     public String getFileList(@AuthenticationPrincipal Member member,
                               @RequestParam(required = false, name = "search-value") String searchValue,
                               @RequestParam(required = false, name = "current-page", defaultValue = "1") int currentPage,
-                              @RequestParam(required = false, name = "row-count", defaultValue = "50") int pageLimit) {
+                              @RequestParam(required = false, name = "row-count", defaultValue = "30") int pageLimit) {
 
         Map<String, Object> resultMap = storageService.getFileList(member, searchValue, currentPage, pageLimit);
         ObjectWriter writer = new ObjectMapper().writerWithDefaultPrettyPrinter();

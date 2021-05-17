@@ -40,7 +40,10 @@ public class MemberDao {
         for (Map.Entry<Long, Member> entry : memberMap.entrySet())
             members.add(entry.getValue());
 
-        int count = memberMapper.selectMemberListCount(searchValue);
+
+        List<Integer> integers = memberMapper.selectMemberListCount(searchValue);
+        int count = integers.size();
+
 
         resultMap.put("memberList", members);
         resultMap.put("count", count);

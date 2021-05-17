@@ -69,18 +69,23 @@
         <tr>
             <td colspan="5" id="pagination">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">&raquo;</a>
-                    </li>
+                    <c:forEach var="page" items="${pagination}">
+                        <c:choose>
+                            <c:when test="${page eq 'current-page'}">
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">${currentPage}</a>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="${path}/management/members?current-page=${page}&row-count=${rowCount}&search-value=${searchValue}">
+                                            ${page}
+                                    </a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
                 </ul>
             </td>
         </tr>

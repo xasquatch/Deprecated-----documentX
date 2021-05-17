@@ -27,7 +27,7 @@ public class ManagementController {
                                     @AuthenticationPrincipal Member member,
                                     @RequestParam(required = false, name = "search-value") String searchValue,
                                     @RequestParam(required = false, name = "current-page", defaultValue = "1") int currentPage,
-                                    @RequestParam(required = false, name = "row-count", defaultValue = "50") int pageLimit) {
+                                    @RequestParam(required = false, name = "row-count", defaultValue = "30") int pageLimit) {
 
         Map<String, Object> resultMap = memberService.searchMemberList(searchValue, currentPage, pageLimit);
         model.addAttribute("memberList", resultMap.get("memberList"));
@@ -76,7 +76,7 @@ public class ManagementController {
                                   @AuthenticationPrincipal Member member,
                                   @RequestParam(required = false, name = "search-value") String searchValue,
                                   @RequestParam(required = false, name = "current-page", defaultValue = "1") int currentPage,
-                                  @RequestParam(required = false, name = "row-count", defaultValue = "50") int pageLimit) {
+                                  @RequestParam(required = false, name = "row-count", defaultValue = "30") int pageLimit) {
 
         Map<String, Object> resultMap = storageService.searchFileLIst(member, searchValue, currentPage, pageLimit);
 

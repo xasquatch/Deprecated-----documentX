@@ -89,7 +89,7 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
 
     @Override
     public Map<String, Object> searchMemberList(String emailOrNickName, int currentPage, int pageLimit) {
-        Map<String, Object> resultMap = memberDao.selectMemberList(emailOrNickName, 0, 10);
+        Map<String, Object> resultMap = memberDao.selectMemberList(emailOrNickName, currentPage, pageLimit);
         List<String> pagination = paginationService.getPageBlockList(pageLimit, currentPage, (Integer) resultMap.get("count"));
 
         resultMap.put("pagination", pagination);
