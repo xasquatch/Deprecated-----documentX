@@ -73,7 +73,7 @@
 <script>
     window.onload = function (event) {
         chat.connect('${chattingRoom.no}', '${sessionMember.nick_name}');
-        file.appendList('#file-package');
+        file.appendList('#file-package', '${searchValue}', '${currentPage}', '${rowCount}');
 
         var $drop = $('#chatting-contents > div:first-child');
         $drop.on('dragover', function (e) {

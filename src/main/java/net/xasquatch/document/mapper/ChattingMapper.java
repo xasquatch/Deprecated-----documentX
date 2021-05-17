@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface ChattingMapper {
 
-    @Select("SELECT * FROM chatting_room WHERE enable = 1")
+    @Select("SELECT no, name, pwd, " +
+            "DATE_FORMAT(date, '%Y.%m.%d %H:%i:%s') AS date " +
+            "FROM chatting_room WHERE enable = 1")
     List<ChattingRoom> selectChattingRoomList();
 
     @Select("SELECT * FROM chatting_room WHERE enable = 1 AND no = #{arg0}")
