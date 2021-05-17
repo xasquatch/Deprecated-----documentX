@@ -112,12 +112,6 @@
                 회원 관리
             </span>
             </a>
-            <a href="/management/chatting-rooms" class="list-group-item list-group-item-action">
-                <i class="fa fa-weixin " aria-hidden="true"></i>
-                <span class="d-none d-xl-inline d-xxl-none">
-                채팅 관리
-            </span>
-            </a>
             <a href="/management/files" class="list-group-item list-group-item-action">
                 <i class="fa fa-files-o" aria-hidden="true"></i>
                 <span class="d-none d-xl-inline d-xxl-none">
