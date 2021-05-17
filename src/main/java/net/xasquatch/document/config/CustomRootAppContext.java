@@ -4,6 +4,7 @@ import net.xasquatch.document.mapper.*;
 import net.xasquatch.document.repository.AuthorizationDao;
 import net.xasquatch.document.repository.MemberDao;
 import net.xasquatch.document.service.MemberService;
+import net.xasquatch.document.service.PaginationService;
 import net.xasquatch.document.service.TokenMap;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -133,6 +134,10 @@ public class CustomRootAppContext {
     @Bean
     public MemberService memberService() {
         return new MemberService();
+    }
+
+    @Bean PaginationService paginationService(){
+        return new PaginationService();
     }
 
     @Bean
