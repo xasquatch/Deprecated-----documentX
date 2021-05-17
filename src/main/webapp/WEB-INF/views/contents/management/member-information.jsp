@@ -78,6 +78,34 @@
             회원 삭제
         </button>
     </div>
+    <hr>
+    <div class="mb-3">
+        <div>
+            <label for="info-permission" class="form-label">권한</label>
+            <button type="button" class="btn btn-dark btn-sm">
+                권한 설정
+            </button>
+        </div>
+        <div class="input-group">
+            <c:forEach var="permission" items="${permissionList}">
+                <div class="input-group-text">
+                    <c:choose>
+                        <c:when test="${member.authList.contains(permission)}">
+                            <input type="checkbox" id="info-permission" name="permission"
+                                   value="${permission}"
+                                   checked>
+                        </c:when>
+                        <c:otherwise>
+                            <input type="checkbox" id="info-permission" name="permission"
+                                   value="${permission}">
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <div class="form-control">${permission}</div>
+            </c:forEach>
+        </div>
+    </div>
+
 </section>
 
 <c:import url="${path}/WEB-INF/views/include/footer.jsp"/>

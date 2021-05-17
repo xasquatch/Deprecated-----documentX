@@ -64,6 +64,21 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
         return authorities;
     }
 
+    public List<String> getPermissionList(){
+        return authorizationDao.selectAuthorizationList();
+    }
+
+    public boolean modifyPermission(long memberNo, String authName) {
+        return authorizationDao.updateAuthorization(memberNo, authName) == 1 ? true : false;
+    }
+
+    public boolean removePermission(long authNo) {
+        return authorizationDao.deleteAuthorization(authNo) == 1 ? true : false;
+    }
+
+
+
+
     //-----------------------MemberServiceInterface------------------------------------------
     @Override
     public boolean isAvailableEmail(String email) {

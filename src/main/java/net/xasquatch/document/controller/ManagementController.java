@@ -1,5 +1,8 @@
 package net.xasquatch.document.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import net.xasquatch.document.model.Member;
 import net.xasquatch.document.service.MemberService;
 import net.xasquatch.document.service.StorageService;
@@ -42,10 +45,11 @@ public class ManagementController {
 
     @GetMapping("/members/{memberNo}")
     public String goToManageMember(Model model,
-                                   @PathVariable long memberNo) {
+                                   @PathVariable long memberNo) throws JsonProcessingException {
         Member member = memberService.getMemberToNumber(memberNo);
 
         model.addAttribute("member", member);
+        model.addAttribute("permissionList", memberService.getPermissionList());
 
         return "contents/management/member-information";
     }
@@ -89,5 +93,28 @@ public class ManagementController {
 
         return "contents/management/file-list";
     }
+
+    @PatchMapping("/members/{memberNo}/permissions")
+    @ResponseBody
+    public String modifyPermission(@PathVariable long memberNo,
+                                   @RequestParam(required = true, name = "permission") String authName) {
+
+        return String.valueOf(memberService.modifyPermission(memberNo, authName));
+    }
+
+    @DeleteMapping("/members/{memberNo}/permissions")
+    @ResponseBody
+    public String modifyPermission(@RequestParam(required = true, name = "permission-number") long authNo) {
+
+        return String.valueOf(memberService.removePermission(authNo));
+    }
+
+    @GetMapping("/permissions")
+    @ResponseBody
+    public String getPermissionsList() throws JsonProcessingException {
+        ObjectWriter objectWriter = new ObjectMapper().writerWithDefaultPrettyPrinter();
+        return objectWriter.writeValueAsString(memberService.getPermissionList());
+    }
+
 
 }

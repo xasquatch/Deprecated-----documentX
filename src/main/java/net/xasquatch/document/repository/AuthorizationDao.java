@@ -13,12 +13,23 @@ public class AuthorizationDao {
     @Autowired
     private AuthorizationMapper authorizationMapper;
 
+
+    public List<String> selectAuthorizationList(){
+        return authorizationMapper.selectAuthorizationList();
+    }
+
     public List<Authorization> selectByEmail(String email) {
         return authorizationMapper.selectByEmail(email);
-
     }
 
     public boolean insertAuthorization(String authority, Long memberNo) {
         return authorizationMapper.insertAuthorization(authority, memberNo) >= 1;
+    }
+
+    public int updateAuthorization(Object memberNo, Object authName) {
+        return authorizationMapper.updateAuthorization(memberNo, authName);
+    }
+    public int deleteAuthorization(Object authNo) {
+        return authorizationMapper.deleteAuthorization(authNo);
     }
 }

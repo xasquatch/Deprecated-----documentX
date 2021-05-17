@@ -1,8 +1,10 @@
 package net.xasquatch.document.mapper;
 
 import net.xasquatch.document.model.Authorization;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -17,5 +19,14 @@ public interface AuthorizationMapper {
 
     @Insert("INSERT INTO authorization(name, mbr_no) VALUES(#{arg0}, #{arg1})")
     int insertAuthorization(String authorization, Object MemberNo);
+
+    @Update("UPDATE authorization SET name = #{arg1} WHERE mbr_no = #{arg0}")
+    int updateAuthorization(Object memberNo, Object authName);
+
+    @Delete("DELETE FROM authorization WEHRE no = #{arg0}")
+    int deleteAuthorization(Object authNo);
+
+    @Select("SELECT name AS permission FROM authorization group by name")
+    List<String> selectAuthorizationList();
 
 }
