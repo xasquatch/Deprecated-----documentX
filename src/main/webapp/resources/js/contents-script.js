@@ -230,6 +230,7 @@ var chat = {
             chat.disconnect();
             chat.webSocket = null;
         }
+        chat.webSocket.onmessage = chat.onMessage;
         chat.webSocket.onclose = function () {
             chat.disconnect();
             chat.webSocket = null;
@@ -238,7 +239,6 @@ var chat = {
             // }, 3000);
         }
         chat.webSocket.onopen = chat.onOpen;
-        chat.webSocket.onmessage = chat.onMessage;
     },
     disconnect: function () {
         chat.webSocket.send(JSON.stringify({
@@ -286,6 +286,7 @@ var chat = {
     onMessage: function (event) {
         var chatroom = document.querySelector('#chatting-contents>div:first-child');
         var parsedData = JSON.parse(event.data);
+
         if (parsedData.contents === undefined) {
             var clientList = document.querySelector('#chatting-client-list');
             clientList.innerHTML = '';
