@@ -54,12 +54,6 @@ public class PaginationService {
                 if (i == currentPageBlock) {
                     blockList.add("current-page");
 
-                } else if (i == prevPageBlock) {
-                    blockList.add("&laquo;");
-
-                } else if (i == nextPageBlock && i != endPageBlock) {
-                    blockList.add("&raquo;");
-
                 } else {
                     blockList.add(String.valueOf(i));
 

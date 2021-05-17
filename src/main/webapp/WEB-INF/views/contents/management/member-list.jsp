@@ -67,7 +67,7 @@
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="5" id="chatting-pagination">
+            <td colspan="5" id="pagination">
                 <ul class="pagination justify-content-center">
                     <li class="page-item disabled">
                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>

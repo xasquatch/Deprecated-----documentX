@@ -140,9 +140,15 @@ public class MemberController {
     }
 
     @GetMapping("/{nickName}/files/management")
-    public String goToMemberFileList(Model model, @AuthenticationPrincipal Member member) {
+    public String goToMemberFileList(Model model, @AuthenticationPrincipal Member member,
+                                     @RequestParam(required = false, name = "search-value") String searchValue,
+                                     @RequestParam(required = false, name = "current-page", defaultValue = "1") int currentPage,
+                                     @RequestParam(required = false, name = "row-count", defaultValue = "50") int pageLimit) {
 
         model.addAttribute("sessionMember", member);
+        model.addAttribute("searchValue", searchValue);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("rowCount", pageLimit);
 
         return "contents/file/list";
     }

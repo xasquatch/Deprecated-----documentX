@@ -28,11 +28,9 @@ var file = {
         element.innerHTML = '';
         var searchValueQuery = '?current-page=' + currentPage + '&row-count=' + pageLimit;
         if (searchValue != undefined && searchValue != null && searchValue != '')
-            searchValueQuery = '&search-value=' + searchValue;
-
+            searchValueQuery += '&search-value=' + searchValue;
 
         request.submit('GET', '/members/script/files' + searchValueQuery, function (data) {
-            console.log(data);
             var parsedData = JSON.parse(data);
             if (parsedData['storageList'].length <= 0) {
                 nav.acceptMsg(5, '아직 등록된 파일이 없으시네요! 화면 상단 우측의 +버튼을 눌러 파일을 추가해보세요!');
@@ -78,7 +76,7 @@ var file = {
                 }
                 text.insert(title, fileName, 10);
             }
-            // /members/script/files' + searchValueQuery
+
             var pageList = parsedData['pagination'];
             var pageContainer = document.querySelector('#pagination');
             var ulTag = document.createElement('ul');
@@ -90,11 +88,23 @@ var file = {
                 liTag.classList.add('page-item');
                 liTag.appendChild(aTag)
                 ulTag.appendChild(liTag);
+
+
                 if (page == 'current-page') {
                     liTag.classList.add('active');
                     aTag.href = '#';
-                }//TODO: 진행중
+                    aTag.innerHTML = currentPage;
+                } else {
+                    searchValueQuery = '?current-page=' + page + '&row-count=' + pageLimit;
+                    if (searchValue != undefined && searchValue != null && searchValue != '')
+                        searchValueQuery += '&search-value=' + searchValue;
+                    aTag.href = location.pathname + searchValueQuery
+                    aTag.innerHTML = page;
+
+                }
             }
+
+
             pageContainer.appendChild(ulTag);
 
         });
@@ -126,7 +136,8 @@ var file = {
             '</div>',
             'file.renameFile(\'' + jsonStringData + '\',document.querySelector(\'#renameString\').value)');
         document.querySelector('#file-remove-btn').setAttribute('onclick', 'file.deleteFile(\'' + jsonStringData + '\')');
-    },
+    }
+    ,
     renameFile: function (jsonStringData, renameString) {
         var parsedData = JSON.parse(jsonStringData);
         var fileName = parsedData.url.substr(parsedData.url.lastIndexOf('/') + 1, parsedData.url.length);
@@ -155,7 +166,8 @@ var file = {
         } catch (e) {
             modal.close();
         }
-    },
+    }
+    ,
     deleteFile: function (jsonStringData) {
         var parsedData = JSON.parse(jsonStringData);
         var fileName = parsedData.url.substr(parsedData.url.lastIndexOf('/') + 1, parsedData.url.length);
@@ -176,7 +188,8 @@ var file = {
         } catch (e) {
             modal.close();
         }
-    },
+    }
+    ,
     upload: function (element) {
         var formData = new FormData();
         var files = element.files;
@@ -196,7 +209,8 @@ var file = {
             }
 
         }, 'FORMFILE', formData)
-    },
+    }
+    ,
 
 }
 
