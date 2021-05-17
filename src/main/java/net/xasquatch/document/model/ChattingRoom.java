@@ -35,8 +35,8 @@ public class ChattingRoom {
         return Objects.hash(no);
     }
 
-    public void handleMessage(WebSocketSession session, Message message,
-                              ObjectMapper objectMapper) throws IOException {
+    public int handleMessage(WebSocketSession session, Message message,
+                             ObjectMapper objectMapper) throws IOException {
 
         switch (message.getMessageType()) {
             case ENTER:
@@ -53,6 +53,8 @@ public class ChattingRoom {
 
         }
         send(message, objectMapper);
+
+        return sessions.size();
     }
 
     private void send(Message chatMessage, ObjectMapper objectMapper) throws IOException {
