@@ -5,18 +5,18 @@ var ASCIIART = {
 
 }
 var file = {
-    appendList: function (parameter, searchValue) {
+    appendList: function (parameter, searchValue, currentPage, pageLimit) {
         if (typeof parameter === 'object') {
-            file.appendListAsObject(parameter, searchValue);
+            file.appendListAsObject(parameter, searchValue, currentPage, pageLimit);
         } else {
-            file.appendListAsQueryString(parameter, searchValue);
+            file.appendListAsQueryString(parameter, searchValue, currentPage, pageLimit);
         }
     },
-    appendListAsQueryString: function (queryString, searchValue) {
+    appendListAsQueryString: function (queryString, searchValue, currentPage, pageLimit) {
         var element = document.querySelector(queryString);
-        file.appendListAsObject(element, searchValue);
+        file.appendListAsObject(element, searchValue, currentPage, pageLimit);
     },
-    appendListAsObject: function (element, searchValue) {
+    appendListAsObject: function (element, searchValue, currentPage, pageLimit) {
         /*{
             "no" : 40,
             "mbr_no" : 1,
@@ -26,16 +26,13 @@ var file = {
             "date" : 1621007457000
         }*/
         element.innerHTML = '';
-        var searchValueQuery = '';
-        if (searchValue == undefined || searchValue == null) {
-            searchValueQuery = '';
+        var searchValueQuery = '?current-page=' + currentPage + '&row-count=' + pageLimit;
+        if (searchValue != undefined && searchValue != null && searchValue != '')
+            searchValueQuery = '&search-value=' + searchValue;
 
-        } else {
-            searchValueQuery = '?search-value=' + searchValue;
-
-        }
 
         request.submit('GET', '/members/script/files' + searchValueQuery, function (data) {
+            console.log(data);
             var parsedData = JSON.parse(data);
             if (parsedData['storageList'].length <= 0) {
                 nav.acceptMsg(5, '아직 등록된 파일이 없으시네요! 화면 상단 우측의 +버튼을 눌러 파일을 추가해보세요!');
@@ -68,6 +65,8 @@ var file = {
                 container.setAttribute('onclick',
                     'file.readyToManipulation(this)');
                 element.appendChild(container);
+                window.history.replaceState('', '', location.pathname + searchValueQuery);
+
                 if (file.dataType === 'FILE') {
                     text.insert(preview, ASCIIART.FILE, 10);
 
@@ -79,6 +78,25 @@ var file = {
                 }
                 text.insert(title, fileName, 10);
             }
+            // /members/script/files' + searchValueQuery
+            var pageList = parsedData['pagination'];
+            var pageContainer = document.querySelector('#pagination');
+            var ulTag = document.createElement('ul');
+            ulTag.className = 'pagination justify-content-center';
+            for (var page of pageList) {
+                var aTag = document.createElement('a');
+                var liTag = document.createElement('li');
+                aTag.className = 'page-link';
+                liTag.classList.add('page-item');
+                liTag.appendChild(aTag)
+                ulTag.appendChild(liTag);
+                if (page == 'current-page') {
+                    liTag.classList.add('active');
+                    aTag.href = '#';
+                }//TODO: 진행중
+            }
+            pageContainer.appendChild(ulTag);
+
         });
     },
     readyToManipulation: function (container) {
@@ -202,6 +220,10 @@ var chat = {
         chat.webSocket = new WebSocket("ws://localhost/chat");
         chat.roomNumber = roomNo;
         chat.nickName = nickName;
+        window.onbeforeunload = function () {
+            chat.disconnect();
+            chat.webSocket = null;
+        }
         chat.webSocket.onclose = function () {
             chat.disconnect();
             chat.webSocket = null;
