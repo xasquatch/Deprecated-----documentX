@@ -52,7 +52,7 @@ public class PaginationService {
         for (int i = prevPageBlock; i <= nextPageBlock; i++) {
             if (i != 0) {
                 if (i == currentPageBlock) {
-                    blockList.add("<a class='myblog-page-block btn btn-link-red current-page'>" + i + "</a>");
+                    blockList.add("current-page");
 
                 } else if (i == prevPageBlock) {
                     blockList.add("&laquo;");
