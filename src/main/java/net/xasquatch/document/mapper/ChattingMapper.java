@@ -46,11 +46,13 @@ public interface ChattingMapper {
             "LIMIT #{arg1} , #{arg2}")
     List<Map<String, Object>> selectChatHistoryList(Object memberNo, Object currentPage, Object limit);
 
-    @Select("SELECT convert(msg.contents USING UTF8) AS contents, msg.date, c.name " +
+    @Select("SELECT convert(msg.contents USING UTF8) AS contents, " +
+            "       mbr.no AS mbr_no, msg.date, mbr.nick_name AS mbr_nick_name, " +
+            "       mbr.email AS mbr_email " +
             "FROM mbr " +
             "RIGHT OUTER JOIN msg ON mbr.no = msg.mbr_no " +
             "LEFT OUTER JOIN chatting_room c ON c.no = msg.chatting_room_no " +
             "WHERE mbr.no = #{arg0} AND c.no = #{arg1} " +
-            "ORDER BY msg.no DESC")
+            "ORDER BY msg.no DESC" )
     List<Map<String, Object>> selectChatHistory(Object memberNo, Object roomNo);
 }
