@@ -6,10 +6,11 @@ import net.xasquatch.document.model.Message;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ChattingMapper {
 
-//    @Select("SELECT no, name, pwd, " +
+    //    @Select("SELECT no, name, pwd, " +
 //            "DATE_FORMAT(date, '%Y.%m.%d %H:%i:%s') AS date " +
 //            "FROM chatting_room WHERE enable = 1")
     @SelectProvider(type = ChattingBuilder.class, method = "selectChattingRoomList")
@@ -35,6 +36,14 @@ public interface ChattingMapper {
             "VALUES(#{mbr_no},#{chatting_room_no},#{contents},#{ip_address})")
     int insertMessage(Message message);
 
-
+    @Select("SELECT c.no, c.name, mbr.no AS mbr_no, c.date " +
+            "FROM mbr " +
+            "RIGHT OUTER JOIN msg ON mbr.no = msg.mbr_no " +
+            "LEFT OUTER JOIN chatting_room c ON c.no = msg.chatting_room_no " +
+            "GROUP BY c.name " +
+            "HAVING mbr.no = #{arg0} " +
+            "ORDER BY c.no DESC " +
+            "LIMIT #{arg1} , #{arg2}")
+    List<Map<String, Object>> selectChatHistoryList(Object memberNo, Object currentPage, Object limit);
 
 }

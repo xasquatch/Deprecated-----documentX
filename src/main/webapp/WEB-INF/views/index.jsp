@@ -16,14 +16,25 @@
         <%--            <canvas id="myChart2"></canvas>--%>
         <%--        </div>--%>
     </div>
-    <div class="d-flex flex-wrap justify-content-around">
-        <div class="card">
+    <div class="d-flex flex-wrap justify-content-between">
+        <div class="card" style="width: 100%; max-width: 530px;">
+            <div class="d-flex justify-content-between">
+                <div>나의 채팅 이력</div>
+                <a class="btn btn-dark" href="${path}/chatting/history">
+                    More
+                </a>
+            </div>
             <ul class="list-group">
-               <li class="list-group-item">
-                   <a href="">
-
-                   </a>
-               </li>
+                <c:forEach var="history" items="${chatHistoryList}">
+                    <li class="list-group-item d-flex justify-content-around">
+                        <a href="/chatting/${history.get(no)}/history">
+                                ${history.get("name")}
+                        </a>
+                        <span>
+                            [${history.get("date")}]
+                        </span>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
         <div class="card">
@@ -55,8 +66,8 @@
                             '${messageCount.get("count")}',
                             </c:forEach>
                         ],
-                    backgroundColor: ['darkred', 'gray', 'aqua', '#c3e6cb', '#dc3545', '#6c757d','rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
-                    borderColor: ['darkred', 'gray', 'aqua', '#c3e6cb', '#dc3545', '#6c757d','rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+                    backgroundColor: ['darkred', 'gray', 'aqua', '#c3e6cb', '#dc3545', '#6c757d', 'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+                    borderColor: ['darkred', 'gray', 'aqua', '#c3e6cb', '#dc3545', '#6c757d', 'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
                     borderWidth: 1
                 }]
             },
@@ -91,7 +102,7 @@
     }
 
     function circleChart() {
-        var colors = ['darkred', 'gray', 'aqua', '#c3e6cb', '#dc3545', '#6c757d','rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'];
+        var colors = ['darkred', 'gray', 'aqua', '#c3e6cb', '#dc3545', '#6c757d', 'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'];
         var donutOptions = {
             cutoutPercentage: 10,
             legend: {

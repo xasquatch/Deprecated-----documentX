@@ -2,6 +2,7 @@ package net.xasquatch.document.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.model.Member;
+import net.xasquatch.document.service.ChattingService;
 import net.xasquatch.document.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,14 +24,19 @@ public class HomeController {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private ChattingService chattingService;
+
 
     @GetMapping("/")
     public String Home(Model model, @AuthenticationPrincipal Member sessionMember) {
 
         List<Map<String, Object>> messageCountList = memberService.getMemberMessageCount(sessionMember.getNo());
+        List<Map<String, Object>> chatHistoryList = chattingService.selectChatHistoryList(sessionMember.getNo(), 1, 5);
 
         model.addAttribute("sessionMember", sessionMember);
         model.addAttribute("messageCountList", messageCountList);
+        model.addAttribute("chatHistoryList", chatHistoryList);
 
         return "index";
     }

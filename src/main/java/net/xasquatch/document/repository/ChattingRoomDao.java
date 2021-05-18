@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ChattingRoomDao {
@@ -44,5 +45,10 @@ public class ChattingRoomDao {
     public int insertMessage(Message message){
         return chattingMapper.insertMessage(message);
     }
+
+    public List<Map<String,Object>> selectChatHistoryList(long memberNo,int currentPage, int limit){
+        return chattingMapper.selectChatHistoryList(memberNo,currentPage-1,limit);
+    }
+
 
 }

@@ -11,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @Slf4j
 @Controller
 @RequestMapping(path = "/chatting", produces = {"text/plain;charset=UTF-8", MediaType.ALL_VALUE})
@@ -56,4 +59,27 @@ public class ChattingRoomController {
 
         return redirectUrl;
     }
+
+    @GetMapping("/history")
+    public String goToChattingListHistoryPage(@AuthenticationPrincipal Member sessionMember, Model model) {
+
+        List<Map<String, Object>> chatHistoryList = chattingService.selectChatHistoryList(sessionMember.getNo(), 1, Integer.MAX_VALUE);
+
+        model.addAttribute("sessionMember", sessionMember);
+        model.addAttribute("chatHistoryList", chatHistoryList);
+
+        return "contents/chatting/history-list";
+    }
+
+    @GetMapping("/history/{roomNo}")
+    public String goToChattingHistoryPage(@AuthenticationPrincipal Member sessionMember,
+                                          @PathVariable int roomNo, Model model) {
+
+
+        model.addAttribute("sessionMember", sessionMember);
+//        model.addAttribute();
+
+        return "contents/chatting/history";
+    }
+
 }
