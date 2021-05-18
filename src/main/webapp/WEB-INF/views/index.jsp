@@ -1,44 +1,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <c:import url="include/header.jsp"/>
 
 <section class="wrap reduced-wrap">
-    <h2>dashboard</h2>
-    <div class="d-flex">
+    <h3>채팅 메시지 히스토리</h3>
+    <div class="d-flex flex-wrap">
         <div class="container">
             <canvas id="myChart"></canvas>
         </div>
-
-        <div class="container">
-            <canvas id="myChart2"></canvas>
-        </div>
+        <%--        <div class="container">--%>
+        <%--            <canvas id="myChart2"></canvas>--%>
+        <%--        </div>--%>
     </div>
+    <div class="d-flex flex-wrap justify-content-around">
+        <div class="card">
+            <ul class="list-group">
+               <li class="list-group-item">
+                   <a href="">
 
-    <hr>
-
-    <h2>title</h2>
-    <div class="d-flex">
-        <div class="col-md-4 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chDonut1"></canvas>
-                </div>
-            </div>
+                   </a>
+               </li>
+            </ul>
         </div>
-        <div class="col-md-4 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chDonut2"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chDonut3"></canvas>
-                </div>
+        <div class="card">
+            <div class="card-body">
+                <canvas id="chDonut"></canvas>
             </div>
         </div>
     </div>
@@ -46,18 +36,27 @@
 </section>
 <script>
 
-    function chart1() {
+    function chart() {
 
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: [
+                    <c:forEach var="messageCount" items="${messageCountList}">
+                    '${messageCount.get("nick_name")}',
+                    </c:forEach>
+                ],
                 datasets: [{
                     label: ' of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: ['rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)'],
-                    borderColor: ['rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)'],
+                    data:
+                        [
+                            <c:forEach var="messageCount" items="${messageCountList}">
+                            '${messageCount.get("count")}',
+                            </c:forEach>
+                        ],
+                    backgroundColor: ['darkred', 'gray', 'aqua', '#c3e6cb', '#dc3545', '#6c757d','rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+                    borderColor: ['darkred', 'gray', 'aqua', '#c3e6cb', '#dc3545', '#6c757d','rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
                     borderWidth: 1
                 }]
             },
@@ -91,10 +90,10 @@
         });
     }
 
-    function chart4() {
-        var colors = ['rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)', 'rgba('+Math.random()*250+', '+Math.random()*250+', '+Math.random()*250+', 1)'];
+    function circleChart() {
+        var colors = ['darkred', 'gray', 'aqua', '#c3e6cb', '#dc3545', '#6c757d','rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'];
         var donutOptions = {
-            cutoutPercentage: 10, //도넛두께 : 값이 클수록 얇아짐
+            cutoutPercentage: 10,
             legend: {
                 position: 'bottom', padding: 5,
                 labels: {
@@ -102,73 +101,45 @@
                 }
             }
         };
-        var chDonutData1 = {
-            labels: ['Bootstrap', 'Popper', 'Other'],
+
+        var chDonutData = {
+
+            labels:
+                [
+                    <c:forEach var="messageCount" items="${messageCountList}">
+                    '${messageCount.get("nick_name")}',
+                    </c:forEach>
+                ],
+
             datasets: [
                 {
-                    backgroundColor: colors.slice(0, 3), borderWidth: 0, data: [74, 11, 40]
+                    backgroundColor: colors.slice(0, ${fn:length(messageCountList)}),
+                    borderWidth: 0,
+                    data:
+                        [
+                            <c:forEach var="messageCount" items="${messageCountList}">
+                            '${messageCount.get("count")}',
+                            </c:forEach>
+                        ]
                 }
             ]
         };
 
-        var chDonut1 = document.getElementById("chDonut1");
-        if (chDonut1) {
-            new Chart(chDonut1,
+        var chDonut = document.getElementById("chDonut");
+        if (chDonut) {
+            new Chart(chDonut,
                 {
                     type: 'pie',
-                    data: chDonutData1,
+                    data: chDonutData,
                     options: donutOptions
                 }
             );
         }
-
-        var chDonutData2 = {
-            labels: ['Wips', 'Pops', 'Dags'],
-            datasets: [
-                {
-                    backgroundColor: colors.slice(0, 3),
-                    borderWidth: 0,
-                    data: [40, 45, 30]
-                }
-            ]
-        };
-        var chDonut2 = document.getElementById("chDonut2");
-        if (chDonut2) {
-            new Chart(chDonut2,
-                {
-                    type: 'pie',
-                    data: chDonutData2,
-                    options: donutOptions
-                }
-            );
-        }
-
-        var chDonutData3 = {
-            labels: ['Angular', 'React', 'Other', 'Otdher'],
-            datasets: [
-                {
-                    backgroundColor: colors.slice(0, 4),
-                    borderWidth: 0,
-                    data: [21, 45, 55, 33]
-                }
-            ]
-        };
-        var chDonut3 = document.getElementById("chDonut3");
-        if (chDonut3) {
-            new Chart(chDonut3,
-                {
-                    type: 'doughnut',
-                    data: chDonutData3,
-                    options: donutOptions
-                });
-        }
-
-
     }
 
-    chart1();
-    chart2();
-    chart4();
+    chart();
+    // chart2();
+    circleChart();
 
 </script>
 

@@ -100,7 +100,7 @@ public class MemberDao {
     }
 
     public List<Map<String ,Object>> selectMeassageGroupByMemberCount(){
-        return memberMapper.selectMeassageGroupByMemberCount();
+        return memberMapper.selectMessageGroupByMemberCount();
     }
 
 }

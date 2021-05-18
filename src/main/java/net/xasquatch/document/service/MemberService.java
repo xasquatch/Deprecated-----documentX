@@ -168,9 +168,7 @@ public class MemberService implements UserDetailsService, MemberServiceInterface
 
     //-------------index----------------
     public List<Map<String, Object>> getMemberMessageCount(long memberNo) {
-        List<Map<String, Object>> countMap = memberDao.selectMeassageGroupByMemberCount();
-
-        return null;
+        return memberDao.selectMeassageGroupByMemberCount();
     }
 
 }

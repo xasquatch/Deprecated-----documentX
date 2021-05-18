@@ -44,8 +44,8 @@ public interface MemberMapper {
     @SelectProvider(type = MemberBuilder.class, method = "selectHistoryList")
     List<History> selectHistoryList(long memberNo);
 
-    @Select("SELECT count(*) AS count, mbr_no FROM msg GROUP BY mbr_no")
-    List<Map<String ,Object>> selectMeassageGroupByMemberCount();
+    @Select("SELECT count(*) AS count, mbr.nick_name FROM msg LEFT OUTER JOIN mbr ON msg.mbr_no = mbr.no GROUP BY mbr.nick_name")
+    List<Map<String ,Object>> selectMessageGroupByMemberCount();
 
 
 }
