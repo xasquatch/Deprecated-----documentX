@@ -27,7 +27,7 @@
             <ul class="list-group">
                 <c:forEach var="history" items="${chatHistoryList}">
                     <li class="list-group-item d-flex justify-content-around">
-                        <a href="/chatting/${history.get(no)}/history">
+                        <a href="/chatting/history/${history.get("name")}?room-number=${history.get("no")}">
                                 ${history.get("name")}
                         </a>
                         <span>

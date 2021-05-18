@@ -30,24 +30,28 @@ public class ChattingRoomDao {
 
     }
 
-    public int updateChattingRoom(ChattingRoom room){
+    public int updateChattingRoom(ChattingRoom room) {
         return updateChattingRoom(room);
     }
 
-    public int deleteChattingRoom(ChattingRoom room){
+    public int deleteChattingRoom(ChattingRoom room) {
         return chattingMapper.deleteChattingRoom(room);
     }
 
-    public List<Message> selectMessageList(Object roomNo){
+    public List<Message> selectMessageList(Object roomNo) {
         return chattingMapper.selectMessageList(roomNo);
     }
 
-    public int insertMessage(Message message){
+    public int insertMessage(Message message) {
         return chattingMapper.insertMessage(message);
     }
 
-    public List<Map<String,Object>> selectChatHistoryList(long memberNo,int currentPage, int limit){
-        return chattingMapper.selectChatHistoryList(memberNo,currentPage-1,limit);
+    public List<Map<String, Object>> selectChatHistoryList(long memberNo, int currentPage, int limit) {
+        return chattingMapper.selectChatHistoryList(memberNo, currentPage - 1, limit);
+    }
+
+    public List<Map<String, Object>> selectChatHistory(long memberNo, long roomNo) {
+        return chattingMapper.selectChatHistory(memberNo, roomNo);
     }
 
 

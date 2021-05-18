@@ -76,4 +76,9 @@ public class ChattingService {
     public List<Map<String,Object>> selectChatHistoryList(long memberNo, int currentPage, int limit){
         return chattingRoomDao.selectChatHistoryList(memberNo, currentPage, limit);
     }
+
+    public List<Map<String, Object>> selectChatHistory(long memberNo, long roomNo) {
+        return chattingRoomDao.selectChatHistory(memberNo, roomNo);
+    }
+
 }

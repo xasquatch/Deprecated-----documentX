@@ -5,9 +5,9 @@
 <c:import url="${path}/WEB-INF/views/include/header.jsp"/>
 
 <section class="wrap reduced-wrap">
+    <h1>${roomName}</h1>
+    <div class="form-control">
 
-
-
-
+    </div>
 </section>
 <c:import url="${path}/WEB-INF/views/include/footer.jsp"/>

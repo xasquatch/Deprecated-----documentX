@@ -71,13 +71,16 @@ public class ChattingRoomController {
         return "contents/chatting/history-list";
     }
 
-    @GetMapping("/history/{roomNo}")
+    @GetMapping("/history/{roomName}")
     public String goToChattingHistoryPage(@AuthenticationPrincipal Member sessionMember,
-                                          @PathVariable int roomNo, Model model) {
+                                          @PathVariable String roomName, Model model,
+                                          @RequestParam(required = true, name = "room-number") int roomNo) {
 
+        List<Map<String, Object>> messageList = chattingService.selectChatHistory(sessionMember.getNo(), roomNo);
 
         model.addAttribute("sessionMember", sessionMember);
-//        model.addAttribute();
+        model.addAttribute("roomName", roomName);
+        model.addAttribute("messageList", messageList);
 
         return "contents/chatting/history";
     }
