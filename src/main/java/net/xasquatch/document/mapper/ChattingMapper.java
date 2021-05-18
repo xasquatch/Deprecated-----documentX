@@ -36,7 +36,8 @@ public interface ChattingMapper {
             "VALUES(#{mbr_no},#{chatting_room_no},#{contents},#{ip_address})")
     int insertMessage(Message message);
 
-    @Select("SELECT c.no, c.name, mbr.no AS mbr_no, c.date " +
+    @Select("SELECT c.no, c.name, mbr.no AS mbr_no, " +
+            "DATE_FORMAT(c.date, '%Y.%m.%d %H:%i:%s') AS date " +
             "FROM mbr " +
             "RIGHT OUTER JOIN msg ON mbr.no = msg.mbr_no " +
             "LEFT OUTER JOIN chatting_room c ON c.no = msg.chatting_room_no " +
@@ -47,8 +48,9 @@ public interface ChattingMapper {
     List<Map<String, Object>> selectChatHistoryList(Object memberNo, Object currentPage, Object limit);
 
     @Select("SELECT convert(msg.contents USING UTF8) AS contents, " +
-            "       mbr.no AS mbr_no, msg.date, mbr.nick_name AS mbr_nick_name, " +
-            "       mbr.email AS mbr_email " +
+            "       mbr.no AS mbr_no, mbr.nick_name AS mbr_nick_name, " +
+            "       mbr.email AS mbr_email," +
+            "       DATE_FORMAT(msg.date, '%Y.%m.%d %H:%i:%s') AS date " +
             "FROM mbr " +
             "RIGHT OUTER JOIN msg ON mbr.no = msg.mbr_no " +
             "LEFT OUTER JOIN chatting_room c ON c.no = msg.chatting_room_no " +
