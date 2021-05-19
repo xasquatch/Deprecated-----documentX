@@ -47,7 +47,7 @@
                          onclick="window.open('${path}${file.url}','${file.url}','${file.dataType}',false)">
                     <c:choose>
                         <c:when test="${file.dataType eq 'IMAGE'}">
-                            <img style="cursor: pointer;" src="${file.url}">
+                            <img style="cursor: pointer; width: 100%;" src="${file.url}">
                         </c:when>
                         <c:otherwise>
                             <img class="loading-icon" src="${path}/resources/img/loading.gif" width="50" height="50">

@@ -76,7 +76,7 @@ public class ChattingRoomController {
                                           @PathVariable String roomName, Model model,
                                           @RequestParam(required = true, name = "room-number") int roomNo) {
 
-        List<Map<String, Object>> messageList = chattingService.selectChatHistory(sessionMember.getNo(), roomNo);
+        List<Map<String, Object>> messageList = chattingService.selectChatHistory(roomNo);
 
         model.addAttribute("sessionMember", sessionMember);
         model.addAttribute("roomName", roomName);

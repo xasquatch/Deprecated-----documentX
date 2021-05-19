@@ -50,8 +50,8 @@ public class ChattingRoomDao {
         return chattingMapper.selectChatHistoryList(memberNo, currentPage - 1, limit);
     }
 
-    public List<Map<String, Object>> selectChatHistory(long memberNo, long roomNo) {
-        return chattingMapper.selectChatHistory(memberNo, roomNo);
+    public List<Map<String, Object>> selectChatHistory(long roomNo) {
+        return chattingMapper.selectChatHistory(roomNo);
     }
 
 

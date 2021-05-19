@@ -269,6 +269,7 @@ var chat = {
         var container = document.createElement('div');
         uploadTarget.setAttribute('onclick', 'window.open("' + urlValue + '",null,null,false);')
         uploadTarget.style.cursor = 'pointer';
+        uploadTarget.style.width = '100%';
         container.appendChild(uploadTarget);
         chatInput.value = container.innerHTML;
         document.querySelector('#chatting-send-btn').click();
