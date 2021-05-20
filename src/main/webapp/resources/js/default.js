@@ -393,7 +393,7 @@ var drag = {
                 if (element === document.querySelector('#chatting-contents>div:first-child')) {
                     return true;
                 } else {
-                    isContainTargetParentNode(element.parentNode);
+                    return isContainTargetParentNode(element.parentNode);
                 }
             } catch (e) {
                 return false;
@@ -445,7 +445,7 @@ var drag = {
                 if (element === document.querySelector('#chatting-contents>div:first-child')) {
                     return true;
                 } else {
-                    isContainTargetParentNode(element.parentNode);
+                    return isContainTargetParentNode(element.parentNode);
                 }
             } catch (e) {
                 return false;
