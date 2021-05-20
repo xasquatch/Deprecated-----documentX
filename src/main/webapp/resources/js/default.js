@@ -390,7 +390,7 @@ var drag = {
 
         function isContainTargetParentNode(element) {
             try {
-                if (element.parentNode === document.querySelector('#chatting-contents>div:first-child')) {
+                if (element === document.querySelector('#chatting-contents>div:first-child')) {
                     return true;
                 } else {
                     isContainTargetParentNode(element.parentNode);
@@ -442,7 +442,7 @@ var drag = {
 
         function isContainTargetParentNode(element) {
             try {
-                if (element.parentNode === document.querySelector('#chatting-contents>div:first-child')) {
+                if (element === document.querySelector('#chatting-contents>div:first-child')) {
                     return true;
                 } else {
                     isContainTargetParentNode(element.parentNode);
