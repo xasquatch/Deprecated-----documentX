@@ -49,12 +49,11 @@ var file = {
                 container.appendChild(hiddenForm);
                 container.appendChild(preview);
                 container.appendChild(title);
-                container.setAttribute('draggable', 'true');
-                container.setAttribute('ondragend', 'chat.uploadDragFile(this)');
                 container.setAttribute('title', fileName);
                 container.setAttribute('onclick',
                     'file.readyToManipulation(this)');
                 element.appendChild(container);
+                drag.addCloneElement(container);
                 window.history.replaceState('', '', location.pathname + searchValueQuery);
 
                 if (file.dataType === 'FILE') {
@@ -222,7 +221,7 @@ var chat = {
         }, 'FORM', 'pwd=' + '')
     },
     connect: function (roomNo, nickName, clientNo) {
-        chat.webSocket = new WebSocket("wss://document.xasquatch.net/chat");
+        chat.webSocket = new WebSocket("ws://localhost/chat");
         chat.roomNumber = roomNo;
         chat.nickName = nickName;
         chat.clientNo = clientNo;

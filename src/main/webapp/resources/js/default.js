@@ -196,6 +196,10 @@ var drag = {
         drag.mouseElement(element);
         drag.touchElement(element);
     },
+    addCloneElement: function (element) {
+        drag.mouseCloneElement(element);
+        drag.touchCloneElement(element);
+    },
 
     addExpansionElement: function (element) {
         drag.mouseElementX(element);
@@ -342,6 +346,89 @@ var drag = {
         function closeDragElement() {
             document.ontouchend = null;
             document.ontouchmove = null;
+        }
+    },
+
+    mouseCloneElement: function (element) {
+        var elementClone;
+        try {
+            element.onmousedown = dragMouseDown;
+        } catch (e) {
+            console.log(e);
+        }
+
+        function dragMouseDown(event) {
+            event = event || window.event;
+            event.preventDefault();
+
+            elementClone = element.cloneNode(true);
+            elementClone.setAttribute('onclick', '');
+            elementClone.classList.add('dragElement');
+            elementClone.style.top = event.clientY + "px";
+            elementClone.style.left = event.clientX + "px";
+            document.querySelector('html').appendChild(elementClone);
+
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(event) {
+            event = event || window.event;
+            event.preventDefault();
+            elementClone.style.top = (event.clientY + 5) + "px";
+            elementClone.style.left = (event.clientX + 5) + "px";
+        }
+
+        function closeDragElement(event) {
+            elementClone.remove();
+            document.onmouseup = null;
+            document.onmousemove = null;
+            if (event.target === document.querySelector('#chatting-contents>div:first-child'))
+                chat.uploadDragFile(elementClone);
+
+        }
+
+    },
+
+    touchCloneElement: function (element) {
+        var elementClone;
+        try {
+            element.ontouchstart = dragTouchStart;
+        } catch (e) {
+            console.log(e);
+        }
+
+        function dragTouchStart(event) {
+            event = event || window.event;
+
+            elementClone = element.cloneNode(true);
+            elementClone.setAttribute('onclick', '');
+            elementClone.classList.add('dragElement');
+            elementClone.style.top = event.clientY + "px";
+            elementClone.style.left = event.clientX + "px";
+            document.querySelector('html').appendChild(elementClone);
+
+            document.ontouchend = closeDragElement;
+            document.ontouchmove = elementDrag;
+        }
+
+        function elementDrag(event) {
+            event = event || window.event;
+            elementClone.style.top = (event.changedTouches[0].clientY + 30) + "px";
+            elementClone.style.left = (event.changedTouches[0].clientX + 30) + "px";
+
+
+        }
+
+        function closeDragElement(event) {
+            elementClone.remove();
+            document.ontouchend = null;
+            document.ontouchmove = null;
+            if (document.elementFromPoint(event.changedTouches[0].clientX, event.changedTouches[0].clientY)
+                === document.querySelector('#chatting-contents>div:first-child'))
+                chat.uploadDragFile(elementClone);
+
+
         }
     }
 

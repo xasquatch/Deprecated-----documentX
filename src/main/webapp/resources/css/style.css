@@ -180,6 +180,19 @@ footer {
     z-index: 11;
 }
 
+.dragElement {
+    position: fixed !important;
+    opacity: 0.5 !important;
+
+}
+
+.dragElement,
+.dragElement * {
+    max-width: 10vw !important;
+    max-height: 10vw !important;
+
+}
+
 #myModal img {
     max-width: 100%;
 }
