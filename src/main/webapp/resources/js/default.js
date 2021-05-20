@@ -349,18 +349,17 @@ var drag = {
 
 var headerExpansion = {
 
-    mainHeader: document.querySelector('#main-header'),
-    btn: document.querySelector('#main-header-expansion-btn'),
     isDeactivated: false,
 
     toggle: function () {
+        var mainHeader = document.querySelector('#main-header');
         headerExpansion.isDeactivated
-            = headerExpansion.mainHeader.classList.toggle('reduced-main-header');
+            = mainHeader.classList.toggle('reduced-main-header');
         document.querySelector('.wrap').classList.toggle('reduced-wrap');
-        headerExpansion.mainHeader.querySelector('#main-header-logo').classList.toggle('reduced-header-logo');
-        headerExpansion.mainHeader.querySelector('#main-header-list').classList.toggle('reduced-header-list');
+        mainHeader.querySelector('#main-header-logo').classList.toggle('reduced-header-logo');
+        mainHeader.querySelector('#main-header-list').classList.toggle('reduced-header-list');
 
-        var listOfNoneVisible = headerExpansion.mainHeader.querySelectorAll(".d-xl-inline");
+        var listOfNoneVisible = mainHeader.querySelectorAll(".d-xl-inline");
 
         for (var element of listOfNoneVisible) {
             element.classList.toggle('d-none');
@@ -378,14 +377,15 @@ var headerExpansion = {
 
     },
     deactivate: function () {
-        headerExpansion.btn.classList.remove('hidden');
-        headerExpansion.isDeactivated
-            = headerExpansion.mainHeader.classList.add('reduced-main-header');
+        var mainHeader = document.querySelector('#main-header');
+        var btn = document.querySelector('#main-header-expansion-btn');
+        btn.classList.remove('hidden');
+        headerExpansion.isDeactivated = mainHeader.classList.add('reduced-main-header');
         document.querySelector('.wrap').classList.add('reduced-wrap');
-        headerExpansion.mainHeader.querySelector('#main-header-logo').classList.add('reduced-header-logo');
-        headerExpansion.mainHeader.querySelector('#main-header-list').classList.add('reduced-header-list');
+        mainHeader.querySelector('#main-header-logo').classList.add('reduced-header-logo');
+        mainHeader.querySelector('#main-header-list').classList.add('reduced-header-list');
 
-        var listOfNoneVisible = headerExpansion.mainHeader.querySelectorAll(".d-xl-inline");
+        var listOfNoneVisible = mainHeader.querySelectorAll(".d-xl-inline");
 
         for (var element of listOfNoneVisible) {
             element.classList.add('d-none');
@@ -393,14 +393,15 @@ var headerExpansion = {
         }
     },
     activate: function () {
-        headerExpansion.btn.classList.add('hidden');
-        headerExpansion.isDeactivated
-            = headerExpansion.mainHeader.classList.remove('reduced-main-header');
+        var btn = document.querySelector('#main-header-expansion-btn');
+        var mainHeader = document.querySelector('#main-header');
+        btn.classList.add('hidden');
+        headerExpansion.isDeactivated = mainHeader.classList.remove('reduced-main-header');
         document.querySelector('.wrap').classList.remove('reduced-wrap');
-        headerExpansion.mainHeader.querySelector('#main-header-logo').classList.remove('reduced-header-logo');
-        headerExpansion.mainHeader.querySelector('#main-header-list').classList.remove('reduced-header-list');
+        mainHeader.querySelector('#main-header-logo').classList.remove('reduced-header-logo');
+        mainHeader.querySelector('#main-header-list').classList.remove('reduced-header-list');
 
-        var listOfNoneVisible = headerExpansion.mainHeader.querySelectorAll(".d-xl-inline");
+        var listOfNoneVisible = mainHeader.querySelectorAll(".d-xl-inline");
 
         for (var element of listOfNoneVisible) {
             element.classList.remove('d-none');
@@ -412,24 +413,21 @@ var headerExpansion = {
 }
 
 var nav = {
-    container: document.querySelector('#main-nav'),
-    count: document.querySelector('#main-nav-count'),
-    msg: document.querySelector('#main-nav-msg'),
     decreaseCount: function () {
-        nav.count.innerHTML--;
+        document.querySelector('#main-nav-count').innerHTML--;
     },
     toggle: function () {
-        nav.container.classList.toggle('deactivate-nav');
+        document.querySelector('#main-nav').classList.toggle('deactivate-nav');
     },
     activate: function (msgCount, msg) {
-        nav.container.classList.remove('deactivate-nav');
-        nav.count.innerHTML = msgCount;
-        nav.msg.innerHTML = msg;
+        document.querySelector('#main-nav').classList.remove('deactivate-nav');
+        document.querySelector('#main-nav-count').innerHTML = msgCount;
+        document.querySelector('#main-nav-msg').innerHTML = msg;
     },
     deactivate: function () {
-        nav.container.classList.add('deactivate-nav');
-        nav.count.innerHTML = '';
-        nav.msg.innerHTML = '';
+        document.querySelector('#main-nav').classList.add('deactivate-nav');
+        document.querySelector('#main-nav-count').innerHTML = '';
+        document.querySelector('#main-nav-msg').innerHTML = '';
     },
     revertToFirst: function (interval) {
         clearInterval(interval);
@@ -439,7 +437,7 @@ var nav = {
         nav.activate(msgCount, msg);
 
         var interval = setInterval(function () {
-            if (nav.count.innerHTML > 1) {
+            if (document.querySelector('#main-nav-count').innerHTML > 1) {
                 nav.decreaseCount();
             } else {
                 nav.revertToFirst(interval);
@@ -453,23 +451,18 @@ var nav = {
 
 
 var modal = {
-    title: document.querySelector('.modal-title'),
-    contents: document.querySelector('.modal-body'),
-    confirm: document.querySelector('.modal-footer>button:first-child'),
-    cancel: document.querySelector('.modal-footer>button:last-child'),
-
     open: function (titleInput, contentsInput, confirmInput) {
-        modal.title.innerHTML = titleInput;
-        modal.contents.innerHTML = contentsInput;
-        modal.confirm.setAttribute('onclick', confirmInput);
+        document.querySelector('.modal-title').innerHTML = titleInput;
+        document.querySelector('.modal-body').innerHTML = contentsInput;
+        document.querySelector('.modal-footer>button:first-child').setAttribute('onclick', confirmInput);
 
         $('#myModal').modal();
     },
     close: function () {
-        modal.title.innerHTML = '';
-        modal.contents.innerHTML = '';
-        modal.confirm.removeAttribute('onclick');
-        modal.cancel.click();
+        document.querySelector('.modal-title').innerHTML = '';
+        document.querySelector('.modal-body').innerHTML = '';
+        document.querySelector('.modal-footer>button:first-child').removeAttribute('onclick');
+        document.querySelector('.modal-footer>button:last-child').click();
     }
 
 }

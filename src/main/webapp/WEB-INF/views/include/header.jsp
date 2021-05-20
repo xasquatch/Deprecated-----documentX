@@ -20,10 +20,10 @@
     <link rel="stylesheet" href="${path}/resources/css/contents-style.css"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap" rel="stylesheet">
-    <script defer src="${path}/resources/js/default.js"></script>
-    <script defer src="${path}/resources/js/contents-script.js"></script>
-    <script defer src="${path}/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
-    <script defer src="${path}/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="${path}/resources/js/default.js"></script>
+    <script src="${path}/resources/js/contents-script.js"></script>
+    <script src="${path}/webjars/jquery/3.6.0/dist/jquery.min.js"></script>
+    <script src="${path}/webjars/bootstrap/4.6.0/js/bootstrap.min.js"></script>
     <script src="${path}/webjars/chart.js/3.1.1/dist/chart.min.js"></script>
 </head>
 <body>
@@ -155,13 +155,7 @@
     </span>
 </nav>
 <script>
-    window.onload = function () {
-        text.insert('#main-header-logo>span:last-child', 'Document', 10);
-        drag.addExpansionElement(document.querySelector('#main-header'));
-        if ('${navMassage}'!==''){
-            nav.acceptMsg(5,'${navMassage}');
-        }
-    }
-
-
+    text.insert('#main-header-logo>span:last-child', 'Document', 10);
+    drag.addExpansionElement(document.querySelector('#main-header'));
+    if ('${navMassage}' !== '') nav.acceptMsg(5, '${navMassage}');
 </script>
