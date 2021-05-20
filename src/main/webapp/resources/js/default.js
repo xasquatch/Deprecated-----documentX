@@ -383,9 +383,21 @@ var drag = {
             elementClone.remove();
             document.onmouseup = null;
             document.onmousemove = null;
-            if (event.target === document.querySelector('#chatting-contents>div:first-child'))
+            if (isContainTargetParentNode(event.target))
                 chat.uploadDragFile(elementClone);
 
+        }
+
+        function isContainTargetParentNode(element) {
+            try {
+                if (element.parentNode === document.querySelector('#chatting-contents>div:first-child')) {
+                    return true;
+                } else {
+                    isContainTargetParentNode(element.parentNode);
+                }
+            } catch (e) {
+                return false;
+            }
         }
 
     },
@@ -424,12 +436,22 @@ var drag = {
             elementClone.remove();
             document.ontouchend = null;
             document.ontouchmove = null;
-            if (document.elementFromPoint(event.changedTouches[0].clientX, event.changedTouches[0].clientY)
-                === document.querySelector('#chatting-contents>div:first-child'))
+            if (isContainTargetParentNode(document.elementFromPoint(event.changedTouches[0].clientX, event.changedTouches[0].clientY)))
                 chat.uploadDragFile(elementClone);
-
-
         }
+
+        function isContainTargetParentNode(element) {
+            try {
+                if (element.parentNode === document.querySelector('#chatting-contents>div:first-child')) {
+                    return true;
+                } else {
+                    isContainTargetParentNode(element.parentNode);
+                }
+            } catch (e) {
+                return false;
+            }
+        }
+
     }
 
 }
