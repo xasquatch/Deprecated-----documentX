@@ -1,5 +1,6 @@
 package net.xasquatch.document.config;
 
+
 import lombok.extern.slf4j.Slf4j;
 import net.xasquatch.document.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login",
                         "/members/available-email/**", "/members/available-nick-name/**",
                         "/members/new/**", "/members/confirm-token/**",
-                        "/resources/**", "/webjars/**").permitAll()
+                        "/resources/**", "/webjars/**", "/connection").permitAll()
                 .antMatchers("/management/**").hasAnyRole("MANAGEMENT")
                 .antMatchers("/members/**").hasAnyRole("MANAGEMENT", "USER")
                 .anyRequest().authenticated();

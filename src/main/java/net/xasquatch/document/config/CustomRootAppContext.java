@@ -136,7 +136,8 @@ public class CustomRootAppContext {
         return new MemberService();
     }
 
-    @Bean PaginationService paginationService(){
+    @Bean
+    PaginationService paginationService() {
         return new PaginationService();
     }
 
@@ -155,17 +156,6 @@ public class CustomRootAppContext {
     public TokenMap tokenMap() {
         return new TokenMap();
     }
-
-//    ---------chatting 서비스-----------
-//    @Bean
-//    public ChattingService chattingService() {
-//        return new ChattingService();
-//    }
-//
-//    @Bean
-//    public ChattingRoomDao chattingRoomDao() {
-//        return new ChattingRoomDao();
-//    }
 
 }
 
