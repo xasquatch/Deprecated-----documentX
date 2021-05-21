@@ -9,9 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -42,6 +40,8 @@ public class HomeController {
     }
 
     @GetMapping("/connection")
+    @CrossOrigin(origins = "*")
+    @ResponseBody
     public String isConnected(){
         return "isConnected";
     }
