@@ -41,6 +41,12 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/connection")
+    public String isConnected(){
+        return "isConnected";
+    }
+
+
     @RequestMapping(path = "/login", method = {RequestMethod.GET, RequestMethod.POST})
     public String loginPage() {
         return "contents/login";
